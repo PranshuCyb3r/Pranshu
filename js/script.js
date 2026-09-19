@@ -325,5 +325,3 @@ window.openLogin = openLogin;
 window.closeLogin = closeLogin;
 window.sendOTP = sendOTP;
 window.verifyOTP = verifyOTP;
-
->>>>>>> 3ae919041c4d6b2e2e4103d54ee868e882ebd142

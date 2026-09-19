@@ -46,4 +46,3 @@ async function sendOTP() {
     alert("OTP / Magic link sent to your email");
   }
 }
->>>>>>> 3ae919041c4d6b2e2e4103d54ee868e882ebd142

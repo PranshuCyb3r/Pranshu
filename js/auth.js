@@ -140,4 +140,3 @@ async function logout() {
   await supabase.auth.signOut();
   window.location.href = "index.html";
 }
->>>>>>> 3ae919041c4d6b2e2e4103d54ee868e882ebd142
