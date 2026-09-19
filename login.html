@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zero | Login</title>
+
+  <link rel="stylesheet" href="css/login.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+  <div class="container">
+    <nav>
+      <div class="logo">
+        <a href="index.html"><span>&lt;</span> ZeRo <span>/&gt;</span></a>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html#home">Home</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== LOGIN SECTION ===== -->
+<section class="login-hero">
+
+  <video class="bg-video" autoplay muted loop playsinline>
+    <source src="videos/cyber2.mp4" type="video/mp4">
+  </video>
+  <div class="video-overlay"></div>
+
+  <div class="login-container">
+    <div class="login-box">
+      <h2>Secure Login</h2>
+
+      <input type="email" id="loginEmail" placeholder="Email" required>
+      <input type="password" id="loginPassword" placeholder="Password" required>
+
+      <button onclick="loginUser()">Login</button>
+
+      <p class="switch">
+        New user?
+        <a href="register.html">Register here</a>
+      </p>
+
+      <p id="loginMsg"></p>
+    </div>
+  </div>
+</section>
+
+<!-- Authentication scripts -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-auth.js"></script>
+<script src="js/auth.js"></script>
+
+</body>
+</html>
