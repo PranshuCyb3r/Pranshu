@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /* Authentication helpers shared by the login, registration and private pages. */
 (function () {
   function setMessage(element, message, isError) {

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /* Shared UI behaviour. Every feature is guarded so this file works on every page. */
 const header = document.querySelector("header");
 const navLinks = document.querySelector(".nav-links");
