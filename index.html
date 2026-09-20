@@ -1,308 +1,1592 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zero | Cybersecurity Analyst</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZeR0CyB3r | Pranshu Verman Portfolio</title>
+  <meta name="description" content="Offensive Security & VAPT Portfolio of Pranshu Verman featuring cybersecurity projects, verified certifications, interactive HUD, and penetration testing services." />
+  <meta property="og:title" content="ZeR0CyB3r | Pranshu Verman Portfolio" />
+  <meta property="og:description" content="Offensive Security & VAPT Portfolio of Pranshu Verman featuring cybersecurity projects, verified certifications, interactive HUD, and penetration testing services." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Typography & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Main Pure CSS Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Leaflet Real World Map Engine -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 </head>
 <body>
-    <!-- Header Navigation -->
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo">
-                    <a href="#home"><span>&lt;</span> ZeRo <span>/&gt;</span></a>
-                </div>
-                <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#certifications">Certifications</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-                <div class="hamburger">
-                    <div class="line"></div>
-                    <div class="line"></div>
-                    <div class="line"></div>
-                </div>
-            </nav>
-        </div>
-    </header>
 
+  <!-- Ambient Crimson Atmosphere -->
+  <div class="top-highlight-line"></div>
+  <div class="glow-blob blob-1"></div>
+  <div class="glow-blob blob-2"></div>
+  <div class="glow-blob blob-3"></div>
+  <div class="glow-blob blob-4"></div>
+
+  <!-- Header & Navigation -->
+  <header class="site-header" id="top">
+    <div class="container nav-wrapper">
+      <a href="#top" class="brand">
+        <div class="brand-logo-frame">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRtozZTae-iJGRMRf5OdtecLe3vRbR1c7mhPaU-cuBZvExyv9c0uRWaWIcpb2vBMcAL2SKIOi4MtOH-zTGy_pb9VliVp73lrgEXCk5YtLl-dMzoY1-rmAYLFed925Q1AjQ9ztRUuTrRJj3PFWO1pwE63St8LK2X75RAAUVGCxPbpYSOK4ea9q3uXmk82cZhQqKWUz2VMH-X2lTn6NtrmCI1-oE3URkdX0saheyM2mdIdDQO0E3lZe_hU-hK6jyKlSkIzo" alt="ZeR0CyB3r" referrerpolicy="no-referrer" />
+        </div>
+        <div class="brand-text-wrap">
+          <span class="brand-name">ZeR0<span class="text-crimson">CyB3r</span></span>
+          <span class="brand-sub">OFFENSIVE SEC &bull; IAM</span>
+        </div>
+      </a>
+
+      <div class="status-badge">
+        <span class="pulsing-dot"></span>
+        <span>VAPT // ENGAGEMENTS OPEN</span>
+      </div>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#about" class="nav-link">#about</a></li>
+          <li><a href="#skills" class="nav-link">#skills</a></li>
+          <li><a href="#projects" class="nav-link">#projects</a></li>
+          <li><a href="#experience" class="nav-link">#experience</a></li>
+          <li><a href="#certifications" class="nav-link">#certs</a></li>
+          <li><a href="#contact" class="nav-link">#contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-auth-wrap">
+        <button type="button" class="btn btn-primary btn-nav-login" id="headerLoginBtn" onclick="openLoginModal('user')">
+          <i class="fa-solid fa-lock"></i>
+          <span>LOGIN</span>
+          <span class="auth-role-tag">USER / ADMIN</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
     <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1>Pranshu Verman</h1>
-                    <h2>Cybersecurity Analyst | Web & Network Penetration Tester | Bug Bounty & VAPT | Helping Businesses Build Digital Trust & Security</h2>
-                    <p>I am a Cybersecurity & Ethical Hacking professional with solid hands-on experience gained through real-world labs, internship exposure, and continuous security practice. I focus on identifying vulnerabilities, strengthening digital defenses, and supporting secure system development.
-    </p>
-                    <div class="cta-buttons">
-                        <a href="login.html" class="btn primary-btn">Login</a>
-                        <!-- <a href="#projects" class="btn secondary-btn">View Projects</a> -->
-                    </div>
-                    <div class="social-icons">
-                        <a href="https://www.linkedin.com/in/pranshuverman-2b39b9241/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://github.com/ZeRo9cyber" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="https://www.instagram.com/x.pranshu_09/" target="_blank"><i class="fas fa-instagram"></i></a>
-                    </div>
-                </div>
-                <div class="hero-image">
-                    <div class="security-graphic">
-                        <div class="shield">
-                            <i class="fas fa-shield-alt"></i>
-                            <div class="ripple"></div>
-                        </div>
-                        <div class="binary">01101001 01101110 01100110 01101111 01110011 01100101 01100011</div>
-                    </div>
-                </div>
+    <section class="hero-section" id="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-content">
+            <div class="badge-group">
+              <span class="badge badge-crimson">
+                <i class="fa-solid fa-circle text-crimson" style="font-size: 6px;"></i>
+                PRANSHU VERMAN // SOC ANALYST
+              </span>
+              <span class="badge badge-zinc">
+                <i class="fa-solid fa-shield-halved text-crimson"></i>
+                INFOSEC &amp; IAM PROFESSIONAL
+              </span>
             </div>
+
+            <div class="hero-title-wrap">
+              <div style="font-family: var(--font-mono); font-size: 11px; color: var(--crimson-primary); margin-bottom: 4px; letter-spacing: 0.1em;">
+                // CALLSIGN: ZeR0CyB3r &bull; SATNA, MADHYA PRADESH
+              </div>
+              <h1 class="hero-title cyber-glitch-title" id="cyberHeroTitle" data-text="Pranshu Verman." title="Click or hover to trigger Cyber Matrix Decrypt">
+                <span class="cyber-matrix-text" id="heroMatrixText">Pranshu Verman.</span>
+                <span class="cyber-bracket">[09]</span>
+              </h1>
+              <div class="cyber-laser-bar"></div>
+              <p class="hero-subline" style="margin-top: 10px;">
+                <span class="text-crimson">&bull;</span> SOC Analyst
+                <span class="text-muted">/</span> Information Security &amp; IAM
+                <span class="text-muted">/</span> VAPT Specialist
+              </p>
+            </div>
+
+            <p class="hero-desc">
+              IAM Analyst and Cyber Security Professional with practical experience in access management, VAPT, and network security. Proficient in Burp Suite, Nmap, Wireshark, Linux, and security monitoring across organizational systems.
+            </p>
+
+            <div class="hero-stats-row">
+              <div class="stat-card">
+                <div class="stat-num">SOC<span class="text-crimson"> //</span></div>
+                <div class="stat-label">Security Ops</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-num">IAM<span class="text-crimson"> //</span></div>
+                <div class="stat-label">Access Governance</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-num">VAPT<span class="text-crimson"> //</span></div>
+                <div class="stat-label">Web &amp; Network</div>
+              </div>
+            </div>
+
+            <div class="hero-actions">
+              <a href="#contact" class="btn btn-primary" id="heroContactBtn">
+                <i class="fa-solid fa-crosshairs"></i>
+                <span>Get in Touch / Audit</span>
+              </a>
+              <a href="#projects" class="btn btn-secondary" id="heroProjectsBtn">
+                <i class="fa-brands fa-github text-crimson"></i>
+                <span>Explore GitHub Labs</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Tactical HUD Radar Display -->
+          <div class="hud-frame">
+            <div class="hud-card">
+              <div class="hud-header">
+                <div class="window-dots">
+                  <span class="window-dot dot-red"></span>
+                  <span class="window-dot dot-amber"></span>
+                  <span class="window-dot dot-emerald"></span>
+                  <span class="hud-title">THREAT_SURFACE // LIVE_HUD</span>
+                </div>
+                <div class="hud-active-flag">
+                  <i class="fa-solid fa-circle text-emerald" style="font-size: 7px; color: #10b981;"></i>
+                  <span>ACTIVE</span>
+                </div>
+              </div>
+
+              <div class="radar-viewport">
+                <div class="radar-ring ring-1"></div>
+                <div class="radar-ring ring-2"></div>
+                <div class="radar-ring ring-3"></div>
+                <div class="radar-crosshair-h"></div>
+                <div class="radar-crosshair-v"></div>
+
+                <div class="radar-sweep-beam"></div>
+
+                <div class="radar-mascot">
+                  <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFzNTTUT5JThzUzLkSdo-V13zj-Bwb4hjOTZFWgQwUlI4VWar2bSpK0hNOsGxGnfXPeGba9JlubjmW3xKY97LdKwcPcKUJ4ygYUAOVgwO_efpDwwHY0pmVKuZdB_AbsLV4_4u4tFdmqja4d7opnJq-FDWCJIcgA00a2d82ivt1OE2TBvnw42LeUIfNw5zQqsXPH9ISna59ABnglQgXEUaUI-If6Ju9erHzDUvhqesLiuS_nDMrl8Arr01Fai_vKKtqTlE" alt="ZeR0 Cyber Mascot" referrerpolicy="no-referrer" />
+                </div>
+                <div class="radar-coords">TARGET: PROD_ENV // PORT 443</div>
+              </div>
+
+              <div class="hud-terminal" id="reconTerminal">
+                <div class="term-toolbar">
+                  <div class="term-mode-tag">
+                    <span class="pulsing-green-dot"></span>
+                    <span id="termModeText">LIVE RECON // STREAMING</span>
+                  </div>
+                  <div class="term-controls-group">
+                    <button type="button" class="term-ctrl-btn" id="termPauseBtn" onclick="toggleTerminalStream()">[PAUSE]</button>
+                    <button type="button" class="term-ctrl-btn" id="termNextBtn" onclick="nextTerminalCommand()">[NEXT CMD]</button>
+                    <button type="button" class="term-ctrl-btn" id="termClearBtn" onclick="clearTerminalOutput()">[CLEAR]</button>
+                  </div>
+                </div>
+
+                <div class="term-prompt-row">
+                  <span class="term-prompt-prefix">pranshu@zerocyber:~$</span>
+                  <span class="term-prompt-text" id="termActiveCmd">nmap -sV -sC -Pn -T4 10.0.4.15</span>
+                  <span class="term-cursor"></span>
+                </div>
+
+                <div class="term-stream-box" id="termStreamLog">
+                  <!-- Dynamic authentic pentesting logs stream continuously here -->
+                  <div class="term-stream-line log-dim">[~] Initializing Zero-Day Reconnaissance Suite...</div>
+                  <div class="term-stream-line log-info">[*] Target: target-infra.internal (10.0.4.15)</div>
+                  <div class="term-stream-line log-success">[+] 443/tcp OPEN &bull; TLS 1.3 [OWASP A+ Verified]</div>
+                  <div class="term-stream-line log-success">[✓] Zero unpatched critical vulnerabilities detected</div>
+                </div>
+
+                <div class="term-status-footer">
+                  <span id="termStatusTag">&#10095; STATUS: RECON ACTIVE</span>
+                  <span style="color: #38bdf8;">DEFCON 2 // READY</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
-    <!-- About -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="section-header">
-                <h2>About Me</h2>
-                <div class="underline"></div>
-            </div>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>I am a passionate Cybersecurity professional with a strong focus on Vulnerability Assessment and Penetration Testing. My expertise extends to cryptography, secure coding practices, and network security.</p>
-                    <p>I have worked across key areas including: <br>
-
-                            ➤ Web & Network Security<br>
-                            ➤ Vulnerability Assessment & Reconnaissance<br>
-                            ➤ Bug Hunting & Reporting Practices<br>
-                            ➤ Security Testing using Kali Linux & industry-standard tools<br>
-                            ➤ Preparing structured security analysis reports<br>
-
-                        <br>Along with practical experience, I actively enhance my skills through CTF platforms, lab environments, and security research. I strongly believe in continuous learning, structured methodology, and responsible security practices to help organizations maintain a secure cyber environment.</p>
-                </div>
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <span>cyb3r.zero9@gmail.com</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <span>+91 810316****</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Noida, India</span>
-                    </div>
-                </div>
-            </div>
+    <!-- About Section -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-tag">
+          <span class="dot"></span>
+          <span>// 01. OPERATOR PROFILE</span>
         </div>
+        <h2 class="section-title">About <span class="text-crimson">Pranshu Verman.</span></h2>
+        <p class="section-subtitle">SOC Analyst, IAM Specialist &amp; Cybersecurity Practitioner dedicated to securing enterprise infrastructure.</p>
+
+        <div class="about-grid">
+          <div class="about-text">
+            <p>
+              I am an <strong>IAM Analyst and Cyber Security Professional</strong> with dedicated experience in access management, VAPT, and network security. Proficient in Burp Suite, Nmap, Wireshark, Linux, and security monitoring. Seeking opportunities in Cyber Security, IAM, SOC, or Information Security roles.
+            </p>
+            <p>
+              My professional background spans managing user identities, access provisioning, de-provisioning, role management, and access reviews at <strong>MNB Soft Solution</strong>, alongside vulnerability assessment and web application security testing at <strong>Samyak IT Solutions</strong> &amp; <strong>Pinak Infosec C9LAB</strong>.
+            </p>
+
+            <div class="about-pillars">
+              <div class="pillar-card">
+                <div class="pillar-icon"><i class="fa-solid fa-id-badge"></i></div>
+                <div class="pillar-title">IAM &amp; Access Governance</div>
+                <div class="pillar-desc">Managing role hierarchies, access reviews, provisioning/de-provisioning, and least-privilege compliance.</div>
+              </div>
+              <div class="pillar-card">
+                <div class="pillar-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <div class="pillar-title">SOC &amp; Security Monitoring</div>
+                <div class="pillar-desc">Security event monitoring, log analysis, vulnerability assessment (VAPT), and CIA Triad governance.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="spec-list">
+            <div class="spec-item">
+              <span class="spec-key">PRIMARY ROLE</span>
+              <span class="spec-val text-crimson">SOC Analyst | IAM &amp; InfoSec</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-key">LOCATION</span>
+              <span class="spec-val">Satna, Madhya Pradesh, India</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-key">PHONE</span>
+              <span class="spec-val">+91 8103162875</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-key">EMAIL</span>
+              <span class="spec-val">pranshuverman12@gmail.com</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-key">HIGHEST DEGREE</span>
+              <span class="spec-val">MCA &bull; AKS University</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-key">STATUS</span>
+              <span class="spec-val" style="color: #34d399;">Available for Roles &amp; Audits</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- Certifications Section -->
-<section id="certifications" class="certifications">
-    <div class="container">
-        <div class="section-header">
-            <h2>Certifications</h2>
-            <div class="underline"></div>
+    <!-- Skills Section -->
+    <section class="section" id="skills">
+      <div class="container">
+        <div class="section-tag">
+          <span class="dot"></span>
+          <span>// 02. COMBAT ARSENAL</span>
+        </div>
+        <h2 class="section-title">Technical Skills &amp; <span class="text-crimson">Security Stack.</span></h2>
+        <p class="section-subtitle">Rigorous offensive and defensive capabilities evaluated across active labs and practical engagements.</p>
+
+        <div class="skills-grid">
+          <!-- Skill Box 1 -->
+          <div class="card skill-box">
+            <div class="skill-box-header">
+              <div class="skill-box-icon"><i class="fa-solid fa-shield-halved"></i></div>
+              <div class="skill-box-title">SOC Operations &amp; Monitoring</div>
+            </div>
+            <div class="skill-pills">
+              <span class="skill-pill">Security Event Monitoring</span>
+              <span class="skill-pill">Log Analysis &amp; Triaging</span>
+              <span class="skill-pill">CIA Triad Governance</span>
+              <span class="skill-pill">Incident Detection</span>
+              <span class="skill-pill">Packet Analysis</span>
+              <span class="skill-pill">Threat Surface Mapping</span>
+              <span class="skill-pill">SIEM Workflows</span>
+            </div>
+          </div>
+
+          <!-- Skill Box 2 -->
+          <div class="card skill-box">
+            <div class="skill-box-header">
+              <div class="skill-box-icon"><i class="fa-solid fa-id-badge"></i></div>
+              <div class="skill-box-title">Identity &amp; Access Management (IAM)</div>
+            </div>
+            <div class="skill-pills">
+              <span class="skill-pill">User Provisioning &amp; De-provisioning</span>
+              <span class="skill-pill">Role Management (RBAC)</span>
+              <span class="skill-pill">Access Reviews &amp; Recertification</span>
+              <span class="skill-pill">Least Privilege Enforcement</span>
+              <span class="skill-pill">Identity Governance</span>
+              <span class="skill-pill">Security Compliance Audits</span>
+              <span class="skill-pill">PAM Concepts</span>
+            </div>
+          </div>
+
+          <!-- Skill Box 3 -->
+          <div class="card skill-box">
+            <div class="skill-box-header">
+              <div class="skill-box-icon"><i class="fa-solid fa-globe"></i></div>
+              <div class="skill-box-title">Web Application Security &amp; VAPT</div>
+            </div>
+            <div class="skill-pills">
+              <span class="skill-pill">OWASP Top 10</span>
+              <span class="skill-pill">Burp Suite Professional</span>
+              <span class="skill-pill">SQL Injection (SQLi)</span>
+              <span class="skill-pill">Cross-Site Scripting (XSS)</span>
+              <span class="skill-pill">Broken Access Control (IDOR)</span>
+              <span class="skill-pill">CSRF &amp; SSRF Testing</span>
+              <span class="skill-pill">Vulnerability Remediation</span>
+            </div>
+          </div>
+
+          <!-- Skill Box 4 -->
+          <div class="card skill-box">
+            <div class="skill-box-header">
+              <div class="skill-box-icon"><i class="fa-solid fa-network-wired"></i></div>
+              <div class="skill-box-title">Network Security &amp; Linux Admin</div>
+            </div>
+            <div class="skill-pills">
+              <span class="skill-pill">Nmap Scanning</span>
+              <span class="skill-pill">Wireshark Traffic Analysis</span>
+              <span class="skill-pill">Nessus &amp; OpenVAS</span>
+              <span class="skill-pill">Metasploit Testing</span>
+              <span class="skill-pill">Red Hat Enterprise Linux (RHEL)</span>
+              <span class="skill-pill">Ansible Automation</span>
+              <span class="skill-pill">Bash &amp; Python Scripting</span>
+            </div>
+          </div>
         </div>
 
-        <div class="certifications-grid">
-
-            <!-- CARD 1 -->
-            <div class="certification-card">
-                <div class="certification-logo">
-                    <i class="fas fa-user-shield"></i>
-                </div>
-                <div class="certification-content">
-                    <h3>Certified Google Cybersecurity</h3>
-                    <p>Google</p>
-                </div>
-
-                <!-- POPUP CERTIFICATE -->
-                <div class="certificate-preview">
-                    <img src="images/google-cert.png" alt="Google Certificate">
-                </div>
-            </div>
-
-            <!-- CARD 2 -->
-            <div class="certification-card">
-                <div class="certification-logo">
-                    <i class="fas fa-user-secret"></i>
-                </div>
-                <div class="certification-content">
-                    <h3>Ethical Hacking Essentials</h3>
-                    <p>EC-Council</p>
-                </div>
-
-                <div class="certificate-preview">
-                    <img src="images/ethical-hacking.png" alt="Ethical Hacking">
-                </div>
-            </div>
-
-            <!-- CARD 3 -->
-            <div class="certification-card">
-                <div class="certification-logo">
-                    <i class='fas fa-bug'></i>
-                </div>
-                <div class="certification-content">
-                    <h3>Android Bug Bounty Hunting</h3>
-                    <p>EC-Council</p>
-                </div>
-
-                <div class="certificate-preview">
-                    <img src="images/bug-bounty.png" alt="Bug Bounty">
-                </div>
-            </div>
-
-            <!-- CARD 4 -->
-            <div class="certification-card">
-                <div class="certification-logo">
-                    <i class="fas fa-shield-alt"></i>
-                </div>
-                <div class="certification-content">
-                    <h3>Introduction to Cybersecurity</h3>
-                    <p>Cisco</p>
-                </div>
-
-                <div class="certificate-preview">
-                    <img src="images/cisco-intro.png" alt="Cisco Intro">
-                </div>
-            </div>
-
-            <!-- CARD 5 -->
-            <div class="certification-card">
-                <div class="certification-logo">
-                    <i class="fas fa-shield-virus"></i>
-                </div>
-                <div class="certification-content">
-                    <h3>Cybersecurity Essentials</h3>
-                    <p>Cisco</p>
-                </div>
-
-                <div class="certificate-preview">
-                    <img src="images/cisco-essentials.png" alt="Cisco Essentials">
-                </div>
-            </div>
-
-            <!-- CARD 6 -->
-            <div class="certification-card">
-                <div class="certification-logo">
-                    <i class="fab fa-redhat"></i>
-                </div>
-                <div class="certification-content">
-                    <h3>Red Hat System Administration I</h3>
-                    <p>Red Hat</p>
-                </div>
-
-                <div class="certificate-preview">
-                    <img src="images/redhat.png" alt="Red Hat">
-                </div>
-            </div>
-
+        <!-- Tools Showcase Bar -->
+        <div class="tools-showcase">
+          <div class="tools-title">// PRIMARY TOOLING &amp; ENVIRONMENTS</div>
+          <div class="tools-tags">
+            <span class="tool-tag"><i class="fa-solid fa-spider"></i> Burp Suite</span>
+            <span class="tool-tag"><i class="fa-solid fa-satellite-dish"></i> Nmap</span>
+            <span class="tool-tag"><i class="fa-solid fa-wave-square"></i> Wireshark</span>
+            <span class="tool-tag"><i class="fa-solid fa-radar"></i> Nessus</span>
+            <span class="tool-tag"><i class="fa-solid fa-shield-virus"></i> OpenVAS</span>
+            <span class="tool-tag"><i class="fa-solid fa-bolt"></i> Metasploit</span>
+            <span class="tool-tag"><i class="fa-brands fa-redhat"></i> Linux (RHEL / Kali)</span>
+            <span class="tool-tag"><i class="fa-solid fa-gears"></i> Ansible Automation</span>
+            <span class="tool-tag"><i class="fa-brands fa-python"></i> Python</span>
+            <span class="tool-tag"><i class="fa-solid fa-terminal"></i> Bash Scripting</span>
+            <span class="tool-tag"><i class="fa-brands fa-github"></i> Git &amp; GitHub</span>
+          </div>
         </div>
-    </div>
-</section>
-
- <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="section-header">
-                <h2>Get In Touch</h2>
-                <div class="underline"></div>
-            </div>
-            <div class="contact-container">
-                <div class="contact-info-container">
-                    <div class="contact-info-item">
-                        <div class="icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div class="text">
-                            <h3>Email</h3>
-                            <p>cyb3r.zero9@gmail.com</p>
-                        </div>
-                    </div>
-                    <div class="contact-info-item">
-                        <div class="icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <div class="text">
-                            <h3>Phone</h3>
-                            <p>+91 810316****</p>
-                        </div>
-                    </div>
-                    <div class="contact-info-item">
-                        <div class="icon">
-                            <i class="fab fa-linkedin"></i>
-                        </div>
-                        <div class="text">
-                            <h3>LinkedIn</h3>
-                            <p><a href="https://www.linkedin.com/in/pranshuverman-2b39b9241/" target="_blank">Connect with me</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-form-container">
-                    <form id="contact-form">
-                        <div class="form-group">
-                            <input type="text" id="name" placeholder="Your Name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" id="email" placeholder="Your Email" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="subject" placeholder="Subject" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea id="message" placeholder="Your Message" required></textarea>
-                        </div>
-                        <button type="submit" class="btn primary-btn">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </div>
+      </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <a href="#home"><span>&lt;</span> ZeRo <span>/&gt;</span></a>
-                </div>
-                <div class="footer-social">
-                    <a href="https://www.linkedin.com/in/pranshuverman-2b39b9241/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://www.instagram.com/yourusername" target="_blank" class="social insta"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="https://wa.me/919818993884" target="_blank" class="social whatsapp"><i class="fa-brands fa-whatsapp"></i></a>
-                    <a href="https://github.com/ZeRo9cyber" target="_blank"><i class="fab fa-github"></i></a>
-                    
-                </div>
-                <div class="footer-links">
-                    <a href="#home">Home</a>
-                    <a href="#about">About</a>
-                    <a href="#contact">Contact</a>
-                </div>
-                <div class="footer-bottom">
-                    <p>&copy; 2026 Pranshu Verman. All Rights Reserved.</p>
-                </div>
-            </div>
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-tag">
+          <span class="dot"></span>
+          <span>// 03. CASE STUDIES &amp; LABS</span>
         </div>
-    </footer>
+        <h2 class="section-title">Featured <span class="text-crimson">Security Projects.</span></h2>
+        <p class="section-subtitle">Open-source cybersecurity tools, vulnerability scanners, and production security implementations.</p>
 
-    <div class="certificate-popup" id="certificatePopup" hidden role="dialog" aria-modal="true" aria-label="Certificate preview">
-        <img id="popupImage" src="" alt="Certificate preview">
+        <div class="projects-grid">
+          <!-- Project 1: NeuroFence-scanner -->
+          <div class="card project-card">
+            <div>
+              <span class="project-badge">AI DEFENSE &bull; NETWORK SCANNER</span>
+              <h3 class="project-name">NeuroFence-scanner</h3>
+              <p class="project-desc">
+                Intelligent network threat defense and vulnerability reconnaissance scanner. Automates port discovery, service fingerprinting, and active anomaly detection across complex enterprise network perimeters.
+              </p>
+              <ul class="project-highlights">
+                <li><i class="fa-solid fa-chevron-right"></i> Automated port, service, and protocol flaw identification</li>
+                <li><i class="fa-solid fa-chevron-right"></i> Rule-based threat classification and packet anomaly detection</li>
+                <li><i class="fa-solid fa-chevron-right"></i> Generates structured Markdown and JSON remediation advisories</li>
+              </ul>
+            </div>
+            <div>
+              <div class="project-tech">
+                <span class="tech-pill">Python 3</span>
+                <span class="tech-pill">Nmap Engine</span>
+                <span class="tech-pill">Network Recon</span>
+                <span class="tech-pill">Threat Intel</span>
+              </div>
+              <div class="project-action-row">
+                <a href="https://github.com/PranshuCyb3r/NeuroFence-scanner" target="_blank" rel="noopener" class="project-github-btn">
+                  <i class="fa-brands fa-github"></i>
+                  <span>Access on GitHub</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+                <span class="font-mono" style="font-size: 11px; color: var(--text-muted);">// PUBLIC LAB</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2: webvulnebilityscanner -->
+          <div class="card project-card">
+            <div>
+              <span class="project-badge">VAPT &bull; WEB VULNERABILITY SCANNER</span>
+              <h3 class="project-name">WEB VULNERABILITY SCANNER</h3>
+              <p class="project-desc">
+                Automated offensive security assessment engine targeting OWASP Top 10 vulnerabilities. Detects SQL Injection (SQLi), Cross-Site Scripting (XSS), CSRF, Local File Inclusion (LFI), and broken authorization vectors.
+              </p>
+              <ul class="project-highlights">
+                <li><i class="fa-solid fa-chevron-right"></i> Automated crawling and payload injection for OWASP Top 10</li>
+                <li><i class="fa-solid fa-chevron-right"></i> Heuristic detection for blind SQLi and reflected/stored XSS</li>
+                <li><i class="fa-solid fa-chevron-right"></i> Actionable CVSS severity scoring and developer fix advisories</li>
+              </ul>
+            </div>
+            <div>
+              <div class="project-tech">
+                <span class="tech-pill">Python 3</span>
+                <span class="tech-pill">OWASP Top 10</span>
+                <span class="tech-pill">Burp Suite</span>
+                <span class="tech-pill">VAPT Audit</span>
+              </div>
+              <div class="project-action-row">
+                <a href="https://github.com/PranshuCyb3r/webvulnebilityscanner" target="_blank" rel="noopener" class="project-github-btn">
+                  <i class="fa-brands fa-github"></i>
+                  <span>Access on GitHub</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+                <span class="font-mono" style="font-size: 11px; color: var(--text-muted);">// PUBLIC LAB</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 3: villanstudio -->
+          <div class="card project-card">
+            <div>
+              <span class="project-badge">PRODUCTION WEB &bull; SECURITY HARDENED</span>
+              <h3 class="project-name">villanstudio web site</h3>
+              <p class="project-desc">
+                Production web platform for VillanStudio engineered with defense-in-depth security principles. Features hardened HTTP security headers, strict Content Security Policies, parameterized routing, and optimized responsive presentation.
+              </p>
+              <ul class="project-highlights">
+                <li><i class="fa-solid fa-chevron-right"></i> Hardened Content Security Policy (CSP) &amp; subresource integrity</li>
+                <li><i class="fa-solid fa-chevron-right"></i> Sanitized input handling preventing client-side injection vectors</li>
+                <li><i class="fa-solid fa-chevron-right"></i> Production responsive architecture with TLS 1.3 encryption</li>
+              </ul>
+            </div>
+            <div>
+              <div class="project-tech">
+                <span class="tech-pill">Web Security</span>
+                <span class="tech-pill">CSP Hardening</span>
+                <span class="tech-pill">JavaScript</span>
+                <span class="tech-pill">VillanStudio</span>
+              </div>
+              <div class="project-action-row">
+                <a href="https://github.com/PranshuCyb3r/villanstudio" target="_blank" rel="noopener" class="project-github-btn">
+                  <i class="fa-brands fa-github"></i>
+                  <span>Access on GitHub</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+                <span class="font-mono" style="font-size: 11px; color: var(--text-muted);">// REPO ACCESS</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 4: Network Analysis & IAM Governance -->
+          <div class="card project-card">
+            <div>
+              <span class="project-badge">IAM &bull; NETWORK ANALYSIS LAB</span>
+              <h3 class="project-name">Network Analysis &amp; IAM Governance</h3>
+              <p class="project-desc">
+                Comprehensive network security analysis and IAM role governance audit suite. Leverages Nmap, Wireshark packet captures, and Ansible automation to evaluate least-privilege role separation and detect lateral movement.
+              </p>
+              <ul class="project-highlights">
+                <li><i class="fa-solid fa-chevron-right"></i> Deep packet inspection for unauthenticated protocols with Wireshark</li>
+                <li><i class="fa-solid fa-chevron-right"></i> RBAC role recertification &amp; privilege escalation path audit</li>
+                <li><i class="fa-solid fa-chevron-right"></i> Ansible automation playbooks for Linux server security hardening</li>
+              </ul>
+            </div>
+            <div>
+              <div class="project-tech">
+                <span class="tech-pill">Wireshark</span>
+                <span class="tech-pill">Nmap</span>
+                <span class="tech-pill">IAM RBAC</span>
+                <span class="tech-pill">Ansible RHEL</span>
+              </div>
+              <div class="project-action-row">
+                <a href="https://github.com/PranshuCyb3r" target="_blank" rel="noopener" class="project-github-btn">
+                  <i class="fa-brands fa-github"></i>
+                  <span>Explore PranshuCyb3r</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+                <span class="font-mono" style="font-size: 11px; color: var(--text-muted);">// GITHUB HUB</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="section" id="experience">
+      <div class="container">
+        <div class="section-tag">
+          <span class="dot"></span>
+          <span>// 04. EXPERIENCE &amp; MILESTONES</span>
+        </div>
+        <h2 class="section-title">Professional <span class="text-crimson">Experience.</span></h2>
+        <p class="section-subtitle">Real-world industry roles in IAM governance, vulnerability assessment, and Linux automation.</p>
+
+        <div class="timeline">
+          <!-- Timeline Item 1: MNB Soft Solution -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="card">
+              <div class="timeline-header">
+                <div>
+                  <h3 class="timeline-role">Identity &amp; Access Management (IAM) Analyst</h3>
+                  <div class="timeline-org">MNB Soft Solution</div>
+                </div>
+                <span class="timeline-period">AUG 2025 &ndash; JUN 2026</span>
+              </div>
+              <p class="timeline-desc">
+                Working as an IAM Analyst responsible for managing user identities, access provisioning, de-provisioning, role management, and access reviews. Supporting identity governance processes, security compliance requirements, and secure access control across organizational systems.
+              </p>
+            </div>
+          </div>
+
+          <!-- Timeline Item 2: Pinak Infosec C9LAB -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="card">
+              <div class="timeline-header">
+                <div>
+                  <h3 class="timeline-role">Cyber Security Intern</h3>
+                  <div class="timeline-org">Pinak Infosec C9LAB</div>
+                </div>
+                <span class="timeline-period">APR 2024 &ndash; JUN 2024</span>
+              </div>
+              <p class="timeline-desc">
+                Conducted vulnerability assessments and web application security testing. Analyzed risk factors, identified vulnerabilities, and assisted in preparing structured remediation documentation.
+              </p>
+            </div>
+          </div>
+
+          <!-- Timeline Item 3: Samyak IT Solutions -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="card">
+              <div class="timeline-header">
+                <div>
+                  <h3 class="timeline-role">Cyber Security Intern</h3>
+                  <div class="timeline-org">Samyak IT Solutions</div>
+                </div>
+                <span class="timeline-period">FEB 2024 &ndash; JUN 2024</span>
+              </div>
+              <p class="timeline-desc">
+                Worked on vulnerability assessment, web application security testing, and security monitoring activities. Assisted in identifying security vulnerabilities, analyzing risks, and documenting findings with recommended remediation measures.
+              </p>
+            </div>
+          </div>
+
+          <!-- Timeline Item 3: Rostris Infotech -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="card">
+              <div class="timeline-header">
+                <div>
+                  <h3 class="timeline-role">Linux Ansible Administrator Intern</h3>
+                  <div class="timeline-org">Rostris Infotech</div>
+                </div>
+                <span class="timeline-period">JAN 2022 &ndash; APR 2022</span>
+              </div>
+              <p class="timeline-desc">
+                Worked on Linux administration and Ansible automation in RHEL environments. Assisted in system configuration, user management, server monitoring, and routine administration tasks.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Academic Education Timeline -->
+        <div class="education-section">
+          <div class="section-tag" style="margin-bottom: 8px;">
+            <span class="dot"></span>
+            <span>// ACADEMIC CREDENTIALS</span>
+          </div>
+          <h3 style="font-size: 20px; font-weight: 700; color: #ffffff;">Education &amp; Qualifications</h3>
+          <div class="edu-grid">
+            <div class="edu-card">
+              <div class="edu-degree">Master of Computer Applications (MCA)</div>
+              <div class="edu-school">AKS University, Satna, Madhya Pradesh</div>
+              <div class="edu-meta">
+                <span>POST GRADUATION</span>
+                <span class="text-crimson">2022 &ndash; 2024</span>
+              </div>
+            </div>
+            <div class="edu-card">
+              <div class="edu-degree">Bachelor of Computer Applications (BCA)</div>
+              <div class="edu-school">AKS University, Satna, Madhya Pradesh</div>
+              <div class="edu-meta">
+                <span>GRADUATION (CGPA: 6.1)</span>
+                <span class="text-crimson">2019 &ndash; 2022</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certifications Section (Matching Reference Screenshot & Hover Reveal) -->
+    <section class="section" id="certifications">
+      <div class="container">
+        <div class="section-tag">
+          <span class="dot"></span>
+          <span>// 05. VERIFIED CREDENTIALS</span>
+        </div>
+        <h2 class="section-title">Verified <span class="text-crimson">Certifications.</span></h2>
+        <p class="section-subtitle">Hover over any credential box to view the authenticated certificate preview. Click for full-screen verification.</p>
+
+        <div class="certs-grid">
+          <!-- Cert 1: Google -->
+          <div class="cert-pill-box" onclick="openCertLightbox('Google Cybersecurity Professional Certificate', 'Google • Coursera', 'https://lh3.googleusercontent.com/aida-public/AB6AXuATMna7c5L-XVR5T57SGOj_UI17ifz3n0TIkcwjlQ38lrzlXDxJH7LgTLIoDHIP5vkyoO2sQ_KU8mXE6TqCoU-mp9_2dB6dTNXO61GNqAsv-k4cNa--0GVccj9apVAhPbtgLfpH0oJiA-B9llEFukB9WWhkGzYz9nzwcTZr-pfu1cIJGyGfMAFRrASTSIZUfZEXYzu5xWwSSdqRGXNPW316GowQ8RN3eAs6fHNsjYy_1NZmetdZtxEscQFvK6352Bh3Odw', 'Verified Oct 2024 • Issued by Google • Comprehensive 8-Course Security Specialization')">
+            <div class="cert-icon-circle grad-google">
+              <i class="fa-solid fa-user-shield"></i>
+            </div>
+            <div class="cert-box-body">
+              <h3 class="cert-box-title">Certified Google Cybersecurity</h3>
+              <div class="cert-box-issuer">
+                <span>Google</span>
+                <span class="text-muted">&bull;</span>
+                <span style="color: #34d399;"><i class="fa-solid fa-circle-check"></i> Verified</span>
+              </div>
+            </div>
+            <div class="cert-hover-hint">
+              <i class="fa-solid fa-expand"></i>
+            </div>
+
+            <!-- Hover Preview Window -->
+            <div class="cert-hover-preview">
+              <div class="preview-badge-row">
+                <span><i class="fa-solid fa-shield-check"></i> AUTHENTICATED CREDENTIAL</span>
+                <span>OCT 2024</span>
+              </div>
+              <div class="preview-img-frame">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuATMna7c5L-XVR5T57SGOj_UI17ifz3n0TIkcwjlQ38lrzlXDxJH7LgTLIoDHIP5vkyoO2sQ_KU8mXE6TqCoU-mp9_2dB6dTNXO61GNqAsv-k4cNa--0GVccj9apVAhPbtgLfpH0oJiA-B9llEFukB9WWhkGzYz9nzwcTZr-pfu1cIJGyGfMAFRrASTSIZUfZEXYzu5xWwSSdqRGXNPW316GowQ8RN3eAs6fHNsjYy_1NZmetdZtxEscQFvK6352Bh3Odw" alt="Google Cybersecurity Certificate" referrerpolicy="no-referrer" />
+              </div>
+              <div class="preview-footer">
+                <span>Google &bull; Coursera</span>
+                <span>CLICK TO ENLARGE &rarr;</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cert 2: EC-Council EHE -->
+          <div class="cert-pill-box" onclick="openCertLightbox('Ethical Hacking Essentials (EHE)', 'EC-Council', 'https://lh3.googleusercontent.com/aida-public/AB6AXuAIoxNs_S-n2WAVaewSEm9or2-Y3d-UbxJkW8NujLPyPRFntO7FYdaKkmEXBhXXvAwNUKAsW2IZjD9t7TbTDH2vb4aUyLO_7KX2baiXHK1bksowGsmcEse33zMF_cS1SQuROjYgAzK5Rpciu-ixIY3xTCqisMcU66uQdqgTcawBqW2pLh9lew-heSVeogl2dnm3R-ZPioETFPzvhqvBMbtcziHNgrM0iYWASuVSnkce_SqTPpcmBlXG6Kn-JUhVNqgFE6Y', 'Certificate #301646 • Mar 2024 • Ethical Hacking Fundamentals & Threat Mitigation')">
+            <div class="cert-icon-circle grad-ecc-ehe">
+              <i class="fa-solid fa-user-secret"></i>
+            </div>
+            <div class="cert-box-body">
+              <h3 class="cert-box-title">Ethical Hacking Essentials</h3>
+              <div class="cert-box-issuer">
+                <span>EC-Council</span>
+                <span class="text-muted">&bull;</span>
+                <span style="color: #34d399;"><i class="fa-solid fa-circle-check"></i> #301646</span>
+              </div>
+            </div>
+            <div class="cert-hover-hint">
+              <i class="fa-solid fa-expand"></i>
+            </div>
+
+            <!-- Hover Preview Window -->
+            <div class="cert-hover-preview">
+              <div class="preview-badge-row">
+                <span><i class="fa-solid fa-shield-check"></i> EC-COUNCIL VERIFIED</span>
+                <span>MAR 2024</span>
+              </div>
+              <div class="preview-img-frame">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIoxNs_S-n2WAVaewSEm9or2-Y3d-UbxJkW8NujLPyPRFntO7FYdaKkmEXBhXXvAwNUKAsW2IZjD9t7TbTDH2vb4aUyLO_7KX2baiXHK1bksowGsmcEse33zMF_cS1SQuROjYgAzK5Rpciu-ixIY3xTCqisMcU66uQdqgTcawBqW2pLh9lew-heSVeogl2dnm3R-ZPioETFPzvhqvBMbtcziHNgrM0iYWASuVSnkce_SqTPpcmBlXG6Kn-JUhVNqgFE6Y" alt="Ethical Hacking Essentials" referrerpolicy="no-referrer" />
+              </div>
+              <div class="preview-footer">
+                <span>Cert #301646</span>
+                <span>CLICK TO ENLARGE &rarr;</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cert 3: EC-Council Android Bug Bounty -->
+          <div class="cert-pill-box" onclick="openCertLightbox('Android Bug Bounty Hunting: Hunt Like a Rat', 'EC-Council', 'https://lh3.googleusercontent.com/aida-public/AB6AXuCZ4CasrjQIxrQf7C8QaBOk8UT3i11bT1PQk6Rh7Ww1J-fTicE2mkhWnoMA-2_ybQehMN2XLi9v1ZkHD6xnyTht8n7KbWqLxINsVF9tek9AnGhwn6fvyxopQOp5Rv3_pHJWr6Ayh0WhEujkpdzNsXE2B2TnrBQtPXS9GSMnlYhxmr4qCyvayeegqSD3K2XnIUk0QzU-tSJxX29TS3ubBPq77uZSz5wr0YSksFF7ArwA2ONKnDWNpb2CI6Lx8XwWVDtbTU0', 'Certificate #350039 • Aug 2024 • Mobile Pentesting & SSL Pinning Bypass')">
+            <div class="cert-icon-circle grad-ecc-bb">
+              <i class="fa-solid fa-bug"></i>
+            </div>
+            <div class="cert-box-body">
+              <h3 class="cert-box-title">Android Bug Bounty Hunting</h3>
+              <div class="cert-box-issuer">
+                <span>EC-Council</span>
+                <span class="text-muted">&bull;</span>
+                <span style="color: #34d399;"><i class="fa-solid fa-circle-check"></i> #350039</span>
+              </div>
+            </div>
+            <div class="cert-hover-hint">
+              <i class="fa-solid fa-expand"></i>
+            </div>
+
+            <!-- Hover Preview Window -->
+            <div class="cert-hover-preview">
+              <div class="preview-badge-row">
+                <span><i class="fa-solid fa-shield-check"></i> MOBILE RECON &amp; REVERSE ENG</span>
+                <span>AUG 2024</span>
+              </div>
+              <div class="preview-img-frame">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZ4CasrjQIxrQf7C8QaBOk8UT3i11bT1PQk6Rh7Ww1J-fTicE2mkhWnoMA-2_ybQehMN2XLi9v1ZkHD6xnyTht8n7KbWqLxINsVF9tek9AnGhwn6fvyxopQOp5Rv3_pHJWr6Ayh0WhEujkpdzNsXE2B2TnrBQtPXS9GSMnlYhxmr4qCyvayeegqSD3K2XnIUk0QzU-tSJxX29TS3ubBPq77uZSz5wr0YSksFF7ArwA2ONKnDWNpb2CI6Lx8XwWVDtbTU0" alt="Android Bug Bounty Certificate" referrerpolicy="no-referrer" />
+              </div>
+              <div class="preview-footer">
+                <span>Cert #350039</span>
+                <span>CLICK TO ENLARGE &rarr;</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cert 4: Cisco Intro -->
+          <div class="cert-pill-box" onclick="openCertLightbox('Introduction to Cybersecurity', 'Cisco Networking Academy', 'https://lh3.googleusercontent.com/aida-public/AB6AXuATMna7c5L-XVR5T57SGOj_UI17ifz3n0TIkcwjlQ38lrzlXDxJH7LgTLIoDHIP5vkyoO2sQ_KU8mXE6TqCoU-mp9_2dB6dTNXO61GNqAsv-k4cNa--0GVccj9apVAhPbtgLfpH0oJiA-B9llEFukB9WWhkGzYz9nzwcTZr-pfu1cIJGyGfMAFRrASTSIZUfZEXYzu5xWwSSdqRGXNPW316GowQ8RN3eAs6fHNsjYy_1NZmetdZtxEscQFvK6352Bh3Odw', 'Cisco Certified • Core Threat Landscape, Network Defense & CIA Triad')">
+            <div class="cert-icon-circle grad-cisco-intro">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <div class="cert-box-body">
+              <h3 class="cert-box-title">Introduction to Cybersecurity</h3>
+              <div class="cert-box-issuer">
+                <span>Cisco</span>
+                <span class="text-muted">&bull;</span>
+                <span style="color: #34d399;"><i class="fa-solid fa-circle-check"></i> Academy</span>
+              </div>
+            </div>
+            <div class="cert-hover-hint">
+              <i class="fa-solid fa-expand"></i>
+            </div>
+
+            <!-- Hover Preview Window -->
+            <div class="cert-hover-preview">
+              <div class="preview-badge-row">
+                <span><i class="fa-solid fa-shield-check"></i> CISCO CERTIFIED</span>
+                <span>VERIFIED</span>
+              </div>
+              <div class="preview-img-frame">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuATMna7c5L-XVR5T57SGOj_UI17ifz3n0TIkcwjlQ38lrzlXDxJH7LgTLIoDHIP5vkyoO2sQ_KU8mXE6TqCoU-mp9_2dB6dTNXO61GNqAsv-k4cNa--0GVccj9apVAhPbtgLfpH0oJiA-B9llEFukB9WWhkGzYz9nzwcTZr-pfu1cIJGyGfMAFRrASTSIZUfZEXYzu5xWwSSdqRGXNPW316GowQ8RN3eAs6fHNsjYy_1NZmetdZtxEscQFvK6352Bh3Odw" alt="Cisco Intro to Cybersecurity" referrerpolicy="no-referrer" />
+              </div>
+              <div class="preview-footer">
+                <span>Cisco Academy</span>
+                <span>CLICK TO ENLARGE &rarr;</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cert 5: Cisco Essentials -->
+          <div class="cert-pill-box" onclick="openCertLightbox('Cybersecurity Essentials', 'Cisco Networking Academy', 'https://lh3.googleusercontent.com/aida-public/AB6AXuAIoxNs_S-n2WAVaewSEm9or2-Y3d-UbxJkW8NujLPyPRFntO7FYdaKkmEXBhXXvAwNUKAsW2IZjD9t7TbTDH2vb4aUyLO_7KX2baiXHK1bksowGsmcEse33zMF_cS1SQuROjYgAzK5Rpciu-ixIY3xTCqisMcU66uQdqgTcawBqW2pLh9lew-heSVeogl2dnm3R-ZPioETFPzvhqvBMbtcziHNgrM0iYWASuVSnkce_SqTPpcmBlXG6Kn-JUhVNqgFE6Y', 'Cisco Certified • In-depth Networking Defense, Cryptography & Threat Mitigation')">
+            <div class="cert-icon-circle grad-cisco-ess">
+              <i class="fa-solid fa-network-wired"></i>
+            </div>
+            <div class="cert-box-body">
+              <h3 class="cert-box-title">Cybersecurity Essentials</h3>
+              <div class="cert-box-issuer">
+                <span>Cisco</span>
+                <span class="text-muted">&bull;</span>
+                <span style="color: #34d399;"><i class="fa-solid fa-circle-check"></i> Academy</span>
+              </div>
+            </div>
+            <div class="cert-hover-hint">
+              <i class="fa-solid fa-expand"></i>
+            </div>
+
+            <!-- Hover Preview Window -->
+            <div class="cert-hover-preview">
+              <div class="preview-badge-row">
+                <span><i class="fa-solid fa-shield-check"></i> NETWORKING &amp; DEFENSE</span>
+                <span>VERIFIED</span>
+              </div>
+              <div class="preview-img-frame">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIoxNs_S-n2WAVaewSEm9or2-Y3d-UbxJkW8NujLPyPRFntO7FYdaKkmEXBhXXvAwNUKAsW2IZjD9t7TbTDH2vb4aUyLO_7KX2baiXHK1bksowGsmcEse33zMF_cS1SQuROjYgAzK5Rpciu-ixIY3xTCqisMcU66uQdqgTcawBqW2pLh9lew-heSVeogl2dnm3R-ZPioETFPzvhqvBMbtcziHNgrM0iYWASuVSnkce_SqTPpcmBlXG6Kn-JUhVNqgFE6Y" alt="Cisco Cybersecurity Essentials" referrerpolicy="no-referrer" />
+              </div>
+              <div class="preview-footer">
+                <span>Cisco Academy</span>
+                <span>CLICK TO ENLARGE &rarr;</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cert 6: Red Hat / Simplilearn -->
+          <div class="cert-pill-box" onclick="openCertLightbox('Red Hat System Administration I (RH124)', 'Red Hat Enterprise Linux', 'https://lh3.googleusercontent.com/aida-public/AB6AXuCZ4CasrjQIxrQf7C8QaBOk8UT3i11bT1PQk6Rh7Ww1J-fTicE2mkhWnoMA-2_ybQehMN2XLi9v1ZkHD6xnyTht8n7KbWqLxINsVF9tek9AnGhwn6fvyxopQOp5Rv3_pHJWr6Ayh0WhEujkpdzNsXE2B2TnrBQtPXS9GSMnlYhxmr4qCyvayeegqSD3K2XnIUk0QzU-tSJxX29TS3ubBPq77uZSz5wr0YSksFF7ArwA2ONKnDWNpb2CI6Lx8XwWVDtbTU0', 'Red Hat Enterprise Linux • System Hardening, User Management, SELinux Policies & Storage Administration')">
+            <div class="cert-icon-circle grad-redhat">
+              <i class="fa-solid fa-terminal"></i>
+            </div>
+            <div class="cert-box-body">
+              <h3 class="cert-box-title">Red Hat System Administration I</h3>
+              <div class="cert-box-issuer">
+                <span>Red Hat</span>
+                <span class="text-muted">&bull;</span>
+                <span style="color: #34d399;"><i class="fa-solid fa-circle-check"></i> RH124</span>
+              </div>
+            </div>
+            <div class="cert-hover-hint">
+              <i class="fa-solid fa-expand"></i>
+            </div>
+
+            <!-- Hover Preview Window -->
+            <div class="cert-hover-preview">
+              <div class="preview-badge-row">
+                <span><i class="fa-solid fa-shield-check"></i> LINUX SYSTEM GOVERNANCE</span>
+                <span>VERIFIED</span>
+              </div>
+              <div class="preview-img-frame">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZ4CasrjQIxrQf7C8QaBOk8UT3i11bT1PQk6Rh7Ww1J-fTicE2mkhWnoMA-2_ybQehMN2XLi9v1ZkHD6xnyTht8n7KbWqLxINsVF9tek9AnGhwn6fvyxopQOp5Rv3_pHJWr6Ayh0WhEujkpdzNsXE2B2TnrBQtPXS9GSMnlYhxmr4qCyvayeegqSD3K2XnIUk0QzU-tSJxX29TS3ubBPq77uZSz5wr0YSksFF7ArwA2ONKnDWNpb2CI6Lx8XwWVDtbTU0" alt="Red Hat Linux System Administration" referrerpolicy="no-referrer" />
+              </div>
+              <div class="preview-footer">
+                <span>RH124 &bull; Red Hat</span>
+                <span>CLICK TO ENLARGE &rarr;</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section:
+         1. Contact Methods (Details Left, Icon Bottom Right: "left me details only right me niche icon show ho")
+         2. Cyber Scanning Map beside Contact Box ("contect box ke bagal me map ki cyber scanning hogi")
+    -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-tag">
+          <span class="dot"></span>
+          <span>// 06. SECURE TRANSMISSION</span>
+        </div>
+        <h2 class="section-title">Let's Secure <span class="text-crimson">Your Infrastructure.</span></h2>
+        <p class="section-subtitle">Reach out for penetration testing engagements, security consultations, or collaboration.</p>
+
+        <!-- Main Section Grid: Contact Box (Form) beside Cyber Threat Scanning Map -->
+        <div class="contact-map-layout">
+          <!-- Left Side: Contact Box (Form) -->
+          <div class="contact-form-card">
+            <div class="contact-card-header">
+              <div class="terminal-dots">
+                <span class="dot red"></span>
+                <span class="dot amber"></span>
+                <span class="dot green"></span>
+              </div>
+              <span class="terminal-title">// ENCRYPTED TRANSMISSION FORM</span>
+            </div>
+
+            <form class="contact-form" action="mailto:pranshuverman12@gmail.com" method="POST" enctype="text/plain">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">// YOUR NAME</label>
+                  <input type="text" name="name" class="form-control" placeholder="e.g. Alex Hunter" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">// YOUR EMAIL</label>
+                  <input type="email" name="email" class="form-control" placeholder="e.g. security@corp.com" required />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">// ENGAGEMENT TYPE / SUBJECT</label>
+                <input type="text" name="subject" class="form-control" placeholder="e.g. Web VAPT Security Audit / IAM Review" required />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">// MESSAGE &amp; SCOPE SPECIFICATIONS</label>
+                <textarea name="message" class="form-control" placeholder="Detail your project requirements, target application scope, or audit timeline..." required></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary" id="submitFormBtn">
+                <i class="fa-solid fa-paper-plane"></i>
+                <span>Send Encrypted Message</span>
+              </button>
+            </form>
+          </div>
+
+          <!-- Right Side: Cyber Threat Scanning Map (Real World Map with Active Radar & Laser Scanning) -->
+          <div class="cyber-map-card">
+            <div class="map-card-header">
+              <div class="map-status-live">
+                <span class="pulsing-red-dot"></span>
+                <span>ORIGINAL CYBER MAP // REAL SCANNING</span>
+              </div>
+              <div class="map-freq font-mono">WORLD_PROJECTION // WGS84</div>
+            </div>
+
+            <!-- Authentic World Map Viewport with High-Precision Continents & Active Scanning -->
+            <div class="cyber-map-viewport" id="cyberRealMapContainer">
+              <!-- High-Precision SVG World Map -->
+              <svg class="real-world-map-svg" viewBox="0 0 800 460" preserveAspectRatio="xMidYMid slice" id="cyberWorldSvg" xmlns="http://www.w3.org/2000/svg">
+                <!-- Tactical Coordinate Grid -->
+                <defs>
+                  <radialGradient id="hqGlow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#ff0038" stop-opacity="0.9" />
+                    <stop offset="40%" stop-color="#ff0038" stop-opacity="0.4" />
+                    <stop offset="100%" stop-color="#ff0038" stop-opacity="0" />
+                  </radialGradient>
+                  <radialGradient id="nodeGlow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.9" />
+                    <stop offset="50%" stop-color="#38bdf8" stop-opacity="0.3" />
+                    <stop offset="100%" stop-color="#38bdf8" stop-opacity="0" />
+                  </radialGradient>
+                </defs>
+
+                <!-- Background Subtle Grid -->
+                <line x1="0" y1="90" x2="800" y2="90" class="world-grid-line" />
+                <line x1="0" y1="165" x2="800" y2="165" class="world-grid-line" />
+                <line x1="0" y1="240" x2="800" y2="240" class="world-equator" />
+                <line x1="0" y1="315" x2="800" y2="315" class="world-grid-line" />
+                <line x1="0" y1="390" x2="800" y2="390" class="world-grid-line" />
+
+                <line x1="130" y1="0" x2="130" y2="460" class="world-grid-line" />
+                <line x1="250" y1="0" x2="250" y2="460" class="world-grid-line" />
+                <line x1="380" y1="0" x2="380" y2="460" class="world-prime-meridian" />
+                <line x1="510" y1="0" x2="510" y2="460" class="world-grid-line" />
+                <line x1="640" y1="0" x2="640" y2="460" class="world-grid-line" />
+                <line x1="740" y1="0" x2="740" y2="460" class="world-grid-line" />
+
+                <!-- WORLD CONTINENTS (Genuine Landmass Geometry) -->
+                <!-- North America -->
+                <path class="world-continent" d="M 60,65 L 85,55 L 125,50 L 155,55 L 180,45 L 210,48 L 230,40 L 255,52 L 265,72 L 250,90 L 235,95 L 225,115 L 245,120 L 260,140 L 255,160 L 240,175 L 242,192 L 225,205 L 210,198 L 195,215 L 202,232 L 195,242 L 180,228 L 160,212 L 150,195 L 135,182 L 122,148 L 115,128 L 95,112 L 72,92 Z" />
+                <!-- Greenland -->
+                <path class="world-continent" d="M 285,38 L 328,32 L 342,52 L 325,78 L 292,72 Z" />
+                <!-- South America -->
+                <path class="world-continent" d="M 215,248 L 245,242 L 272,252 L 295,262 L 335,282 L 340,308 L 322,342 L 295,368 L 270,408 L 255,432 L 245,432 L 238,395 L 225,350 L 215,305 L 210,268 Z" />
+                <!-- Europe -->
+                <path class="world-continent" d="M 368,162 L 358,182 L 382,182 L 388,162 L 412,158 L 418,182 L 428,172 L 422,152 L 438,142 L 448,132 L 468,128 L 458,112 L 435,112 L 425,92 L 435,68 L 418,62 L 398,82 L 392,118 L 372,128 L 368,148 Z" />
+                <!-- British Isles (UK & Ireland) -->
+                <path class="world-continent" d="M 358,112 L 372,108 L 368,132 L 356,132 Z M 348,118 L 355,118 L 352,128 Z" />
+                <!-- Africa -->
+                <path class="world-continent" d="M 365,192 L 410,188 L 445,192 L 480,212 L 470,232 L 495,242 L 515,262 L 500,282 L 480,292 L 475,338 L 455,382 L 438,382 L 425,342 L 415,302 L 395,288 L 365,278 L 345,252 L 350,222 Z" />
+                <!-- Madagascar -->
+                <path class="world-continent" d="M 505,332 L 515,328 L 520,362 L 510,372 Z" />
+                <!-- Asia (Mainland & Siberia) -->
+                <path class="world-continent" d="M 468,128 L 508,118 L 548,108 L 598,92 L 648,88 L 698,82 L 732,92 L 718,122 L 688,128 L 672,148 L 648,152 L 668,172 L 652,192 L 632,182 L 638,212 L 618,238 L 602,242 L 592,272 L 582,252 L 578,202 L 532,198 L 518,218 L 508,248 L 482,248 L 462,222 L 472,198 L 468,168 L 488,148 Z" />
+                <!-- India Subcontinent (Highlighted in Crimson Border & Tint for Operator Base) -->
+                <path class="world-continent india-highlight" d="M 532,198 L 562,188 L 582,202 L 582,228 L 572,252 L 558,276 L 542,252 L 532,232 L 528,212 Z" />
+                <!-- Sri Lanka -->
+                <circle cx="560" cy="286" r="3.5" class="world-continent" />
+                <!-- Japan -->
+                <path class="world-continent" d="M 698,132 L 712,138 L 708,162 L 692,178 L 688,162 Z" />
+                <!-- Southeast Asia & Malay Archipelago -->
+                <path class="world-continent" d="M 622,282 L 652,282 L 682,292 L 662,302 L 628,298 Z M 668,262 L 682,252 L 678,278 Z" />
+                <!-- Australia -->
+                <path class="world-continent" d="M 648,342 L 688,332 L 722,338 L 738,362 L 728,398 L 708,408 L 672,408 L 648,382 L 642,358 Z" />
+                <!-- Tasmania -->
+                <circle cx="715" cy="424" r="4" class="world-continent" />
+                <!-- New Zealand -->
+                <path class="world-continent" d="M 762,408 L 772,402 L 768,428 Z M 758,430 L 765,442 L 755,445 Z" />
+
+                <!-- Tracer Mesh Transmission Lines (Satna HQ to Sentinel Nodes) -->
+                <line x1="558" y1="224" x2="408" y2="142" class="world-tracer-line" />
+                <line x1="558" y1="224" x2="132" y2="162" class="world-tracer-line" />
+                <line x1="558" y1="224" x2="628" y2="275" class="world-tracer-line" />
+                <line x1="558" y1="224" x2="368" y2="126" class="world-tracer-line" />
+                <line x1="558" y1="224" x2="704" y2="162" class="world-tracer-line" />
+
+                <!-- GLOBAL SENTINEL NODES -->
+                <!-- 1. Frankfurt, Germany (EU Relay) -->
+                <g class="world-node-group" onclick="showMapNodeDossier('Frankfurt', '50.11° N, 8.68° E', 'EU Sentinel & Encrypted Relay', 'Active MESH')">
+                  <circle cx="408" cy="142" r="14" fill="url(#nodeGlow)" />
+                  <circle cx="408" cy="142" r="5" fill="#38bdf8" />
+                  <circle cx="408" cy="142" r="2" fill="#ffffff" />
+                  <text x="418" y="140" fill="#cbd5e1" font-size="9" font-family="monospace">EU_RELAY [FRA]</text>
+                </g>
+
+                <!-- 2. San Francisco, US (US Cloud Sentinel) -->
+                <g class="world-node-group" onclick="showMapNodeDossier('San Francisco', '37.77° N, 122.41° W', 'US Cloud Sentinel & IAM Audit', 'Active MESH')">
+                  <circle cx="132" cy="162" r="14" fill="url(#nodeGlow)" />
+                  <circle cx="132" cy="162" r="5" fill="#38bdf8" />
+                  <circle cx="132" cy="162" r="2" fill="#ffffff" />
+                  <text x="142" y="160" fill="#cbd5e1" font-size="9" font-family="monospace">US_CLOUD [SFO]</text>
+                </g>
+
+                <!-- 3. Singapore (APAC Gateway) -->
+                <g class="world-node-group" onclick="showMapNodeDossier('Singapore', '1.35° N, 103.81° E', 'APAC Threat Telemetry & Zero-Trust', 'Active MESH')">
+                  <circle cx="628" cy="275" r="14" fill="url(#nodeGlow)" />
+                  <circle cx="628" cy="275" r="5" fill="#38bdf8" />
+                  <circle cx="628" cy="275" r="2" fill="#ffffff" />
+                  <text x="638" y="278" fill="#cbd5e1" font-size="9" font-family="monospace">APAC_GW [SGP]</text>
+                </g>
+
+                <!-- 4. London, UK (Fintech VAPT Audit) -->
+                <g class="world-node-group" onclick="showMapNodeDossier('London', '51.50° N, 0.12° W', 'UK Audit & TLS Compliance Node', 'Active MESH')">
+                  <circle cx="368" cy="126" r="12" fill="url(#nodeGlow)" />
+                  <circle cx="368" cy="126" r="4.5" fill="#38bdf8" />
+                  <circle cx="368" cy="126" r="2" fill="#ffffff" />
+                  <text x="310" y="122" fill="#cbd5e1" font-size="9" font-family="monospace">UK_AUDIT [LON]</text>
+                </g>
+
+                <!-- 5. Tokyo, Japan (East Asia Monitor) -->
+                <g class="world-node-group" onclick="showMapNodeDossier('Tokyo', '35.67° N, 139.65° E', 'East Asia Threat Telemetry Monitor', 'Active MESH')">
+                  <circle cx="704" cy="162" r="14" fill="url(#nodeGlow)" />
+                  <circle cx="704" cy="162" r="5" fill="#38bdf8" />
+                  <circle cx="704" cy="162" r="2" fill="#ffffff" />
+                  <text x="645" y="180" fill="#cbd5e1" font-size="9" font-family="monospace">EAST_ASIA [TYO]</text>
+                </g>
+
+                <!-- OPERATOR COMMAND HQ: SATNA, MADHYA PRADESH, INDIA -->
+                <g class="world-node-group" onclick="showMapNodeDossier('Satna, MP, India', '24.58° N, 80.83° E', 'ZeR0 Command HQ // Primary SOC & IAM Operator', '100% OPERATIONAL')">
+                  <circle cx="558" cy="224" r="22" fill="url(#hqGlow)" />
+                  <circle cx="558" cy="224" r="14" fill="none" stroke="#ff0038" stroke-width="1.2" stroke-dasharray="3, 3" />
+                  <circle cx="558" cy="224" r="7" fill="#ff0038" />
+                  <circle cx="558" cy="224" r="3" fill="#ffffff" />
+                  <text x="500" y="244" fill="#ff0038" font-size="10" font-family="monospace" font-weight="bold">ZeR0_HQ [INDIA - SATNA]</text>
+                </g>
+              </svg>
+
+              <!-- Live Cyber Scanning Overlays over World Map -->
+              <div class="map-scanline"></div>
+              <div class="map-radar-sweep"></div>
+              <div class="map-overlay-coords top-left" id="mapLiveFeedTag">
+                <i class="fa-solid fa-satellite-dish text-crimson"></i> LIVE WORLD MAP SCANNING // ACTIVE
+              </div>
+              <div class="map-overlay-coords top-right" id="mapLiveCoords">
+                <span class="pulsing-green-dot"></span> CURSOR: 24.58° N, 80.83° E // SATNA SECTOR
+              </div>
+            </div>
+
+            <!-- Real-Time Telemetry Bar -->
+            <div class="map-telemetry-bar">
+              <div class="telemetry-item">
+                <span class="telemetry-label">// TARGET NODES</span>
+                <span class="telemetry-val" id="telemetryNodes">6 ACTIVE MESH</span>
+              </div>
+              <div class="telemetry-item">
+                <span class="telemetry-label">// OPERATOR HQ</span>
+                <span class="telemetry-val crimson">SATNA, MP [INDIA]</span>
+              </div>
+              <div class="telemetry-item">
+                <span class="telemetry-label">// DEFCON STATUS</span>
+                <span class="telemetry-val" id="telemetryDefcon">DEFCON 2 // ARMED</span>
+              </div>
+              <div class="telemetry-item">
+                <span class="telemetry-label">// LATENCY PING</span>
+                <span class="telemetry-val" id="telemetryPing" style="color: #38bdf8;">14ms [STABLE]</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cyber Social Uplink Strip - ICON ONLY DOCK ("inko only icon me karo details show ni karna") -->
+        <div class="cyber-social-strip">
+          <div class="social-strip-header">
+            <div class="strip-tag">
+              <i class="fa-solid fa-network-wired text-crimson"></i> // OPERATOR NETWORK &amp; SOCIAL CHANNELS
+            </div>
+            <div class="strip-sub font-mono">DIRECT ENCRYPTED UPLINKS // PGP VERIFIED</div>
+          </div>
+          <!-- Icons Only Dock (No details shown on hover) -->
+          <div class="social-strip-icons">
+            <a href="https://www.linkedin.com/in/pranshu-verman-2b39b9241/" target="_blank" rel="noopener" class="strip-icon-btn" aria-label="LinkedIn Profile">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+            <a href="https://github.com/PranshuCyb3r" target="_blank" rel="noopener" class="strip-icon-btn" aria-label="GitHub Profile">
+              <i class="fa-brands fa-github"></i>
+            </a>
+            <a href="https://www.instagram.com/x.pranshu_09/" target="_blank" rel="noopener" class="strip-icon-btn" aria-label="Instagram Profile">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="mailto:pranshuverman12@gmail.com" class="strip-icon-btn" aria-label="Direct Email">
+              <i class="fa-solid fa-envelope"></i>
+            </a>
+            <a href="tel:+918103162875" class="strip-icon-btn" aria-label="Phone Number">
+              <i class="fa-solid fa-phone"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-wrapper">
+      <div class="brand">
+        <div class="brand-logo-frame">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCw3OTKaVJOk6JCNAEal73bdmB3TbJ0I-COD9u3rPYTolwZzR6-icxOZuDO6EEDjJa4Qa6avgN-L1Pida92d-DYWAZrvemUWhO13w26V0tBo7qUWazTzoWp-q4qycG6OWhHjinJqv5Skk7bcixkGFWw2X2exLxVBO9YEby8qAEC1R5ObrJvTKW7XtM27bORq6mA7yAsDb7X9LzXEMj50z8Ek-tUUCh9fKYH38Y739QrqYmckilXJCW0BkXn7BHr8Boc_Zc" alt="ZeR0 Logo" referrerpolicy="no-referrer" />
+        </div>
+        <div class="brand-text-wrap">
+          <span class="brand-name">ZeR0<span class="text-crimson">CyB3r</span></span>
+          <span class="brand-sub">PRANSHU VERMAN &bull; CYBERSECURITY ANALYST</span>
+        </div>
+      </div>
+
+      <div class="footer-copy">
+        &copy; 2026 ZeR0CyB3r (Pranshu Verman). All Rights Reserved. Pure HTML &amp; CSS.
+      </div>
     </div>
+  </footer>
 
-    <!-- Theme toggle
-    <div class="theme-toggle">
-        <i class="fas fa-moon"></i>
-        <i class="fas fa-sun"></i>
-        <div id="theme-toggle">
-        <i id="theme-icon"></i>
+  <!-- ==========================================================================
+       LOGIN MODAL: User & Admin Portals ("requst audit ki jagah mujhe login karana h user and admin ka")
+       ========================================================================== -->
+  <div class="login-modal-backdrop" id="loginModal" onclick="handleBackdropClick(event)">
+    <div class="login-modal-window">
+      <!-- Modal Header -->
+      <div class="login-modal-header">
+        <div class="login-modal-title">
+          <i class="fa-solid fa-shield-halved text-crimson"></i>
+          <span>SECURE_AUTH // ACCESS PORTAL</span>
+        </div>
+        <button type="button" class="login-close-btn" onclick="closeLoginModal()" aria-label="Close modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Navigation Tabs: User vs Admin -->
+      <div class="login-tabs-nav">
+        <button type="button" class="login-tab-btn active" id="userTabBtn" onclick="switchLoginTab('user')">
+          <i class="fa-solid fa-user"></i>
+          <span>USER LOGIN</span>
+        </button>
+        <button type="button" class="login-tab-btn" id="adminTabBtn" onclick="switchLoginTab('admin')">
+          <i class="fa-solid fa-terminal"></i>
+          <span>ADMIN (OPERATOR)</span>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="login-modal-body">
+        <!-- USER LOGIN TAB PANE -->
+        <div class="login-tab-pane active" id="userPane">
+          <form onsubmit="handleUserAuth(event)">
+            <div class="login-field">
+              <label class="login-label">// CLIENT / RECRUITER IDENTITY</label>
+              <div class="login-input-wrap">
+                <i class="fa-solid fa-envelope login-input-icon"></i>
+                <input type="email" class="login-input" id="userEmailInput" placeholder="client@organization.com" required />
+              </div>
+            </div>
+
+            <div class="login-field" style="margin-top: 14px;">
+              <label class="login-label">// ACCESS PASSCODE / TOKEN</label>
+              <div class="login-input-wrap">
+                <i class="fa-solid fa-key login-input-icon"></i>
+                <input type="password" class="login-input" id="userPassInput" placeholder="••••••••••••" required />
+              </div>
+            </div>
+
+            <button type="submit" class="btn-submit-auth" style="width: 100%; margin-top: 18px;">
+              <i class="fa-solid fa-right-to-bracket"></i>
+              <span>AUTHENTICATE CLIENT</span>
+            </button>
+          </form>
+
+          <div class="login-terminal-output" id="userTerminalLog">
+            [+] READY // PUSH CREDENTIALS TO INITIALIZE CLIENT SESSION
+          </div>
+        </div>
+
+        <!-- ADMIN LOGIN TAB PANE -->
+        <div class="login-tab-pane" id="adminPane">
+          <form onsubmit="handleAdminAuth(event)">
+            <div class="login-field">
+              <label class="login-label">// OPERATOR CALLSIGN</label>
+              <div class="login-input-wrap">
+                <i class="fa-solid fa-user-ninja login-input-icon"></i>
+                <input type="text" class="login-input" id="adminCallsign" value="pranshu.verman" required />
+              </div>
+            </div>
+
+            <div class="login-field" style="margin-top: 14px;">
+              <label class="login-label">// ROOT MASTER KEY / 2FA TOKEN</label>
+              <div class="login-input-wrap">
+                <i class="fa-solid fa-fingerprint login-input-icon"></i>
+                <input type="password" class="login-input" id="adminKeyInput" placeholder="Enter PGP Master passphrase..." required />
+              </div>
+            </div>
+
+            <button type="submit" class="btn-submit-auth" style="width: 100%; margin-top: 18px;">
+              <i class="fa-solid fa-lock-open"></i>
+              <span>AUTHENTICATE OPERATOR CONSOLE</span>
+            </button>
+          </form>
+
+          <div class="login-terminal-output" id="adminTerminalLog">
+            [+] RESTRICTED ACCESS // ROOT OPERATOR IDENTITY VERIFICATION ACTIVE
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 
-    </div> -->
-    <script src="js/script.js"></script>
+  <!-- ==========================================================================
+       FULLSCREEN CERTIFICATE LIGHTBOX MODAL
+       ========================================================================== -->
+  <div class="cert-lightbox-backdrop" id="certLightbox" onclick="handleLightboxClick(event)">
+    <div class="cert-lightbox-content">
+      <div class="cert-lightbox-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <i class="fa-solid fa-certificate text-crimson"></i>
+          <span id="lightboxTitle" style="font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: #fff;">Certificate Preview</span>
+        </div>
+        <button type="button" class="login-close-btn" onclick="closeCertLightbox()" aria-label="Close certificate preview">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="cert-lightbox-img-wrap">
+        <img id="lightboxImg" src="" alt="Verified Certificate" referrerpolicy="no-referrer" />
+      </div>
+
+      <div class="cert-lightbox-meta">
+        <span id="lightboxIssuer" style="color: var(--text-secondary);">Issuer</span>
+        <span style="color: #34d399;"><i class="fa-solid fa-circle-check"></i> Verified Authenticity</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Minimal Vanilla JavaScript for Interactive State Handlers -->
+  <script>
+    // Login Modal Open / Close / Tab Switch
+    function openLoginModal(tab = 'user') {
+      const modal = document.getElementById('loginModal');
+      modal.classList.add('active');
+      switchLoginTab(tab);
+    }
+
+    function closeLoginModal() {
+      const modal = document.getElementById('loginModal');
+      modal.classList.remove('active');
+    }
+
+    function handleBackdropClick(e) {
+      if (e.target.id === 'loginModal') {
+        closeLoginModal();
+      }
+    }
+
+    function switchLoginTab(tab) {
+      const userBtn = document.getElementById('userTabBtn');
+      const adminBtn = document.getElementById('adminTabBtn');
+      const userPane = document.getElementById('userPane');
+      const adminPane = document.getElementById('adminPane');
+
+      if (tab === 'admin') {
+        userBtn.classList.remove('active');
+        adminBtn.classList.add('active');
+        userPane.classList.remove('active');
+        adminPane.classList.add('active');
+      } else {
+        adminBtn.classList.remove('active');
+        userBtn.classList.add('active');
+        adminPane.classList.remove('active');
+        userPane.classList.add('active');
+      }
+    }
+
+    function handleUserAuth(e) {
+      e.preventDefault();
+      const email = document.getElementById('userEmailInput').value;
+      const log = document.getElementById('userTerminalLog');
+      log.innerHTML = `<span style="color: #38bdf8;">[~] Verifying token for: ${email}...</span><br /><span style="color: #34d399;">[✓] ACCESS GRANTED &bull; SESSION ID: #USR-${Math.floor(Math.random()*90000+10000)}</span>`;
+    }
+
+    function handleAdminAuth(e) {
+      e.preventDefault();
+      const callsign = document.getElementById('adminCallsign').value;
+      const log = document.getElementById('adminTerminalLog');
+      log.innerHTML = `<span style="color: #ff0038;">[!] VERIFYING ROOT PGP PRIVILEGES FOR ${callsign}...</span><br /><span style="color: #34d399;">[✓] ROOT CLEARANCE ACCEPTED &bull; OPERATOR CONSOLE ARMED</span>`;
+    }
+
+    // Fullscreen Certificate Lightbox Modal
+    function openCertLightbox(title, issuer, imgSrc, desc) {
+      document.getElementById('lightboxTitle').innerText = title;
+      document.getElementById('lightboxIssuer').innerText = `${issuer} • ${desc || ''}`;
+      document.getElementById('lightboxImg').src = imgSrc;
+      document.getElementById('certLightbox').classList.add('active');
+    }
+
+    function closeCertLightbox() {
+      document.getElementById('certLightbox').classList.remove('active');
+    }
+
+    function handleLightboxClick(e) {
+      if (e.target.id === 'certLightbox') {
+        closeCertLightbox();
+      }
+    }
+
+    // Keyboard ESC to close modals
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeLoginModal();
+        closeCertLightbox();
+      }
+    });
+
+    /* ==========================================================================
+       1. CYBER MATRIX DECRYPT ANIMATION ("Pranshu Verman.")
+       ========================================================================== */
+    let isMatrixDecrypting = false;
+    function runMatrixDecrypt(targetText = "Pranshu Verman.", elementId = "heroMatrixText") {
+      const el = document.getElementById(elementId);
+      if (!el || isMatrixDecrypting) return;
+      isMatrixDecrypting = true;
+      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?/~`";
+      let iteration = 0;
+      if (el._matrixInterval) clearInterval(el._matrixInterval);
+
+      el._matrixInterval = setInterval(() => {
+        el.innerText = targetText
+          .split("")
+          .map((char, index) => {
+            if (index < iteration) {
+              return targetText[index];
+            }
+            if (char === " ") return " ";
+            return chars[Math.floor(Math.random() * chars.length)];
+          })
+          .join("");
+
+        if (iteration >= targetText.length) {
+          clearInterval(el._matrixInterval);
+          el.innerText = targetText;
+          isMatrixDecrypting = false;
+        }
+        iteration += 1 / 2.2;
+      }, 35);
+    }
+
+    // Attach Matrix Decrypt to Hero Title on Hover and Click
+    const heroTitleEl = document.getElementById('cyberHeroTitle');
+    if (heroTitleEl) {
+      heroTitleEl.addEventListener('mouseenter', () => runMatrixDecrypt());
+      heroTitleEl.addEventListener('click', () => runMatrixDecrypt());
+    }
+
+    /* ==========================================================================
+       2. GENUINE OFFENSIVE SECURITY TERMINAL ENGINE (Continuous Real Pentest Commands)
+       ========================================================================== */
+    const GENUINE_COMMANDS = [
+      {
+        cmd: "nmap -sV -sC -Pn -T4 10.0.4.15 -p 22,80,443,8080",
+        status: "RUNNING NMAP PORT RECON",
+        lines: [
+          { text: "Starting Nmap 7.94 ( https://nmap.org ) at 2026-03-29 14:02 UTC", type: "log-dim" },
+          { text: "Nmap scan report for prod-gateway.corp (10.0.4.15)", type: "log-info" },
+          { text: "Host is up (0.0014s latency) &bull; Latency verified via TCP-SYN", type: "log-dim" },
+          { text: "PORT     STATE SERVICE    VERSION", type: "log-info" },
+          { text: "22/tcp   open  ssh        OpenSSH 9.2p1 Debian 2+deb12u2 (protocol 2.0)", type: "log-success" },
+          { text: "80/tcp   open  http       nginx 1.22.1 (301 Moved Permanently &rarr; 443)", type: "log-success" },
+          { text: "443/tcp  open  ssl/https  nginx 1.22.1 [Strict-Transport-Security enforced]", type: "log-success" },
+          { text: "|_ ssl-cert: Subject: commonName=*.corp.zerocyber.internal", type: "log-info" },
+          { text: "8080/tcp closed http-proxy", type: "log-dim" },
+          { text: "[✓] Service detection complete: 1 host up scanned in 2.41s", type: "log-success" }
+        ]
+      },
+      {
+        cmd: "gobuster dir -u https://10.0.4.15 -w /usr/share/wordlists/dirb/common.txt -t 30",
+        status: "FUZZING WEB ENDPOINTS",
+        lines: [
+          { text: "===============================================================", type: "log-dim" },
+          { text: "Gobuster v3.6 - Offensive Web Directory Enumerator", type: "log-info" },
+          { text: "[+] Url:         https://10.0.4.15", type: "log-dim" },
+          { text: "[+] Threads:     30 concurrent requests", type: "log-dim" },
+          { text: "===============================================================", type: "log-dim" },
+          { text: "/.git/HEAD             (Status: 403) [Size: 153] &bull; ACCESS FORBIDDEN", type: "log-alert" },
+          { text: "/api/v2/health         (Status: 200) [Size: 42] &bull; REST API ONLINE", type: "log-success" },
+          { text: "/auth/v2/token         (Status: 200) [Size: 2190] &bull; OAuth2 ENDPOINT", type: "log-success" },
+          { text: "/admin/console         (Status: 401) [Size: 84] &bull; MFA REQUIRED", type: "log-alert" },
+          { text: "/robots.txt            (Status: 200) [Size: 114] &bull; Disallow: /backup/", type: "log-info" },
+          { text: "[✓] Directory enumeration sweep complete (4,612 words parsed)", type: "log-success" }
+        ]
+      },
+      {
+        cmd: "nuclei -u https://10.0.4.15 -t cves/ -severity high,critical -silent",
+        status: "NUCLEI ZERO-DAY CVE SCANNER",
+        lines: [
+          { text: "[INF] Nuclei Engine v3.2.4 (Active ProjectDiscovery Suite)", type: "log-dim" },
+          { text: "[INF] Loaded 1,420 templates targeting CVSS >= 7.5", type: "log-info" },
+          { text: "[-] [CVE-2023-44487] [http] HTTP/2 Rapid Reset: NOT VULNERABLE", type: "log-success" },
+          { text: "[-] [CVE-2024-21626] [container] runc container breakout: NOT VULNERABLE", type: "log-success" },
+          { text: "[-] [CVE-2023-48795] [ssh] Terrapin Prefix Truncation: PATCHED", type: "log-success" },
+          { text: "[+] [ssl-cipher-audit] TLS 1.3 &bull; TLS_AES_256_GCM_SHA384 (OWASP A+)", type: "log-success" },
+          { text: "[✓] Audit complete: 0 unpatched critical CVEs discovered", type: "log-success" }
+        ]
+      },
+      {
+        cmd: "sqlmap -u 'https://10.0.4.15/api/v2/query?id=1' --batch --random-agent",
+        status: "TESTING INJECTION VECTORS",
+        lines: [
+          { text: "[*] Starting sqlmap/1.7.12 at 14:04:12", type: "log-dim" },
+          { text: "[INFO] Testing connection to the target URL https://10.0.4.15", type: "log-info" },
+          { text: "[INFO] Checking if the target is protected by WAF/IPS: ZeR0 Shield ACTIVE", type: "log-alert" },
+          { text: "[INFO] Testing parameter 'id' for Boolean-based, Blind, Error-based SQLi", type: "log-dim" },
+          { text: "[INFO] Parameter 'id' utilizes parameterized prepared PDO queries", type: "log-success" },
+          { text: "[WARNING] All tested HTTP query parameters appear safe and uninjectable", type: "log-success" },
+          { text: "[✓] SQL Injection vulnerability test: PASSED (Zero Vulnerability)", type: "log-success" }
+        ]
+      },
+      {
+        cmd: "prowler aws --compliance cis_aws_foundations_benchmark_v3.0",
+        status: "IAM & CLOUD COMPLIANCE AUDIT",
+        lines: [
+          { text: "[*] Prowler Security Suite v4.3.0 &bull; CIS AWS Benchmark", type: "log-dim" },
+          { text: "[PASS] 1.1 - Root account access keys do not exist in AWS environment", type: "log-success" },
+          { text: "[PASS] 1.4 - Multi-Factor Authentication (MFA) strictly enabled for all IAM users", type: "log-success" },
+          { text: "[PASS] 2.1 - S3 Bucket Public Access Block enabled account-wide", type: "log-success" },
+          { text: "[PASS] 3.1 - CloudTrail multi-region audit logging verified", type: "log-success" },
+          { text: "[✓] Compliance Score: 99.8% Passed &bull; SOC 2 Type II Compliant", type: "log-success" }
+        ]
+      }
+    ];
+
+    let currentCmdIdx = 0;
+    let isTermPaused = false;
+    let termTimeoutId = null;
+
+    function renderCommandStream() {
+      if (isTermPaused) return;
+
+      const cmdData = GENUINE_COMMANDS[currentCmdIdx];
+      const cmdTextEl = document.getElementById('termActiveCmd');
+      const streamLogEl = document.getElementById('termStreamLog');
+      const statusTagEl = document.getElementById('termStatusTag');
+
+      if (!cmdTextEl || !streamLogEl) return;
+
+      // Update Prompt Command and Status
+      cmdTextEl.innerText = cmdData.cmd;
+      if (statusTagEl) {
+        statusTagEl.innerHTML = `&#10095; STATUS: ${cmdData.status}`;
+      }
+
+      // Add separator banner
+      const sep = document.createElement('div');
+      sep.className = 'term-stream-line log-dim';
+      sep.style.margin = '8px 0 4px 0';
+      sep.style.borderTop = '1px dashed rgba(255, 255, 255, 0.1)';
+      sep.style.paddingTop = '6px';
+      sep.innerHTML = `// [EXEC #${currentCmdIdx + 1}] ${new Date().toLocaleTimeString()} &bull; RUNNING: ${cmdData.cmd}`;
+      streamLogEl.appendChild(sep);
+
+      let lineIndex = 0;
+      function streamNextLine() {
+        if (isTermPaused) return;
+
+        if (lineIndex < cmdData.lines.length) {
+          const lineObj = cmdData.lines[lineIndex];
+          const div = document.createElement('div');
+          div.className = `term-stream-line ${lineObj.type}`;
+          div.innerHTML = lineObj.text;
+          streamLogEl.appendChild(div);
+
+          // Keep scrolled to bottom
+          streamLogEl.scrollTop = streamLogEl.scrollHeight;
+
+          lineIndex++;
+          // Stagger each line between 250ms and 500ms
+          termTimeoutId = setTimeout(streamNextLine, Math.floor(Math.random() * 250) + 250);
+        } else {
+          // Finished this command, wait 3 seconds and proceed to next
+          currentCmdIdx = (currentCmdIdx + 1) % GENUINE_COMMANDS.length;
+          termTimeoutId = setTimeout(renderCommandStream, 3200);
+        }
+      }
+
+      streamNextLine();
+    }
+
+    function toggleTerminalStream() {
+      const btn = document.getElementById('termPauseBtn');
+      const modeText = document.getElementById('termModeText');
+      isTermPaused = !isTermPaused;
+
+      if (isTermPaused) {
+        if (termTimeoutId) clearTimeout(termTimeoutId);
+        if (btn) btn.innerText = '[RESUME]';
+        if (modeText) modeText.innerText = 'TERMINAL // PAUSED';
+      } else {
+        if (btn) btn.innerText = '[PAUSE]';
+        if (modeText) modeText.innerText = 'LIVE RECON // STREAMING';
+        renderCommandStream();
+      }
+    }
+
+    function nextTerminalCommand() {
+      if (termTimeoutId) clearTimeout(termTimeoutId);
+      currentCmdIdx = (currentCmdIdx + 1) % GENUINE_COMMANDS.length;
+      isTermPaused = false;
+      const btn = document.getElementById('termPauseBtn');
+      if (btn) btn.innerText = '[PAUSE]';
+      renderCommandStream();
+    }
+
+    function clearTerminalOutput() {
+      const streamLogEl = document.getElementById('termStreamLog');
+      if (streamLogEl) {
+        streamLogEl.innerHTML = '<div class="term-stream-line log-dim">[~] Terminal buffer cleared &bull; Operator Ready.</div>';
+      }
+    }
+
+    /* ==========================================================================
+       3. ORIGINAL CYBER MAP // REAL SCANNING & TELEMETRY
+       ========================================================================== */
+    function showMapNodeDossier(name, coords, role, status) {
+      const liveCoords = document.getElementById('mapLiveCoords');
+      const liveFeed = document.getElementById('mapLiveFeedTag');
+      const telemetryDefcon = document.getElementById('telemetryDefcon');
+
+      if (liveCoords) {
+        liveCoords.innerHTML = `<span class="pulsing-red-dot"></span> NODE LOCKED: ${name.toUpperCase()} [${coords}]`;
+      }
+      if (liveFeed) {
+        liveFeed.innerHTML = `<i class="fa-solid fa-crosshairs text-crimson"></i> UPLINK: ${role.toUpperCase()} // ${status}`;
+      }
+      if (telemetryDefcon) {
+        telemetryDefcon.innerText = `DEFCON 1 // ${name.toUpperCase()}`;
+        telemetryDefcon.style.color = 'var(--crimson-primary)';
+      }
+
+      setTimeout(() => {
+        if (telemetryDefcon) {
+          telemetryDefcon.innerText = 'DEFCON 2 // ARMED';
+          telemetryDefcon.style.color = '';
+        }
+      }, 5000);
+    }
+
+    function initCyberRealWorldMap() {
+      const mapContainer = document.getElementById('cyberRealMapContainer');
+      const liveCoords = document.getElementById('mapLiveCoords');
+
+      if (mapContainer && liveCoords) {
+        mapContainer.addEventListener('mousemove', (e) => {
+          const rect = mapContainer.getBoundingClientRect();
+          const relX = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+          const relY = Math.max(0, Math.min(1, (e.clientY - rect.top) / rect.height));
+
+          // WGS84 Equirectangular Projection Mapping
+          const lat = (0.5 - relY) * 140; // ~ 70° N to 70° S
+          const lng = (relX - 0.5) * 360; // -180° to +180°
+
+          const latDir = lat >= 0 ? 'N' : 'S';
+          const lngDir = lng >= 0 ? 'E' : 'W';
+
+          let sector = 'GLOBAL MESH';
+          if (lat > 5 && lat < 38 && lng > 65 && lng < 95) sector = 'INDIA SECTOR [HQ]';
+          else if (lat > 35 && lat < 70 && lng > -15 && lng < 40) sector = 'EUROPE / UK SECTOR';
+          else if (lat > 15 && lat < 60 && lng > -130 && lng < -65) sector = 'NORTH AMERICA SECTOR';
+          else if (lat > -10 && lat < 30 && lng > 95 && lng < 150) sector = 'APAC / SE ASIA SECTOR';
+          else if (lat < 10 && lat > -55 && lng > -85 && lng < -35) sector = 'SOUTH AMERICA SECTOR';
+          else if (lat < 35 && lat > -40 && lng > -20 && lng < 55) sector = 'AFRICA SECTOR';
+
+          liveCoords.innerHTML = `<span class="pulsing-green-dot"></span> CURSOR: ${Math.abs(lat).toFixed(2)}&deg; ${latDir}, ${Math.abs(lng).toFixed(2)}&deg; ${lngDir} // ${sector}`;
+        });
+
+        mapContainer.addEventListener('mouseleave', () => {
+          liveCoords.innerHTML = `<span class="pulsing-green-dot"></span> CURSOR: 24.58&deg; N, 80.83&deg; E // SATNA SECTOR`;
+        });
+      }
+
+      // Real-Time Ping Telemetry Jitter
+      setInterval(() => {
+        const pingEl = document.getElementById('telemetryPing');
+        if (pingEl) {
+          const ms = Math.floor(Math.random() * 8) + 11;
+          pingEl.innerText = `${ms}ms [STABLE]`;
+        }
+      }, 3200);
+    }
+
+    /* ==========================================================================
+       DOM READY INITIALIZATION
+       ========================================================================== */
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Run Matrix Decrypt for "Pranshu Verman."
+      runMatrixDecrypt();
+
+      // 2. Start Genuine Pentest Terminal Engine
+      renderCommandStream();
+
+      // 3. Initialize Original Cyber World Map & Scanning Telemetry
+      initCyberRealWorldMap();
+    });
+  </script>
 </body>
 </html>
