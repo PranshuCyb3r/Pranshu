@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ZeR0CyB3r // Secure Access Portal (Login &amp; Register)</title>
-  <meta name="description" content="Secure authentication, registration, and OTP verification portal for ZeR0CyB3r cybersecurity systems." />
-  <meta property="og:title" content="ZeR0CyB3r // Secure Access Portal" />
-  <meta property="og:description" content="Secure authentication and registration with 2FA OTP verification." />
+  <title>ZeR0CyB3r // Register New Account (OTP Verification)</title>
+  <meta name="description" content="Secure new user registration and OTP verification portal for ZeR0CyB3r cybersecurity platform." />
+  <meta property="og:title" content="ZeR0CyB3r // Register New Account" />
+  <meta property="og:description" content="Secure new user registration with OTP verification." />
 
   <!-- Typography & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -384,7 +384,8 @@
     <span>&copy; 2026 ZeR0CyB3r // Pranshu Verman &bull; Authorized Operator &amp; Client Access</span>
   </footer>
 
-  <!-- Vanilla Authentication & OTP State Script -->
+  <script>window.addEventListener("DOMContentLoaded", () => { if (typeof switchAuthTab === "function") switchAuthTab("register"); });</script>
+  <!-- Vanilla Authentication <!-- Vanilla Authentication & OTP State Script --> OTP State Script -->
   <script>
     // In-memory pending registration state
     let pendingRegistration = null;

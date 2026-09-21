@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
   <!-- Main Pure CSS Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="css/style.css" />
 
   <!-- Leaflet Real World Map Engine -->
@@ -52,21 +53,21 @@
 
       <nav>
         <ul class="nav-links">
-          <li><a href="#about" class="nav-link">#about</a></li>
-          <li><a href="#skills" class="nav-link">#skills</a></li>
-          <li><a href="#projects" class="nav-link">#projects</a></li>
-          <li><a href="#experience" class="nav-link">#experience</a></li>
-          <li><a href="#certifications" class="nav-link">#certs</a></li>
-          <li><a href="#contact" class="nav-link">#contact</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#experience" class="nav-link">Experience</a></li>
+          <li><a href="#certifications" class="nav-link">Certifications</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
         </ul>
       </nav>
 
       <div class="nav-auth-wrap">
-        <button type="button" class="btn btn-primary btn-nav-login" id="headerLoginBtn" onclick="openLoginModal('user')">
-          <i class="fa-solid fa-lock"></i>
-          <span>LOGIN</span>
-          <span class="auth-role-tag">USER / ADMIN</span>
-        </button>
+        <a href="login.html" class="btn btn-primary btn-nav-login" id="headerLoginBtn" style="text-decoration: none;">
+          <i class="fa-solid fa-user-shield"></i>
+          <span id="headerLoginText">PORTAL LOGIN</span>
+          <span class="auth-role-tag" id="headerLoginRole">REG &bull; SIGN IN</span>
+        </a>
       </div>
     </div>
   </header>
@@ -210,6 +211,7 @@
       <div class="container">
         <div class="section-tag">
           <span class="dot"></span>
+          <i class="fa-solid fa-user-shield"></i>
           <span>// 01. OPERATOR PROFILE</span>
         </div>
         <h2 class="section-title">About <span class="text-crimson">Pranshu Verman.</span></h2>
@@ -248,14 +250,6 @@
               <span class="spec-val">Satna, Madhya Pradesh, India</span>
             </div>
             <div class="spec-item">
-              <span class="spec-key">PHONE</span>
-              <span class="spec-val">+91 8103162875</span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-key">EMAIL</span>
-              <span class="spec-val">pranshuverman12@gmail.com</span>
-            </div>
-            <div class="spec-item">
               <span class="spec-key">HIGHEST DEGREE</span>
               <span class="spec-val">MCA &bull; AKS University</span>
             </div>
@@ -273,6 +267,7 @@
       <div class="container">
         <div class="section-tag">
           <span class="dot"></span>
+          <i class="fa-solid fa-shield-virus"></i>
           <span>// 02. COMBAT ARSENAL</span>
         </div>
         <h2 class="section-title">Technical Skills &amp; <span class="text-crimson">Security Stack.</span></h2>
@@ -373,6 +368,7 @@
       <div class="container">
         <div class="section-tag">
           <span class="dot"></span>
+          <i class="fa-solid fa-flask-vial"></i>
           <span>// 03. CASE STUDIES &amp; LABS</span>
         </div>
         <h2 class="section-title">Featured <span class="text-crimson">Security Projects.</span></h2>
@@ -515,6 +511,7 @@
       <div class="container">
         <div class="section-tag">
           <span class="dot"></span>
+          <i class="fa-solid fa-timeline"></i>
           <span>// 04. EXPERIENCE &amp; MILESTONES</span>
         </div>
         <h2 class="section-title">Professional <span class="text-crimson">Experience.</span></h2>
@@ -594,6 +591,7 @@
         <div class="education-section">
           <div class="section-tag" style="margin-bottom: 8px;">
             <span class="dot"></span>
+            <i class="fa-solid fa-graduation-cap"></i>
             <span>// ACADEMIC CREDENTIALS</span>
           </div>
           <h3 style="font-size: 20px; font-weight: 700; color: #ffffff;">Education &amp; Qualifications</h3>
@@ -624,6 +622,7 @@
       <div class="container">
         <div class="section-tag">
           <span class="dot"></span>
+          <i class="fa-solid fa-certificate"></i>
           <span>// 05. VERIFIED CREDENTIALS</span>
         </div>
         <h2 class="section-title">Verified <span class="text-crimson">Certifications.</span></h2>
@@ -839,6 +838,7 @@
       <div class="container">
         <div class="section-tag">
           <span class="dot"></span>
+          <i class="fa-solid fa-satellite-dish"></i>
           <span>// 06. SECURE TRANSMISSION</span>
         </div>
         <h2 class="section-title">Let's Secure <span class="text-crimson">Your Infrastructure.</span></h2>
@@ -1095,104 +1095,21 @@
         </div>
       </div>
 
+      <div class="footer-nav-links" style="display: flex; gap: 20px; align-items: center; font-family: var(--font-mono); font-size: 12px;">
+        <a href="login.html" style="color: var(--crimson-light); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 700;">
+          <i class="fa-solid fa-user-shield"></i>
+          <span>PORTAL LOGIN &bull; REGISTER</span>
+        </a>
+        <a href="#hero" style="color: var(--text-muted); text-decoration: none;">
+          <span>TOP &uarr;</span>
+        </a>
+      </div>
+
       <div class="footer-copy">
         &copy; 2026 ZeR0CyB3r (Pranshu Verman). All Rights Reserved. Pure HTML &amp; CSS.
       </div>
     </div>
   </footer>
-
-  <!-- ==========================================================================
-       LOGIN MODAL: User & Admin Portals ("requst audit ki jagah mujhe login karana h user and admin ka")
-       ========================================================================== -->
-  <div class="login-modal-backdrop" id="loginModal" onclick="handleBackdropClick(event)">
-    <div class="login-modal-window">
-      <!-- Modal Header -->
-      <div class="login-modal-header">
-        <div class="login-modal-title">
-          <i class="fa-solid fa-shield-halved text-crimson"></i>
-          <span>SECURE_AUTH // ACCESS PORTAL</span>
-        </div>
-        <button type="button" class="login-close-btn" onclick="closeLoginModal()" aria-label="Close modal">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-
-      <!-- Navigation Tabs: User vs Admin -->
-      <div class="login-tabs-nav">
-        <button type="button" class="login-tab-btn active" id="userTabBtn" onclick="switchLoginTab('user')">
-          <i class="fa-solid fa-user"></i>
-          <span>USER LOGIN</span>
-        </button>
-        <button type="button" class="login-tab-btn" id="adminTabBtn" onclick="switchLoginTab('admin')">
-          <i class="fa-solid fa-terminal"></i>
-          <span>ADMIN (OPERATOR)</span>
-        </button>
-      </div>
-
-      <!-- Modal Body -->
-      <div class="login-modal-body">
-        <!-- USER LOGIN TAB PANE -->
-        <div class="login-tab-pane active" id="userPane">
-          <form onsubmit="handleUserAuth(event)">
-            <div class="login-field">
-              <label class="login-label">// CLIENT / RECRUITER IDENTITY</label>
-              <div class="login-input-wrap">
-                <i class="fa-solid fa-envelope login-input-icon"></i>
-                <input type="email" class="login-input" id="userEmailInput" placeholder="client@organization.com" required />
-              </div>
-            </div>
-
-            <div class="login-field" style="margin-top: 14px;">
-              <label class="login-label">// ACCESS PASSCODE / TOKEN</label>
-              <div class="login-input-wrap">
-                <i class="fa-solid fa-key login-input-icon"></i>
-                <input type="password" class="login-input" id="userPassInput" placeholder="••••••••••••" required />
-              </div>
-            </div>
-
-            <button type="submit" class="btn-submit-auth" style="width: 100%; margin-top: 18px;">
-              <i class="fa-solid fa-right-to-bracket"></i>
-              <span>AUTHENTICATE CLIENT</span>
-            </button>
-          </form>
-
-          <div class="login-terminal-output" id="userTerminalLog">
-            [+] READY // PUSH CREDENTIALS TO INITIALIZE CLIENT SESSION
-          </div>
-        </div>
-
-        <!-- ADMIN LOGIN TAB PANE -->
-        <div class="login-tab-pane" id="adminPane">
-          <form onsubmit="handleAdminAuth(event)">
-            <div class="login-field">
-              <label class="login-label">// OPERATOR CALLSIGN</label>
-              <div class="login-input-wrap">
-                <i class="fa-solid fa-user-ninja login-input-icon"></i>
-                <input type="text" class="login-input" id="adminCallsign" value="pranshu.verman" required />
-              </div>
-            </div>
-
-            <div class="login-field" style="margin-top: 14px;">
-              <label class="login-label">// ROOT MASTER KEY / 2FA TOKEN</label>
-              <div class="login-input-wrap">
-                <i class="fa-solid fa-fingerprint login-input-icon"></i>
-                <input type="password" class="login-input" id="adminKeyInput" placeholder="Enter PGP Master passphrase..." required />
-              </div>
-            </div>
-
-            <button type="submit" class="btn-submit-auth" style="width: 100%; margin-top: 18px;">
-              <i class="fa-solid fa-lock-open"></i>
-              <span>AUTHENTICATE OPERATOR CONSOLE</span>
-            </button>
-          </form>
-
-          <div class="login-terminal-output" id="adminTerminalLog">
-            [+] RESTRICTED ACCESS // ROOT OPERATOR IDENTITY VERIFICATION ACTIVE
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- ==========================================================================
        FULLSCREEN CERTIFICATE LIGHTBOX MODAL
@@ -1222,56 +1139,30 @@
 
   <!-- Minimal Vanilla JavaScript for Interactive State Handlers -->
   <script>
-    // Login Modal Open / Close / Tab Switch
-    function openLoginModal(tab = 'user') {
-      const modal = document.getElementById('loginModal');
-      modal.classList.add('active');
-      switchLoginTab(tab);
+    // Navigation to Dedicated Secure Auth Portal
+    function openLoginModal(tab = 'login') {
+      window.location.href = tab === 'register' ? 'login.html#register' : 'login.html';
     }
 
-    function closeLoginModal() {
-      const modal = document.getElementById('loginModal');
-      modal.classList.remove('active');
-    }
-
-    function handleBackdropClick(e) {
-      if (e.target.id === 'loginModal') {
-        closeLoginModal();
+    // Sync Active Session State to Navbar
+    function syncAuthSession() {
+      const sessionStr = localStorage.getItem('cyber_auth_session');
+      const btnText = document.getElementById('headerLoginText');
+      const btnRole = document.getElementById('headerLoginRole');
+      const btn = document.getElementById('headerLoginBtn');
+      if (sessionStr && btnText && btnRole && btn) {
+        try {
+          const session = JSON.parse(sessionStr);
+          if (session && session.name) {
+            const firstName = session.name.split(' ')[0];
+            btnText.innerHTML = `<span style="color:#34d399; font-weight:800;">●</span> ${firstName.toUpperCase()}`;
+            btnRole.innerText = "ACTIVE SESSION";
+            btn.title = `Authenticated as: ${session.name} (${session.mail})`;
+          }
+        } catch (e) {}
       }
     }
-
-    function switchLoginTab(tab) {
-      const userBtn = document.getElementById('userTabBtn');
-      const adminBtn = document.getElementById('adminTabBtn');
-      const userPane = document.getElementById('userPane');
-      const adminPane = document.getElementById('adminPane');
-
-      if (tab === 'admin') {
-        userBtn.classList.remove('active');
-        adminBtn.classList.add('active');
-        userPane.classList.remove('active');
-        adminPane.classList.add('active');
-      } else {
-        adminBtn.classList.remove('active');
-        userBtn.classList.add('active');
-        adminPane.classList.remove('active');
-        userPane.classList.add('active');
-      }
-    }
-
-    function handleUserAuth(e) {
-      e.preventDefault();
-      const email = document.getElementById('userEmailInput').value;
-      const log = document.getElementById('userTerminalLog');
-      log.innerHTML = `<span style="color: #38bdf8;">[~] Verifying token for: ${email}...</span><br /><span style="color: #34d399;">[✓] ACCESS GRANTED &bull; SESSION ID: #USR-${Math.floor(Math.random()*90000+10000)}</span>`;
-    }
-
-    function handleAdminAuth(e) {
-      e.preventDefault();
-      const callsign = document.getElementById('adminCallsign').value;
-      const log = document.getElementById('adminTerminalLog');
-      log.innerHTML = `<span style="color: #ff0038;">[!] VERIFYING ROOT PGP PRIVILEGES FOR ${callsign}...</span><br /><span style="color: #34d399;">[✓] ROOT CLEARANCE ACCEPTED &bull; OPERATOR CONSOLE ARMED</span>`;
-    }
+    window.addEventListener('DOMContentLoaded', syncAuthSession);
 
     // Fullscreen Certificate Lightbox Modal
     function openCertLightbox(title, issuer, imgSrc, desc) {
