@@ -151,7 +151,7 @@
 
               <!-- Demo Credentials Helper -->
               <div class="demo-helper-bar" style="margin-top: 16px;">
-                <span><i class="fa-solid fa-bolt text-crimson"></i> Quick-test operator demo?</span>
+                <span><i class="fa-solid fa-bolt text-crimson"></i> Quick-test demo: demo@zerocyber.com</span>
                 <button type="button" class="btn-demo-fill" onclick="fillDemoCredentials()">Auto-Fill Demo</button>
               </div>
 
@@ -181,7 +181,7 @@
                     type="text" 
                     id="regName" 
                     class="auth-text-input" 
-                    placeholder="e.g. Rahul Sharma" 
+                    placeholder="Name" 
                     required 
                     autocomplete="name"
                   />
@@ -200,7 +200,7 @@
                     type="tel" 
                     id="regPhone" 
                     class="auth-text-input" 
-                    placeholder="e.g. +91 98765 43210" 
+                    placeholder="Number" 
                     required 
                     autocomplete="tel"
                   />
@@ -219,7 +219,7 @@
                     type="email" 
                     id="regEmail" 
                     class="auth-text-input" 
-                    placeholder="e.g. rahul@security.org" 
+                    placeholder="Mail" 
                     required 
                     autocomplete="email"
                   />
@@ -238,7 +238,7 @@
                     type="password" 
                     id="regPassword" 
                     class="auth-text-input" 
-                    placeholder="Minimum 6 characters with mixed symbols..." 
+                    placeholder="Password" 
                     required 
                     oninput="evaluatePasswordStrength(this.value)"
                     autocomplete="new-password"
@@ -361,11 +361,15 @@
               </div>
 
               <div class="auth-actions-group">
-                <a href="index.html" class="btn btn-primary" style="text-decoration: none; justify-content: center;">
-                  <i class="fa-solid fa-compass"></i>
-                  <span>EXPLORE PENTEST PORTFOLIO &rarr;</span>
+                <a href="hub.html" class="btn btn-primary" style="text-decoration: none; justify-content: center; background: linear-gradient(135deg, #ff0038, #b30027); box-shadow: 0 0 24px rgba(255, 0, 56, 0.45); font-weight: 700; padding: 14px 20px;">
+                  <i class="fa-solid fa-graduation-cap" style="font-size: 16px;"></i>
+                  <span>ACCESS CYBER STUDY HUB &amp; ARSENAL &rarr;</span>
                 </a>
-                <button type="button" class="btn btn-outline" onclick="handleSignOut()" style="justify-content: center; font-family: var(--font-mono);">
+                <a href="index.html" class="btn btn-outline" style="text-decoration: none; justify-content: center;">
+                  <i class="fa-solid fa-compass"></i>
+                  <span>EXPLORE PENTEST PORTFOLIO</span>
+                </a>
+                <button type="button" class="btn btn-outline" onclick="handleSignOut()" style="justify-content: center; font-family: var(--font-mono); color: var(--crimson-light);">
                   <i class="fa-solid fa-power-off text-crimson"></i>
                   <span>TERMINATE SESSION &bull; LOG OUT</span>
                 </button>
@@ -395,25 +399,44 @@
     // Default Seed Accounts
     const DEFAULT_SEED_USERS = [
       {
+        name: "Demo Operator",
+        number: "+91 8103162875",
+        mail: "demo@zerocyber.com",
+        password: "Cyber@2026",
+        registeredAt: "2026-03-29 10:00:00"
+      },
+      {
         name: "Pranshu Verman (Operator)",
         number: "+91 8103162875",
         mail: "operator@zerocyber.com",
         password: "Cyber@2026",
         registeredAt: "2026-03-29 10:00:00"
-      },
-      {
-        name: "Lead Security Auditor",
-        number: "+91 8103162875",
-        mail: "operator@zerocyber.com",
-        password: "Audit@2026",
-        registeredAt: "2026-03-29 11:30:00"
       }
     ];
 
     // Initialize Database in LocalStorage if not already present
     function initializeUserDb() {
-      if (!localStorage.getItem('cyber_users')) {
-        localStorage.setItem('cyber_users', JSON.stringify(DEFAULT_SEED_USERS));
+      let users = [];
+      try {
+        users = JSON.parse(localStorage.getItem('cyber_users')) || [];
+      } catch (e) {
+        users = [];
+      }
+      if (!Array.isArray(users) || users.length === 0) {
+        users = [...DEFAULT_SEED_USERS];
+        localStorage.setItem('cyber_users', JSON.stringify(users));
+      } else {
+        // Ensure demo@zerocyber.com is always present
+        if (!users.some(u => u.mail && u.mail.toLowerCase() === 'demo@zerocyber.com')) {
+          users.unshift({
+            name: "Demo Operator",
+            number: "+91 8103162875",
+            mail: "demo@zerocyber.com",
+            password: "Cyber@2026",
+            registeredAt: "2026-03-29 10:00:00"
+          });
+          localStorage.setItem('cyber_users', JSON.stringify(users));
+        }
       }
     }
 
@@ -728,6 +751,17 @@
 
       localStorage.setItem('cyber_auth_session', JSON.stringify(sessionObj));
 
+      // Check if there is a redirect query param
+      const urlParams = new URLSearchParams(window.location.search);
+      const redirect = urlParams.get('redirect');
+      if (redirect === 'hub.html' || urlParams.get('reason') === 'required') {
+        showAlert('success', `✓ Clearance Granted! Welcome ${sessionObj.name}. Redirecting to Study Hub & Arsenal...`);
+        setTimeout(() => {
+          window.location.href = 'hub.html';
+        }, 700);
+        return;
+      }
+
       // Display Authenticated Session Dashboard
       showSessionDashboard(sessionObj);
       showAlert('success', `✓ Access Granted! Welcome back, ${sessionObj.name}.`);
@@ -769,10 +803,10 @@
     // Quick fill Demo credentials helper
     function fillDemoCredentials() {
       switchAuthTab('login');
-      document.getElementById('loginEmail').value = 'operator@zerocyber.sec';
+      document.getElementById('loginEmail').value = 'demo@zerocyber.com';
       document.getElementById('loginPassword').value = 'Cyber@2026';
       clearAlert();
-      showAlert('success', 'Demo credentials loaded: [operator@zerocyber.sec / Cyber@2026]');
+      showAlert('success', 'Demo credentials loaded: [demo@zerocyber.com / Cyber@2026]');
     }
 
     // Setup 6 OTP boxes auto-focus & backspace navigation
@@ -818,16 +852,27 @@
         switchAuthTab('register');
       }
 
+      const urlParams = new URLSearchParams(window.location.search);
+      const isHubRedirect = urlParams.get('redirect') === 'hub.html' || urlParams.get('reason') === 'required';
+
       const existingSession = localStorage.getItem('cyber_auth_session');
       if (existingSession) {
         try {
           const parsed = JSON.parse(existingSession);
-          if (parsed && parsed.mail) {
+          if (parsed && (parsed.mail || parsed.name)) {
+            if (isHubRedirect) {
+              window.location.href = 'hub.html';
+              return;
+            }
             showSessionDashboard(parsed);
           }
         } catch (e) {
           localStorage.removeItem('cyber_auth_session');
         }
+      }
+
+      if (isHubRedirect) {
+        showAlert('error', '🔒 Security Gate: Cyber Security Knowledge & Study Hub requires operator clearance. Please sign in or click "Auto-Fill Demo".');
       }
     });
   </script>

