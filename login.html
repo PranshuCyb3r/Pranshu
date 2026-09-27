@@ -149,19 +149,8 @@
                 </div>
               </div>
 
-              <!-- Demo Credentials Helper -->
-              <div class="demo-helper-bar" style="margin-top: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
-                <span style="font-family: var(--font-mono); font-size: 11.5px; color: var(--text-secondary);">
-                  <i class="fa-solid fa-bolt text-crimson"></i> Demo: <strong>demo@zerocyber.com</strong> (Pass: Cyber@2026)
-                </span>
-                <div style="display: flex; gap: 6px;">
-                  <button type="button" class="btn-demo-fill" onclick="fillDemoCredentials(false)">Auto-Fill</button>
-                  <button type="button" class="btn-demo-fill" style="background: rgba(255, 0, 56, 0.2); border-color: var(--crimson-primary); color: #fff;" onclick="fillDemoCredentials(true)">1-Click Login</button>
-                </div>
-              </div>
-
               <!-- Submit Button -->
-              <button type="submit" class="btn-submit-auth" id="btnLoginSubmit" style="width: 100%; margin-top: 18px;">
+              <button type="submit" class="btn-submit-auth" id="btnLoginSubmit" style="width: 100%; margin-top: 22px;">
                 <i class="fa-solid fa-lock-open"></i>
                 <span>AUTHENTICATE &bull; LOG IN</span>
               </button>
@@ -277,30 +266,13 @@
                ================================================================ -->
           <div class="auth-view-pane" id="otpPane">
             
-            <div style="text-align: center; margin-bottom: 8px;">
+            <div style="text-align: center; margin-bottom: 14px;">
               <span style="font-family: var(--font-mono); font-size: 12px; color: #38bdf8;">
-                [~] 2FA DISPATCH &bull; VERIFICATION REQUIRED
+                [~] TWO-FACTOR AUTHENTICATION &bull; 2FA SECURITY
               </span>
-              <p style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">
-                Enter the 6-digit code transmitted to <strong id="otpTargetContact" style="color: #fff;"></strong>.
+              <p style="font-size: 13px; color: var(--text-secondary); margin-top: 6px;">
+                Enter the 6-digit security verification code sent to <strong id="otpTargetContact" style="color: #fff;"></strong>.
               </p>
-            </div>
-
-            <!-- Simulated SMS/Email Terminal Dispatch HUD Alert -->
-            <div class="otp-card-hud">
-              <div class="otp-hud-header">
-                <span><i class="fa-solid fa-satellite-dish"></i> TRANSMISSION DETECTED</span>
-                <span style="color: #34d399;">LIVE DISPATCH</span>
-              </div>
-              <div class="otp-hud-code-display">
-                <span id="dispatchedOtpCode">------</span>
-                <button type="button" class="btn-autofill-otp" onclick="autoFillOtp()">
-                  <i class="fa-solid fa-wand-magic-sparkles"></i> Auto-Fill OTP
-                </button>
-              </div>
-              <div style="font-size: 11px; color: var(--text-muted); font-family: var(--font-mono);">
-                Safe simulation active for testing and verification.
-              </div>
             </div>
 
             <!-- 6 Interactive OTP Boxes -->
@@ -316,7 +288,7 @@
             <div class="otp-timer-row">
               <span id="otpCountdownText"><i class="fa-regular fa-clock"></i> Expires in 00:59</span>
               <button type="button" class="btn-resend-otp" id="btnResendOtp" onclick="resendOtp()" disabled>
-                Resend New Code
+                Resend Code
               </button>
             </div>
 
@@ -388,9 +360,30 @@
     </div>
   </main>
 
-  <!-- Compact Clean Footer -->
-  <footer class="auth-footer">
-    <span>&copy; 2026 ZeR0CyB3r // Pranshu Verman &bull; Authorized Operator &amp; Client Access</span>
+  <!-- SITE FOOTER (Exact unified footer across ALL pages) -->
+  <footer class="site-footer hub-footer" id="loginSiteFooter">
+    <div class="container footer-wrapper">
+      <div class="brand">
+        <div class="brand-logo-frame">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCw3OTKaVJOk6JCNAEal73bdmB3TbJ0I-COD9u3rPYTolwZzR6-icxOZuDO6EEDjJa4Qa6avgN-L1Pida92d-DYWAZrvemUWhO13w26V0tBo7qUWazTzoWp-q4qycG6OWhHjinJqv5Skk7bcixkGFWw2X2exLxVBO9YEby8qAEC1R5ObrJvTKW7XtM27bORq6mA7yAsDb7X9LzXEMj50z8Ek-tUUCh9fKYH38Y739QrqYmckilXJCW0BkXn7BHr8Boc_Zc" alt="ZeR0 Logo" referrerpolicy="no-referrer" />
+        </div>
+        <div class="brand-text-wrap">
+          <span class="brand-name">ZeR0<span class="text-crimson">CyB3r</span></span>
+          <span class="brand-sub">PRANSHU VERMAN &bull; CYBERSECURITY ANALYST</span>
+        </div>
+      </div>
+      <div class="footer-center">
+        <a href="hub.html" class="footer-hub-badge">
+          <i class="fa-solid fa-graduation-cap text-crimson"></i> CYBER STUDY HUB
+        </a>
+        <a href="#top" class="footer-top-link" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
+          TOP &uarr;
+        </a>
+      </div>
+      <div class="footer-copy">
+        &copy; 2026 ZeR0CyB3r (Pranshu Verman). All Rights Reserved. Pure HTML &amp; CSS.
+      </div>
+    </div>
   </footer>
 
   <!-- Vanilla Authentication & OTP State Script -->
@@ -401,17 +394,17 @@
     let otpCountdownTimer = null;
     let otpSecondsRemaining = 60;
 
-    // Default Seed Accounts
+    // Master Seed Accounts
     const DEFAULT_SEED_USERS = [
       {
-        name: "Demo Operator",
+        name: "Pranshu Verman",
         number: "+91 8103162875",
-        mail: "demo@zerocyber.com",
+        mail: "pranshuverman12@gmail.com",
         password: "Cyber@2026",
         registeredAt: "2026-03-29 10:00:00"
       },
       {
-        name: "Pranshu Verman (Operator)",
+        name: "ZeR0CyB3r Security Operator",
         number: "+91 8103162875",
         mail: "operator@zerocyber.com",
         password: "Cyber@2026",
@@ -431,16 +424,10 @@
         users = [...DEFAULT_SEED_USERS];
         localStorage.setItem('cyber_users', JSON.stringify(users));
       } else {
-        // Ensure demo@zerocyber.com is always present
-        if (!users.some(u => u.mail && u.mail.toLowerCase() === 'demo@zerocyber.com')) {
-          users.unshift({
-            name: "Demo Operator",
-            number: "+91 8103162875",
-            mail: "demo@zerocyber.com",
-            password: "Cyber@2026",
-            registeredAt: "2026-03-29 10:00:00"
-          });
-          localStorage.setItem('cyber_users', JSON.stringify(users));
+        // Clean out any legacy demo test accounts
+        const cleaned = users.filter(u => u && u.mail && !u.mail.toLowerCase().includes('demo@'));
+        if (cleaned.length !== users.length) {
+          localStorage.setItem('cyber_users', JSON.stringify(cleaned));
         }
       }
     }
@@ -633,11 +620,10 @@
     function dispatchNewOtp() {
       // Random 6 digit number between 100000 and 999999
       generatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
-      document.getElementById('dispatchedOtpCode').innerText = generatedOtp;
 
       // Start Countdown
       startOtpTimer();
-      showAlert('success', `[SECURE DISPATCH]: Verification OTP [${generatedOtp}] sent to ${pendingRegistration.mail}`);
+      showAlert('success', `[2FA AUTH CODE]: Verification code [${generatedOtp}] generated for ${pendingRegistration.mail}. Please enter the 6 digits.`);
     }
 
     // OTP 60s Countdown Timer
@@ -669,17 +655,6 @@
         document.getElementById(`otpDigit${i}`).value = '';
       }
       document.getElementById('otpDigit1').focus();
-    }
-
-    // Auto-fill OTP helper for quick testing
-    function autoFillOtp() {
-      if (!generatedOtp) return;
-      for (let i = 1; i <= 6; i++) {
-        const el = document.getElementById(`otpDigit${i}`);
-        if (el) el.value = generatedOtp[i - 1] || '';
-      }
-      clearAlert();
-      showAlert('success', 'OTP code filled automatically. Click verify to complete registration.');
     }
 
     // Step 2: Verify OTP and finalize Registration
@@ -798,31 +773,13 @@
 
     // Terminate Session (Sign Out)
     function handleSignOut() {
-      localStorage.removeItem('cyber_auth_session');
-      document.getElementById('sessionPane').classList.remove('active');
-      document.getElementById('authTabSwitcher').style.display = 'grid';
-      switchAuthTab('login');
-      showAlert('success', 'Session terminated successfully. Re-authenticate to access.');
-    }
-
-    // Quick fill Demo credentials helper
-    function fillDemoCredentials(autoSubmit = false) {
-      switchAuthTab('login');
-      document.getElementById('loginEmail').value = 'demo@zerocyber.com';
-      document.getElementById('loginPassword').value = 'Cyber@2026';
-      clearAlert();
-
-      if (autoSubmit) {
-        showAlert('success', 'Demo clearance loaded: demo@zerocyber.com. Authenticating operator session...');
-        setTimeout(() => {
-          const form = document.getElementById('loginForm');
-          if (form) {
-            form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
-          }
-        }, 300);
-      } else {
-        showAlert('success', 'Demo credentials loaded: [demo@zerocyber.com / Cyber@2026]. Click "AUTHENTICATE & LOG IN" to enter.');
-      }
+      try {
+        localStorage.removeItem('cyber_auth_session');
+        sessionStorage.removeItem('cyber_auth_session');
+        localStorage.removeItem('cyber_session_user');
+        sessionStorage.clear();
+      } catch (e) {}
+      window.location.href = 'index.html';
     }
 
     // Setup 6 OTP boxes auto-focus & backspace navigation
@@ -863,12 +820,25 @@
       initializeUserDb();
       setupOtpBoxListeners();
 
+      const urlParams = new URLSearchParams(window.location.search);
+      const isLogout = urlParams.get('logout') === 'true' || urlParams.get('action') === 'logout';
+
+      if (isLogout) {
+        try {
+          localStorage.removeItem('cyber_auth_session');
+          sessionStorage.removeItem('cyber_auth_session');
+          localStorage.removeItem('cyber_session_user');
+          sessionStorage.clear();
+        } catch (e) {}
+        window.location.href = 'index.html';
+        return;
+      }
+
       // Check if URL hash or search specifies register tab
       if (window.location.hash === '#register' || window.location.search.includes('tab=register')) {
         switchAuthTab('register');
       }
 
-      const urlParams = new URLSearchParams(window.location.search);
       const isHubRedirect = urlParams.get('redirect') === 'hub.html' || urlParams.get('reason') === 'required';
 
       const existingSession = localStorage.getItem('cyber_auth_session');
@@ -888,7 +858,7 @@
       }
 
       if (isHubRedirect) {
-        showAlert('error', '🔒 Security Gate: Cyber Security Knowledge & Study Hub requires operator clearance. Please sign in or click "Auto-Fill Demo".');
+        showAlert('error', '🔒 Access Gate: Cyber Security Knowledge & Study Hub requires valid sign in. Please log in with your credentials or register an account.');
       }
     });
   </script>

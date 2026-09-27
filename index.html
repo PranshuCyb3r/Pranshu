@@ -1082,8 +1082,8 @@
     </section>
   </main>
 
-  <!-- Footer -->
-  <footer class="site-footer">
+  <!-- SITE FOOTER (Exact unified footer across ALL pages) -->
+  <footer class="site-footer hub-footer" id="siteFooter">
     <div class="container footer-wrapper">
       <div class="brand">
         <div class="brand-logo-frame">
@@ -1094,17 +1094,14 @@
           <span class="brand-sub">PRANSHU VERMAN &bull; CYBERSECURITY ANALYST</span>
         </div>
       </div>
-
-      <div class="footer-nav-links" style="display: flex; gap: 20px; align-items: center; font-family: var(--font-mono); font-size: 12px;">
-        <a href="hub.html" onclick="handleStudyHubClick(event)" style="color: var(--crimson-light); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 700;">
-          <i class="fa-solid fa-graduation-cap"></i>
-          <span>CYBER STUDY HUB</span>
+      <div class="footer-center">
+        <a href="hub.html" onclick="handleStudyHubClick(event)" class="footer-hub-badge">
+          <i class="fa-solid fa-graduation-cap text-crimson"></i> CYBER STUDY HUB
         </a>
-        <a href="#hero" style="color: var(--text-muted); text-decoration: none;">
-          <span>TOP &uarr;</span>
+        <a href="#hero" class="footer-top-link" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
+          TOP &uarr;
         </a>
       </div>
-
       <div class="footer-copy">
         &copy; 2026 ZeR0CyB3r (Pranshu Verman). All Rights Reserved. Pure HTML &amp; CSS.
       </div>
@@ -1168,25 +1165,35 @@
       const sessionStr = localStorage.getItem('cyber_auth_session');
       const lockBadge = document.getElementById('hubLockBadge');
       const hubBtn = document.getElementById('navStudyHubBtn');
-      if (sessionStr && lockBadge) {
+
+      let session = null;
+      if (sessionStr) {
         try {
-          const session = JSON.parse(sessionStr);
-          if (session && (session.mail || session.name)) {
-            lockBadge.className = 'hub-lock-indicator unlocked';
-            lockBadge.innerHTML = '<i class="fa-solid fa-unlock"></i> UNLOCKED';
-            if (hubBtn) {
-              hubBtn.title = `Authenticated as ${session.name}. Click to access Study Hub.`;
-            }
-            return;
-          }
+          session = JSON.parse(sessionStr);
         } catch (e) {}
       }
-      if (lockBadge) {
-        lockBadge.className = 'hub-lock-indicator';
-        lockBadge.innerHTML = '<i class="fa-solid fa-lock"></i> REQ';
+
+      if (session && (session.mail || session.name)) {
+        const displayName = (session.name || (session.mail ? session.mail.split('@')[0] : 'OPERATOR')).trim();
+        if (lockBadge) {
+          lockBadge.className = 'hub-lock-indicator unlocked';
+          lockBadge.innerHTML = '<i class="fa-solid fa-unlock"></i> UNLOCKED';
+        }
+        if (hubBtn) {
+          hubBtn.title = `Authenticated as ${displayName}. Click to access Study Hub.`;
+        }
+      } else {
+        if (lockBadge) {
+          lockBadge.className = 'hub-lock-indicator';
+          lockBadge.innerHTML = '<i class="fa-solid fa-lock"></i> REQ';
+        }
+        if (hubBtn) {
+          hubBtn.title = 'Cyber Security Knowledge & Study Hub (Login Required)';
+        }
       }
     }
     window.addEventListener('DOMContentLoaded', syncAuthSession);
+    window.addEventListener('pageshow', syncAuthSession);
 
     // Fullscreen Certificate Lightbox Modal
     function openCertLightbox(title, issuer, imgSrc, desc) {
@@ -1490,6 +1497,124 @@
     }
 
     /* ==========================================================================
+       4. SCROLL-SPY NAVIGATION ENGINE
+       ========================================================================== */
+    function initScrollSpy() {
+      const navLinks = document.querySelectorAll('.nav-links .nav-link');
+      if (!navLinks.length) return;
+
+      const trackedSections = [];
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href && href.startsWith('#') && href.length > 1) {
+          const targetEl = document.querySelector(href);
+          if (targetEl) {
+            trackedSections.push({
+              id: href,
+              link: link,
+              element: targetEl
+            });
+          }
+        }
+      });
+
+      if (!trackedSections.length) return;
+
+      let isThrottled = false;
+
+      function updateActiveSection() {
+        const scrollY = window.scrollY;
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        const headerThreshold = 140;
+
+        // 1. Bottom of page check: activates last section (Contact)
+        if (scrollY + windowHeight >= documentHeight - 60) {
+          setActiveLink(trackedSections[trackedSections.length - 1].link);
+          isThrottled = false;
+          return;
+        }
+
+        // 2. Determine currently active section
+        let activeLink = null;
+        for (let i = 0; i < trackedSections.length; i++) {
+          const item = trackedSections[i];
+          const top = item.element.offsetTop - headerThreshold;
+          const height = item.element.offsetHeight;
+
+          if (scrollY >= top && scrollY < top + height) {
+            activeLink = item.link;
+            break;
+          }
+        }
+
+        // 3. Fallback: If past the top of the last section
+        if (!activeLink) {
+          for (let i = trackedSections.length - 1; i >= 0; i--) {
+            const item = trackedSections[i];
+            if (scrollY >= item.element.offsetTop - headerThreshold) {
+              activeLink = item.link;
+              break;
+            }
+          }
+        }
+
+        setActiveLink(activeLink);
+        isThrottled = false;
+      }
+
+      function setActiveLink(activeEl) {
+        navLinks.forEach(link => {
+          if (link === activeEl) {
+            link.classList.add('active');
+            link.setAttribute('aria-current', 'page');
+          } else {
+            link.classList.remove('active');
+            link.removeAttribute('aria-current');
+          }
+        });
+      }
+
+      // Smooth click handling with instant visual feedback
+      navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          const href = link.getAttribute('href');
+          if (href && href.startsWith('#') && href.length > 1) {
+            const targetEl = document.querySelector(href);
+            if (targetEl) {
+              e.preventDefault();
+              setActiveLink(link);
+
+              const targetPosition = targetEl.getBoundingClientRect().top + window.scrollY - 80;
+              window.scrollTo({
+                top: Math.max(0, targetPosition),
+                behavior: 'smooth'
+              });
+
+              if (history.pushState) {
+                history.pushState(null, null, href);
+              }
+            }
+          }
+        });
+      });
+
+      // Throttled scroll and resize listeners via requestAnimationFrame
+      const onScrollOrResize = () => {
+        if (!isThrottled) {
+          isThrottled = true;
+          window.requestAnimationFrame(updateActiveSection);
+        }
+      };
+
+      window.addEventListener('scroll', onScrollOrResize, { passive: true });
+      window.addEventListener('resize', onScrollOrResize, { passive: true });
+
+      // Initial check
+      updateActiveSection();
+    }
+
+    /* ==========================================================================
        DOM READY INITIALIZATION
        ========================================================================== */
     document.addEventListener('DOMContentLoaded', () => {
@@ -1501,6 +1626,9 @@
 
       // 3. Initialize Original Cyber World Map & Scanning Telemetry
       initCyberRealWorldMap();
+
+      // 4. Initialize Scroll-Spy Navigation
+      initScrollSpy();
     });
   </script>
 </body>
