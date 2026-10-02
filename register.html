@@ -24,6 +24,10 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
   <script src="js/firebase-init.js"></script>
 
+  <!-- EmailJS SDK & Real Mail Dispatcher -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script src="js/email-dispatcher.js"></script>
+
   <!-- Global Authentication & Session Security Manager -->
   <script src="js/auth.js"></script>
 </head>
@@ -763,16 +767,23 @@
     }
 
     // Generate & Dispatch OTP
-    function dispatchNewOtp() {
+    async function dispatchNewOtp() {
       // Random 6 digit number between 100000 and 999999
       generatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
 
       // Start Countdown
       startOtpTimer();
 
-      // Display official notification requesting user to check their email
       const targetMail = pendingRegistration.mail;
-      showAlert('success', `📧 An OTP verification code has been dispatched to your email address (${targetMail}). Please check your inbox or spam directory! [Security Backup Code: ${generatedOtp}]`);
+      const targetName = pendingRegistration.name;
+
+      // Call Email Dispatcher to send real email
+      if (window.CyberEmailDispatcher && typeof window.CyberEmailDispatcher.sendOtpEmail === 'function') {
+        window.CyberEmailDispatcher.sendOtpEmail(targetMail, targetName, generatedOtp);
+      }
+
+      // Display official notification requesting user to check their email
+      showAlert('success', `📧 An OTP verification code has been dispatched to your email address (${targetMail}). Please check your inbox or spam folder.`);
     }
 
     // OTP 60s Countdown Timer
@@ -822,7 +833,7 @@
       }
 
       if (enteredOtp !== generatedOtp) {
-        showAlert('error', `Invalid OTP code. Please check the code [${generatedOtp}] and retry.`);
+        showAlert('error', 'Invalid OTP code. Please check the code received in your email and retry.');
         return;
       }
 
