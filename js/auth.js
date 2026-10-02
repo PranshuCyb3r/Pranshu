@@ -2,11 +2,16 @@
  * ZeR0CyB3r Authentication & Session Security Manager
  * - Synchronizes registered users across sessions & storage
  * - Enforces 5-minute inactivity auto-logout security policy
- * - Handles resilient credential verification (case-insensitive emails, trimmed fields, normalized phone numbers)
+ * - Supports 'Remember Me':
+ *     * When 'Remember Me' is checked: session persists in localStorage across browser tab closing & restarts.
+ *     * When 'Remember Me' is UNCHECKED: session is transient for the browser session (cleared on window close).
+ *     * In both modes: 5-minute inactivity auto-logout timer is strictly maintained!
+ * - Handles resilient credential verification & password resets.
  */
 
 (function () {
   const SESSION_KEY = 'cyber_auth_session';
+  const REMEMBER_KEY = 'cyber_remember_me_state';
   const USERS_KEY = 'cyber_users';
   const INACTIVITY_TIMEOUT_MS = 5 * 60 * 1000; // 5 minutes inactivity timeout
   const ACTIVITY_EVENTS = ['mousedown', 'mousemove', 'keydown', 'scroll', 'touchstart', 'click'];
@@ -29,7 +34,6 @@
     }
   ];
 
-  // Helper to normalize strings for comparison
   function normalizeEmail(email) {
     if (!email) return '';
     return String(email).trim().toLowerCase();
@@ -83,7 +87,6 @@
     const users = getRegisteredUsers();
     const cleanEmail = normalizeEmail(userObj.mail);
 
-    // Update if already exists or add new
     const idx = users.findIndex(u => normalizeEmail(u.mail) === cleanEmail);
     const cleanedUser = {
       name: String(userObj.name || '').trim(),
@@ -108,14 +111,40 @@
     }
   }
 
+  // Update password for user (e.g. after reset)
+  function updateUserPassword(email, newPassword) {
+    const cleanEmail = normalizeEmail(email);
+    const users = getRegisteredUsers();
+    const user = users.find(u => normalizeEmail(u.mail) === cleanEmail);
+    if (user) {
+      user.password = normalizePass(newPassword);
+      try {
+        localStorage.setItem(USERS_KEY, JSON.stringify(users));
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
+    return false;
+  }
+
+  // Retrieve raw session string checking session or persistent local storage
+  function getRawSessionString() {
+    try {
+      // If rememberMe was true, it was stored in localStorage
+      const local = localStorage.getItem(SESSION_KEY);
+      if (local) return local;
+
+      // Otherwise, check sessionStorage for transient session
+      const sess = sessionStorage.getItem(SESSION_KEY);
+      if (sess) return sess;
+    } catch (e) {}
+    return null;
+  }
+
   // Get active session
   function getActiveSession() {
-    let sessionStr = null;
-    try {
-      sessionStr = localStorage.getItem(SESSION_KEY);
-    } catch (e) {
-      sessionStr = null;
-    }
+    const sessionStr = getRawSessionString();
     if (!sessionStr) return null;
 
     try {
@@ -124,11 +153,10 @@
         return null;
       }
 
-      // Check Inactivity Expiration
+      // Check Inactivity Expiration: 5-minute timeout applies regardless of rememberMe
       const now = Date.now();
       const lastActivity = session.lastActivity || session.loginTimestamp || now;
       if (now - lastActivity > INACTIVITY_TIMEOUT_MS) {
-        // Session expired due to inactivity
         terminateSession('inactivity');
         return null;
       }
@@ -140,7 +168,7 @@
   }
 
   // Create new active session
-  function createSession(user) {
+  function createSession(user, rememberMe = true) {
     const now = Date.now();
     const sessionObj = {
       name: user.name || 'OPERATOR',
@@ -149,11 +177,22 @@
       token: '#Z0C-' + Math.floor(10000 + Math.random() * 90000) + '-SEC',
       loginTime: new Date(now).toLocaleString(),
       loginTimestamp: now,
-      lastActivity: now
+      lastActivity: now,
+      rememberMe: Boolean(rememberMe)
     };
 
     try {
-      localStorage.setItem(SESSION_KEY, JSON.stringify(sessionObj));
+      if (rememberMe) {
+        // Persists across browser tab closing & restarts in localStorage
+        localStorage.setItem(SESSION_KEY, JSON.stringify(sessionObj));
+        localStorage.setItem(REMEMBER_KEY, 'true');
+        sessionStorage.removeItem(SESSION_KEY);
+      } else {
+        // Session storage is deleted when tab/browser is closed
+        sessionStorage.setItem(SESSION_KEY, JSON.stringify(sessionObj));
+        localStorage.removeItem(SESSION_KEY);
+        localStorage.setItem(REMEMBER_KEY, 'false');
+      }
     } catch (e) {}
 
     return sessionObj;
@@ -162,12 +201,15 @@
   // Update session activity timestamp
   function touchActivity() {
     try {
-      const sessionStr = localStorage.getItem(SESSION_KEY);
+      const isRemembered = localStorage.getItem(REMEMBER_KEY) !== 'false';
+      const storage = isRemembered ? localStorage : (sessionStorage.getItem(SESSION_KEY) ? sessionStorage : localStorage);
+      const sessionStr = storage.getItem(SESSION_KEY);
+
       if (sessionStr) {
         const session = JSON.parse(sessionStr);
         if (session) {
           session.lastActivity = Date.now();
-          localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+          storage.setItem(SESSION_KEY, JSON.stringify(session));
         }
       }
     } catch (e) {}
@@ -183,7 +225,6 @@
     } catch (e) {}
 
     if (reason === 'inactivity') {
-      // Redirect to login with reason parameter
       const isAlreadyOnAuthPage = window.location.pathname.endsWith('login.html') || window.location.pathname.endsWith('register.html');
       if (!isAlreadyOnAuthPage) {
         window.location.href = 'login.html?reason=inactivity';
@@ -193,7 +234,6 @@
 
   // Inactivity Watchdog
   function initInactivityWatchdog() {
-    // Throttled activity event listener
     let throttleTimeout = null;
     const onUserActivity = () => {
       if (!throttleTimeout) {
@@ -211,22 +251,20 @@
     // Check every 10 seconds if session has expired
     setInterval(() => {
       const session = getActiveSession();
-      // If was previously on a protected page like hub.html and session is now null
       if (!session && window.location.pathname.includes('hub.html')) {
         window.location.replace('login.html?redirect=hub.html&reason=inactivity');
       }
     }, 10000);
   }
 
-  // Initialize watchdog on load
   if (typeof window !== 'undefined') {
     initInactivityWatchdog();
   }
 
-  // Export functions to global window object
   window.CyberAuth = {
     getRegisteredUsers,
     saveRegisteredUser,
+    updateUserPassword,
     getActiveSession,
     createSession,
     touchActivity,

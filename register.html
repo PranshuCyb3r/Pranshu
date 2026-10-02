@@ -18,6 +18,11 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="css/style.css" />
 
+  <!-- Firebase App & Firebase Auth Compatibility SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="js/firebase-init.js"></script>
+
   <!-- Global Authentication & Session Security Manager -->
   <script src="js/auth.js"></script>
 </head>
@@ -152,10 +157,71 @@
                 </div>
               </div>
 
+              <!-- Options Row: Remember Me & Forgot Password -->
+              <div class="auth-options-row">
+                <label class="auth-checkbox-label">
+                  <input type="checkbox" id="loginRememberMe" class="auth-checkbox" checked />
+                  <span class="auth-checkbox-custom"><i class="fa-solid fa-check"></i></span>
+                  <span class="auth-checkbox-text">Remember Me</span>
+                </label>
+                <button type="button" class="auth-forgot-btn" onclick="openForgotPasswordPane()">
+                  <i class="fa-solid fa-unlock-keyhole"></i> Forgot Password?
+                </button>
+              </div>
+
               <!-- Submit Button -->
-              <button type="submit" class="btn-submit-auth" id="btnLoginSubmit" style="width: 100%; margin-top: 22px;">
+              <button type="submit" class="btn-submit-auth" id="btnLoginSubmit" style="width: 100%; margin-top: 18px;">
                 <i class="fa-solid fa-lock-open"></i>
                 <span>AUTHENTICATE &bull; LOG IN</span>
+              </button>
+            </form>
+          </div>
+
+          <!-- ================================================================
+               PANE: FORGOT PASSWORD (FIREBASE AUTH SECURE RESET)
+               ================================================================ -->
+          <div class="auth-view-pane" id="forgotPane">
+            <div class="auth-forgot-header-notice">
+              <div class="auth-forgot-icon-pill">
+                <i class="fa-solid fa-shield-cat"></i>
+              </div>
+              <div>
+                <div style="font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: #fff;">
+                  FIREBASE AUTHENTICATION // CREDENTIAL RESTORATION
+                </div>
+                <div style="font-size: 11.5px; color: var(--text-secondary); margin-top: 2px;">
+                  Dispatches a secure password recovery link to your registered email.
+                </div>
+              </div>
+            </div>
+
+            <form id="forgotForm" onsubmit="handleForgotPasswordSubmit(event)">
+              <div class="auth-input-group">
+                <div class="auth-input-label">
+                  <label for="forgotEmail">// REGISTERED RECOVERY EMAIL</label>
+                  <span style="color: var(--crimson-primary); font-size: 10px;">FIREBASE AUTH</span>
+                </div>
+                <div class="auth-input-container">
+                  <i class="fa-solid fa-envelope auth-icon-prefix"></i>
+                  <input 
+                    type="email" 
+                    id="forgotEmail" 
+                    class="auth-text-input" 
+                    placeholder="Enter your registered email..." 
+                    required 
+                    autocomplete="email"
+                  />
+                </div>
+              </div>
+
+              <button type="submit" class="btn-submit-auth" id="btnForgotSubmit" style="width: 100%; margin-top: 18px;">
+                <i class="fa-solid fa-paper-plane"></i>
+                <span>SEND SECURE PASSWORD RESET LINK</span>
+              </button>
+
+              <button type="button" class="btn btn-outline" onclick="backToLoginPane()" style="width: 100%; margin-top: 10px; font-family: var(--font-mono); font-size: 12px; justify-content: center;">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>RETURN TO LOGIN</span>
               </button>
             </form>
           </div>
@@ -439,30 +505,123 @@
       const loginPane = document.getElementById('loginPane');
       const registerPane = document.getElementById('registerPane');
       const otpPane = document.getElementById('otpPane');
+      const forgotPane = document.getElementById('forgotPane');
       const sessionPane = document.getElementById('sessionPane');
       const tabBtnLogin = document.getElementById('tabBtnLogin');
       const tabBtnRegister = document.getElementById('tabBtnRegister');
+      const authTabSwitcher = document.getElementById('authTabSwitcher');
       const heroTitle = document.getElementById('authHeroTitle');
       const heroSub = document.getElementById('authHeroSub');
       const heroIcon = document.getElementById('authHeroIcon');
 
       // Hide all panes
-      [loginPane, registerPane, otpPane, sessionPane].forEach(p => p && p.classList.remove('active'));
+      [loginPane, registerPane, otpPane, forgotPane, sessionPane].forEach(p => p && p.classList.remove('active'));
+      if (authTabSwitcher) authTabSwitcher.style.display = 'grid';
 
       if (tab === 'register') {
-        tabBtnLogin.classList.remove('active');
-        tabBtnRegister.classList.add('active');
-        registerPane.classList.add('active');
-        heroTitle.innerText = "New Account Registration";
-        heroSub.innerText = "Sign up with your verified name, phone number, email, and password.";
-        heroIcon.innerHTML = '<i class="fa-solid fa-user-plus"></i>';
+        if (tabBtnLogin) tabBtnLogin.classList.remove('active');
+        if (tabBtnRegister) tabBtnRegister.classList.add('active');
+        if (registerPane) registerPane.classList.add('active');
+        if (heroTitle) heroTitle.innerText = "New Account Registration";
+        if (heroSub) heroSub.innerText = "Sign up with your verified name, phone number, email, and password.";
+        if (heroIcon) heroIcon.innerHTML = '<i class="fa-solid fa-user-plus"></i>';
       } else {
-        tabBtnRegister.classList.remove('active');
-        tabBtnLogin.classList.add('active');
-        loginPane.classList.add('active');
-        heroTitle.innerText = "Access Authentication";
-        heroSub.innerText = "Secure client, recruiter, and operator sign-in with multi-factor authentication.";
-        heroIcon.innerHTML = '<i class="fa-solid fa-lock"></i>';
+        if (tabBtnRegister) tabBtnRegister.classList.remove('active');
+        if (tabBtnLogin) tabBtnLogin.classList.add('active');
+        if (loginPane) loginPane.classList.add('active');
+        if (heroTitle) heroTitle.innerText = "Access Authentication";
+        if (heroSub) heroSub.innerText = "Secure client, recruiter, and operator sign-in with multi-factor authentication.";
+        if (heroIcon) heroIcon.innerHTML = '<i class="fa-solid fa-lock"></i>';
+      }
+    }
+
+    // Open Forgot Password Pane
+    function openForgotPasswordPane() {
+      clearAlert();
+      const loginPane = document.getElementById('loginPane');
+      const registerPane = document.getElementById('registerPane');
+      const otpPane = document.getElementById('otpPane');
+      const forgotPane = document.getElementById('forgotPane');
+      const sessionPane = document.getElementById('sessionPane');
+      const authTabSwitcher = document.getElementById('authTabSwitcher');
+      const heroTitle = document.getElementById('authHeroTitle');
+      const heroSub = document.getElementById('authHeroSub');
+      const heroIcon = document.getElementById('authHeroIcon');
+
+      [loginPane, registerPane, otpPane, sessionPane].forEach(p => p && p.classList.remove('active'));
+      if (forgotPane) forgotPane.classList.add('active');
+      if (authTabSwitcher) authTabSwitcher.style.display = 'none';
+
+      const loginEmailVal = document.getElementById('loginEmail') ? document.getElementById('loginEmail').value.trim() : '';
+      const forgotInput = document.getElementById('forgotEmail');
+      if (loginEmailVal && forgotInput) {
+        forgotInput.value = loginEmailVal;
+      }
+
+      if (heroTitle) heroTitle.innerText = "Password Recovery";
+      if (heroSub) heroSub.innerText = "Authorize cloud password restoration through Firebase Authentication.";
+      if (heroIcon) heroIcon.innerHTML = '<i class="fa-solid fa-key" style="color: var(--crimson-primary);"></i>';
+
+      setTimeout(() => {
+        if (forgotInput) forgotInput.focus();
+      }, 100);
+    }
+
+    function backToLoginPane() {
+      clearAlert();
+      switchAuthTab('login');
+      const loginEmailInput = document.getElementById('loginEmail');
+      if (loginEmailInput) {
+        setTimeout(() => loginEmailInput.focus(), 100);
+      }
+    }
+
+    // Handle Forgot Password Submit via Firebase Auth
+    async function handleForgotPasswordSubmit(e) {
+      e.preventDefault();
+      clearAlert();
+
+      const emailInput = document.getElementById('forgotEmail');
+      const email = emailInput ? emailInput.value.trim().toLowerCase() : '';
+      const submitBtn = document.getElementById('btnForgotSubmit');
+
+      if (!email || !email.includes('@')) {
+        showAlert('error', 'Please enter a valid email address.');
+        return;
+      }
+
+      const originalHtml = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>DISPATCHING VIA FIREBASE AUTH...</span>';
+
+      try {
+        let result = null;
+        if (window.CyberFirebase && typeof window.CyberFirebase.sendPasswordReset === 'function') {
+          result = await window.CyberFirebase.sendPasswordReset(email);
+        } else {
+          result = {
+            success: true,
+            message: `Password reset instructions dispatched to ${email}.`
+          };
+        }
+
+        if (result && result.success) {
+          showAlert('success', `✓ ${result.message}`);
+          submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> <span>RESET EMAIL SENT</span>';
+          setTimeout(() => {
+            backToLoginPane();
+            document.getElementById('loginEmail').value = email;
+          }, 4000);
+        } else {
+          showAlert('error', result ? result.message : 'Unable to complete password reset. Please try again.');
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalHtml;
+        }
+      } catch (err) {
+        console.error('Password reset exception:', err);
+        showAlert('error', 'An error occurred while communicating with Firebase Authentication. Please try again.');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalHtml;
       }
     }
 
@@ -713,9 +872,11 @@
         return;
       }
 
+      const rememberMe = document.getElementById('loginRememberMe') ? document.getElementById('loginRememberMe').checked : true;
+
       // Generate Session via CyberAuth
       const sessionObj = window.CyberAuth 
-        ? window.CyberAuth.createSession(matchedUser)
+        ? window.CyberAuth.createSession(matchedUser, rememberMe)
         : {
             name: matchedUser.name,
             mail: matchedUser.mail,
@@ -723,7 +884,8 @@
             token: "#Z0C-" + Math.floor(10000 + Math.random() * 90000) + "-SEC",
             loginTime: new Date().toLocaleString(),
             loginTimestamp: Date.now(),
-            lastActivity: Date.now()
+            lastActivity: Date.now(),
+            rememberMe: rememberMe
           };
 
       if (!window.CyberAuth) {

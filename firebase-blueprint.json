@@ -1,0 +1,40 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User registered credentials and profile information",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Full legal name or callsign of user"
+        },
+        "mail": {
+          "type": "string",
+          "format": "email",
+          "description": "Unique email address"
+        },
+        "number": {
+          "type": "string",
+          "description": "Phone number with country code"
+        },
+        "role": {
+          "type": "string",
+          "description": "User security clearance role"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp ISO string"
+        }
+      },
+      "required": ["mail", "name"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile data keyed by user ID or email hash"
+    }
+  }
+}
