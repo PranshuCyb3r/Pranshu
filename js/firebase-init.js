@@ -228,6 +228,30 @@
     };
   }
 
+  /**
+   * Delete / Purge all registered users from Firestore database
+   */
+  async function purgeAllRegisteredUsers() {
+    const fb = await initFirebase();
+    let count = 0;
+    if (fb && fb.db) {
+      try {
+        const snap = await fb.db.collection('users').get();
+        const batch = fb.db.batch();
+        snap.forEach(doc => {
+          batch.delete(doc.ref);
+          count++;
+        });
+        if (count > 0) {
+          await batch.commit();
+        }
+      } catch (e) {
+        console.warn('Purge users note:', e);
+      }
+    }
+    return { success: true, count };
+  }
+
   // Auto initialize on load
   if (typeof window !== 'undefined') {
     window.CyberFirebase = {
@@ -235,6 +259,7 @@
       registerWithFirebase,
       signInWithFirebase,
       sendPasswordReset,
+      purgeAllRegisteredUsers,
       getConfig: loadConfig
     };
     initFirebase();

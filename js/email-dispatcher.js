@@ -1,12 +1,18 @@
 /**
  * ZeR0CyB3r Multi-Provider Real Mail Dispatcher
- * Integrates EmailJS & Resend REST Dispatchers directly from frontend client
- * Sends actual 6-digit OTP codes directly to user's real email inbox
+ * Integrates EmailJS to send actual 6-digit OTP codes directly to user's real email inbox
  */
 
 (function () {
-  // Configuration settings (Configurable in localStorage or defaults)
   const EMAILJS_CONFIG_KEY = 'cyber_emailjs_config';
+
+  // Live production credentials provided by user
+  const DEFAULT_CONFIG = {
+    serviceId: 'service_prdo4ab',
+    templateId: 'template_d8rr5kl',
+    publicKey: 'GgypAMFsvZCFYmRv1',
+    enabled: true
+  };
 
   function getDispatcherConfig() {
     let saved = null;
@@ -14,13 +20,10 @@
       saved = JSON.parse(localStorage.getItem(EMAILJS_CONFIG_KEY));
     } catch (e) {}
 
-    return saved || {
-      // Default placeholder configuration or environment
-      serviceId: 'service_zerocyber',
-      templateId: 'template_otp_auth',
-      publicKey: 'EMAILJS_PUBLIC_KEY',
-      enabled: false
-    };
+    if (saved && saved.publicKey) {
+      return saved;
+    }
+    return DEFAULT_CONFIG;
   }
 
   function setDispatcherConfig(cfg) {
@@ -30,52 +33,56 @@
   }
 
   /**
-   * Dispatch Real OTP via EmailJS SDK if available, or fallback to direct HTTP POST
+   * Dispatch Real OTP via EmailJS SDK directly to the user's Gmail/Mailbox
    */
   async function sendOtpEmail(toEmail, toName, otpCode) {
     const config = getDispatcherConfig();
     const cleanMail = String(toEmail || '').trim().toLowerCase();
-    const cleanName = String(toName || 'Cyber Agent').trim();
+    const cleanName = String(toName || 'User').trim();
 
-    console.log(`[CyberMail Dispatcher] Initiating delivery of OTP [${otpCode}] to: ${cleanMail}`);
+    console.log(`[CyberMail Dispatcher] Sending real OTP email to: ${cleanMail}`);
 
-    // If EmailJS SDK loaded in browser
-    if (window.emailjs && config && config.publicKey && config.publicKey !== 'EMAILJS_PUBLIC_KEY') {
+    if (window.emailjs && config && config.publicKey) {
       try {
         window.emailjs.init(config.publicKey);
-        const response = await window.emailjs.send(config.serviceId, config.templateId, {
+
+        // Standard EmailJS template parameter aliases for One-Time Password template
+        const templateParams = {
           to_email: cleanMail,
           to_name: cleanName,
+          email: cleanMail,
+          user_email: cleanMail,
           otp_code: otpCode,
+          passcode: otpCode,
+          otp: otpCode,
+          code: otpCode,
           app_name: 'ZeR0CyB3r Security',
+          company_name: 'ZeR0CyB3r Security',
           timestamp: new Date().toLocaleString()
-        });
-        console.log('[CyberMail Dispatcher] EmailJS delivery SUCCESS:', response.status, response.text);
+        };
+
+        const response = await window.emailjs.send(config.serviceId, config.templateId, templateParams);
+        console.log('[CyberMail Dispatcher] Real OTP Email Dispatched Successfully!', response.status, response.text);
         return {
           success: true,
           provider: 'EmailJS',
+          status: response.status,
           message: `Official OTP has been dispatched to ${cleanMail} inbox.`
         };
       } catch (err) {
-        console.warn('[CyberMail Dispatcher] EmailJS SDK send error:', err);
+        console.error('[CyberMail Dispatcher] EmailJS Delivery Error:', err);
+        return {
+          success: false,
+          error: err,
+          message: err && err.text ? err.text : 'Failed to send OTP via EmailJS'
+        };
       }
     }
 
-    // Try sending via free email relay or direct web webhook if configured
-    try {
-      // Simulated secure relay handshake:
-      // Even if offline/network filtered, we return success with backup code
-      return {
-        success: true,
-        delivered: true,
-        message: `OTP [${otpCode}] routed for transmission to ${cleanMail}. Check inbox or spam.`
-      };
-    } catch (e) {
-      return {
-        success: true,
-        message: `OTP generated for ${cleanMail}.`
-      };
-    }
+    return {
+      success: false,
+      message: 'EmailJS SDK not ready'
+    };
   }
 
   window.CyberEmailDispatcher = {

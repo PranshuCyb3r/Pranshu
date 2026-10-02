@@ -128,6 +128,30 @@
     return false;
   }
 
+  // Delete single user by email
+  function deleteRegisteredUser(email) {
+    const cleanEmail = normalizeEmail(email);
+    let users = getRegisteredUsers();
+    users = users.filter(u => normalizeEmail(u.mail) !== cleanEmail);
+    try {
+      localStorage.setItem(USERS_KEY, JSON.stringify(users));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  // Clear all registered users completely
+  function clearAllRegisteredUsers() {
+    try {
+      localStorage.removeItem(USERS_KEY);
+      localStorage.setItem(USERS_KEY, JSON.stringify([]));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   // Retrieve raw session string checking session or persistent local storage
   function getRawSessionString() {
     try {
@@ -264,6 +288,8 @@
   window.CyberAuth = {
     getRegisteredUsers,
     saveRegisteredUser,
+    deleteRegisteredUser,
+    clearAllRegisteredUsers,
     updateUserPassword,
     getActiveSession,
     createSession,

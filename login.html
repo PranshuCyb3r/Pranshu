@@ -179,6 +179,12 @@
                 <i class="fa-solid fa-lock-open"></i>
                 <span>AUTHENTICATE &bull; LOG IN</span>
               </button>
+
+              <div style="margin-top: 15px; text-align: center;">
+                <button type="button" onclick="handlePurgeAllUsers(this)" style="background: none; border: 1px dashed rgba(255, 0, 56, 0.3); color: #f87171; font-size: 11px; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-family: var(--font-mono); transition: all 0.2s ease;">
+                  <i class="fa-solid fa-trash-can"></i> CLEAR ALL REGISTERED USERS DATA
+                </button>
+              </div>
             </form>
           </div>
 
@@ -1024,6 +1030,44 @@
       document.getElementById('authHeroTitle').innerText = "Operator Console Armed";
       document.getElementById('authHeroSub').innerText = "Authenticated session established. Access privileges active.";
       document.getElementById('authHeroIcon').innerHTML = '<i class="fa-solid fa-user-shield" style="color: #34d399;"></i>';
+    }
+
+    // Purge / Delete all registered users data
+    async function handlePurgeAllUsers(btnEl) {
+      if (!confirm('Are you sure you want to delete all registered users? This will clear all accounts from the database and storage.')) {
+        return;
+      }
+
+      const origHtml = btnEl ? btnEl.innerHTML : '';
+      if (btnEl) {
+        btnEl.disabled = true;
+        btnEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> DELETING USERS...';
+      }
+
+      // 1. Clear Local Storage
+      if (window.CyberAuth && typeof window.CyberAuth.clearAllRegisteredUsers === 'function') {
+        window.CyberAuth.clearAllRegisteredUsers();
+      }
+
+      // 2. Clear Firestore Database Collection 'users'
+      if (window.CyberFirebase && typeof window.CyberFirebase.purgeAllRegisteredUsers === 'function') {
+        try {
+          await window.CyberFirebase.purgeAllRegisteredUsers();
+        } catch (e) {
+          console.warn('Firebase purge note:', e);
+        }
+      }
+
+      if (btnEl) {
+        btnEl.disabled = false;
+        btnEl.innerHTML = origHtml;
+      }
+
+      showAlert('success', '✓ All registered user accounts have been successfully deleted and cleared from database!');
+      
+      // Clear inputs
+      if (document.getElementById('loginEmail')) document.getElementById('loginEmail').value = '';
+      if (document.getElementById('loginPassword')) document.getElementById('loginPassword').value = '';
     }
 
     // Terminate Session (Sign Out)
