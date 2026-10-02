@@ -340,12 +340,9 @@
                ================================================================ -->
           <div class="auth-view-pane" id="otpPane">
             
-            <div style="text-align: center; margin-bottom: 14px;">
-              <span style="font-family: var(--font-mono); font-size: 12px; color: #38bdf8;">
-                [~] TWO-FACTOR AUTHENTICATION &bull; 2FA SECURITY
-              </span>
-              <p style="font-size: 13px; color: var(--text-secondary); margin-top: 6px;">
-                Enter the 6-digit security verification code transmitted to <strong id="otpTargetContact" style="color: #fff;"></strong>.
+            <div style="text-align: center; margin-bottom: 18px;">
+              <p style="font-size: 13.5px; color: var(--text-secondary); margin-top: 4px;">
+                Enter the 6-digit verification code below:
               </p>
             </div>
 
@@ -731,12 +728,11 @@
         return;
       }
 
-      // Check if email already registered
+      // Check if email already registered - allow overwrite/fresh registration
       const users = getRegisteredUsers();
       const existing = users.find(u => u.mail.toLowerCase() === email);
       if (existing) {
-        showAlert('error', `An account with email "${email}" already exists. Please sign in.`);
-        return;
+        console.log(`Re-registering existing user ${email}. Overwriting previous entry.`);
       }
 
       // Store in pending state
@@ -754,7 +750,8 @@
       // Show OTP Pane
       document.getElementById('registerPane').classList.remove('active');
       document.getElementById('otpPane').classList.add('active');
-      document.getElementById('otpTargetContact').innerText = `${phone} / ${email}`;
+      const otpContactEl = document.getElementById('otpTargetContact');
+      if (otpContactEl) otpContactEl.innerText = `${phone} / ${email}`;
       document.getElementById('authHeroTitle').innerText = "2FA Verification Code";
       document.getElementById('authHeroSub').innerText = "Enter the 6-digit verification code to validate and activate your account.";
       document.getElementById('authHeroIcon').innerHTML = '<i class="fa-solid fa-mobile-screen-button"></i>';
@@ -783,7 +780,7 @@
       }
 
       // Display official notification requesting user to check their email
-      showAlert('success', `📧 An OTP verification code has been dispatched to your email address (${targetMail}). Please check your inbox or spam folder.`);
+      showAlert('success', '📧 An OTP verification code has been sent to your email.');
     }
 
     // OTP 60s Countdown Timer

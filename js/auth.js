@@ -272,11 +272,31 @@
       window.addEventListener(evt, onUserActivity, { passive: true });
     });
 
-    // Check every 10 seconds if session has expired
-    setInterval(() => {
+    // Check every 10 seconds if session has expired or if user was revoked/disabled in Firebase
+    setInterval(async () => {
       const session = getActiveSession();
       if (!session && window.location.pathname.includes('hub.html')) {
         window.location.replace('login.html?redirect=hub.html&reason=inactivity');
+        return;
+      }
+
+      // Real-time Firebase Security Check:
+      // If user is inside hub.html, verify their Firebase Auth token hasn't been disabled/deleted
+      if (session && window.location.pathname.includes('hub.html') && window.firebase && window.firebase.auth) {
+        try {
+          const auth = window.firebase.auth();
+          const currentUser = auth.currentUser;
+          if (currentUser) {
+            // Force reload token to detect if admin deleted or disabled the user in Firebase Console
+            await currentUser.reload();
+          }
+        } catch (revokeErr) {
+          console.warn('[Security Watchdog] Firebase user revoked or disabled:', revokeErr);
+          if (revokeErr && (revokeErr.code === 'auth/user-disabled' || revokeErr.code === 'auth/user-not-found')) {
+            terminateSession('revoked');
+            window.location.replace('login.html?reason=blocked');
+          }
+        }
       }
     }, 10000);
   }

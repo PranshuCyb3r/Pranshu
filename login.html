@@ -179,12 +179,6 @@
                 <i class="fa-solid fa-lock-open"></i>
                 <span>AUTHENTICATE &bull; LOG IN</span>
               </button>
-
-              <div style="margin-top: 15px; text-align: center;">
-                <button type="button" onclick="handlePurgeAllUsers(this)" style="background: none; border: 1px dashed rgba(255, 0, 56, 0.3); color: #f87171; font-size: 11px; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-family: var(--font-mono); transition: all 0.2s ease;">
-                  <i class="fa-solid fa-trash-can"></i> CLEAR ALL REGISTERED USERS DATA
-                </button>
-              </div>
             </form>
           </div>
 
@@ -346,12 +340,9 @@
                ================================================================ -->
           <div class="auth-view-pane" id="otpPane">
             
-            <div style="text-align: center; margin-bottom: 14px;">
-              <span style="font-family: var(--font-mono); font-size: 12px; color: #38bdf8;">
-                [~] TWO-FACTOR AUTHENTICATION &bull; 2FA SECURITY
-              </span>
-              <p style="font-size: 13px; color: var(--text-secondary); margin-top: 6px;">
-                Enter the 6-digit security verification code sent to <strong id="otpTargetContact" style="color: #fff;"></strong>.
+            <div style="text-align: center; margin-bottom: 18px;">
+              <p style="font-size: 13.5px; color: var(--text-secondary); margin-top: 4px;">
+                Enter the 6-digit verification code below:
               </p>
             </div>
 
@@ -741,12 +732,12 @@
         return;
       }
 
-      // Check if email already registered
+      // Check if email already registered - if exists, ask or allow overwrite/update
       const users = getRegisteredUsers();
       const existing = users.find(u => u.mail.toLowerCase() === email);
       if (existing) {
-        showAlert('error', `An account with email "${email}" already exists. Please sign in.`);
-        return;
+        // Automatically allow re-registration by removing old instance so user can register fresh
+        console.log(`Re-registering existing user ${email}. Overwriting previous entry.`);
       }
 
       // Store in pending state
@@ -764,7 +755,8 @@
       // Show OTP Pane
       document.getElementById('registerPane').classList.remove('active');
       document.getElementById('otpPane').classList.add('active');
-      document.getElementById('otpTargetContact').innerText = `${phone} / ${email}`;
+      const otpContactEl = document.getElementById('otpTargetContact');
+      if (otpContactEl) otpContactEl.innerText = `${phone} / ${email}`;
       document.getElementById('authHeroTitle').innerText = "2FA Verification Code";
       document.getElementById('authHeroSub').innerText = "Enter the 6-digit verification code to validate and activate your account.";
       document.getElementById('authHeroIcon').innerHTML = '<i class="fa-solid fa-mobile-screen-button"></i>';
@@ -793,7 +785,7 @@
       }
 
       // Display official notification requesting user to check their email
-      showAlert('success', `📧 An OTP verification code has been dispatched to your email address (${targetMail}). Please check your inbox or spam folder.`);
+      showAlert('success', '📧 An OTP verification code has been sent to your email.');
     }
 
     // OTP 60s Countdown Timer
@@ -930,17 +922,34 @@
         loginBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>AUTHENTICATING WITH FIREBASE...</span>';
       }
 
-      // Check Firebase Auth in Cloud
+      // Check Firebase Auth in Cloud (Real-time Authority)
       let fbUser = null;
+      let fbError = null;
       if (window.CyberFirebase && typeof window.CyberFirebase.signInWithFirebase === 'function') {
         try {
           const res = await window.CyberFirebase.signInWithFirebase(email, pass);
           if (res && res.success) {
             fbUser = res.user;
+          } else {
+            fbError = res;
           }
         } catch (fbErr) {
           console.warn('Firebase login attempt note:', fbErr);
         }
+      }
+
+      // If account was deleted or blocked in Firebase Console:
+      if (fbError && (fbError.code === 'auth/user-disabled' || fbError.code === 'auth/user-not-found')) {
+        // If user was deleted or disabled in Firebase, purge local cached copy immediately
+        if (window.CyberAuth && typeof window.CyberAuth.deleteRegisteredUser === 'function') {
+          window.CyberAuth.deleteRegisteredUser(email);
+        }
+        if (loginBtn) {
+          loginBtn.disabled = false;
+          loginBtn.innerHTML = origLoginBtnHtml;
+        }
+        showAlert('error', fbError.message || 'Access Denied: This account has been blocked or removed from Firebase.');
+        return;
       }
 
       // Match against local registered users or seed accounts
@@ -1141,10 +1150,12 @@
       // Check if redirected from Study Hub access gate
       const isHubRedirect = urlParams.get('redirect') === 'hub.html' || urlParams.get('reason') === 'required';
 
-      // Check if logged out due to inactivity
+      // Check if logged out due to inactivity or blocked
       const reason = urlParams.get('reason');
       if (reason === 'inactivity') {
         showAlert('error', '⏳ Session Expired: Logged out automatically after 5 minutes of inactivity for your security. Please log in again.');
+      } else if (reason === 'blocked') {
+        showAlert('error', '⛔ ACCESS REVOKED: This user account has been disabled or removed by the Administrator. Access has been terminated.');
       } else if (isHubRedirect) {
         showAlert('error', '🔒 Access Gate: Cyber Security Knowledge & Study Hub requires valid sign in. Please log in with your credentials or register an account.');
       }

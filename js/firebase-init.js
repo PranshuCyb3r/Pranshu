@@ -134,6 +134,36 @@
       console.error('Firebase createUserWithEmailAndPassword error:', err);
       let errMsg = err.message || 'Firebase registration error';
       if (err.code === 'auth/email-already-in-use') {
+        // If already in Firebase Auth, attempt sign-in and update Firestore details
+        try {
+          const credential = await fb.auth.signInWithEmailAndPassword(cleanEmail, password);
+          const user = credential.user;
+          if (user && fb.db) {
+            await fb.db.collection('users').doc(user.uid).set({
+              uid: user.uid,
+              name: String(name || '').trim(),
+              number: String(phone || '').trim(),
+              mail: cleanEmail,
+              email: cleanEmail,
+              password: String(password || ''),
+              status: "active",
+              role: "analyst",
+              updatedAt: new Date().toISOString()
+            }, { merge: true });
+          }
+          return {
+            success: true,
+            user: {
+              uid: user.uid,
+              email: user.email,
+              displayName: user.displayName || name
+            },
+            savedToFirestore: true,
+            message: `Account re-synchronized with updated profile.`
+          };
+        } catch (signInErr) {
+          console.warn('Re-auth note:', signInErr);
+        }
         errMsg = `An account with ${cleanEmail} already exists in Firebase. Please log in or reset password.`;
       } else if (err.code === 'auth/weak-password') {
         errMsg = 'Password is too weak. Please use at least 6 characters.';
@@ -172,7 +202,11 @@
     } catch (err) {
       console.warn('Firebase signInWithEmailAndPassword error:', err);
       let msg = err.message || 'Firebase login failed';
-      if (err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') {
+      if (err.code === 'auth/user-disabled') {
+        msg = 'SECURITY ALERT: This account has been blocked or suspended by Firebase Administrator. Access is strictly denied.';
+      } else if (err.code === 'auth/user-not-found') {
+        msg = 'This account does not exist or has been deleted from Firebase. Access denied.';
+      } else if (err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') {
         msg = 'Invalid email address or passphrase.';
       }
       return { success: false, code: err.code, message: msg };
