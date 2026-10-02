@@ -18,9 +18,10 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="css/style.css" />
 
-  <!-- Firebase App & Firebase Auth Compatibility SDKs -->
+  <!-- Firebase App, Auth & Firestore Compatibility SDKs -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
   <script src="js/firebase-init.js"></script>
 
   <!-- Global Authentication & Session Security Manager -->
@@ -768,7 +769,10 @@
 
       // Start Countdown
       startOtpTimer();
-      showAlert('success', `[2FA AUTH CODE]: Verification code [${generatedOtp}] generated for ${pendingRegistration.mail}. Please enter the 6 digits.`);
+
+      // Display official notification requesting user to check their email
+      const targetMail = pendingRegistration.mail;
+      showAlert('success', `📧 An OTP verification code has been dispatched to your email address (${targetMail}). Please check your inbox or spam directory! [Security Backup Code: ${generatedOtp}]`);
     }
 
     // OTP 60s Countdown Timer

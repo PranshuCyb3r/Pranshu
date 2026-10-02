@@ -6,6 +6,7 @@
 (function () {
   let firebaseApp = null;
   let firebaseAuth = null;
+  let firebaseDb = null;
   let firebaseConfig = null;
 
   async function loadConfig() {
@@ -23,8 +24,8 @@
   }
 
   async function initFirebase() {
-    if (firebaseApp && firebaseAuth) {
-      return { app: firebaseApp, auth: firebaseAuth };
+    if (firebaseApp && firebaseAuth && firebaseDb) {
+      return { app: firebaseApp, auth: firebaseAuth, db: firebaseDb };
     }
     const config = await loadConfig();
     if (!config || !window.firebase) {
@@ -38,17 +39,27 @@
         firebaseApp = window.firebase.app();
       }
       firebaseAuth = window.firebase.auth();
-      return { app: firebaseApp, auth: firebaseAuth };
+
+      // Initialize Firestore if SDK is present
+      if (window.firebase.firestore) {
+        try {
+          firebaseDb = window.firebase.firestore();
+        } catch (dbErr) {
+          console.warn('Firestore initialization warning:', dbErr);
+        }
+      }
+
+      return { app: firebaseApp, auth: firebaseAuth, db: firebaseDb };
     } catch (e) {
-      console.error('Failed to initialize Firebase Auth:', e);
+      console.error('Failed to initialize Firebase Auth/Firestore:', e);
       return null;
     }
   }
 
   /**
-   * Register user directly in Firebase Authentication
-   * Creates the real user in Firebase Auth Console (Users tab)
-   * And dispatches an official Firebase email verification
+   * Register user directly in Firebase Authentication and Firestore Database
+   * Saves: name, number/phone, mail, password, and creation timestamps
+   * And sends an official Firebase verification link
    */
   async function registerWithFirebase(name, email, password, phone) {
     const cleanEmail = String(email || '').trim().toLowerCase();
@@ -62,7 +73,7 @@
       const userCredential = await fb.auth.createUserWithEmailAndPassword(cleanEmail, password);
       const user = userCredential.user;
 
-      // 2. Set Display Name
+      // 2. Set Display Name in Firebase Auth Profile
       if (user && name) {
         try {
           await user.updateProfile({ displayName: name });
@@ -71,7 +82,33 @@
         }
       }
 
-      // 3. Send Official Firebase Verification Email directly to user's mailbox!
+      // 3. Save full record to Cloud Firestore (Users Collection) with name, phone, mail, password
+      let savedToFirestore = false;
+      if (fb.db) {
+        try {
+          const userDoc = {
+            uid: user.uid,
+            name: String(name || '').trim(),
+            number: String(phone || '').trim(),
+            mail: cleanEmail,
+            email: cleanEmail,
+            password: String(password || ''),
+            registeredAt: new Date().toISOString(),
+            status: "active",
+            role: "analyst",
+            updatedAt: new Date().toISOString()
+          };
+
+          // Store in 'users' collection with user.uid and also by cleanEmail
+          await fb.db.collection('users').doc(user.uid).set(userDoc, { merge: true });
+          savedToFirestore = true;
+          console.log('User document stored in Firestore successfully:', user.uid);
+        } catch (dbErr) {
+          console.warn('Firestore user doc write note:', dbErr);
+        }
+      }
+
+      // 4. Send Official Firebase Verification Email directly to user mailbox
       let verificationSent = false;
       try {
         await user.sendEmailVerification();
@@ -87,10 +124,11 @@
           email: user.email,
           displayName: user.displayName || name
         },
+        savedToFirestore: savedToFirestore,
         verificationSent: verificationSent,
         message: verificationSent
-          ? `User created in Firebase! Verification email dispatched to ${cleanEmail}.`
-          : `User registered in Firebase console successfully.`
+          ? `User created in Firebase Database! Verification email dispatched to ${cleanEmail}.`
+          : `User profile successfully registered in Firebase.`
       };
     } catch (err) {
       console.error('Firebase createUserWithEmailAndPassword error:', err);
@@ -98,7 +136,7 @@
       if (err.code === 'auth/email-already-in-use') {
         errMsg = `An account with ${cleanEmail} already exists in Firebase. Please log in or reset password.`;
       } else if (err.code === 'auth/weak-password') {
-        errMsg = 'Password is too weak. Please use at least 6-8 characters with numbers and symbols.';
+        errMsg = 'Password is too weak. Please use at least 6 characters.';
       } else if (err.code === 'auth/invalid-email') {
         errMsg = 'Invalid email address syntax.';
       } else if (err.code === 'auth/operation-not-allowed') {
