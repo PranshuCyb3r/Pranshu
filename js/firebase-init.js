@@ -46,6 +46,102 @@
   }
 
   /**
+   * Register user directly in Firebase Authentication
+   * Creates the real user in Firebase Auth Console (Users tab)
+   * And dispatches an official Firebase email verification
+   */
+  async function registerWithFirebase(name, email, password, phone) {
+    const cleanEmail = String(email || '').trim().toLowerCase();
+    const fb = await initFirebase();
+    if (!fb || !fb.auth) {
+      return { success: false, message: 'Firebase Auth is not initialized.' };
+    }
+
+    try {
+      // 1. Create User in Firebase Auth
+      const userCredential = await fb.auth.createUserWithEmailAndPassword(cleanEmail, password);
+      const user = userCredential.user;
+
+      // 2. Set Display Name
+      if (user && name) {
+        try {
+          await user.updateProfile({ displayName: name });
+        } catch (e) {
+          console.warn('Could not update displayName in Firebase:', e);
+        }
+      }
+
+      // 3. Send Official Firebase Verification Email directly to user's mailbox!
+      let verificationSent = false;
+      try {
+        await user.sendEmailVerification();
+        verificationSent = true;
+      } catch (verifErr) {
+        console.warn('sendEmailVerification note:', verifErr);
+      }
+
+      return {
+        success: true,
+        user: {
+          uid: user.uid,
+          email: user.email,
+          displayName: user.displayName || name
+        },
+        verificationSent: verificationSent,
+        message: verificationSent
+          ? `User created in Firebase! Verification email dispatched to ${cleanEmail}.`
+          : `User registered in Firebase console successfully.`
+      };
+    } catch (err) {
+      console.error('Firebase createUserWithEmailAndPassword error:', err);
+      let errMsg = err.message || 'Firebase registration error';
+      if (err.code === 'auth/email-already-in-use') {
+        errMsg = `An account with ${cleanEmail} already exists in Firebase. Please log in or reset password.`;
+      } else if (err.code === 'auth/weak-password') {
+        errMsg = 'Password is too weak. Please use at least 6-8 characters with numbers and symbols.';
+      } else if (err.code === 'auth/invalid-email') {
+        errMsg = 'Invalid email address syntax.';
+      } else if (err.code === 'auth/operation-not-allowed') {
+        errMsg = 'Email/Password sign-in is not enabled in Firebase Console. Please enable it in Authentication > Sign-in method.';
+      }
+      return { success: false, code: err.code, message: errMsg };
+    }
+  }
+
+  /**
+   * Sign In via Firebase Authentication
+   */
+  async function signInWithFirebase(email, password) {
+    const cleanEmail = String(email || '').trim().toLowerCase();
+    const fb = await initFirebase();
+    if (!fb || !fb.auth) {
+      return { success: false, message: 'Firebase Auth is not initialized.' };
+    }
+
+    try {
+      const userCredential = await fb.auth.signInWithEmailAndPassword(cleanEmail, password);
+      const user = userCredential.user;
+      return {
+        success: true,
+        user: {
+          uid: user.uid,
+          email: user.email,
+          displayName: user.displayName,
+          emailVerified: user.emailVerified
+        },
+        message: 'Firebase login successful.'
+      };
+    } catch (err) {
+      console.warn('Firebase signInWithEmailAndPassword error:', err);
+      let msg = err.message || 'Firebase login failed';
+      if (err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') {
+        msg = 'Invalid email address or passphrase.';
+      }
+      return { success: false, code: err.code, message: msg };
+    }
+  }
+
+  /**
    * Send Password Reset Email via Firebase Auth
    * @param {string} email 
    * @returns {Promise<{success: boolean, message: string}>}
@@ -98,6 +194,8 @@
   if (typeof window !== 'undefined') {
     window.CyberFirebase = {
       initFirebase,
+      registerWithFirebase,
+      signInWithFirebase,
       sendPasswordReset,
       getConfig: loadConfig
     };

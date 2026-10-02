@@ -802,8 +802,8 @@
       document.getElementById('otpDigit1').focus();
     }
 
-    // Step 2: Verify OTP and finalize Registration
-    function verifyOtpAndRegister() {
+    // Step 2: Verify OTP and finalize Registration (Synchronized to Firebase Auth)
+    async function verifyOtpAndRegister() {
       clearAlert();
 
       let enteredOtp = '';
@@ -818,15 +818,45 @@
       }
 
       if (enteredOtp !== generatedOtp) {
-        showAlert('error', `Invalid OTP code. Please check the dispatched code [${generatedOtp}] and retry.`);
+        showAlert('error', `Invalid OTP code. Please check the code [${generatedOtp}] and retry.`);
         return;
       }
 
       // Successful OTP Verification
       if (otpCountdownTimer) clearInterval(otpCountdownTimer);
-      saveRegisteredUser(pendingRegistration);
 
-      const registeredEmail = pendingRegistration.mail;
+      const targetData = { ...pendingRegistration };
+      const btnVerify = document.getElementById('btnVerifyOtp');
+      const origVerifyHtml = btnVerify ? btnVerify.innerHTML : '';
+      if (btnVerify) {
+        btnVerify.disabled = true;
+        btnVerify.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>SYNCING WITH FIREBASE DATABASE...</span>';
+      }
+
+      // Save locally first
+      saveRegisteredUser(targetData);
+
+      // Save to Firebase Authentication (Real Database in Console)
+      let fbResult = null;
+      if (window.CyberFirebase && typeof window.CyberFirebase.registerWithFirebase === 'function') {
+        try {
+          fbResult = await window.CyberFirebase.registerWithFirebase(
+            targetData.name,
+            targetData.mail,
+            targetData.password,
+            targetData.number
+          );
+        } catch (e) {
+          console.warn('Firebase registration exception:', e);
+        }
+      }
+
+      if (btnVerify) {
+        btnVerify.disabled = false;
+        btnVerify.innerHTML = origVerifyHtml;
+      }
+
+      const registeredEmail = targetData.mail;
       pendingRegistration = null;
       generatedOtp = null;
 
@@ -836,7 +866,15 @@
       document.getElementById('loginPassword').value = '';
       document.getElementById('loginPassword').focus();
 
-      showAlert('success', `✓ Identity verified! Account registered successfully. Please login with your password.`);
+      let successMsg = `✓ Account registered & verified!`;
+      if (fbResult && fbResult.verificationSent) {
+        successMsg += ` Official Firebase verification link dispatched to ${registeredEmail}. Please check your inbox/spam.`;
+      } else if (fbResult && fbResult.success) {
+        successMsg += ` User profile successfully created in Firebase Console.`;
+      } else {
+        successMsg += ` Credentials configured. You can now log in below.`;
+      }
+      showAlert('success', successMsg);
     }
 
     function backToRegistrationDetails() {
@@ -849,25 +887,61 @@
       clearAlert();
     }
 
-    // Step 3: Login Submit (Mail + Password)
-    function handleLoginSubmit(e) {
+    // Step 3: Login Submit (Mail + Password) with Firebase Auth & Local Resiliency
+    async function handleLoginSubmit(e) {
       e.preventDefault();
       clearAlert();
 
       const rawEmail = document.getElementById('loginEmail').value;
       const rawPass = document.getElementById('loginPassword').value;
+      const loginBtn = document.getElementById('btnLoginSubmit');
+      const origLoginBtnHtml = loginBtn ? loginBtn.innerHTML : '';
 
       const email = window.CyberAuth ? window.CyberAuth.normalizeEmail(rawEmail) : String(rawEmail || '').trim().toLowerCase();
       const pass = window.CyberAuth ? window.CyberAuth.normalizePass(rawPass) : String(rawPass || '');
 
+      if (loginBtn) {
+        loginBtn.disabled = true;
+        loginBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>AUTHENTICATING WITH FIREBASE...</span>';
+      }
+
+      // Check Firebase Auth in Cloud
+      let fbUser = null;
+      if (window.CyberFirebase && typeof window.CyberFirebase.signInWithFirebase === 'function') {
+        try {
+          const res = await window.CyberFirebase.signInWithFirebase(email, pass);
+          if (res && res.success) {
+            fbUser = res.user;
+          }
+        } catch (fbErr) {
+          console.warn('Firebase login attempt note:', fbErr);
+        }
+      }
+
       const users = getRegisteredUsers();
-      const matchedUser = users.find(u => {
+      let matchedUser = users.find(u => {
         const uEmail = window.CyberAuth ? window.CyberAuth.normalizeEmail(u.mail) : String(u.mail || '').trim().toLowerCase();
         const uPass = window.CyberAuth ? window.CyberAuth.normalizePass(u.password) : String(u.password || '');
         return uEmail === email && uPass === pass;
       });
 
+      // If user exists in Firebase but not cached locally, synthesize matched user record
+      if (!matchedUser && fbUser) {
+        matchedUser = {
+          name: fbUser.displayName || email.split('@')[0],
+          mail: fbUser.email || email,
+          number: "+91 8103162875",
+          password: pass,
+          registeredAt: new Date().toISOString()
+        };
+        saveRegisteredUser(matchedUser);
+      }
+
       if (!matchedUser) {
+        if (loginBtn) {
+          loginBtn.disabled = false;
+          loginBtn.innerHTML = origLoginBtnHtml;
+        }
         showAlert('error', 'Authentication failed: Invalid email address or password. Please verify credentials or register.');
         return;
       }
