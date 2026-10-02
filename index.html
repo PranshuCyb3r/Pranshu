@@ -20,6 +20,9 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="css/style.css" />
 
+  <!-- Global Authentication & Session Security Manager -->
+  <script src="js/auth.js"></script>
+
   <!-- Leaflet Real World Map Engine -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
@@ -1136,23 +1139,11 @@
 
   <!-- Minimal Vanilla JavaScript for Interactive State Handlers -->
   <script>
-    // Gate access to Study Hub: Require login if not authenticated
+    // Gate access to Study Hub: Require login if not authenticated or expired
     function handleStudyHubClick(e) {
       if (e) e.preventDefault();
-      const sessionStr = localStorage.getItem('cyber_auth_session');
-      let isAuthenticated = false;
-      if (sessionStr) {
-        try {
-          const session = JSON.parse(sessionStr);
-          if (session && (session.mail || session.name)) {
-            isAuthenticated = true;
-          }
-        } catch (err) {
-          isAuthenticated = false;
-        }
-      }
-
-      if (isAuthenticated) {
+      const activeSession = window.CyberAuth ? window.CyberAuth.getActiveSession() : null;
+      if (activeSession && (activeSession.mail || activeSession.name)) {
         window.location.href = 'hub.html';
       } else {
         // Redirect to login page requiring authentication for Study Hub
@@ -1162,19 +1153,12 @@
 
     // Sync Active Session State to Navbar Study Hub Button
     function syncAuthSession() {
-      const sessionStr = localStorage.getItem('cyber_auth_session');
+      const activeSession = window.CyberAuth ? window.CyberAuth.getActiveSession() : null;
       const lockBadge = document.getElementById('hubLockBadge');
       const hubBtn = document.getElementById('navStudyHubBtn');
 
-      let session = null;
-      if (sessionStr) {
-        try {
-          session = JSON.parse(sessionStr);
-        } catch (e) {}
-      }
-
-      if (session && (session.mail || session.name)) {
-        const displayName = (session.name || (session.mail ? session.mail.split('@')[0] : 'OPERATOR')).trim();
+      if (activeSession && (activeSession.mail || activeSession.name)) {
+        const displayName = (activeSession.name || (activeSession.mail ? activeSession.mail.split('@')[0] : 'OPERATOR')).trim();
         if (lockBadge) {
           lockBadge.className = 'hub-lock-indicator unlocked';
           lockBadge.innerHTML = '<i class="fa-solid fa-unlock"></i> UNLOCKED';
@@ -1194,6 +1178,8 @@
     }
     window.addEventListener('DOMContentLoaded', syncAuthSession);
     window.addEventListener('pageshow', syncAuthSession);
+    // Periodically re-sync in case 5-minute inactivity elapsed while page remained open
+    setInterval(syncAuthSession, 10000);
 
     // Fullscreen Certificate Lightbox Modal
     function openCertLightbox(title, issuer, imgSrc, desc) {

@@ -18,8 +18,8 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="css/style.css" />
 
-
-  
+  <!-- Global Authentication & Session Security Manager -->
+  <script src="js/auth.js"></script>
 </head>
 <body>
 
@@ -945,22 +945,15 @@
     let searchQuery = "";
     let bookmarkedIds = JSON.parse(localStorage.getItem('cyber_hub_bookmarks')) || [];
 
-    // Session Enforcement
+    // Session Enforcement (5-min inactivity timeout supported)
     function enforceAuthGuard() {
-      const sessionStr = localStorage.getItem('cyber_auth_session');
-      if (!sessionStr) {
+      const session = window.CyberAuth ? window.CyberAuth.getActiveSession() : null;
+      if (!session) {
+        // Check if there was an expired session to redirect with reason
         window.location.replace('login.html?redirect=hub.html&reason=required');
         return null;
       }
-      try {
-        const session = JSON.parse(sessionStr);
-        if (session && (session.name || session.mail)) {
-          return session;
-        }
-      } catch (e) {}
-
-      window.location.replace('login.html?redirect=hub.html&reason=required');
-      return null;
+      return session;
     }
 
     function handleHubLogout(e) {
@@ -968,13 +961,15 @@
         try { e.preventDefault(); } catch (err) {}
         try { e.stopPropagation(); } catch (err) {}
       }
-      try {
-        localStorage.removeItem('cyber_auth_session');
-        sessionStorage.removeItem('cyber_auth_session');
-        localStorage.removeItem('cyber_session_user');
-        sessionStorage.clear();
-      } catch (err) {
-        console.error('Logout error:', err);
+      if (window.CyberAuth) {
+        window.CyberAuth.terminateSession('manual');
+      } else {
+        try {
+          localStorage.removeItem('cyber_auth_session');
+          sessionStorage.removeItem('cyber_auth_session');
+          localStorage.removeItem('cyber_session_user');
+          sessionStorage.clear();
+        } catch (err) {}
       }
       window.location.href = 'index.html';
     }

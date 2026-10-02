@@ -17,6 +17,9 @@
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Global Authentication & Session Security Manager -->
+  <script src="js/auth.js"></script>
 </head>
 <body class="auth-page">
 
@@ -412,36 +415,22 @@
       }
     ];
 
-    // Initialize Database in LocalStorage if not already present
+    // User Database helpers delegated to window.CyberAuth
     function initializeUserDb() {
-      let users = [];
-      try {
-        users = JSON.parse(localStorage.getItem('cyber_users')) || [];
-      } catch (e) {
-        users = [];
-      }
-      if (!Array.isArray(users) || users.length === 0) {
-        users = [...DEFAULT_SEED_USERS];
-        localStorage.setItem('cyber_users', JSON.stringify(users));
-      } else {
-        // Clean out any legacy demo test accounts
-        const cleaned = users.filter(u => u && u.mail && !u.mail.toLowerCase().includes('demo@'));
-        if (cleaned.length !== users.length) {
-          localStorage.setItem('cyber_users', JSON.stringify(cleaned));
-        }
-      }
+      if (window.CyberAuth) return window.CyberAuth.getRegisteredUsers();
     }
 
     function getRegisteredUsers() {
-      initializeUserDb();
+      if (window.CyberAuth) return window.CyberAuth.getRegisteredUsers();
       try {
         return JSON.parse(localStorage.getItem('cyber_users')) || [];
       } catch (e) {
-        return DEFAULT_SEED_USERS;
+        return [];
       }
     }
 
     function saveRegisteredUser(userObj) {
+      if (window.CyberAuth) return window.CyberAuth.saveRegisteredUser(userObj);
       const users = getRegisteredUsers();
       users.push(userObj);
       localStorage.setItem('cyber_users', JSON.stringify(users));
@@ -709,27 +698,40 @@
       e.preventDefault();
       clearAlert();
 
-      const email = document.getElementById('loginEmail').value.trim().toLowerCase();
-      const pass = document.getElementById('loginPassword').value;
+      const rawEmail = document.getElementById('loginEmail').value;
+      const rawPass = document.getElementById('loginPassword').value;
+
+      const email = window.CyberAuth ? window.CyberAuth.normalizeEmail(rawEmail) : String(rawEmail || '').trim().toLowerCase();
+      const pass = window.CyberAuth ? window.CyberAuth.normalizePass(rawPass) : String(rawPass || '');
 
       const users = getRegisteredUsers();
-      const matchedUser = users.find(u => u.mail.toLowerCase() === email && u.password === pass);
+      const matchedUser = users.find(u => {
+        const uEmail = window.CyberAuth ? window.CyberAuth.normalizeEmail(u.mail) : String(u.mail || '').trim().toLowerCase();
+        const uPass = window.CyberAuth ? window.CyberAuth.normalizePass(u.password) : String(u.password || '');
+        return uEmail === email && uPass === pass;
+      });
 
       if (!matchedUser) {
         showAlert('error', 'Authentication failed: Invalid email address or password. Please verify credentials or register.');
         return;
       }
 
-      // Generate Session
-      const sessionObj = {
-        name: matchedUser.name,
-        mail: matchedUser.mail,
-        number: matchedUser.number || "+91 8103162875",
-        token: "#Z0C-" + Math.floor(10000 + Math.random() * 90000) + "-SEC",
-        loginTime: new Date().toLocaleString()
-      };
+      // Generate Session via CyberAuth
+      const sessionObj = window.CyberAuth 
+        ? window.CyberAuth.createSession(matchedUser)
+        : {
+            name: matchedUser.name,
+            mail: matchedUser.mail,
+            number: matchedUser.number || "+91 8103162875",
+            token: "#Z0C-" + Math.floor(10000 + Math.random() * 90000) + "-SEC",
+            loginTime: new Date().toLocaleString(),
+            loginTimestamp: Date.now(),
+            lastActivity: Date.now()
+          };
 
-      localStorage.setItem('cyber_auth_session', JSON.stringify(sessionObj));
+      if (!window.CyberAuth) {
+        localStorage.setItem('cyber_auth_session', JSON.stringify(sessionObj));
+      }
 
       // Check if there is a redirect query param
       const urlParams = new URLSearchParams(window.location.search);
@@ -839,26 +841,21 @@
         switchAuthTab('register');
       }
 
-      const isHubRedirect = urlParams.get('redirect') === 'hub.html' || urlParams.get('reason') === 'required';
-
-      const existingSession = localStorage.getItem('cyber_auth_session');
-      if (existingSession) {
-        try {
-          const parsed = JSON.parse(existingSession);
-          if (parsed && (parsed.mail || parsed.name)) {
-            if (isHubRedirect) {
-              window.location.href = 'hub.html';
-              return;
-            }
-            showSessionDashboard(parsed);
-          }
-        } catch (e) {
-          localStorage.removeItem('cyber_auth_session');
-        }
+      // Check if logged out due to inactivity
+      const reason = urlParams.get('reason');
+      if (reason === 'inactivity') {
+        showAlert('error', '⏳ Session Expired: Logged out automatically after 5 minutes of inactivity for your security. Please log in again.');
+      } else if (isHubRedirect) {
+        showAlert('error', '🔒 Access Gate: Cyber Security Knowledge & Study Hub requires valid sign in. Please log in with your credentials or register an account.');
       }
 
-      if (isHubRedirect) {
-        showAlert('error', '🔒 Access Gate: Cyber Security Knowledge & Study Hub requires valid sign in. Please log in with your credentials or register an account.');
+      const existingSession = window.CyberAuth ? window.CyberAuth.getActiveSession() : null;
+      if (existingSession) {
+        if (isHubRedirect) {
+          window.location.href = 'hub.html';
+          return;
+        }
+        showSessionDashboard(existingSession);
       }
     });
   </script>
