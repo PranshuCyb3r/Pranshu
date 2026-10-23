@@ -54,24 +54,30 @@
         <span>VAPT // ENGAGEMENTS OPEN</span>
       </div>
 
-      <nav style="display: flex; align-items: center; gap: 20px;">
-        <ul class="nav-links">
-          <li><a href="#about" class="nav-link">About</a></li>
-          <li><a href="#skills" class="nav-link">Skills</a></li>
-          <li><a href="#projects" class="nav-link">Projects</a></li>
-          <li><a href="#experience" class="nav-link">Experience</a></li>
-          <li><a href="#certifications" class="nav-link">Certifications</a></li>
-          <li><a href="#contact" class="nav-link">Contact</a></li>
+      <nav class="site-nav-container" id="siteNavContainer">
+        <ul class="nav-links" id="siteNavLinks">
+          <li><a href="#about" class="nav-link" onclick="closeSiteMobileMenu()">About</a></li>
+          <li><a href="#skills" class="nav-link" onclick="closeSiteMobileMenu()">Skills</a></li>
+          <li><a href="#projects" class="nav-link" onclick="closeSiteMobileMenu()">Projects</a></li>
+          <li><a href="#experience" class="nav-link" onclick="closeSiteMobileMenu()">Experience</a></li>
+          <li><a href="#certifications" class="nav-link" onclick="closeSiteMobileMenu()">Certifications</a></li>
+          <li><a href="#contact" class="nav-link" onclick="closeSiteMobileMenu()">Contact</a></li>
+          <li class="nav-hub-action-item">
+            <a href="hub.html" onclick="closeSiteMobileMenu(); handleStudyHubClick(event);" class="btn-nav-study-hub" id="navStudyHubBtn" title="Cyber Security Knowledge & Study Hub (Login Required)">
+              <i class="fa-solid fa-graduation-cap" style="font-size: 13px;"></i>
+              <span>STUDY HUB</span>
+              <span class="hub-lock-indicator" id="hubLockBadge"><i class="fa-solid fa-lock"></i> REQ</span>
+            </a>
+          </li>
         </ul>
-
-        <div class="nav-hub-action-wrap">
-          <a href="hub.html" onclick="handleStudyHubClick(event)" class="btn-nav-study-hub" id="navStudyHubBtn" title="Cyber Security Knowledge & Study Hub (Login Required)">
-            <i class="fa-solid fa-graduation-cap" style="font-size: 13px;"></i>
-            <span>STUDY HUB</span>
-            <span class="hub-lock-indicator" id="hubLockBadge"><i class="fa-solid fa-lock"></i> REQ</span>
-          </a>
-        </div>
       </nav>
+
+      <!-- Mobile Hamburger Menu Button with Cyber Animated Bars (Positioned on the side) -->
+      <button type="button" class="site-mobile-menu-toggle cyber-toggle-animated" id="siteMobileMenuToggle" aria-label="Toggle navigation menu" onclick="toggleSiteMobileMenu()">
+        <span class="cyber-toggle-bar bar-1"></span>
+        <span class="cyber-toggle-bar bar-2"></span>
+        <span class="cyber-toggle-bar bar-3"></span>
+      </button>
     </div>
   </header>
 
@@ -1076,9 +1082,6 @@
             <a href="mailto:pranshuverman12@gmail.com" class="strip-icon-btn" aria-label="Direct Email">
               <i class="fa-solid fa-envelope"></i>
             </a>
-            <a href="tel:+918103162875" class="strip-icon-btn" aria-label="Phone Number">
-              <i class="fa-solid fa-phone"></i>
-            </a>
           </div>
         </div>
       </div>
@@ -1600,6 +1603,30 @@
       updateActiveSection();
     }
 
+    // Mobile Navigation Drawer Toggle for Portfolio Site
+    function toggleSiteMobileMenu() {
+      const navContainer = document.getElementById('siteNavContainer');
+      const toggleBtn = document.getElementById('siteMobileMenuToggle');
+      if (navContainer) {
+        navContainer.classList.toggle('mobile-open');
+        const isOpen = navContainer.classList.contains('mobile-open');
+        if (toggleBtn) {
+          toggleBtn.classList.toggle('open', isOpen);
+        }
+      }
+    }
+    window.toggleSiteMobileMenu = toggleSiteMobileMenu;
+
+    function closeSiteMobileMenu() {
+      const navContainer = document.getElementById('siteNavContainer');
+      const toggleBtn = document.getElementById('siteMobileMenuToggle');
+      if (navContainer && navContainer.classList.contains('mobile-open')) {
+        navContainer.classList.remove('mobile-open');
+        if (toggleBtn) toggleBtn.classList.remove('open');
+      }
+    }
+    window.closeSiteMobileMenu = closeSiteMobileMenu;
+
     /* ==========================================================================
        DOM READY INITIALIZATION
        ========================================================================== */
@@ -1615,6 +1642,23 @@
 
       // 4. Initialize Scroll-Spy Navigation
       initScrollSpy();
+
+      // 5. Close mobile menu on resize or click outside
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 860) {
+          closeSiteMobileMenu();
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        const navContainer = document.getElementById('siteNavContainer');
+        const toggleBtn = document.getElementById('siteMobileMenuToggle');
+        if (navContainer && navContainer.classList.contains('mobile-open')) {
+          if (!navContainer.contains(e.target) && (!toggleBtn || !toggleBtn.contains(e.target))) {
+            closeSiteMobileMenu();
+          }
+        }
+      });
     });
   </script>
 </body>

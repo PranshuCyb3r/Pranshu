@@ -362,8 +362,7 @@
                 Resend Code
               </button>
             </div>
-
-            <button type="button" class="btn-submit-auth" onclick="verifyOtpAndRegister()" style="width: 100%; margin-top: 16px;">
+            <button type="button" class="btn-submit-auth" id="btnVerifyOtp" onclick="verifyOtpAndRegister()" style="width: 100%; margin-top: 16px;">
               <i class="fa-solid fa-circle-check"></i>
               <span>VERIFY OTP &amp; COMPLETE REGISTRATION</span>
             </button>
@@ -772,20 +771,28 @@
     async function dispatchNewOtp() {
       // Random 6 digit number between 100000 and 999999
       generatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
+      sessionStorage.setItem('cyber_temp_otp', generatedOtp);
+      if (pendingRegistration) {
+        sessionStorage.setItem('cyber_pending_reg', JSON.stringify(pendingRegistration));
+      }
 
       // Start Countdown
       startOtpTimer();
 
-      const targetMail = pendingRegistration.mail;
-      const targetName = pendingRegistration.name;
+      const targetMail = pendingRegistration ? pendingRegistration.mail : '';
+      const targetName = pendingRegistration ? pendingRegistration.name : 'Security Analyst';
 
-      // Call Email Dispatcher to send real email
+      // Call Email Dispatcher to send real email to user's inbox
       if (window.CyberEmailDispatcher && typeof window.CyberEmailDispatcher.sendOtpEmail === 'function') {
-        window.CyberEmailDispatcher.sendOtpEmail(targetMail, targetName, generatedOtp);
+        try {
+          window.CyberEmailDispatcher.sendOtpEmail(targetMail, targetName, generatedOtp);
+        } catch (mailErr) {
+          console.warn('Email dispatch warning:', mailErr);
+        }
       }
 
-      // Display official notification requesting user to check their email
-      showAlert('success', '📧 An OTP verification code has been sent to your email.');
+      // Display official notification requesting user to check their email inbox
+      showAlert('success', `📧 A 6-digit verification code has been dispatched to ${targetMail}. Please check your inbox/spam folder.`);
     }
 
     // OTP 60s Countdown Timer
@@ -819,7 +826,7 @@
       document.getElementById('otpDigit1').focus();
     }
 
-    // Step 2: Verify OTP and finalize Registration (Synchronized to Firebase Auth)
+    // Step 2: Verify OTP and finalize Registration (Synchronized to Firebase Auth & Instant Auto-Login)
     async function verifyOtpAndRegister() {
       clearAlert();
 
@@ -834,26 +841,41 @@
         return;
       }
 
+      if (!generatedOtp) {
+        generatedOtp = sessionStorage.getItem('cyber_temp_otp');
+      }
+      if (!pendingRegistration) {
+        try {
+          pendingRegistration = JSON.parse(sessionStorage.getItem('cyber_pending_reg'));
+        } catch (e) {}
+      }
+
       if (enteredOtp !== generatedOtp) {
-        showAlert('error', 'Invalid OTP code. Please check the code received in your email and retry.');
+        showAlert('error', 'Invalid OTP code. Please enter the verification code sent to your email.');
         return;
       }
 
       // Successful OTP Verification
       if (otpCountdownTimer) clearInterval(otpCountdownTimer);
 
-      const targetData = { ...pendingRegistration };
+      const targetData = pendingRegistration ? { ...pendingRegistration } : null;
+      if (!targetData || !targetData.mail) {
+        showAlert('error', 'Registration session expired. Please re-enter your details.');
+        backToRegistrationDetails();
+        return;
+      }
+
       const btnVerify = document.getElementById('btnVerifyOtp');
       const origVerifyHtml = btnVerify ? btnVerify.innerHTML : '';
       if (btnVerify) {
         btnVerify.disabled = true;
-        btnVerify.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>SYNCING WITH FIREBASE DATABASE...</span>';
+        btnVerify.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>ACTIVATING & LOGGING IN...</span>';
       }
 
-      // Save locally first
+      // 1. Save locally to registered users database
       saveRegisteredUser(targetData);
 
-      // Save to Firebase Authentication (Real Database in Console)
+      // 2. Save to Firebase Authentication (Cloud Database) asynchronously
       let fbResult = null;
       if (window.CyberFirebase && typeof window.CyberFirebase.registerWithFirebase === 'function') {
         try {
@@ -873,25 +895,44 @@
         btnVerify.innerHTML = origVerifyHtml;
       }
 
-      const registeredEmail = targetData.mail;
+      // 3. Directly establish authenticated active session (Auto-Login!)
+      const sessionObj = window.CyberAuth 
+        ? window.CyberAuth.createSession(targetData, true)
+        : {
+            name: targetData.name,
+            mail: targetData.mail,
+            number: targetData.number,
+            token: '#Z0C-' + Math.floor(10000 + Math.random() * 90000) + '-SEC',
+            loginTime: new Date().toLocaleString(),
+            loginTimestamp: Date.now(),
+            lastActivity: Date.now(),
+            rememberMe: true
+          };
+
+      try {
+        localStorage.setItem('cyber_auth_session', JSON.stringify(sessionObj));
+      } catch (e) {}
+
+      // Clean up temporary pending registration
       pendingRegistration = null;
       generatedOtp = null;
+      sessionStorage.removeItem('cyber_temp_otp');
+      sessionStorage.removeItem('cyber_pending_reg');
 
-      // Switch to Login Tab and prefill email
-      switchAuthTab('login');
-      document.getElementById('loginEmail').value = registeredEmail;
-      document.getElementById('loginPassword').value = '';
-      document.getElementById('loginPassword').focus();
-
-      let successMsg = `✓ Account registered & verified!`;
-      if (fbResult && fbResult.verificationSent) {
-        successMsg += ` Official Firebase verification link dispatched to ${registeredEmail}. Please check your inbox/spam.`;
-      } else if (fbResult && fbResult.success) {
-        successMsg += ` User profile successfully created in Firebase Console.`;
-      } else {
-        successMsg += ` Credentials configured. You can now log in below.`;
+      // Check if there is a redirect query param
+      const urlParams = new URLSearchParams(window.location.search);
+      const redirect = urlParams.get('redirect');
+      if (redirect === 'hub.html' || urlParams.get('reason') === 'required') {
+        showAlert('success', `✓ OTP Verified! Welcome, ${sessionObj.name}. Clearance Level-3 Granted. Redirecting to Study Hub & Arsenal...`);
+        setTimeout(() => {
+          window.location.href = 'hub.html';
+        }, 800);
+        return;
       }
-      showAlert('success', successMsg);
+
+      // Display Authenticated Session Dashboard directly
+      showSessionDashboard(sessionObj);
+      showAlert('success', `✓ Registration & Verification Complete! You are now logged in as ${sessionObj.name}.`);
     }
 
     function backToRegistrationDetails() {
@@ -919,7 +960,7 @@
 
       if (loginBtn) {
         loginBtn.disabled = true;
-        loginBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>AUTHENTICATING WITH FIREBASE...</span>';
+        loginBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>AUTHENTICATING...</span>';
       }
 
       // Check Firebase Auth in Cloud (Real-time Authority)
@@ -938,9 +979,8 @@
         }
       }
 
-      // If account was deleted or blocked in Firebase Console:
-      if (fbError && (fbError.code === 'auth/user-disabled' || fbError.code === 'auth/user-not-found')) {
-        // If user was deleted or disabled in Firebase, purge local cached copy immediately
+      // Only reject if account was explicitly disabled in Firebase:
+      if (fbError && fbError.code === 'auth/user-disabled') {
         if (window.CyberAuth && typeof window.CyberAuth.deleteRegisteredUser === 'function') {
           window.CyberAuth.deleteRegisteredUser(email);
         }
@@ -948,7 +988,7 @@
           loginBtn.disabled = false;
           loginBtn.innerHTML = origLoginBtnHtml;
         }
-        showAlert('error', fbError.message || 'Access Denied: This account has been blocked or removed from Firebase.');
+        showAlert('error', fbError.message || 'Access Denied: This account has been disabled in Firebase.');
         return;
       }
 
@@ -972,6 +1012,16 @@
         saveRegisteredUser(matchedUser);
       }
 
+      // If matched locally but not in Firebase Auth, sync in background
+      if (matchedUser && !fbUser && fbError && fbError.code === 'auth/user-not-found' && window.CyberFirebase && typeof window.CyberFirebase.registerWithFirebase === 'function') {
+        window.CyberFirebase.registerWithFirebase(
+          matchedUser.name,
+          matchedUser.mail,
+          matchedUser.password,
+          matchedUser.number
+        ).catch(e => console.warn('Background Firebase sync note:', e));
+      }
+
       if (!matchedUser) {
         if (loginBtn) {
           loginBtn.disabled = false;
@@ -979,6 +1029,11 @@
         }
         showAlert('error', 'Authentication failed: Invalid email address or password. Please verify credentials or register.');
         return;
+      }
+
+      if (loginBtn) {
+        loginBtn.disabled = false;
+        loginBtn.innerHTML = origLoginBtnHtml;
       }
 
       const rememberMe = document.getElementById('loginRememberMe') ? document.getElementById('loginRememberMe').checked : true;
@@ -1095,9 +1150,21 @@
       const inputs = document.querySelectorAll('.otp-input-digit');
       inputs.forEach((input, index) => {
         input.addEventListener('input', (e) => {
-          const val = e.target.value;
-          if (val && index < inputs.length - 1) {
+          let val = e.target.value;
+          // Filter to digits only
+          if (val && !/^\d+$/.test(val)) {
+            val = val.replace(/\D/g, '');
+            e.target.value = val.slice(0, 1);
+          }
+          if (e.target.value && index < inputs.length - 1) {
             inputs[index + 1].focus();
+          }
+          // If all 6 digits are entered, prepare verify button
+          let full = '';
+          inputs.forEach(inp => full += inp.value.trim());
+          if (full.length === 6) {
+            const btnVerify = document.getElementById('btnVerifyOtp');
+            if (btnVerify) btnVerify.focus();
           }
         });
 
@@ -1113,9 +1180,11 @@
         input.addEventListener('paste', (e) => {
           e.preventDefault();
           const pasteData = (e.clipboardData || window.clipboardData).getData('text').trim();
-          if (/^\d{6}$/.test(pasteData)) {
+          const digitsOnly = pasteData.replace(/\D/g, '');
+          if (digitsOnly.length >= 6) {
+            const first6 = digitsOnly.slice(0, 6);
             inputs.forEach((inp, idx) => {
-              inp.value = pasteData[idx] || '';
+              inp.value = first6[idx] || '';
             });
             inputs[5].focus();
           }

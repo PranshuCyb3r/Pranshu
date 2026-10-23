@@ -33,7 +33,7 @@
   <!-- Top Hub Navigation Bar (All Study Access Lives Here) -->
   <header class="site-header hub-site-header" id="top">
     <div class="hub-header-container">
-      <a href="index.html" class="brand" title="Return to ZeR0CyB3r Portfolio &amp; Engagements">
+      <a href="index.html" class="brand" title="ZeR0CyB3r Academy &bull; Hub">
         <div class="brand-logo-frame">
           <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRtozZTae-iJGRMRf5OdtecLe3vRbR1c7mhPaU-cuBZvExyv9c0uRWaWIcpb2vBMcAL2SKIOi4MtOH-zTGy_pb9VliVp73lrgEXCk5YtLl-dMzoY1-rmAYLFed925Q1AjQ9ztRUuTrRJj3PFWO1pwE63St8LK2X75RAAUVGCxPbpYSOK4ea9q3uXmk82cZhQqKWUz2VMH-X2lTn6NtrmCI1-oE3URkdX0saheyM2mdIdDQO0E3lZe_hU-hK6jyKlSkIzo" alt="ZeR0CyB3r" referrerpolicy="no-referrer" />
         </div>
@@ -44,8 +44,8 @@
       </a>
 
       <!-- Direct Header Navigation -->
-      <nav class="hub-nav-wrap" aria-label="Cyber Security Academy Navigation">
-        <ul class="hub-nav-links">
+      <nav class="hub-nav-wrap" id="hubNavWrap" aria-label="Cyber Security Academy Navigation">
+        <ul class="hub-nav-links" id="hubNavLinks">
           <li>
             <a href="#welcome" class="nav-link active" id="navLinkWelcome" onclick="switchCategoryFromNav('welcome', event)" title="Tactical Command Center &amp; Mission HQ">
               <i class="fa-solid fa-satellite-dish text-crimson"></i>
@@ -86,16 +86,26 @@
         </ul>
       </nav>
 
-      <!-- Operator Session Status & Logout -->
-      <div class="hub-user-badge-wrap">
-        <div class="hub-operator-pill">
-          <span class="pulsing-dot"></span>
-          <span id="hubOperatorName">OPERATOR CLEARANCE</span>
+      <!-- Right Header Actions (Operator & Mobile Menu Toggle) -->
+      <div class="hub-header-right-actions">
+        <!-- Operator Session Status & Logout -->
+        <div class="hub-user-badge-wrap">
+          <div class="hub-operator-pill">
+            <span class="pulsing-dot"></span>
+            <span id="hubOperatorName">OPERATOR CLEARANCE</span>
+          </div>
+          <a href="index.html" class="hub-logout-action-btn" id="hubLogoutBtn" onclick="handleHubLogout(event)" title="Terminate current operator session">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>LOG OUT</span>
+          </a>
         </div>
-        <a href="index.html" class="hub-logout-action-btn" id="hubLogoutBtn" onclick="handleHubLogout(event)" title="Terminate current operator session">
-          <i class="fa-solid fa-right-from-bracket"></i>
-          <span>LOG OUT</span>
-        </a>
+
+        <!-- Mobile Hamburger Menu Button (Positioned on the side) -->
+        <button type="button" class="hub-mobile-menu-toggle cyber-toggle-animated" id="hubMobileMenuToggle" aria-label="Toggle navigation menu" onclick="toggleHubMobileMenu()">
+          <span class="cyber-toggle-bar bar-1"></span>
+          <span class="cyber-toggle-bar bar-2"></span>
+          <span class="cyber-toggle-bar bar-3"></span>
+        </button>
       </div>
     </div>
   </header>
@@ -182,7 +192,7 @@
 
       <div class="hq-bento-grid">
         <!-- 1. Video Masterclasses -->
-        <div class="hq-bento-card">
+        <div class="hq-bento-card" onclick="switchCategoryFromNav('videos', event)" title="Click to view Video Courses & Masterclasses">
           <div>
             <div class="hq-bento-top">
               <span class="hq-bento-badge">CURATED TRAINING</span>
@@ -200,12 +210,12 @@
           </div>
           <div class="hq-bento-footer-stat">
             <span>REPOSITORY ACCESS</span>
-            <span>TOP NAV &bull; COURSES</span>
+            <span>OPEN COURSES &rarr;</span>
           </div>
         </div>
 
         <!-- 2. Technical Books & Manuals -->
-        <div class="hq-bento-card">
+        <div class="hq-bento-card" onclick="switchCategoryFromNav('books', event)" title="Click to view Reference Books & PDF Manuals">
           <div>
             <div class="hq-bento-top">
               <span class="hq-bento-badge">DEEP THEORY</span>
@@ -223,12 +233,12 @@
           </div>
           <div class="hq-bento-footer-stat">
             <span>REPOSITORY ACCESS</span>
-            <span>TOP NAV &bull; BOOKS &amp; PDFS</span>
+            <span>OPEN BOOKS &amp; PDFS &rarr;</span>
           </div>
         </div>
 
         <!-- 3. Security Tools Arsenal -->
-        <div class="hq-bento-card">
+        <div class="hq-bento-card" onclick="switchCategoryFromNav('tools', event)" title="Click to view Security Tools Arsenal">
           <div>
             <div class="hq-bento-top">
               <span class="hq-bento-badge">FIELD ARSENAL</span>
@@ -246,12 +256,12 @@
           </div>
           <div class="hq-bento-footer-stat">
             <span>REPOSITORY ACCESS</span>
-            <span>TOP NAV &bull; TOOLS</span>
+            <span>OPEN TOOLS &rarr;</span>
           </div>
         </div>
 
         <!-- 4. Hardened Operating Systems -->
-        <div class="hq-bento-card">
+        <div class="hq-bento-card" onclick="switchCategoryFromNav('os', event)" title="Click to view Hardened Operating Systems">
           <div>
             <div class="hq-bento-top">
               <span class="hq-bento-badge">PLATFORMS</span>
@@ -269,12 +279,12 @@
           </div>
           <div class="hq-bento-footer-stat">
             <span>REPOSITORY ACCESS</span>
-            <span>TOP NAV &bull; OS</span>
+            <span>OPEN OS &rarr;</span>
           </div>
         </div>
 
         <!-- 5. Deployment Guides -->
-        <div class="hq-bento-card">
+        <div class="hq-bento-card" onclick="switchCategoryFromNav('guides', event)" title="Click to view Installation & Use Manuals">
           <div>
             <div class="hq-bento-top">
               <span class="hq-bento-badge">LAB WORKSHOPS</span>
@@ -292,7 +302,7 @@
           </div>
           <div class="hq-bento-footer-stat">
             <span>REPOSITORY ACCESS</span>
-            <span>TOP NAV &bull; INSTALLATION</span>
+            <span>OPEN GUIDES &rarr;</span>
           </div>
         </div>
 
@@ -429,6 +439,10 @@
         </div>
 
         <div class="hub-category-meta-wrap">
+          <button type="button" class="hub-back-hq-btn" onclick="switchCategoryFromNav('welcome', event)" title="Return to Academy HQ Dashboard">
+            <i class="fa-solid fa-satellite-dish"></i>
+            <span>&larr; ACADEMY HQ</span>
+          </button>
           <span class="hub-category-meta-tag" id="hubSectionBadge">
             ACTIVE REPOSITORY
           </span>
@@ -1014,28 +1028,80 @@
       const welcomeBadge = document.getElementById('welcomeOperatorBadge');
       if (welcomeBadge) welcomeBadge.innerText = displayName;
 
-      // URL Hash Routing
-      const hash = window.location.hash.replace('#', '');
-      if (hash === 'welcome' || !hash) {
-        currentCategory = 'welcome';
-      } else if (hash === 'courses') {
-        currentCategory = 'videos';
-      } else if (hash === 'installation-and-use' || hash === 'guides') {
-        currentCategory = 'guides';
-      } else if (['videos', 'books', 'tools', 'os'].includes(hash)) {
-        currentCategory = hash;
-      } else {
-        currentCategory = 'welcome';
+      // URL Hash Routing Helper
+      function resolveCategoryFromHash() {
+        const hash = window.location.hash.replace('#', '');
+        if (hash === 'welcome' || !hash) {
+          return 'welcome';
+        } else if (hash === 'courses') {
+          return 'videos';
+        } else if (hash === 'installation-and-use' || hash === 'guides') {
+          return 'guides';
+        } else if (['videos', 'books', 'tools', 'os'].includes(hash)) {
+          return hash;
+        }
+        return 'welcome';
       }
 
+      currentCategory = resolveCategoryFromHash();
       syncActiveTabs(currentCategory);
       renderCurrentView();
+
+      // Listen for browser Back / Forward buttons
+      window.addEventListener('hashchange', () => {
+        currentCategory = resolveCategoryFromHash();
+        syncActiveTabs(currentCategory);
+        renderCurrentView();
+      });
+
+      // Auto close mobile menu on screen resize to desktop
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 960) {
+          closeHubMobileMenu();
+        }
+      });
+
+      // Close mobile menu if clicked outside
+      document.addEventListener('click', (e) => {
+        const navWrap = document.getElementById('hubNavWrap');
+        const toggleBtn = document.getElementById('hubMobileMenuToggle');
+        if (navWrap && navWrap.classList.contains('mobile-open')) {
+          if (!navWrap.contains(e.target) && (!toggleBtn || !toggleBtn.contains(e.target))) {
+            closeHubMobileMenu();
+          }
+        }
+      });
     });
+
+    // Mobile Drawer Toggle with Cyber Bar Animation
+    function toggleHubMobileMenu() {
+      const navWrap = document.getElementById('hubNavWrap');
+      const toggleBtn = document.getElementById('hubMobileMenuToggle');
+      if (navWrap) {
+        navWrap.classList.toggle('mobile-open');
+        const isOpen = navWrap.classList.contains('mobile-open');
+        if (toggleBtn) {
+          toggleBtn.classList.toggle('open', isOpen);
+        }
+      }
+    }
+    window.toggleHubMobileMenu = toggleHubMobileMenu;
+
+    function closeHubMobileMenu() {
+      const navWrap = document.getElementById('hubNavWrap');
+      const toggleBtn = document.getElementById('hubMobileMenuToggle');
+      if (navWrap && navWrap.classList.contains('mobile-open')) {
+        navWrap.classList.remove('mobile-open');
+        if (toggleBtn) toggleBtn.classList.remove('open');
+      }
+    }
 
     // Navigation Switcher (Top Nav Bar)
     function switchCategoryFromNav(cat, event) {
       if (event) event.preventDefault();
       currentCategory = cat;
+
+      closeHubMobileMenu();
 
       // Update Hash without jumping
       const hashMap = {
@@ -1047,7 +1113,9 @@
         guides: '#installation-and-use'
       };
       if (hashMap[cat]) {
-        history.pushState(null, '', hashMap[cat]);
+        if (window.location.hash !== hashMap[cat]) {
+          history.pushState(null, '', hashMap[cat]);
+        }
       }
 
       syncActiveTabs(cat);
@@ -1055,6 +1123,7 @@
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+    window.switchCategoryFromNav = switchCategoryFromNav;
 
     // Search Input Listener
     function handleSearchChange() {
