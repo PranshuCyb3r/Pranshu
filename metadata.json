@@ -1,6 +1,6 @@
 {
   "name": "ZeR0CyB3r Portfolio & Study Hub",
-  "description": "Cybersecurity portfolio and interactive study hub for Pranshu Verman",
-  "requestFramePermissions": [],
+  "description": "Cybersecurity portfolio, tactical study hub, and Gemini AI Cyber Sentinel for Pranshu Verman",
+  "requestFramePermissions": ["microphone"],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
