@@ -2254,7 +2254,8 @@ main,
 }
 
 /* Highlighted Study Hub Button (Placed right after Contact) */
-.nav-hub-action-wrap {
+.nav-hub-action-wrap,
+.nav-hub-action-item {
   display: inline-flex;
   align-items: center;
 }
@@ -2610,10 +2611,77 @@ textarea.form-control {
   }
 }
 
-@media (max-width: 768px) {
-  .nav-links {
+@media (max-width: 860px) {
+  .site-mobile-menu-toggle {
+    display: flex;
+  }
+  .status-badge {
     display: none;
   }
+  .site-nav-container {
+    position: fixed;
+    top: 76px;
+    left: 0;
+    right: 0;
+    background: rgba(9, 11, 17, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1.5px solid var(--crimson-primary);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.85);
+    padding: 16px;
+    display: none;
+    flex-direction: column;
+    z-index: 999;
+  }
+  .site-nav-container.mobile-open {
+    display: flex;
+    animation: siteNavSlideDown 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+    align-items: stretch;
+    gap: 6px;
+  }
+  .nav-links li {
+    width: 100%;
+  }
+  .nav-links .nav-link {
+    width: 100%;
+    font-size: 13px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+  }
+  .nav-links .nav-link.active {
+    background: rgba(255, 0, 56, 0.18);
+    border-color: var(--crimson-primary);
+    color: #ffffff;
+  }
+  .nav-links .nav-link.active::after {
+    display: none;
+  }
+  .nav-hub-action-item {
+    width: 100%;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .nav-hub-action-item .btn-nav-study-hub {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 16px;
+    font-size: 13px;
+    background: linear-gradient(135deg, rgba(255, 0, 56, 0.22), rgba(179, 0, 39, 0.35));
+    border: 1px solid var(--crimson-primary);
+    box-shadow: 0 4px 14px rgba(255, 0, 56, 0.25);
+  }
+}
+
+@media (max-width: 768px) {
   .status-badge {
     display: none;
   }
@@ -3133,6 +3201,12 @@ textarea.form-control {
   background: rgba(16, 185, 129, 0.12);
   border: 1px solid rgba(16, 185, 129, 0.4);
   color: #6ee7b7;
+}
+
+@keyframes cyberShake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
 }
 
 /* Options Row: Remember Me & Forgot Password */
