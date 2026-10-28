@@ -62,6 +62,7 @@
           <li><a href="#projects" class="nav-link" onclick="closeSiteMobileMenu()">Projects</a></li>
           <li><a href="#experience" class="nav-link" onclick="closeSiteMobileMenu()">Experience</a></li>
           <li><a href="#certifications" class="nav-link" onclick="closeSiteMobileMenu()">Certifications</a></li>
+          <li><a href="#threat-intel" class="nav-link" onclick="closeSiteMobileMenu()">Threat Intel</a></li>
           <li><a href="#contact" class="nav-link" onclick="closeSiteMobileMenu()">Contact</a></li>
           <li class="nav-hub-action-item">
             <a href="hub.html" onclick="closeSiteMobileMenu(); handleStudyHubClick(event);" class="btn-nav-study-hub" id="navStudyHubBtn" title="Cyber Security Knowledge & Study Hub (Login Required)">
@@ -81,6 +82,88 @@
       </button>
     </div>
   </header>
+  <!-- Live Security Incident Marquee Ticker -->
+  <div class="cyber-incident-ticker-bar" id="cyberIncidentTicker">
+    <div class="ticker-prefix">
+      <span class="ticker-radar-dot"></span>
+      <i class="fa-solid fa-satellite-dish"></i>
+      <span>LIVE SOC INTEL //</span>
+    </div>
+    <div class="ticker-track-wrap">
+      <div class="ticker-track">
+        <div class="ticker-group">
+          <div class="ticker-item">
+            <span class="ticker-tag critical"><i class="fa-solid fa-triangle-exclamation"></i> CRITICAL</span>
+            <span>Unauthorized access attempt detected in EMEA region &bull; IP: 185.220.101.45 [BLOCKED BY WAF]</span>
+            <span class="ticker-divider">//</span>
+          </div>
+          <div class="ticker-item">
+            <span class="ticker-tag secops"><i class="fa-solid fa-shield-halved"></i> SEC-OPS</span>
+            <span>Firewall rules updated across US-East-1 &amp; EU-West VPC clusters &bull; Zero-Trust Enforced</span>
+            <span class="ticker-divider">//</span>
+          </div>
+          <div class="ticker-item">
+            <span class="ticker-tag threat"><i class="fa-solid fa-bolt"></i> THREAT-INTEL</span>
+            <span>Zero-Day CVE-2026-4198 mitigation patch dispatched to edge reverse proxies</span>
+            <span class="ticker-divider">//</span>
+          </div>
+          <div class="ticker-item">
+            <span class="ticker-tag iam"><i class="fa-solid fa-key"></i> IAM-AUDIT</span>
+            <span>Privileged credential spray anomaly intercepted &bull; Session revoked &amp; IP quarantined</span>
+            <span class="ticker-divider">//</span>
+          </div>
+          <div class="ticker-item">
+            <span class="ticker-tag vapt"><i class="fa-solid fa-crosshairs"></i> VAPT-RADAR</span>
+            <span>Perimeter penetration test active: 42/48 subdomains verified secure &bull; OWASP Top 10 Clear</span>
+            <span class="ticker-divider">//</span>
+          </div>
+          <div class="ticker-item">
+            <span class="ticker-tag critical"><i class="fa-solid fa-bug"></i> IDS/IPS</span>
+            <span>Distributed SYN flood signature neutralized from ASN 49505 &bull; Honeypot untouched</span>
+            <span class="ticker-divider">//</span>
+          </div>
+        </div>
+        <!-- Cloned duplicate group for seamless endless scrolling loop -->
+        <div class="ticker-group" aria-hidden="true">
+          <div class="ticker-item">
+            <span class="ticker-tag critical"><i class="fa-solid fa-triangle-exclamation"></i> CRITICAL</span>
+            <span>Unauthorized access attempt detected in EMEA region &bull; IP: 185.220.101.45 [BLOCKED BY WAF]</span>
+            <span class="ticker-divider">//</span>
+          </div>
+          <div class="ticker-item">
+            <span class="ticker-tag secops"><i class="fa-solid fa-shield-halved"></i> SEC-OPS</span>
+            <span>Firewall rules updated across US-East-1 &amp; EU-West VPC clusters &bull; Zero-Trust Enforced</span>
+            <span class="ticker-divider">//</span>
+          </div>
+          <div class="ticker-item">
+            <span class="ticker-tag threat"><i class="fa-solid fa-bolt"></i> THREAT-INTEL</span>
+            <span>Zero-Day CVE-2026-4198 mitigation patch dispatched to edge reverse proxies</span>
+            <span class="ticker-divider">//</span>
+          </div>
+          <div class="ticker-item">
+            <span class="ticker-tag iam"><i class="fa-solid fa-key"></i> IAM-AUDIT</span>
+            <span>Privileged credential spray anomaly intercepted &bull; Session revoked &amp; IP quarantined</span>
+            <span class="ticker-divider">//</span>
+          </div>
+          <div class="ticker-item">
+            <span class="ticker-tag vapt"><i class="fa-solid fa-crosshairs"></i> VAPT-RADAR</span>
+            <span>Perimeter penetration test active: 42/48 subdomains verified secure &bull; OWASP Top 10 Clear</span>
+            <span class="ticker-divider">//</span>
+          </div>
+          <div class="ticker-item">
+            <span class="ticker-tag critical"><i class="fa-solid fa-bug"></i> IDS/IPS</span>
+            <span>Distributed SYN flood signature neutralized from ASN 49505 &bull; Honeypot untouched</span>
+            <span class="ticker-divider">//</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ticker-badge-live">
+      <span class="pulsing-red-dot"></span>
+      <span>LIVE FEED</span>
+    </div>
+  </div>
+
 
   <!-- Main Content -->
   <main>
@@ -102,7 +185,7 @@
 
             <div class="hero-title-wrap">
               <div style="font-family: var(--font-mono); font-size: 11px; color: var(--crimson-primary); margin-bottom: 4px; letter-spacing: 0.1em;">
-                // CALLSIGN: ZeR0CyB3r &bull; SATNA, MADHYA PRADESH
+                // CALLSIGN: ZeR0CyB3r &bull; INDIA
               </div>
               <h1 class="hero-title cyber-glitch-title" id="cyberHeroTitle" data-text="Pranshu Verman." title="Click or hover to trigger Cyber Matrix Decrypt">
                 <span class="cyber-matrix-text" id="heroMatrixText">Pranshu Verman.</span>
@@ -257,7 +340,7 @@
             </div>
             <div class="spec-item">
               <span class="spec-key">LOCATION</span>
-              <span class="spec-val">Satna, Madhya Pradesh, India</span>
+              <span class="spec-val">India</span>
             </div>
             <div class="spec-item">
               <span class="spec-key">HIGHEST DEGREE</span>
@@ -608,7 +691,7 @@
           <div class="edu-grid">
             <div class="edu-card">
               <div class="edu-degree">Master of Computer Applications (MCA)</div>
-              <div class="edu-school">AKS University, Satna, Madhya Pradesh</div>
+              <div class="edu-school">AKS University, India</div>
               <div class="edu-meta">
                 <span>POST GRADUATION</span>
                 <span class="text-crimson">2022 &ndash; 2024</span>
@@ -616,7 +699,7 @@
             </div>
             <div class="edu-card">
               <div class="edu-degree">Bachelor of Computer Applications (BCA)</div>
-              <div class="edu-school">AKS University, Satna, Madhya Pradesh</div>
+              <div class="edu-school">AKS University, India</div>
               <div class="edu-meta">
                 <span>GRADUATION (CGPA: 6.1)</span>
                 <span class="text-crimson">2019 &ndash; 2022</span>
@@ -840,12 +923,70 @@
       </div>
     </section>
 
+    
+    <!-- ==========================================================================
+         06. THREAT INTEL // ZERO-DAY & VULNERABILITY RADAR
+         ========================================================================== -->
+    <section class="section" id="threat-intel">
+      <div class="container">
+        <div class="section-tag">
+          <span class="dot"></span>
+          <i class="fa-solid fa-radar text-crimson"></i>
+          <span>// 06. THREAT INTEL &bull; CVE RADAR</span>
+        </div>
+        <h2 class="section-title">Active Cybersecurity <span class="text-crimson">Threat Radar.</span></h2>
+        <p class="section-subtitle">Real-time threat intelligence on critical zero-days, active exploit vectors, and offensive security mitigation blueprints.</p>
+
+        <!-- Threat Filter & Search Control Bar -->
+        <div class="threat-intel-controls">
+          <div class="threat-filter-group">
+            <button type="button" class="threat-filter-btn active" data-filter="all">
+              <i class="fa-solid fa-layer-group"></i> ALL INTEL (6)
+            </button>
+            <button type="button" class="threat-filter-btn" data-filter="zero-day">
+              <i class="fa-solid fa-triangle-exclamation"></i> ZERO-DAYS &amp; RCE
+            </button>
+            <button type="button" class="threat-filter-btn" data-filter="cloud">
+              <i class="fa-solid fa-cloud-bolt"></i> CONTAINER &amp; CLOUD
+            </button>
+            <button type="button" class="threat-filter-btn" data-filter="web">
+              <i class="fa-solid fa-globe"></i> WEB &amp; API
+            </button>
+            <button type="button" class="threat-filter-btn" data-filter="supply-chain">
+              <i class="fa-solid fa-link"></i> SUPPLY CHAIN
+            </button>
+          </div>
+
+          <div class="threat-search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="threatSearchInput" placeholder="Search CVE, vector, or software..." aria-label="Search threat intelligence" />
+          </div>
+        </div>
+
+        <!-- Dynamic Grid of Threat Cards -->
+        <div class="threat-intel-grid" id="threatIntelGrid">
+          <!-- Populated dynamically by js/threat-intel.js with interactive mitigation reveal drawers -->
+        </div>
+      </div>
+    </section>
+
     <!-- Contact Section:
          1. Contact Methods (Details Left, Icon Bottom Right: "left me details only right me niche icon show ho")
          2. Cyber Scanning Map beside Contact Box ("contect box ke bagal me map ki cyber scanning hogi")
     -->
     <section class="section" id="contact">
       <div class="container">
+        <!-- In-Section Threat Perimeter Breach Status Header -->
+        <div class="contact-threat-status-strip" id="contactThreatStatusStrip">
+          <div class="strip-left">
+            <span class="strip-radar-pulse"></span>
+            <span class="strip-title"><i class="fa-solid fa-shield-virus"></i> SECTOR 06 // PERIMETER THREAT DETECTION ENGAGED</span>
+          </div>
+          <div class="strip-right">
+            <span class="strip-telemetry">PROTOCOL: TLS 1.3 ENCRYPTED</span>
+            <span class="strip-badge-risk">DEFCON-1 ACTIVE</span>
+          </div>
+        </div>
         <div class="section-tag">
           <span class="dot"></span>
           <i class="fa-solid fa-satellite-dish"></i>
@@ -970,7 +1111,7 @@
                 <!-- New Zealand -->
                 <path class="world-continent" d="M 762,408 L 772,402 L 768,428 Z M 758,430 L 765,442 L 755,445 Z" />
 
-                <!-- Tracer Mesh Transmission Lines (Satna HQ to Sentinel Nodes) -->
+                <!-- Tracer Mesh Transmission Lines (India HQ to Sentinel Nodes) -->
                 <line x1="558" y1="224" x2="408" y2="142" class="world-tracer-line" />
                 <line x1="558" y1="224" x2="132" y2="162" class="world-tracer-line" />
                 <line x1="558" y1="224" x2="628" y2="275" class="world-tracer-line" />
@@ -1018,13 +1159,13 @@
                   <text x="645" y="180" fill="#cbd5e1" font-size="9" font-family="monospace">EAST_ASIA [TYO]</text>
                 </g>
 
-                <!-- OPERATOR COMMAND HQ: SATNA, MADHYA PRADESH, INDIA -->
-                <g class="world-node-group" onclick="showMapNodeDossier('Satna, MP, India', '24.58° N, 80.83° E', 'ZeR0 Command HQ // Primary SOC & IAM Operator', '100% OPERATIONAL')">
+                <!-- OPERATOR COMMAND HQ: INDIA -->
+                <g class="world-node-group" onclick="showMapNodeDossier('India HQ', '20.59° N, 78.96° E', 'ZeR0 Command HQ // Primary SOC & IAM Operator', '100% OPERATIONAL')">
                   <circle cx="558" cy="224" r="22" fill="url(#hqGlow)" />
                   <circle cx="558" cy="224" r="14" fill="none" stroke="#ff0038" stroke-width="1.2" stroke-dasharray="3, 3" />
                   <circle cx="558" cy="224" r="7" fill="#ff0038" />
                   <circle cx="558" cy="224" r="3" fill="#ffffff" />
-                  <text x="500" y="244" fill="#ff0038" font-size="10" font-family="monospace" font-weight="bold">ZeR0_HQ [INDIA - SATNA]</text>
+                  <text x="500" y="244" fill="#ff0038" font-size="10" font-family="monospace" font-weight="bold">ZeR0_HQ [INDIA]</text>
                 </g>
               </svg>
 
@@ -1035,7 +1176,7 @@
                 <i class="fa-solid fa-satellite-dish text-crimson"></i> LIVE WORLD MAP SCANNING // ACTIVE
               </div>
               <div class="map-overlay-coords top-right" id="mapLiveCoords">
-                <span class="pulsing-green-dot"></span> CURSOR: 24.58° N, 80.83° E // SATNA SECTOR
+                <span class="pulsing-green-dot"></span> CURSOR: 20.59° N, 78.96° E // INDIA SECTOR
               </div>
             </div>
 
@@ -1047,7 +1188,7 @@
               </div>
               <div class="telemetry-item">
                 <span class="telemetry-label">// OPERATOR HQ</span>
-                <span class="telemetry-val crimson">SATNA, MP [INDIA]</span>
+                <span class="telemetry-val crimson">INDIA</span>
               </div>
               <div class="telemetry-item">
                 <span class="telemetry-label">// DEFCON STATUS</span>
@@ -1328,12 +1469,14 @@
       }
     ];
 
-    let currentCmdIdx = 0;
+        let currentCmdIdx = 0;
     let isTermPaused = false;
     let termTimeoutId = null;
+    let isTypingActive = false;
 
     function renderCommandStream() {
       if (isTermPaused) return;
+      if (termTimeoutId) clearTimeout(termTimeoutId);
 
       const cmdData = GENUINE_COMMANDS[currentCmdIdx];
       const cmdTextEl = document.getElementById('termActiveCmd');
@@ -1342,46 +1485,89 @@
 
       if (!cmdTextEl || !streamLogEl) return;
 
-      // Update Prompt Command and Status
-      cmdTextEl.innerText = cmdData.cmd;
+      // 1. Initial State for real-time typing animation
+      cmdTextEl.innerText = '';
       if (statusTagEl) {
-        statusTagEl.innerHTML = `&#10095; STATUS: ${cmdData.status}`;
+        statusTagEl.innerHTML = '&#10095; STATUS: TYPING INJECTION CMD [' + (currentCmdIdx + 1) + '/' + GENUINE_COMMANDS.length + ']';
       }
 
-      // Add separator banner
-      const sep = document.createElement('div');
-      sep.className = 'term-stream-line log-dim';
-      sep.style.margin = '8px 0 4px 0';
-      sep.style.borderTop = '1px dashed rgba(255, 255, 255, 0.1)';
-      sep.style.paddingTop = '6px';
-      sep.innerHTML = `// [EXEC #${currentCmdIdx + 1}] ${new Date().toLocaleTimeString()} &bull; RUNNING: ${cmdData.cmd}`;
-      streamLogEl.appendChild(sep);
+      const fullCommand = cmdData.cmd;
+      let charIndex = 0;
+      isTypingActive = true;
 
-      let lineIndex = 0;
-      function streamNextLine() {
-        if (isTermPaused) return;
+      // Type character by character with realistic cadence
+      function typeNextChar() {
+        if (isTermPaused) {
+          isTypingActive = false;
+          return;
+        }
 
-        if (lineIndex < cmdData.lines.length) {
-          const lineObj = cmdData.lines[lineIndex];
-          const div = document.createElement('div');
-          div.className = `term-stream-line ${lineObj.type}`;
-          div.innerHTML = lineObj.text;
-          streamLogEl.appendChild(div);
+        if (charIndex < fullCommand.length) {
+          cmdTextEl.innerText = fullCommand.slice(0, charIndex + 1);
+          charIndex++;
 
-          // Keep scrolled to bottom
-          streamLogEl.scrollTop = streamLogEl.scrollHeight;
+          // Natural cadence: slightly longer delay on space, hyphens, flags
+          const char = fullCommand[charIndex - 1];
+          let delay = Math.floor(Math.random() * 25) + 20; // 20-45ms
+          if (char === ' ' || char === '-' || char === '/') {
+            delay += Math.floor(Math.random() * 35) + 25;
+          }
 
-          lineIndex++;
-          // Stagger each line between 250ms and 500ms
-          termTimeoutId = setTimeout(streamNextLine, Math.floor(Math.random() * 250) + 250);
+          termTimeoutId = setTimeout(typeNextChar, delay);
         } else {
-          // Finished this command, wait 3 seconds and proceed to next
-          currentCmdIdx = (currentCmdIdx + 1) % GENUINE_COMMANDS.length;
-          termTimeoutId = setTimeout(renderCommandStream, 3200);
+          // Finished typing! Pause briefly before hitting Enter to execute
+          isTypingActive = false;
+          if (statusTagEl) {
+            statusTagEl.innerHTML = '&#10095; STATUS: EXECUTING &bull; ' + cmdData.status;
+          }
+
+          // Delay simulating Enter key execution
+          termTimeoutId = setTimeout(() => {
+            if (isTermPaused) return;
+
+            // Add separator banner
+            const sep = document.createElement('div');
+            sep.className = 'term-stream-line log-dim';
+            sep.style.margin = '8px 0 4px 0';
+            sep.style.borderTop = '1px dashed rgba(255, 0, 56, 0.25)';
+            sep.style.paddingTop = '6px';
+            sep.innerHTML = '// [EXEC #' + (currentCmdIdx + 1) + '] ' + new Date().toLocaleTimeString() + ' &bull; RUNNING: <span style="color: #ff2a55; font-weight: 600;">' + cmdData.cmd + '</span>';
+            streamLogEl.appendChild(sep);
+
+            let lineIndex = 0;
+
+            function streamNextLine() {
+              if (isTermPaused) return;
+
+              if (lineIndex < cmdData.lines.length) {
+                const lineObj = cmdData.lines[lineIndex];
+                const div = document.createElement('div');
+                div.className = 'term-stream-line ' + lineObj.type;
+                div.innerHTML = lineObj.text;
+                streamLogEl.appendChild(div);
+
+                // Keep scrolled to bottom
+                streamLogEl.scrollTop = streamLogEl.scrollHeight;
+
+                lineIndex++;
+                // Rapid realistic output stream 150ms-350ms
+                termTimeoutId = setTimeout(streamNextLine, Math.floor(Math.random() * 200) + 150);
+              } else {
+                if (statusTagEl) {
+                  statusTagEl.innerHTML = '&#10095; STATUS: COMPLETED &bull; ' + cmdData.status;
+                }
+                // Finished this command, wait 3.5 seconds and proceed to type next command
+                currentCmdIdx = (currentCmdIdx + 1) % GENUINE_COMMANDS.length;
+                termTimeoutId = setTimeout(renderCommandStream, 3500);
+              }
+            }
+
+            streamNextLine();
+          }, 380);
         }
       }
 
-      streamNextLine();
+      termTimeoutId = setTimeout(typeNextChar, 180);
     }
 
     function toggleTerminalStream() {
@@ -1472,7 +1658,7 @@
         });
 
         mapContainer.addEventListener('mouseleave', () => {
-          liveCoords.innerHTML = `<span class="pulsing-green-dot"></span> CURSOR: 24.58&deg; N, 80.83&deg; E // SATNA SECTOR`;
+          liveCoords.innerHTML = `<span class="pulsing-green-dot"></span> CURSOR: 20.59&deg; N, 78.96&deg; E // INDIA SECTOR`;
         });
       }
 
@@ -1665,5 +1851,9 @@
 
   <!-- Gemini Tactical AI Sentinel (Multi-Turn Chat, Search Grounding, Maps Grounding, Voice Transcribe) -->
   <script src="js/gemini-sentinel.js"></script>
+  <!-- Threat Alert Overlay -->
+  <script src="js/threat-alert.js"></script>
+  <!-- Live Threat Intel & Mitigation Engine -->
+  <script src="js/threat-intel.js"></script>
 </body>
 </html>

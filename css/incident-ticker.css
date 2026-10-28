@@ -1,0 +1,198 @@
+/* ==========================================================================
+   ZeR0CyB3r // Live Security Incident Marquee Ticker
+   Real-Time Mock Threat Stream & SOC Intelligence Feed
+   ========================================================================== */
+
+.cyber-incident-ticker-bar {
+  position: fixed;
+  top: 76px;
+  left: 0;
+  width: 100%;
+  height: 35px;
+  background: rgba(8, 9, 14, 0.95);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 0, 56, 0.25);
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  display: flex;
+  align-items: center;
+  z-index: 45;
+  overflow: hidden;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 11px;
+}
+
+.ticker-prefix {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255, 0, 56, 0.22), rgba(255, 0, 56, 0.06));
+  border-right: 1px solid rgba(255, 0, 56, 0.35);
+  color: #ff2a55;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  flex-shrink: 0;
+  z-index: 3;
+  box-shadow: 4px 0 12px rgba(0, 0, 0, 0.6);
+}
+
+.ticker-radar-dot {
+  width: 7px;
+  height: 7px;
+  background-color: #ff0038;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #ff0038;
+  animation: tickerDotPulse 1.4s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+@keyframes tickerDotPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(0.7);
+  }
+}
+
+.ticker-track-wrap {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.ticker-track {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  will-change: transform;
+  animation: tickerMarquee 45s linear infinite;
+}
+
+.cyber-incident-ticker-bar:hover .ticker-track {
+  animation-play-state: paused;
+}
+
+@keyframes tickerMarquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.ticker-group {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 22px;
+  color: #e4e4e7;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+}
+
+.ticker-divider {
+  color: #ff0038;
+  opacity: 0.6;
+  font-weight: bold;
+  padding-left: 12px;
+}
+
+.ticker-tag {
+  font-size: 9.5px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ticker-tag.critical {
+  background: rgba(255, 0, 56, 0.2);
+  border: 1px solid rgba(255, 0, 56, 0.55);
+  color: #ff335c;
+  box-shadow: 0 0 10px rgba(255, 0, 56, 0.35);
+}
+
+.ticker-tag.secops {
+  background: rgba(56, 189, 248, 0.16);
+  border: 1px solid rgba(56, 189, 248, 0.5);
+  color: #38bdf8;
+}
+
+.ticker-tag.threat {
+  background: rgba(251, 191, 36, 0.16);
+  border: 1px solid rgba(251, 191, 36, 0.5);
+  color: #fbbf24;
+}
+
+.ticker-tag.iam {
+  background: rgba(168, 85, 247, 0.16);
+  border: 1px solid rgba(168, 85, 247, 0.5);
+  color: #c084fc;
+}
+
+.ticker-tag.vapt {
+  background: rgba(52, 211, 153, 0.16);
+  border: 1px solid rgba(52, 211, 153, 0.5);
+  color: #34d399;
+}
+
+.ticker-badge-live {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 14px;
+  height: 100%;
+  background: rgba(12, 14, 20, 0.96);
+  border-left: 1px solid rgba(255, 0, 56, 0.28);
+  color: #a1a1aa;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  flex-shrink: 0;
+  z-index: 3;
+  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.6);
+}
+
+@media (max-width: 860px) {
+  .cyber-incident-ticker-bar {
+    top: 68px;
+    height: 32px;
+    font-size: 10px;
+  }
+  .ticker-prefix {
+    padding: 0 10px;
+    font-size: 9.5px;
+  }
+  .ticker-prefix i {
+    display: none;
+  }
+  .ticker-item {
+    padding: 0 14px;
+    font-size: 10px;
+  }
+  .ticker-badge-live span {
+    display: none;
+  }
+  .ticker-badge-live {
+    padding: 0 10px;
+  }
+}

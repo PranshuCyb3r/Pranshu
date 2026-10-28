@@ -1,0 +1,374 @@
+/* ==========================================================================
+   ZeR0CyB3r // Threat Alert Real-Time Overlay
+   High-Risk Security Breach Detection Simulation (Contact Section)
+   ========================================================================== */
+
+/* Full Viewport Threat Alert Overlay */
+.threat-alert-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s ease;
+  overflow: hidden;
+}
+
+/* Active State: subtle red glow along screen edges */
+.threat-alert-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  animation: threatBreachGlow 1.85s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Rhythmic Crimson Perimeter Pulse (Heartbeat / Emergency Strobe Cadence) */
+@keyframes threatBreachGlow {
+  0% {
+    box-shadow: 
+      inset 0 0 50px rgba(255, 0, 56, 0.22),
+      inset 0 0 16px rgba(255, 0, 56, 0.35);
+  }
+  16% {
+    box-shadow: 
+      inset 0 0 115px rgba(255, 0, 56, 0.52),
+      inset 0 0 42px rgba(255, 0, 56, 0.75);
+  }
+  28% {
+    box-shadow: 
+      inset 0 0 65px rgba(255, 0, 56, 0.28),
+      inset 0 0 20px rgba(255, 0, 56, 0.45);
+  }
+  44% {
+    box-shadow: 
+      inset 0 0 145px rgba(255, 0, 56, 0.6),
+      inset 0 0 50px rgba(255, 0, 56, 0.85);
+  }
+  65%, 100% {
+    box-shadow: 
+      inset 0 0 50px rgba(255, 0, 56, 0.22),
+      inset 0 0 16px rgba(255, 0, 56, 0.35);
+  }
+}
+
+/* CSS-based Viewport Shake Animation when Threat Alert Triggers */
+@keyframes threatViewportShake {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  10% { transform: translate(-4px, 2px) rotate(-0.25deg); }
+  20% { transform: translate(4px, -2px) rotate(0.25deg); }
+  30% { transform: translate(-3px, -2px) rotate(-0.15deg); }
+  40% { transform: translate(3px, 2px) rotate(0.15deg); }
+  50% { transform: translate(-2px, 1px) rotate(-0.1deg); }
+  65% { transform: translate(2px, -1px) rotate(0.1deg); }
+  80% { transform: translate(-1px, 1px) rotate(-0.05deg); }
+  90% { transform: translate(1px, -0.5px) rotate(0.05deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+body.threat-viewport-shake {
+  animation: threatViewportShake 0.55s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform-origin: center center;
+}
+
+/* Cyber Scanning Line overlay (very faint, authentic security HUD) */
+.threat-scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 3px,
+    rgba(255, 0, 56, 0.035) 4px
+  );
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* Corner HUD Targeting Brackets */
+.threat-hud-bracket {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border: 2px solid #ff0038;
+  pointer-events: none;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 6px rgba(255, 0, 56, 0.7));
+}
+
+.threat-hud-bracket.top-left {
+  top: 18px;
+  left: 18px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.threat-hud-bracket.top-right {
+  top: 18px;
+  right: 18px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.threat-hud-bracket.bottom-left {
+  bottom: 18px;
+  left: 18px;
+  border-right: none;
+  border-top: none;
+}
+
+.threat-hud-bracket.bottom-right {
+  bottom: 18px;
+  right: 18px;
+  border-left: none;
+  border-top: none;
+}
+
+/* Tactical Threat HUD Dock (Positioned in clear space above bottom footer bar, perfectly centered between Logo and Operator/AI button) */
+.threat-hud-banner {
+  position: fixed;
+  bottom: 90px;
+  top: auto;
+  left: 50%;
+  transform: translateX(-50%) translateY(50px);
+  opacity: 0;
+  background: rgba(10, 12, 18, 0.96);
+  border: 1px solid rgba(255, 0, 56, 0.65);
+  border-radius: 9999px;
+  padding: 10px 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.88), 0 0 25px rgba(255, 0, 56, 0.38);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s ease;
+  pointer-events: auto;
+  max-width: 92vw;
+  z-index: 10000;
+}
+
+.threat-alert-overlay.active .threat-hud-banner {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* Threat Beacon (Pulsing Red Orb) */
+.threat-beacon-wrap {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.threat-beacon-core {
+  width: 9px;
+  height: 9px;
+  background-color: #ff0038;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #ff0038;
+}
+
+.threat-beacon-ring {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1.5px solid #ff0038;
+  animation: threatRingPulse 1.4s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+@keyframes threatRingPulse {
+  0% {
+    transform: scale(0.6);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+/* Threat HUD Text details */
+.threat-hud-details {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.threat-hud-title {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #ff2a55;
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.threat-hud-sub {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 9.5px;
+  color: #a1a1aa;
+  letter-spacing: 0.04em;
+}
+
+/* Acknowledge / Dismiss Button */
+.threat-hud-dismiss-btn {
+  background: rgba(255, 0, 56, 0.15);
+  border: 1px solid rgba(255, 0, 56, 0.45);
+  color: #f4f4f5;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.threat-hud-dismiss-btn:hover {
+  background: rgba(255, 0, 56, 0.35);
+  border-color: #ff0038;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(255, 0, 56, 0.5);
+  transform: translateY(-1px);
+}
+
+/* Sound toggle button */
+.threat-hud-sound-btn {
+  background: transparent;
+  border: none;
+  color: #71717a;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 5px;
+  transition: color 0.2s ease;
+}
+
+.threat-hud-sound-btn:hover {
+  color: #ff0038;
+}
+
+.threat-hud-sound-btn.muted {
+  color: #52525b;
+}
+
+/* Contact Section Highlight when Threat Alert is Active */
+body.threat-alert-active #contact .contact-form-card {
+  border-color: rgba(255, 0, 56, 0.45);
+  box-shadow: 0 0 25px rgba(255, 0, 56, 0.2);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+body.threat-alert-active #contact .cyber-map-card {
+  border-color: rgba(255, 0, 56, 0.5);
+  box-shadow: 0 0 30px rgba(255, 0, 56, 0.25);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* When Threat Alert is active, synchronize Live SOC Ticker with subtle red glow */
+body.threat-alert-active .cyber-incident-ticker-bar {
+  border-bottom-color: rgba(255, 0, 56, 0.5);
+  box-shadow: 0 4px 16px rgba(255, 0, 56, 0.2);
+}
+
+body.threat-alert-active .ticker-badge-live {
+  background: rgba(255, 0, 56, 0.22);
+  border-left-color: rgba(255, 0, 56, 0.55);
+  color: #ff335c;
+}
+
+/* In-Page Threat Perimeter Status Strip inside Contact Section */
+.contact-threat-status-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 10px 18px;
+  margin-bottom: 24px;
+  background: rgba(14, 16, 22, 0.85);
+  border: 1px solid rgba(255, 0, 56, 0.35);
+  border-radius: 10px;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+}
+
+.strip-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.strip-radar-pulse {
+  width: 8px;
+  height: 8px;
+  background-color: #ff0038;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #ff0038;
+  animation: stripPulse 1.4s infinite ease-in-out;
+}
+
+@keyframes stripPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.75); }
+}
+
+.strip-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #ff335c;
+  letter-spacing: 0.06em;
+}
+
+.strip-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 10px;
+  color: #a1a1aa;
+}
+
+.strip-badge-risk {
+  background: rgba(255, 0, 56, 0.16);
+  border: 1px solid rgba(255, 0, 56, 0.45);
+  color: #ff335c;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 640px) {
+  .threat-hud-banner {
+    bottom: 84px;
+    top: auto;
+    padding: 8px 14px;
+    gap: 10px;
+    width: 94%;
+    border-radius: 12px;
+  }
+  .threat-hud-title {
+    font-size: 10px;
+  }
+  .threat-hud-sub {
+    font-size: 8.5px;
+  }
+  .threat-hud-bracket {
+    width: 18px;
+    height: 18px;
+  }
+  .contact-threat-status-strip {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

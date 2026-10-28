@@ -11,7 +11,7 @@
   const state = {
     isOpen: false,
     activeTab: 'chat', // 'chat' | 'search' | 'maps' | 'voice'
-    selectedModel: 'gemini-3.8-flash',
+    selectedModel: 'gemini-3.1-flash-lite',
     selectedRole: 'default',
     enableSearchGrounding: false,
     enableMapsGrounding: false,
@@ -51,10 +51,9 @@
     root.id = 'geminiAiSentinelRoot';
     root.innerHTML = `
       <!-- Floating Trigger Button -->
-      <button type="button" class="gemini-floating-trigger" id="btnOpenGeminiSentinel" aria-label="Open ZeR0 AI Sentinel" title="Open ZeR0 AI Tactical Sentinel (Gemini 3.8 / 3.5 / 4)">
+      <button type="button" class="gemini-floating-trigger" id="btnOpenGeminiSentinel" aria-label="Open ZeR0 AI" title="Open ZeR0 AI Tactical Assistant">
         <i class="fa-solid fa-microchip gemini-trigger-icon" aria-hidden="true"></i>
-        <span>ZeR0 AI SENTINEL</span>
-        <span class="gemini-trigger-badge">GEMINI</span>
+        <span>ZeR0 AI</span>
       </button>
 
       <!-- Terminal Modal Overlay -->
@@ -70,13 +69,13 @@
                 <span class="gemini-h-dot green"></span>
               </div>
               <div class="gemini-header-title" id="geminiHeaderTitle">
-                // ZeR0 AI <span>TACTICAL SENTINEL</span>
+                // ZeR0 AI <span>OFFENSIVE SEC ASSISTANT</span>
               </div>
             </div>
 
             <div class="gemini-header-actions">
               <span class="gemini-header-status">
-                <i class="fa-solid fa-shield-halved"></i> 256-BIT SECURE // GEMINI 3.8
+                <i class="fa-solid fa-shield-halved"></i> 256-BIT SECURE // FLASH-LITE
               </span>
               <button type="button" class="gemini-action-btn" id="btnCloseGeminiModal" aria-label="Close Sentinel">
                 <i class="fa-solid fa-xmark"></i>
@@ -131,8 +130,8 @@
                 <div class="gemini-ctrl-group">
                   <label for="geminiModelSelect" style="color: #94a3b8;">// MODEL:</label>
                   <select id="geminiModelSelect" class="gemini-select-pill" title="Select Gemini Model">
-                    <option value="gemini-3.8-flash">gemini-3.8-flash (General • Default)</option>
-                    <option value="gemini-3.1-flash-lite">gemini-3.1-flash-lite (Fast Tasks)</option>
+                    <option value="gemini-3.1-flash-lite" selected>gemini-3.1-flash-lite (Ultra-Fast • Instant)</option>
+                    <option value="gemini-3.8-flash">gemini-3.8-flash (General • High Capacity)</option>
                     <option value="gemini-4-argon">gemini-4-argon (Complex Reasoning)</option>
                   </select>
                 </div>

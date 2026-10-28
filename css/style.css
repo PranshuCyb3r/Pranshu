@@ -1,3 +1,7 @@
+@import 'threat-intel.css';
+@import 'incident-ticker.css';
+@import 'threat-alert.css';
+
 /* ==========================================================================
    ZeR0CyB3r // Pranshu Verman Portfolio
    Offensive Security & VAPT Specialist
@@ -400,7 +404,7 @@ main,
 
 /* Hero Section */
 .hero-section {
-  padding: 130px 0 80px 0;
+  padding: 148px 0 80px 0;
   position: relative;
 }
 .hero-grid {

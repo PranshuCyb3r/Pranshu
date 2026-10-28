@@ -3,7 +3,6 @@ import { GoogleGenAI } from '@google/genai';
 
 async function generateContentWithRetry(ai: GoogleGenAI, params: any, maxRetries = 2) {
   let lastError: any;
-  const originalModel = params.model;
 
   for (let attempt = 0; attempt <= maxRetries; attempt++) {
     try {
@@ -11,19 +10,17 @@ async function generateContentWithRetry(ai: GoogleGenAI, params: any, maxRetries
     } catch (err: any) {
       lastError = err;
       const errStr = String(err?.message || '');
-      const isTemporary =
+      const isDemandSpike =
         errStr.includes('503') ||
         err?.status === 503 ||
         errStr.includes('high demand') ||
         errStr.includes('UNAVAILABLE') ||
         errStr.includes('429');
 
-      if (isTemporary && attempt < maxRetries) {
-        await new Promise((resolve) => setTimeout(resolve, 1000 * (attempt + 1)));
-        // If on second retry gemini-3.8-flash had a demand spike, fallback to gemini-3.1-flash-lite (if maps is not required)
-        if (attempt === 1 && originalModel === 'gemini-3.8-flash' && !params.config?.tools?.some((t: any) => t.googleMaps)) {
-          params.model = 'gemini-3.1-flash-lite';
-        }
+      if (attempt < maxRetries) {
+        // Fallback immediately to ultra-fast gemini-3.1-flash-lite
+        params.model = 'gemini-3.1-flash-lite';
+        await new Promise((resolve) => setTimeout(resolve, 300));
         continue;
       }
       throw err;
@@ -74,7 +71,7 @@ export function setupGeminiApi(app: Express) {
 
       const {
         messages = [],
-        model = 'gemini-3.8-flash',
+        model = 'gemini-3.1-flash-lite',
         systemRole = 'default',
         enableSearch = false,
         enableMaps = false,
@@ -85,8 +82,8 @@ export function setupGeminiApi(app: Express) {
         return res.status(400).json({ error: 'Messages array is required and cannot be empty.' });
       }
 
-      const validModels = ['gemini-3.8-flash', 'gemini-3.1-flash-lite', 'gemini-4-argon'];
-      let targetModel = validModels.includes(model) ? model : 'gemini-3.8-flash';
+      const validModels = ['gemini-3.1-flash-lite', 'gemini-3.8-flash', 'gemini-4-argon'];
+      let targetModel = validModels.includes(model) ? model : 'gemini-3.1-flash-lite';
 
       let systemInstruction =
         'You are ZeR0 AI, the tactical cybersecurity assistant and SOC advisor for ZeR0CyB3r (Pranshu Verman). ' +
